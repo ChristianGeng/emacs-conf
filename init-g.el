@@ -1,0 +1,369 @@
+;;;;;;;; ;;;;;;;; ;;;;;;;; ;;;;;;;;
+;;;;;;;;;;;;;; Load - Path  ;;;;;;;;
+;;;;;;;; ;;;;;;;; ;;;;;;;; ;;;;;;;;
+;; (add-to-list 'load-path "~/.emacs.d/el/desktopaid-1.0.5/")
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+
+;; (prefer-coding-system 'utf-8)
+;; (setq coding-system-for-read 'utf-8)
+;; (setq coding-system-for-write 'utf-8)
+
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-language-environment 'utf-8)
+(set-selection-coding-system 'utf-8)
+
+;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
+
+
+(package-initialize)
+
+;; Setup packages
+
+
+
+ (add-to-list 'load-path "~/.emacs.d/el")
+ (add-to-list 'load-path "~/.emacs.d/elpa/auctex-11.89.8")
+
+(require 'setup-daimler-proxy)
+
+
+;; (add-to-list 'load-path "~/.emacs.d/el/inf-mongo")
+;; (add-to-list 'load-path "~/.emacs.d/") # gives warning ...
+;; (add-to-list 'load-path "~/.emacs.d/el/auctex")
+;; (add-to-list 'load-path "~/el/")
+
+;; (require 'inf-mongo)
+
+
+
+;; Turn off mouse interface early in startup to avoid momentary display
+;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;; (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+
+
+;; ;; No splash screen please ... jeez
+(setq inhibit-startup-message t)
+
+;; Ease debugging, as it allows to test with   --- habe ich jetzt statisch gesetzt
+;; emacs -q -l ~/path/to/other/.emacs.d/init.el
+;; (setq user-emacs-directory
+;;      (file-name-directory (or load-file-name (buffer-file-name))))
+(setq user-emacs-directory "~/.emacs.d/")
+(message user-emacs-directory)
+
+
+;;(add-to-list 'load-path user-emacs-directory)
+
+;; Set path to dependencies
+(setq site-lisp-dir
+      (expand-file-name "site-lisp" user-emacs-directory))
+
+;; Settings for currently logged in user
+(setq user-settings-dir
+      (concat user-emacs-directory "users/" user-login-name))
+(add-to-list 'load-path user-settings-dir)
+
+;; Write backup files to own directory
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name "backups" user-emacs-directory))))
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
+
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+
+;; Are we on a mac?
+(setq is-mac (equal system-type 'darwin))
+
+;; Setup elnode before packages to stop it from starting a server
+;;(require 'setup-elnode)
+
+
+
+;; Setup packages
+(require 'setup-package)
+
+
+(require 'paredit)
+(enable-paredit-mode)
+
+
+;; Set up load path
+(add-to-list 'load-path site-lisp-dir)
+
+;; Add external projects to load path
+(dolist (project (directory-files site-lisp-dir t "\\w+"))
+  (when (file-directory-p project)
+    (add-to-list 'load-path project)))
+
+;; Lets start with a smattering of sanity
+(require 'sane-defaults)
+
+;; Setup environment variables from the user's shell.
+;; (when is-mac (exec-path-from-shell-initialize))
+
+;; Setup extensions
+(require 'setup-themes)
+;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
+;; (eval-after-load 'dired '(require 'setup-dired))
+(eval-after-load 'magit '(require 'setup-magit)) ;; version control
+(eval-after-load 'grep '(require 'setup-rgrep))
+;; (eval-after-load 'shell '(require 'setup-shell))
+;; (require 'setup-hippie)
+
+;;(require 'setup-yasnippet) - package assoc problem
+
+
+;;(add-to-list 'warning-suppress-types '(undo discard-info))
+
+(eval-after-load 'whitespace '(require 'setup-whitespace))
+(eval-after-load 'tramp '(require 'setup-tramp))
+;; (require 'setup-perspective)
+;; (require 'setup-ffip)
+;; (require 'setup-paredit)
+
+;; Language specific setup files
+(eval-after-load 'js2-mode '(require 'setup-js2-mode))
+
+
+
+;;;; PYTHON NEW 
+;;(eval-after-load 'python '(require 'setup-python))
+(elpy-enable)
+
+;;(setq elpy-rpc-backend "jedi")
+
+(pyvenv-activate "/home/CHRGENG/venvs/py3_virtualenv/")
+;;(setenv "WORKON_HOME" "/cygdrive/c/Anaconda3/envs/")
+(pyvenv-activate "py3_Conda")
+(pyvenv-mode 1)
+
+
+;; From the console:
+;; echo $WORKON_HOME
+;; /home/CHRGENG/venvs
+;; virtualenv -p c:/Anaconda3/python.exe ~/.emacs.d/.python-environments/default
+;; /home/CHRGENG/venvs/py3_virtualenv/Scripts/activate.bat
+;; dort legt conda per default die venvs hin:
+;;  C:\Anaconda3\envs\py3_Conda
+;; conda info -e
+;; source activate
+;; source  activate  py3_Conda
+(add-hook 'python-mode-hook 'jedi:setup)
+;;(setq jedi:setup-keys t)                      ; optional
+;;(setq jedi:complete-on-dot t)                 ; optional
+;; (pyenv-activate "/data/venvs/tttPyChristian")
+
+;;(setq jedi:server-command '("/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py"))
+;; (setq exec-path (append exec-path '("C:/Users/CHRGENG/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py")))
+
+;; condarc at startup
+;; envs_dirs:
+;;  - /Users/nolan/newpath
+
+
+;; ;; damit bekommt man wenigstens import errors:
+
+;; (require 'epc)
+;; (require 'jedi)
+;; ;;(add-hook 'python-mode-hook 'jedi:setup)
+
+;; (if (eq system-type 'windows-nt)
+;;     (progn (setq msys-bin "c:\\cygwin\\bin")
+;; 	   (setq exec-path (cons msys-bin exec-path))
+;; 	   (setenv "PATH" (concat msys-bin ";" (getenv "PATH")))))
+
+
+;; (autoload 'jedi:setup "jedi" nil t)
+;; (setq jedi:setup-keys t)                      ; optional
+;; (setq jedi:complete-on-dot t)                 ; optional
+
+
+;; Used by virtualenvwrapper.el
+;;(setq venv-location (expand-file-name "/C/Anaconds/envs")) 
+;;(setq python-shell-virtualenv-path "/C/Anaconda3/envs/")
+;;(setq python-environment-directory venv-location)
+;; (setq python-environment-default-root-name . "py3_Conda")
+
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:server-command (list "python3" jedi:server-script))
+;; (jedi-mode 1)
+
+;; (when (memq window-system '(mac ns))
+;;   (exec-path-from-shell-initialize))
+
+;; (defvar jedi:install-server--command
+;;   `("pip" "install" "--upgrade" ,(convert-standard-filename jedi:source-dir)))
+
+;(setq jedi:server-command '("C:\\cygwin\\home\\CHRGENG\\.emacs.d\\elpa\\jedi-core-20170121.610\\jediepcserver.py c"))
+
+
+
+
+
+(eval-after-load 'sgml-mode '(require 'setup-html-mode))
+(eval-after-load 'lisp-mode '(require 'setup-lisp))
+(require 'setup-org) ;; organizer todo notes etc
+(require 'setup-latex)
+(require 'setup-bash)
+;; (require 'mc)
+
+;;(require 'setup-web-mode)
+(require 'setup-jabber) 
+(require 'setup-chat-tracking)
+;; (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
+ (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
+;; (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
+;;(require 'setup-pandoc) 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-command "latex -synctex=1")
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(custom-enabled-themes (quote (tango-dark)))
+ '(custom-safe-themes
+   (quote
+    ("256a381a0471ad344e1ed33470e4c28b35fb4489a67eb821181e35f080083c36" "dfe0523e20114df987a41afb6ac5698307e65e0fcb9bff12dc94621e18d44c3d" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "3fa07dd06f4aff80df2d820084db9ecbc007541ce7f15474f1d956c846a3238f" "cf284fac2a56d242ace50b6d2c438fcc6b4090137f1631e32bedf19495124600" "c616e584f7268aa3b63d08045a912b50863a34e7ea83e35fcab8537b75741956" "0cd56f8cd78d12fc6ead32915e1c4963ba2039890700458c13e12038ec40f6f5" "b563a87aa29096e0b2e38889f7a5e3babde9982262181b65de9ce8b78e9324d5" "d21135150e22e58f8c656ec04530872831baebf5a1c3688030d119c114233c24" "59d1dc166e648573cd7d2fedca89cb5af3309e1a06f230a9c34e02189eb33ab7" "7393c1db792adec2f7ce4e6bdd162d5b1f2621c16dfd2450955b684786b48add" default)))
+ '(markdown-command "pandoc")
+ '(package-selected-packages
+   (quote
+    (jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
+
+;; Load slime-js when asked for
+;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
+;; (autoload 'slime-js-jack-in-node "setup-slime-js" nil t)
+
+;; Map files to modes
+(require 'mode-mappings)
+
+;; Functions (load all files in defuns-dir)
+(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+(dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
+  (when (file-regular-p file)
+    (load (file-name-sans-extension file))))
+;; (require 'expand-region)
+;; (require 'mark-more-like-this)
+;; (require 'inline-string-rectangle)
+;;(require 'multiple-cursors)
+;; (require 'delsel)
+;; (require 'jump-char)
+;; (require 'eproject)
+;; (require 'wgrep)
+;; (require 'smart-forward)
+;; (require 'change-inner)
+;; (require 'multifiles)
+
+;; Fill column indicator
+;; (require 'fill-column-indicator)
+;; (setq fci-rule-color "#111122")
+
+;; Browse kill ring
+(require 'browse-kill-ring)
+(setq browse-kill-ring-quit-action 'save-and-restore)
+
+;; Smart M-x is smart - der ido fuer M-x
+(require 'smex)
+(smex-initialize)
+
+;; Setup key bindings
+(require 'key-bindings)
+
+;; Misc
+;; (require 'appearance)
+;; (require 'my-misc)
+;; (when is-mac (require 'mac))
+
+;; Diminish modeline clutter
+(require 'diminish)
+;; (diminish 'yas-minor-mode)
+;; (diminish 'eldoc-mode)
+;; (diminish 'paredit-mode)
+
+;; Elisp go-to-definition with M-. and back again with M-,
+;; (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
+;; (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
+;; (eval-after-load 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))
+
+;; ;; Email, baby
+;; (require 'setup-mu4e)
+
+;; Emacs server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+;; Run at full power please
+(put 'downcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+;; electric-pair-mode
+;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
+;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
+(electric-pair-mode 1)
+
+
+;; company mode autocompletion
+;;(add-hook 'after-init-hook 'global-company-mode)
+
+
+
+;; Keep emacs Custom-settings in separate file
+;;(setq custom-file (expand-file-name "custom.el" user-settings-dir))
+;;(load custom-file 'noerror)
+
+;;(message user-settings-dir)
+
+;; Conclude init by setting up specifics for the current user
+;;(when (file-exists-p user-settings-dir)
+  ;; (if (file-exists-p (concat user-settings-dir "/init.el"))
+  ;;     (load (concat user-settings-dir "/init"))
+  ;;   (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$"))))
+
+(when (fboundp 'cycle-themes)
+  (cycle-themes))
+
+(put 'scroll-left 'disabled nil)
+
+
+  (setq abbrev-file-name             ;; tell emacs where to read abbrev
+        "~/.emacs.d/abbrev_defs")    ;; definitions from...
+
+(load-library "cglispfuncs")
+
+
+(package-initialize)
+
+
+
+
+
+
+
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+
+
+(defun close-all-buffers ()
+(interactive)
+  (mapc 'kill-buffer (buffer-list)))
