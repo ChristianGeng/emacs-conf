@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 # emacs-conf
 =======
-<<<<<<< HEAD
 
 =======
 # Conf that also works for cygwin 
->>>>>>> 81509f31e52b640389ceea7142204f233f43102b
 
 arbi change
 
@@ -26,12 +22,6 @@ Better take a look at:
 
 from which I take inspiration or plainly copy.
 
-
-<<<<<<< HEAD
-=======
 # emacs-configuration-cygwin
 Cygwin-Version der Emacs configuration
->>>>>>> ad7ebba35b7bb11ccfabb2e596aece2366324a1e
->>>>>>> d519758... spuriosus
-=======
->>>>>>> 81509f31e52b640389ceea7142204f233f43102b
+
