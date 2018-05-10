@@ -18,8 +18,6 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
-
 (package-initialize)
 ;; Setup packages
 
@@ -65,7 +63,6 @@
 ;; Setup environment variables from the user's shell.
 (when is-mac (exec-path-from-shell-initialize))
 
-
 ;; Setup elnode before packages to stop it from starting a server
 ;;(require 'setup-elnode)
 ;; Setup packages
@@ -82,7 +79,6 @@
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
 
-
 ;; Setup extensions
 (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
@@ -90,6 +86,8 @@
 (eval-after-load 'magit '(require 'setup-magit)) ;; version control
 (eval-after-load 'grep '(require 'setup-rgrep))
 (require 'setup-yasnippet) 
+(eval-after-load 'python '(require 'setup-python))
+
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
@@ -99,84 +97,6 @@
 
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
-
-;;;; PYTHON NEW 
-;;(eval-after-load 'python '(require 'setup-python))
-(elpy-enable)
-;;(setq elpy-rpc-backend "jedi")
-(pyvenv-mode)
-(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
-(pyvenv-activate "py3")
-
-;; Using ELPA (When installed from `list-packages'):
-(require 'pungi)
-(add-hook #'python-mode-hook
-          '(lambda ()
-             (pungi:setup-jedi)))
-
-;;(setenv "WORKON_HOME" "/cygdrive/c/Anaconda3/envs/")
-;;(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
-
-;(pyvenv-activate "py3")
-;(pyvenv-mode 1)
-
-;; From the console:
-;; echo $WORKON_HOME
-;; /home/CHRGENG/venvs
-;; virtualenv -p c:/Anaconda3/python.exe ~/.emacs.d/.python-environments/default
-;; /home/CHRGENG/venvs/py3_virtualenv/Scripts/activate.bat
-;; dort legt conda per default die venvs hin:
-;;  C:\Anaconda3\envs\py3_Conda
-;; conda info -e
-;; source activate
-;; source  activate  py3_Conda
-(add-hook 'python-mode-hook 'jedi:setup)
-;;(setq jedi:setup-keys t)                      ; optional
-;;(setq jedi:complete-on-dot t)                 ; optional
-;; (pyenv-activate "/data/venvs/tttPyChristian")
-
-;;(setq jedi:server-command '("/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py"))
-;; (setq exec-path (append exec-path '("C:/Users/CHRGENG/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py")))
-
-;; condarc at startup
-;; envs_dirs:
-;;  - /Users/nolan/newpath
-
-
-;; ;; damit bekommt man wenigstens import errors:
-
- (require 'epc)
- (require 'jedi)
-;; ;;(add-hook 'python-mode-hook 'jedi:setup)
-
-;; (if (eq system-type 'windows-nt)
-;;     (progn (setq msys-bin "c:\\cygwin\\bin")
-;; 	   (setq exec-path (cons msys-bin exec-path))
-;; 	   (setenv "PATH" (concat msys-bin ";" (getenv "PATH")))))
-
-
- (autoload 'jedi:setup "jedi" nil t)
- (setq jedi:setup-keys t)                      ; optional
- (setq jedi:complete-on-dot t)                 ; optional
-
-
-;; Used by virtualenvwrapper.el
-;;(setq venv-location (expand-file-name "/C/Anaconds/envs")) 
-;;(setq python-shell-virtualenv-path "/C/Anaconda3/envs/")
-;;(setq python-environment-directory venv-location)
-;; (setq python-environment-default-root-name . "py3_Conda")
-
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:server-command (list "python3" jedi:server-script))
-;; (jedi-mode 1)
-
-;; (when (memq window-system '(mac ns))
-;;   (exec-path-from-shell-initialize))
-
-;; (defvar jedi:install-server--command
-;;   `("pip" "install" "--upgrade" ,(convert-standard-filename jedi:source-dir)))
-
-;(setq jedi:server-command '("C:\\cygwin\\home\\CHRGENG\\.emacs.d\\elpa\\jedi-core-20170121.610\\jediepcserver.py c"))
 
 ;; this is good for the speedbar:
 ;; see https://stackoverflow.com/questions/20265938/emacs-speedbar-does-not-show-all-classs-methods
