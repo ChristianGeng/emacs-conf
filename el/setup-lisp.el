@@ -9,8 +9,15 @@
 
 ;;; Lisp without paredit is a pain
 
+(require 'paredit)
+
 (defun turn-on-paredit ()
   (paredit-mode +1))
+
+
+;; (enable-paredit-mode)
+
+
 
 (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
 

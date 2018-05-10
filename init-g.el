@@ -20,42 +20,12 @@
 
 ;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 
-
 (package-initialize)
-
 ;; Setup packages
 
-
-
  (add-to-list 'load-path "~/.emacs.d/el")
- (add-to-list 'load-path "~/.emacs.d/elpa/auctex-11.89.8")
 
 ;; (require 'setup-daimler-proxy)
-
-
-;; (add-to-list 'load-path "~/.emacs.d/el/inf-mongo")
-;; (add-to-list 'load-path "~/.emacs.d/") # gives warning ...
-;; (add-to-list 'load-path "~/.emacs.d/el/auctex")
-;; (add-to-list 'load-path "~/el/")
-
-;; (require 'inf-mongo)
-
-
-
-;; Turn off mouse interface early in startup to avoid momentary display
-;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-;; (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-
-
-;;narrow dired to match filter
-(use-package dired-narrow
-  :ensure t
-  :bind (:map dired-mode-map
-              ("/" . dired-narrow)))
-
-
 
 ;; ;; No splash screen please ... jeez
 (setq inhibit-startup-message t)
@@ -66,7 +36,6 @@
 ;;      (file-name-directory (or load-file-name (buffer-file-name))))
 (setq user-emacs-directory "~/.emacs.d/")
 (message user-emacs-directory)
-
 
 ;;(add-to-list 'load-path user-emacs-directory)
 
@@ -93,19 +62,14 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
+;; Setup environment variables from the user's shell.
+(when is-mac (exec-path-from-shell-initialize))
+
 
 ;; Setup elnode before packages to stop it from starting a server
 ;;(require 'setup-elnode)
-
-
-
 ;; Setup packages
 (require 'setup-package)
-
-
-(require 'paredit)
-(enable-paredit-mode)
-
 
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
@@ -118,22 +82,14 @@
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
 
-;; Setup environment variables from the user's shell.
-;; (when is-mac (exec-path-from-shell-initialize))
 
 ;; Setup extensions
 (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-;; (eval-after-load 'dired '(require 'setup-dired))
+(eval-after-load 'dired '(require 'setup-dired))
 (eval-after-load 'magit '(require 'setup-magit)) ;; version control
 (eval-after-load 'grep '(require 'setup-rgrep))
-;; (eval-after-load 'shell '(require 'setup-shell))
-;; (require 'setup-hippie)
-
-;;(require 'setup-yasnippet) - package assoc problem
-
-
-;;(add-to-list 'warning-suppress-types '(undo discard-info))
+(require 'setup-yasnippet) 
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
@@ -144,18 +100,13 @@
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
 
-
-
 ;;;; PYTHON NEW 
 ;;(eval-after-load 'python '(require 'setup-python))
 (elpy-enable)
-
 ;;(setq elpy-rpc-backend "jedi")
-
 (pyvenv-mode)
 (setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
 (pyvenv-activate "py3")
-
 
 ;; Using ELPA (When installed from `list-packages'):
 (require 'pungi)
@@ -163,13 +114,11 @@
           '(lambda ()
              (pungi:setup-jedi)))
 
-
 ;;(setenv "WORKON_HOME" "/cygdrive/c/Anaconda3/envs/")
 ;;(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
 
 ;(pyvenv-activate "py3")
 ;(pyvenv-mode 1)
-
 
 ;; From the console:
 ;; echo $WORKON_HOME
@@ -236,8 +185,6 @@
 (semantic-mode 1)
 
 
-
-
 (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
 (require 'setup-org) ;; organizer todo notes etc
@@ -267,7 +214,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
+    (dired-details markdown-mode+ markdown-preview-mode jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -341,11 +288,8 @@
 ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 (electric-pair-mode 1)
 
-
 ;; company mode autocompletion
 ;;(add-hook 'after-init-hook 'global-company-mode)
-
-
 
 ;; Keep emacs Custom-settings in separate file
 ;;(setq custom-file (expand-file-name "custom.el" user-settings-dir))
@@ -370,15 +314,7 @@
 
 (load-library "cglispfuncs")
 
-
 (package-initialize)
-
-
-
-
-
-
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -388,8 +324,3 @@
  )
 
 
-
-
-(defun close-all-buffers ()
-(interactive)
-  (mapc 'kill-buffer (buffer-list)))

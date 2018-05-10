@@ -1,4 +1,7 @@
 
+(defun close-all-buffers ()
+(interactive)
+  (mapc 'kill-buffer (buffer-list)))
 
 ;; rename a currently open buffer
 ;; https://stackoverflow.com/questions/384284/how-do-i-rename-an-open-file-in-emacs

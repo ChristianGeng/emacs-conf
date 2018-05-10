@@ -2,11 +2,8 @@
 =======
 
 =======
-# Conf that also works for cygwin 
 
-arbi change
-
-Only my clone of 
+My adapation of  
 https://github.com/chaoflow/.emacs.d
 
 Original README: 
@@ -20,8 +17,6 @@ Better take a look at:
 - https://github.com/cjohansen/.emacs.d
 - https://github.com/technomancy/emacs-starter-kit
 
-from which I take inspiration or plainly copy.
+from which I take inspiration or shamelessly copy.
 
-# emacs-configuration-cygwin
-Cygwin-Version der Emacs configuration
 

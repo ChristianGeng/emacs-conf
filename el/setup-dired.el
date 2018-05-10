@@ -1,5 +1,12 @@
 (require 'dired)
 (require 'dash)
+(require 'dired-narrow)
+
+;;narrow dired to match filter
+(use-package dired-narrow
+  :ensure t
+  :bind (:map dired-mode-map
+              ("/" . dired-narrow)))
 
 ;; Make dired less verbose
 (require 'dired-details)
