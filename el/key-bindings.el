@@ -6,8 +6,8 @@
 
 ;; Eome cycle buffers alternative ist diese hier:
 ;; https://www.emacswiki.org/emacs/CycleBuffer including delete
-(global-set-key [f11] 'cycbuf-switch-to-previous-buffer-no-timeout)
-(global-set-key [f12] 'cycbuf-switch-to-next-buffer-no-timeout)
+(global-set-key [f12] 'other-window)
+
 
 ;; I don't need to kill emacs that easily
 ;; the mnemonic is C-x REALLY QUIT
