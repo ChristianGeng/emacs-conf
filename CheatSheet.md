@@ -27,6 +27,4 @@ C-x C-h show keybindings
 
 * [ipdb-Notes](https://github.com/realgud/realgud/wiki/ipdb-notes)
 * M-x realgud:pdb test.py
-* 
-
 
