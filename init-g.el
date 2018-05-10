@@ -30,7 +30,7 @@
  (add-to-list 'load-path "~/.emacs.d/el")
  (add-to-list 'load-path "~/.emacs.d/elpa/auctex-11.89.8")
 
-(require 'setup-daimler-proxy)
+;; (require 'setup-daimler-proxy)
 
 
 ;; (add-to-list 'load-path "~/.emacs.d/el/inf-mongo")
@@ -46,6 +46,14 @@
 ;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 ;; (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 ;; (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+
+
+;;narrow dired to match filter
+(use-package dired-narrow
+  :ensure t
+  :bind (:map dired-mode-map
+              ("/" . dired-narrow)))
 
 
 
@@ -144,10 +152,23 @@
 
 ;;(setq elpy-rpc-backend "jedi")
 
-(pyvenv-activate "/home/CHRGENG/venvs/py3_virtualenv/")
+(pyvenv-mode)
+(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
+(pyvenv-activate "py3")
+
+
+;; Using ELPA (When installed from `list-packages'):
+(require 'pungi)
+(add-hook #'python-mode-hook
+          '(lambda ()
+             (pungi:setup-jedi)))
+
+
 ;;(setenv "WORKON_HOME" "/cygdrive/c/Anaconda3/envs/")
-(pyvenv-activate "py3_Conda")
-(pyvenv-mode 1)
+;;(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
+
+;(pyvenv-activate "py3")
+;(pyvenv-mode 1)
 
 
 ;; From the console:
@@ -175,8 +196,8 @@
 
 ;; ;; damit bekommt man wenigstens import errors:
 
-;; (require 'epc)
-;; (require 'jedi)
+ (require 'epc)
+ (require 'jedi)
 ;; ;;(add-hook 'python-mode-hook 'jedi:setup)
 
 ;; (if (eq system-type 'windows-nt)
@@ -185,9 +206,9 @@
 ;; 	   (setenv "PATH" (concat msys-bin ";" (getenv "PATH")))))
 
 
-;; (autoload 'jedi:setup "jedi" nil t)
-;; (setq jedi:setup-keys t)                      ; optional
-;; (setq jedi:complete-on-dot t)                 ; optional
+ (autoload 'jedi:setup "jedi" nil t)
+ (setq jedi:setup-keys t)                      ; optional
+ (setq jedi:complete-on-dot t)                 ; optional
 
 
 ;; Used by virtualenvwrapper.el
@@ -246,7 +267,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
+    (jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
