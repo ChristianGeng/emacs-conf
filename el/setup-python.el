@@ -32,6 +32,8 @@
 
 ;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 
+;; M-x pyvenv-activate
+
 
 (require 'python)
 ;; (require 'cl-lib)
@@ -44,7 +46,7 @@
 ;;(setq elpy-rpc-backend "jedi")
 (pyvenv-mode)
 (setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
-(pyvenv-activate "py3")
+(pyvenv-activate "/home/christian/.virtualenvs/py3")
 
 ;; Using ELPA (When installed from `list-packages'):
 (require 'pungi)
@@ -79,6 +81,18 @@
 ;; condarc at startup
 ;; envs_dirs:
 ;;  - /Users/nolan/newpath
+
+
+
+;; (setq python-shell-interpreter "jupyter"
+;;       python-shell-interpreter-args "console --simple-prompt"
+;;       python-shell-prompt-detect-failure-warning nil)
+;; (add-to-list 'python-shell-completion-native-disabled-interpreters
+;;              "jupyter")
+
+
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "-i --simple-prompt")
 
 
 ;; ;; damit bekommt man wenigstens import errors:

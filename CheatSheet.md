@@ -23,3 +23,10 @@ M-x auto-fill-mode
 M-x set-fill-column  
 C-x C-h show keybindings  
 
+## [realgud]("https://github.com/realgud/realgud")
+
+* [ipdb-Notes](https://github.com/realgud/realgud/wiki/ipdb-notes)
+* M-x realgud:pdb test.py
+* 
+
+
