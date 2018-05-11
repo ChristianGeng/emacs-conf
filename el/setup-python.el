@@ -82,14 +82,23 @@
 ;; envs_dirs:
 ;;  - /Users/nolan/newpath
 
+;; automatically sort imports
+;; https://github.com/proofit404/isortify/blob/master/isortify.el
+(add-hook 'python-mode-hook 'isort-mode)
 
+(require 'py-autopep8)
+(setq py-autopep8-options '("--max-line-length=120"))
+(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+
+;; enforce removal of  trailing whitespace ehen saving for pep 8:
+ (add-hook 'python-mode-hook
+                (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 ;; (setq python-shell-interpreter "jupyter"
 ;;       python-shell-interpreter-args "console --simple-prompt"
 ;;       python-shell-prompt-detect-failure-warning nil)
 ;; (add-to-list 'python-shell-completion-native-disabled-interpreters
 ;;              "jupyter")
-
 
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "-i --simple-prompt")
