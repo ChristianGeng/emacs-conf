@@ -1,4 +1,4 @@
-;; 
+;;
 ;; elpy documentation online
 ;; http://elpy.readthedocs.io/en/latest/ide.html
 ;; help on configuration
@@ -6,14 +6,14 @@
 ;;
 ;; python hilfe:
 ;; https://www.emacswiki.org/emacs/?action=browse;oldid=PythonMode;id=PythonProgrammingInEmacs#toc16
-;; 
+;;
 ;; DEBUGGING:
 ;; (a) emacs aus virtualenv aufrufen: workon py3; emacs-24 xxxx
 ;; (b) M-x py-pdb
 ;; (c) aufruf korrigieren: python -m pdb /home/christian/.emacs.d/el/formants.py
 ;;
 ;; Keybindings:
-;; C-c | -> send selection 
+;; C-c | -> send selection
 ;; see http://www.jesshamrick.com/2012/09/18/emacs-as-a-python-ide/
 ;;
 ;; Weitere Links
@@ -40,7 +40,7 @@
 (require 'cl-lib)
 (require 'elpy)
 
-;;;; PYTHON NEW 
+;;;; PYTHON NEW
 ;;(eval-after-load 'python '(require 'setup-python))
 (elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
@@ -86,13 +86,26 @@
 ;; https://github.com/proofit404/isortify/blob/master/isortify.el
 (add-hook 'python-mode-hook 'isort-mode)
 
-(require 'py-autopep8)
-(setq py-autopep8-options '("--max-line-length=120"))
-(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+;;(require 'py-autopep8)
+
+;; http://pep8.readthedocs.io/en/1.4.1/_sources/intro.txt
+
+
+;; enable autopep8 formatting on save
+;; ignoring:
+;; - E501 - Try to make lines fit within --max-line-length characters.
+;; - W293 - Remove trailing whitespace on blank line.
+;; - W391 - Remove trailing blank lines.
+;; - W690 - Fix various deprecated code (via lib2to3).
+;;(require 'py-autopep8)
+;; (setq py-autopep8-options '("--ignore=E501,W293,W391,W690,--max-line-length=120"))
+
+;;(setq py-autopep8-options '("--max-line-length=120"))
+;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
 
 ;; enforce removal of  trailing whitespace ehen saving for pep 8:
- (add-hook 'python-mode-hook
-                (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+;; (add-hook 'python-mode-hook
+;;                (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
 ;; (setq python-shell-interpreter "jupyter"
 ;;       python-shell-interpreter-args "console --simple-prompt"
@@ -122,7 +135,7 @@
 
 
 ;; Used by virtualenvwrapper.el
-;;(setq venv-location (expand-file-name "/C/Anaconds/envs")) 
+;;(setq venv-location (expand-file-name "/C/Anaconds/envs"))
 ;;(setq python-shell-virtualenv-path "/C/Anaconda3/envs/")
 ;;(setq python-environment-directory venv-location)
 ;; (setq python-environment-default-root-name . "py3_Conda")

@@ -114,6 +114,8 @@
 (require 'setup-org) ;; organizer todo notes etc
 (require 'setup-latex)
 (require 'setup-bash)
+;;(require 'setup-helm)
+
 ;; (require 'mc)
 
 ;;(require 'setup-web-mode)
@@ -138,7 +140,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (py-autopep8 isortify pony-mode isend-mode realgud pippel django-manage django-mode django-snippets django-theme dired-details markdown-mode+ markdown-preview-mode jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
+    (helm-swoop py-autopep8 isortify pony-mode isend-mode realgud pippel django-manage django-mode django-snippets django-theme dired-details markdown-mode+ markdown-preview-mode jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
