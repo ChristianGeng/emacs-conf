@@ -102,12 +102,7 @@
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
 
-;; this is good for the speedbar:
-;; see https://stackoverflow.com/questions/20265938/emacs-speedbar-does-not-show-all-classs-methods
-(global-ede-mode 1)
-(require 'semantic/sb)
-(semantic-mode 1)
-
+(require 'setup-speedbar)
 
 (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
