@@ -24,6 +24,11 @@
 (package-initialize)
 ;; Setup packages
 
+;; Switch between windows with Shift+{left,up,down,right}
+(windmove-default-keybindings)
+(setq windmove-wrap-around t)
+
+
  (add-to-list 'load-path "~/.emacs.d/el")
 
 ;; (require 'setup-daimler-proxy)
