@@ -154,6 +154,8 @@
 
 (require 'elpy)
 
+(add-hook 'python-mode-hook
+          (lambda() (which-function-mode 1)))
 
 ;; (require 'epy-setup)
 ;; (require 'epy-python)
