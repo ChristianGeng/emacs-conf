@@ -30,6 +30,6 @@ C-x C-h show keybindings
 
 ## [moving by defun](https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-by-Defuns.html)
 
-C-M-a     Move to beginning of current or preceding defun (beginning-of-defun).
-C-M-e     Move to end of current or following defun (end-of-defun).
-C-M-h     Put region around whole current or following defun (mark-defun). 
+* C-M-a     Move to beginning of current or preceding defun (beginning-of-defun).
+* C-M-e     Move to end of current or following defun (end-of-defun).
+* C-M-h     Put region around whole current or following defun (mark-defun). 
