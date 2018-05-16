@@ -22,6 +22,7 @@ from which I take inspiration or shamelessly copy.
 
 
 # Furhter Links
+2. [Emacs Manual](https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top)
 
 ## Helm
 1. [A Package in a league of its own](https://tuhdo.github.io/helm-intro.html)
