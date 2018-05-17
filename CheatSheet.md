@@ -36,3 +36,8 @@ C-x C-h show keybindings
 
 # Functions:
 * show-file-name (cglispfunctions.el)
+
+
+# Navigation
+* C-x 0 - delete current "split"
+* S-{right,left,up,down} - move windows 
