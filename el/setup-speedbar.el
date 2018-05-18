@@ -17,7 +17,10 @@
 
 ;; improve speedbars behavior                                                                                                                                                                                                                                                                                                                                              
 ;; see https://stackoverflow.com/questions/20265938/emacs-speedbar-does-not-show-all-classs-methods                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                           
+                 
+;; print font family with (print (font-family-list))
+(set-face-font 'speedbar-face "Courier-10")
+
 (global-ede-mode 1)
 (require 'semantic/sb)
 (semantic-mode 1)
