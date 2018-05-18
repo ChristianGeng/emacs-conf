@@ -8,6 +8,8 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
+(setq dired-listing-switches "-alh")
+
 ;; Make dired less verbose
 (require 'dired-details)
 (setq-default dired-details-hidden-string "--- ")
