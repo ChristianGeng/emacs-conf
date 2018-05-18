@@ -45,29 +45,6 @@
 
 
 
-;;;;;;;;;;;;;;;;;;
-;;; see https://stackoverflow.com/questions/5194294/how-to-remove-all-newlines-from-selected-region-in-emacs
-(defun remove-newlines-in-region ()
-  "Removes all newlines in the region."
-  (interactive)
-  (save-restriction
-    (narrow-to-region (point) (mark))
-    (goto-char (point-min))
-    (while (search-forward "\n" nil t) (replace-match "" nil t))))
-
-
-;;;;;;;;;;;;;;;;;;
-(defun replace-newlines-with-semicolon ()
-  "Removes all newlines in the region."
-  (interactive)
-  (save-restriction
-    (narrow-to-region (point) (mark))
-    (goto-char (point-min))
-    (while (search-forward "\n" nil t) (replace-match ";" nil t))))
-
-
-
-  ;;(global-set-key [f8] 'remove-newlines-in-region)
 
 
 
@@ -75,15 +52,7 @@
 ;;;; see https://stackoverflow.com/questions/8674912/how-to-collapse-whitespaces-in-a-region
 
 
-(defun just-one-space-in-region (beg end)
-  "replace all whitespace in the region with single spaces"
-  (interactive "r")
-  (save-excursion
-    (save-restriction
-      (narrow-to-region beg end)
-      (goto-char (point-min))
-      (while (re-search-forward "\\s-+" nil t)
-        (replace-match " ")))))
+
 
 ;; https://www.emacswiki.org/emacs/ChangingEncodings
 
@@ -132,3 +101,99 @@
   "Change the current buffer to Mac line-ends."
   (interactive)
   (set-buffer-file-coding-system 'mac t))
+
+;; lumps several function into a big one for etengo thing
+(defun format-properly (b e)
+  "Run `indent-region', `untabify' and `delete-trailing-whitespace' in sequence."
+  (interactive "*r")
+  (when (use-region-p)
+    (save-restriction
+      (narrow-to-region b e)
+      (replace-newlines-with-semicolon)
+      (just-one-space-in-region b e)
+      (kill-space-before-semicolon)
+      )))
+  
+;; (global-set-key [f8] 'format-properly)
+
+
+;;;;;;;;;;;;;;;;;;
+;;; see https://stackoverflow.com/questions/5194294/how-to-remove-all-newlines-from-selected-region-in-emacs
+(defun remove-newlines-in-region ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match "" nil t))))
+
+
+;;;;;;;;;;;;;;;;;;
+(defun replace-newlines-with-semicolon ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match ";" nil t))))
+
+
+
+  ;;(global-set-key [f8] 'remove-newlines-in-region)
+
+;;;;;;;;;;;;;;;;;;
+(defun kill-space-before-semicolon ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward " ;" nil t) (replace-match "; " nil t))))
+
+(defun just-one-space-in-region (beg end)
+  "replace all whitespace in the region with single spaces"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (re-search-forward "\\s-+" nil t)
+        (replace-match " ")))))
+
+
+(defun forwardize-slashes (beg end)
+  "replace all backward slashes in the region with forward slashes"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (search-forward "\\" nil t)
+        (replace-match "/"))))
+  )
+
+(defun backwardize-slashes (beg end)
+  "replace all forward slashes in the region with backward slashes"
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (search-forward "/" nil t)
+        (replace-match "\\"))))
+  )
+
+
+;; from cursor, get a region delimited by parentheses
+;; https://stackoverflow.com/questions/5194417/how-to-mark-the-text-between-the-parentheses-in-emacs
+;; then use mark-sexp
+(defun backward-up-sexp (arg)
+  (interactive "p")
+  (let ((ppss (syntax-ppss)))
+    (cond ((elt ppss 3)
+           (goto-char (elt ppss 8))
+           (backward-up-sexp (1- arg)))
+          ((backward-up-list arg)))))
+
+
+
