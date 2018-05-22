@@ -95,6 +95,17 @@
 ;; (add-hook 'python-mode-hook
 ;;                (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
 
+
+;;(setq py-autopep8-options '("--max-line-length=120"))
+;;(add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
+
+
+;; cat ~/xflow/.style.yapf
+;; [style]
+;; based_on_style = pep8
+;; split_before_first_argument = false
+
+
 ;; (setq python-shell-interpreter "jupyter"
 ;;       python-shell-interpreter-args "console --simple-prompt"
 ;;       python-shell-prompt-detect-failure-warning nil)
