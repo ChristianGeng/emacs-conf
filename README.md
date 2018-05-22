@@ -19,9 +19,7 @@ Better take a look at:
 
 from which I take inspiration or shamelessly copy.
 
-
-
-# Furhter Links
+# Further Links
 * [Emacs Manual](https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top)
 * [imenu and icycles](https://www.emacswiki.org/emacs/ImenuMode#toc3)
 * [Emacs Mode Hook for autopep](http://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
