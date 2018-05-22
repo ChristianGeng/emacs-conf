@@ -1,4 +1,4 @@
-,# emacs-conf
+# emacs-conf
 =======
 
 =======
@@ -28,4 +28,5 @@ from which I take inspiration or shamelessly copy.
 
 ## Helm
 1. [A Package in a league of its own](https://tuhdo.github.io/helm-intro.html)
-1. [helm-wiki](https://github.com/emacs-helm/helm/wiki)
+2. [helm-wiki](https://github.com/emacs-helm/helm/wiki)
+3. [bloc post](http://thescratchcastle.com/posts/emacs-and-helm.html)
