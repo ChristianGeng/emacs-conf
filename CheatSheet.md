@@ -42,3 +42,13 @@ C-x C-h show keybindings
 * C-x 0 - delete current "split"
 * S-{right,left,up,down} - move windows  windmove-right|left ....
 
+# dired
+
+## Rename many: 
+* wdired-change-to-wdired-mode
+* wdired-finish-edit
+
+
+
+
+
