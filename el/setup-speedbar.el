@@ -10,7 +10,7 @@
 (setq speedbar-use-images nil) ; use text for buttons                                                                                                                                                                                                                                                                                                                      
 
 (setq sr-speedbar-right-side t) ; put on right side                                                                                                                                                                                                                                                                                                                        
-(set-face-font 'speedbar-face "Courier-10")
+;; (set-face-font 'speedbar-face "Courier-10")
 
 (setq sr-speedbar-width-console 55)
 (setq sr-speedbar-width-x 55)
@@ -19,7 +19,7 @@
 ;; see https://stackoverflow.com/questions/20265938/emacs-speedbar-does-not-show-all-classs-methods                                                                                                                                                                                                                                                                        
                  
 ;; print font family with (print (font-family-list))
-(set-face-font 'speedbar-face "Courier-10")
+;; (set-face-font 'speedbar-face "Courier-10")
 
 (global-ede-mode 1)
 (require 'semantic/sb)

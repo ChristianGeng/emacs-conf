@@ -29,24 +29,22 @@
 ;; pymacs - http://www.yilmazhuseyin.com/blog/dev/emacs-setup-python-development/
 ;; https://stackoverflow.com/questions/13622687/rope-auto-import-did-not-work
 ;; Erwähnung von rope_py3k https://github.com/jorgenschaefer/elpy/wiki/Installation
-
 ;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
-
 ;; M-x pyvenv-activate
 
-
 (require 'python)
-;; (require 'cl-lib)
 (require 'cl-lib)
 (require 'elpy)
 
 ;;;; PYTHON NEW
 ;;(eval-after-load 'python '(require 'setup-python))
+
 (elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
-(pyvenv-mode)
+(pyvenv-mode 1)
 (setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
 (pyvenv-activate "/home/christian/.virtualenvs/py3")
+;(pyvenv-activate "py3")
 
 ;; Using ELPA (When installed from `list-packages'):
 (require 'pungi)
@@ -54,26 +52,18 @@
           '(lambda ()
              (pungi:setup-jedi)))
 
-;;(setenv "WORKON_HOME" "/cygdrive/c/Anaconda3/envs/")
-;;(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
+(add-hook 'python-mode-hook
+          (lambda() (which-function-mode 1)))
 
-;(pyvenv-activate "py3")
-;(pyvenv-mode 1)
-
-;; From the console:
-;; echo $WORKON_HOME
-;; /home/CHRGENG/venvs
-;; virtualenv -p c:/Anaconda3/python.exe ~/.emacs.d/.python-environments/default
-;; /home/CHRGENG/venvs/py3_virtualenv/Scripts/activate.bat
-;; dort legt conda per default die venvs hin:
-;;  C:\Anaconda3\envs\py3_Conda
-;; conda info -e
-;; source activate
-;; source  activate  py3_Conda
+;; automatically sort imports
+;; https://github.com/proofit404/isortify/blob/master/isortify.el
+(add-hook 'python-mode-hook 'isort-mode)
+(add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
-;;(setq jedi:setup-keys t)                      ; optional
-;;(setq jedi:complete-on-dot t)                 ; optional
-;; (pyenv-activate "/data/venvs/tttPyChristian")
+
+
+;;(setq jedi:setup-keys t)                      ; OBSOLETE
+;;(setq jedi:complete-on-dot t)                 ; automatically start completing when entering dot
 
 ;;(setq jedi:server-command '("/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py"))
 ;; (setq exec-path (append exec-path '("C:/Users/CHRGENG/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py")))
@@ -82,9 +72,7 @@
 ;; envs_dirs:
 ;;  - /Users/nolan/newpath
 
-;; automatically sort imports
-;; https://github.com/proofit404/isortify/blob/master/isortify.el
-(add-hook 'python-mode-hook 'isort-mode)
+
 
 ;;(require 'py-autopep8)
 
@@ -130,7 +118,6 @@
 
 
  (autoload 'jedi:setup "jedi" nil t)
- (setq jedi:setup-keys t)                      ; optional
  (setq jedi:complete-on-dot t)                 ; optional
 
 
@@ -153,17 +140,5 @@
 ;(setq jedi:server-command '("C:\\cygwin\\home\\CHRGENG\\.emacs.d\\elpa\\jedi-core-20170121.610\\jediepcserver.py c"))
 
 (require 'elpy)
-
-(add-hook 'python-mode-hook
-          (lambda() (which-function-mode 1)))
-
-;; (require 'epy-setup)
-;; (require 'epy-python)
-;; (require 'epy-completion)
-;; (require 'epy-editing)
-;; (require 'epy-nose)
-;; (require 'epy-bindings)
-
-
 
 (provide 'setup-python)

@@ -40,4 +40,5 @@ C-x C-h show keybindings
 
 # Navigation
 * C-x 0 - delete current "split"
-* S-{right,left,up,down} - move windows 
+* S-{right,left,up,down} - move windows  windmove-right|left ....
+
