@@ -59,4 +59,18 @@
      (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
      (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)))
 
+
+
+;; If you add this to your .emacs, you'll be able to open the files via the keybinding 'F'.
+;; https://stackoverflow.com/questions/1110118/in-emacs-dired-how-to-find-visit-multiple-files
+(eval-after-load "dired"
+  '(progn
+     (define-key dired-mode-map "F" 'my-dired-find-file)
+     (defun my-dired-find-file (&optional arg)
+       "Open each of the marked files, or the file under the point, or when prefix arg, the next N files "
+       (interactive "P")
+       (let* ((fn-list (dired-get-marked-files nil arg)))
+         (mapc 'find-file fn-list)))))
+
+
 (provide 'setup-dired)
