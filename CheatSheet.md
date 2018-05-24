@@ -12,14 +12,21 @@ M-v	Move backward one screenful
 
 M-< , beginning of file  
 M-> , end of file  
-C-h r emacs book  
-C-h f	Describe a function  
-C-h v	Describe variable  
+
 
 C-l C-l put current pos to top of file
 
 C-j Insert New line
 
+## Getting help
+C-h ? what kinds of help
+
+C-h r emacs book  
+C-h f	Describe a function  
+C-h v	Describe variable  
+C-h d debugging 
+C-h b (or M-x describe-bindings) will sh
+C-h k (M-x describe-key) to show what command is bound to a 
 
 
 ##  Auto-Fill-Mode
