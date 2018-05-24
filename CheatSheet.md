@@ -18,10 +18,16 @@ C-h v	Describe variable
 
 C-l C-l put current pos to top of file
 
+C-j Insert New line
+
+
+
 ##  Auto-Fill-Mode
 M-x auto-fill-mode  
 M-x set-fill-column  
 C-x C-h show keybindings  
+
+
 
 ## [realgud]("https://github.com/realgud/realgud")
 
