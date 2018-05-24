@@ -39,4 +39,5 @@ from which I take inspiration or shamelessly copy.
 
 * `find . -name '*.[ch]' | xargs etags`
 * M-. (that’s Meta-Period) and type the name of the function
+* M-* to navigate to last point
 
