@@ -32,3 +32,11 @@ from which I take inspiration or shamelessly copy.
 
 ## Autopep
 1. [Anleitung für pep mode hook](https://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
+
+# Code Navigation
+
+## [etags primer](https://www.coverfire.com/archives/2004/06/24/emacs-source-code-navigation/)
+
+* `find . -name '*.[ch]' | xargs etags`
+* M-. (that’s Meta-Period) and type the name of the function
+
