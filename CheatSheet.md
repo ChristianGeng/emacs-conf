@@ -3,9 +3,10 @@
 ## Basic Navigation 
 
 C-p Previous line,   
-C-b Backwaro  
-Next line, C-n  
-Forward, C-f  
+C-n next line,   
+
+C-b Backward
+C-f  Forward
 
 C-v	Move forward one screenful  
 M-v	Move backward one screenful  
@@ -17,6 +18,16 @@ M-> , end of file
 C-l C-l put current pos to top of file
 
 C-j Insert New line
+
+## [moving by defun (emacs manual)](https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-by-Defuns.html)
+
+* C-M-a     Move to beginning of current or preceding defun (beginning-of-defun).
+* C-M-e     Move to end of current or following defun (end-of-defun).
+* C-M-h     Put region around whole current or following defun (mark-defun). 
+
+## Navigation between Windows , switching
+* C-x 0 - delete current "split"
+* S-{right,left,up,down} - move windows  windmove-right|left ....
 
 ## Getting help
 C-h ? what kinds of help
@@ -39,21 +50,15 @@ C-x C-h show keybindings
 ## [realgud]("https://github.com/realgud/realgud")
 
 * [ipdb-Notes](https://github.com/realgud/realgud/wiki/ipdb-notes)
+* M-x load-library realgud
 * M-x realgud:pdb test.py
 
-## [moving by defun (emacs manual)](https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-by-Defuns.html)
 
-* C-M-a     Move to beginning of current or preceding defun (beginning-of-defun).
-* C-M-e     Move to end of current or following defun (end-of-defun).
-* C-M-h     Put region around whole current or following defun (mark-defun). 
 
 # Functions:
 * show-file-name (cglispfunctions.el)
 
 
-# Navigation
-* C-x 0 - delete current "split"
-* S-{right,left,up,down} - move windows  windmove-right|left ....
 
 # dired
 
