@@ -73,6 +73,9 @@
 ;;  - /Users/nolan/newpath
 
 
+;; https://github.com/jorgenschaefer/elpy/issues/733
+(setq python-shell-prompt-detect-failure-warning nil)
+
 
 ;;(require 'py-autopep8)
 
