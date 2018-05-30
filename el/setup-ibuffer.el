@@ -1,6 +1,6 @@
 ;; nearly all of this is the default layout
 ;; interesting example conf at https://github.com/purcell/emacs.d/blob/master/lisp/init-ibuffer.el
-;; 
+;; https://www.emacswiki.org/emacs/IbufferMode#toc4
 
 
 (after-load 'ibuffer
@@ -27,4 +27,36 @@
               (name 16 -1)
               " " filename)))
               
+
+
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("python" (
+                          or (mode . python-mode)
+                             (mode . shell-mode)
+                             (name . "^\\*Elpy Output\\*$")
+                             ))
+               ("dired" (mode . dired-mode))
+               ("planner" (or
+                           (name . "^\\*Calendar\\*$")
+                           (name . "^diary$")
+                           (mode . muse-mode)
+                           (mode . org-mode)
+                           ))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")
+                         (mode . emacs-lisp-mode)))
+               ))))
+
+
+
+
+ (add-hook 'ibuffer-mode-hook
+              (lambda ()
+                (ibuffer-switch-to-saved-filter-groups "default")))
+
+
+
+
  (provide 'setup-ibuffer)
