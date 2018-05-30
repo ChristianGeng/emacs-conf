@@ -38,14 +38,11 @@ C-h v	Describe variable
 C-h d debugging 
 C-h b (or M-x describe-bindings) will sh
 C-h k (M-x describe-key) to show what command is bound to a 
-
+C-x C-h show keybindings  
 
 ##  Auto-Fill-Mode
 M-x auto-fill-mode  
 M-x set-fill-column  
-C-x C-h show keybindings  
-
-
 
 ## [realgud]("https://github.com/realgud/realgud")
 
