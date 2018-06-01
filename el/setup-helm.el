@@ -2,7 +2,7 @@
 (require 'helm)
 (require 'helm-config)
 
-(global-set-key (kbd "M-x") 'helm-M-x)
+
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -33,9 +33,11 @@
 (helm-autoresize-mode 1)
 
 (helm-mode 1)
-(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
+
+;; (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
 ;;(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-M-y") 'helm-show-kill-ring)

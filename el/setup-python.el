@@ -43,6 +43,16 @@
           (lambda ()
             (set-fill-column 100)))
 
+
+(require 'fill-column-indicator)
+(setq fci-rule-column 100)
+(add-hook 'python-mode-hook 'fci-mode)
+
+(add-to-list 'load-path "/D/myfiles/2018/isortify")
+(load-library "isortify")
+(setq isortify-line-width 100)
+
+
 ;;;; PYTHON NEW
 ;;(eval-after-load 'python '(require 'setup-python))
 

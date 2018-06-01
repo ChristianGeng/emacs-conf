@@ -3,14 +3,15 @@
 ;; https://www.emacswiki.org/emacs/IbufferMode#toc4
 
 
-(after-load 'ibuffer
-  ;; Use human readable Size column instead of original one
-  (define-ibuffer-column size-h
-    (:name "Size" :inline t)
-    (cond
-     ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
-     ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
-     (t (format "%8d" (buffer-size))))))
+;; after load raises an issue!
+;; (after-load 'ibuffer
+;;   ;; Use human readable Size column instead of original one
+;;   (define-ibuffer-column size-h
+;;     (:name "Size" :inline t)
+;;     (cond
+;;      ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+;;      ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+;;      (t (format "%8d" (buffer-size))))))
 
 
 
@@ -34,6 +35,8 @@
                ("python" (
                           or (mode . python-mode)
                              (mode . shell-mode)
+                             (mode . django-mode)
+                             (mode . elpy-mode)
                              (name . "^\\*Elpy Output\\*$")
                              ))
                ("dired" (mode . dired-mode))
