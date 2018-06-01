@@ -93,7 +93,7 @@
 ;; Setup extensions
 (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-(eval-after-load 'dired '(require 'setup-dired))
+;; (eval-after-load 'dired '(require 'setup-dired))
 (eval-after-load 'magit '(require 'setup-magit)) ;; version control
 (eval-after-load 'grep '(require 'setup-rgrep))
 (require 'setup-yasnippet) 
@@ -141,7 +141,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (fill-column-indicator pungi fancy-battery helm-swoop py-autopep8 pony-mode isend-mode realgud pippel django-manage django-mode django-snippets django-theme dired-details markdown-mode+ markdown-preview-mode jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
+    (dired-sidebar dired-subtree dired-hacks-utils dired-quick-sort dired-collapse all-the-icons-dired dired-rsync dired-du dired-k image-dired+ ein fill-column-indicator pungi fancy-battery helm-swoop py-autopep8 pony-mode isend-mode realgud pippel django-manage django-mode django-snippets django-theme dired-details markdown-mode+ markdown-preview-mode jump-to-line use-package dired-narrow egg jedi exec-path-from-shell deferred python-environment pycomplete ac-python pymacs python-django yasnippet-bundle yasnippet-snippets elpygen ac-anaconda anaconda-mode bash-completion magit-svn magit yaml-mode flyspell-correct-helm autothemer airline-themes airplay alect-themes ahungry-theme ag afternoon-theme color-theme unicode-whitespace flymd markdown-preview-eww scala-mode tagedit markdown-mode pandoc pandoc-mode python-mode undo-tree smooth-scrolling smex rainbow-delimiters paredit elpy diminish browse-kill-ring))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)

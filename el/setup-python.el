@@ -53,6 +53,12 @@
 (setq isortify-line-width 100)
 
 
+(setq ein:jupyter-default-server-command "/home/christian/.virtualenvs/py3/bin/jupyter")
+;;(setq ein:jupyter-default-notebook-directory "/D/myfiles/2018/coursera_DeepLearning_Ng/")
+(setq ein:jupyter-default-notebook-directory "/D/myfiles/2018/coursera_DeepLearning_Ng/4-ConvNets/W4/")
+
+
+
 ;;;; PYTHON NEW
 ;;(eval-after-load 'python '(require 'setup-python))
 

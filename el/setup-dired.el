@@ -8,11 +8,15 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
-(setq dired-listing-switches "-alh")
+;; https://www.emacswiki.org/emacs/DiredSorting
+;; (setq dired-listing-switches "-alh")
+(setq dired-listing-switches "-aBhl  --group-directories-first")
+
+
 
 ;; Make dired less verbose
 (require 'dired-details)
-(setq-default dired-details-hidden-string "--- ")
+;; (setq-default dired-details-hidden-string "--- ")
 (dired-details-install)
 
 ;; Move files between split panes
@@ -72,5 +76,15 @@
        (let* ((fn-list (dired-get-marked-files nil arg)))
          (mapc 'find-file fn-list)))))
 
+
+(require 'dired-k)
+(define-key dired-mode-map (kbd "K") 'dired-k)
+
+
+(require 'dired-quick-sort)
+(dired-quick-sort-setup)
+
+
+;; (add-hook 'python-mode-hook 'isort-mode)
 
 (provide 'setup-dired)
