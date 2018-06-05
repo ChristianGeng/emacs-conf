@@ -51,12 +51,9 @@ M-x set-fill-column
 * M-x realgud:pdb test.py
 
 
-
 # Functions:
 * show-file-name (cglispfunctions.el)
-
-
-
+* flush-lines with regex `^\s-*$` - remove all blank lines
 # dired
 
 ## Rename many: 
