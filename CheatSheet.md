@@ -60,6 +60,20 @@ M-x set-fill-column
 * wdired-change-to-wdired-mode
 * wdired-finish-edit
 
+# [Recording and Persisting macros](https://emacs.stackexchange.com/questions/70/how-to-save-a-keyboard-macro-as-a-lisp-function)
+1. M-x start-kbd-macro
+2. do definitions like e.g. M-x flush-lines ^\s-*$
+3. M-x kmacro-end-macro
+4. M-x kmacro-name-last-macro
+5. M-x insert-kbd-macro
+
+Resulting Ouput (still with a typo): 
+```
+(fset 'removeemptylines
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217848 102 108 117 115 104 45 108 105 110 101 115 return 94 94 backspace 92 115 45 42 36 return 134217848 107 109 97 99 114 111 45 101 110 100 45 109 97 114 backspace 99 114 111 105 backspace] 0 "%d")) arg)))
+```
+
+
 
 
 
