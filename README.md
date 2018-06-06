@@ -16,17 +16,18 @@ Better take a look at:
 - https://github.com/magnars/.emacs.d/
 - https://github.com/cjohansen/.emacs.d
 - https://github.com/technomancy/emacs-starter-kit
-- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org67e2b1b
-
 from which I take inspiration or shamelessly copy.
-
-
-
 
 # Further Links
 * [Emacs Manual](https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top)
 * [imenu and icycles](https://www.emacswiki.org/emacs/ImenuMode#toc3)
 * [Emacs Mode Hook for autopep](http://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
+
+- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org67e2b1b
+- https://github.com/tmtxt/.emacs.d/tree/master/config
+- https://www.masteringemacs.org
+- https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
+- http://ergoemacs.org/emacs/emacs_find_replace.html
 
 ## Helm
 1. [A Package in a league of its own](https://tuhdo.github.io/helm-intro.html)
