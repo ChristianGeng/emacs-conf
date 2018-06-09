@@ -39,7 +39,7 @@
 
 ;;  Mode specific fill column: 
 ;; https://stackoverflow.com/questions/8080495/how-do-i-set-the-emacs-fill-column-for-a-specific-mode
-(add-hook 'python-mode-hook auto-fill-mode)
+(add-hook 'python-mode-hook 'auto-fill-mode)
 (add-hook 'python-mode-hook
           (lambda ()
             (set-fill-column 100)))

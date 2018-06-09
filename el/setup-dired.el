@@ -87,4 +87,7 @@
 
 ;; (add-hook 'python-mode-hook 'isort-mode)
 
+(require 'dired-sort)
+
+
 (provide 'setup-dired)
