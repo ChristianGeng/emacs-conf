@@ -24,6 +24,7 @@ from which I take inspiration or shamelessly copy.
 * [Emacs Mode Hook for autopep](http://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
 
 - http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org67e2b1b
+- https://github.com/Schnouki
 - https://github.com/tmtxt/.emacs.d/tree/master/config
 - https://www.masteringemacs.org
 - https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
