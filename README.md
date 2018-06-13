@@ -35,6 +35,8 @@ from which I take inspiration or shamelessly copy.
 2. [helm-wiki](https://github.com/emacs-helm/helm/wiki)
 3. [bloc post](http://thescratchcastle.com/posts/emacs-and-helm.html)
 
+## python
+1. [lsp-mode](https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/)
 
 ## Autopep
 1. [Anleitung für pep mode hook](https://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
