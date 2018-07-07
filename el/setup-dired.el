@@ -12,6 +12,16 @@
 ;; (setq dired-listing-switches "-alh")
 (setq dired-listing-switches "-aBhl  --group-directories-first")
 
+;; setting is cool if you want to split dired windows and copy files between them. See here: 
+;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
+(setq dired-dwim-target t)
+
+;; don not ask for recursive deletion separately for each dir
+(setq dired-recursive-deletes 'always)
+(setq dired-recursive-copies 'always)
+
+;; not bad but too much rebinding (overrides marking of files etc)
+;;(dired-fdclone)
 
 
 ;; Make dired less verbose

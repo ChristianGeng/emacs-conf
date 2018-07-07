@@ -196,4 +196,13 @@
           ((backward-up-list arg)))))
 
 
+(defun tpon ()
+ "Nonce function"
+ (interactive)
+ (shell-command ". cglib; tpon"))
+
+(defun tpoff ()
+ "Nonce function"
+ (interactive)
+ (shell-command ". cglib; tpoff"))
 
