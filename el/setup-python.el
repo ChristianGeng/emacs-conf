@@ -39,19 +39,21 @@
 
 ;;  Mode specific fill column: 
 ;; https://stackoverflow.com/questions/8080495/how-do-i-set-the-emacs-fill-column-for-a-specific-mode
+
+(defconst python-linewidth 100)
+
 (add-hook 'python-mode-hook 'auto-fill-mode)
 (add-hook 'python-mode-hook
           (lambda ()
-            (set-fill-column 100)))
-
+            (set-fill-column python-linewidth)))
 
 (require 'fill-column-indicator)
-(setq fci-rule-column 100)
+(setq fci-rule-column python-linewidth)
 (add-hook 'python-mode-hook 'fci-mode)
 
 (add-to-list 'load-path "/D/myfiles/2018/isortify")
 (load-library "isortify")
-(setq isortify-line-width 100)
+(setq isortify-line-width python-linewidth)
 
 
 (setq ein:jupyter-default-server-command "/home/christian/.virtualenvs/py3/bin/jupyter")
@@ -82,7 +84,7 @@
 ;; automatically sort imports
 ;; https://github.com/proofit404/isortify/blob/master/isortify.el
 (add-hook 'python-mode-hook 'isort-mode)
-(add-hook 'python-mode-hook 'linum-mode)
+;;(add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
 
 

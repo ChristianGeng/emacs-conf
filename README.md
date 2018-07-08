@@ -30,6 +30,11 @@ from which I take inspiration or shamelessly copy.
 - https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
 - http://ergoemacs.org/emacs/emacs_find_replace.html
 
+## Lisp
+
+1. [Learn Emacs Lips the Hard Way](https://github.com/hypernumbers/learn_elisp_the_hard_way/tree/master/contents)
+
+
 ## Helm
 1. [A Package in a league of its own](https://tuhdo.github.io/helm-intro.html)
 2. [helm-wiki](https://github.com/emacs-helm/helm/wiki)

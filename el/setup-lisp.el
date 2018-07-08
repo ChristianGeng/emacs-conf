@@ -17,9 +17,7 @@
 
 ;; (enable-paredit-mode)
 
-
-
-(add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
+;; (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
 
 
 ;;; Remove compiled .elc files on source changes

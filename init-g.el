@@ -18,8 +18,6 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-
-
 (setq  realgud-safe-mode nil)
 
 
@@ -141,7 +139,7 @@
  '(markdown-command "pandoc")
  '(package-selected-packages
    (quote
-    (dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -242,6 +240,17 @@
         "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
 (load-library "cglispfuncs")
+
+;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
+;;./elpa/openwith-20120531.1436/openwith.el:1
+(require 'openwith)
+(setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
+(openwith-mode t)
+
+
+
+
+
 
 (package-initialize)
 
