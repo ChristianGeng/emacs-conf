@@ -1,6 +1,13 @@
 (add-to-list 'load-path (concat site-lisp-dir "/org-mode/lisp"))
 (require 'org)
 
+
+(defconst org-linewidth 100)
+(add-hook 'org-mode-hook 'auto-fill-mode)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (set-fill-column org-linewidth)))
+
 (defun myorg-update-parent-cookie ()
   (when (equal major-mode 'org-mode)
     (save-excursion
@@ -36,5 +43,16 @@
 (global-set-key "\C-cb" 'org-iswitchb)
 
 (define-key org-mode-map (kbd "C-c f") 'org-footnote-action)
+
+
+(use-package org-chef
+  :ensure t)
+
+
+(setq org-capture-templates
+      '(("c" "Cookbook" entry (file "~/.emacs.d/cookbook.org")
+         "%(org-chef-get-recipe-from-url)"
+         :empty-lines 1)))
+
 
 (provide 'setup-org)
