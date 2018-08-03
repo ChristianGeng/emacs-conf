@@ -91,12 +91,10 @@
 ;; Setup extensions
 (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-;; (eval-after-load 'dired '(require 'setup-dired))
-(eval-after-load 'magit '(require 'setup-magit)) ;; version control
-(eval-after-load 'grep '(require 'setup-rgrep))
-(require 'setup-yasnippet) 
-(eval-after-load 'python '(require 'setup-python))
+;; (eval-after-load 'dired '(require 'setup-python))
 
+(require 'setup-dired)
+(require 'setup-python)
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
@@ -142,7 +140,7 @@
     ("/D/myfiles/formalia/cv/Arvato-Vorstellung/notes.org")))
  '(package-selected-packages
    (quote
-    (org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (auctex org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)

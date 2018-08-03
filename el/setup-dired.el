@@ -2,8 +2,11 @@
 (require 'dash)
 (require 'dired-narrow)
 
-(require 'atool)
-(dired-atool-setup)
+
+;; (require 'atool)
+;; (dired-atool-setup)
+
+
 (define-key dired-mode-map "z" #'dired-atool-do-unpack)
 (define-key dired-mode-map "Z" #'dired-atool-do-pack)
 
