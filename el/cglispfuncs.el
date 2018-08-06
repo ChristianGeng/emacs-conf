@@ -196,13 +196,18 @@
           ((backward-up-list arg)))))
 
 (defun tpon ()
- "Nonce function"
+ "Activate the touchpad"
  (interactive)
  (shell-command ". cglib; tpon"))
 
 (defun tpoff ()
- "Nonce function"
+ "Deactivate the touchpad"
  (interactive)
  (shell-command ". cglib; tpoff"))
 
+
+(defun lock-screen ()
+ "lock screen using screensaver"
+ (interactive)
+ (shell-command ". cglib; lock"))
 
