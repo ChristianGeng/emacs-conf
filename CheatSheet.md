@@ -29,6 +29,8 @@ C-j Insert New line
 * C-x 0 - delete current "split"
 * S-{right,left,up,down} - move windows  windmove-right|left ....
 
+Another option: https://github.com/abo-abo/avy 
+
 ## Getting help
 C-h ? what kinds of help
 
@@ -50,7 +52,6 @@ M-x set-fill-column
 * M-x load-library realgud
 * M-x realgud:pdb test.py
 
-
 # Functions:
 * show-file-name (cglispfunctions.el)
 * flush-lines with regex `^\s-*$` - remove all blank lines
@@ -59,6 +60,18 @@ M-x set-fill-column
 ## Rename many: 
 * wdired-change-to-wdired-mode
 * wdired-finish-edit
+
+# Edit multiple files / Refactoring
+https://emacs.stackexchange.com/questions/7595/how-do-i-refactor-across-a-project-in-emacs-change-method-name-everywhere
+
+* The approach using [helm-ag](https://github.com/syohex/emacs-helm-ag) requires the silver searcher. helm-swoop will also come in handy
+ In case any of the others don't work use the wgrep approach. 
+
+*  wgrep way - parallells wdired
+   1. Run M-x rgrep.
+   2. *M-x wgrep-change-to-wgrep-mode*. This buffer is now editable. Any changes you make here will be reflected in the files themselves.
+   3. Run a replace-regexp or a query-replace-regexp in this buffer, to do the refactoring.
+   4. Finish your edits with M-x wgrep-save-all-buffers and M-x wgrep-finish-edit.
 
 # [Recording and Persisting macros](https://emacs.stackexchange.com/questions/70/how-to-save-a-keyboard-macro-as-a-lisp-function)
 1. M-x start-kbd-macro
@@ -72,9 +85,6 @@ Resulting Ouput (still with a typo):
 (fset 'removeemptylines
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217848 102 108 117 115 104 45 108 105 110 101 115 return 94 94 backspace 92 115 45 42 36 return 134217848 107 109 97 99 114 111 45 101 110 100 45 109 97 114 backspace 99 114 111 105 backspace] 0 "%d")) arg)))
 ```
-
-
-
 
 
  
