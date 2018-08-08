@@ -39,6 +39,7 @@ from which I take inspiration or shamelessly copy.
 1. [A Package in a league of its own](https://tuhdo.github.io/helm-intro.html)
 2. [helm-wiki](https://github.com/emacs-helm/helm/wiki)
 3. [bloc post](http://thescratchcastle.com/posts/emacs-and-helm.html)
+4. [helm-swoop](allows to edit occurrences in many files too)
 
 ## python
 1. [lsp-mode](https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/)
