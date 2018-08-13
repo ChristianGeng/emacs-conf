@@ -46,8 +46,13 @@ from which I take inspiration or shamelessly copy.
 2. [red baron](https://www.reddit.com/r/emacs/comments/4oyvcn/redbaron_for_emacs_refactor_your_python_method/)
 3. [python lsp server implementation](https://github.com/palantir/python-language-server)
 
-## Autopep
+
+Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
+
+###  Autopep
 1. [Anleitung für pep mode hook](https://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
+
+
 
 # Code Navigation
 
