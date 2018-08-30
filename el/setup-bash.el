@@ -17,8 +17,12 @@
 ;; .  /etc/bash_completion does not exist, use this one: ??
 ;; .  /etc/bash_completion.d/cygport-bash-completion
 
-;; add yasnippet hook in shell scripts
+;; add yas in shell scripts                                                                                                                                                                                                                                                                                                                                                
 (yas-reload-all)
-(add-hook 'prog-mode-hook #'yas-minor-mode)
+(add-hook 'shell-script-mode-hook #'yas-minor-mode)
+
+;; add yas in shell                                                                                                                                                                                                                                                                                                                                                        
+(yas-reload-all)
+(add-hook 'shell-mode-hook #'yas-minor-mode)
 
 (provide 'setup-bash)
