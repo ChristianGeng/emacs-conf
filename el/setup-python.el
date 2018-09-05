@@ -160,6 +160,7 @@
  (autoload 'jedi:setup "jedi" nil t)
  (setq jedi:complete-on-dot t)                 ; optional
 
+(require 'elpy)
 
 (add-hook 'elpy-mode-hook                                                                                                                                                           |def print_namespace(parsed_namespace):                                                                                  |                                                             
           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))                                                                                                                 |    data = []                                                                                                           |                                                             
@@ -186,6 +187,6 @@
 
 ;(setq jedi:server-command '("C:\\cygwin\\home\\CHRGENG\\.emacs.d\\elpa\\jedi-core-20170121.610\\jediepcserver.py c"))
 
-(require 'elpy)
+
 
 (provide 'setup-python)
