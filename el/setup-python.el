@@ -161,6 +161,13 @@
  (setq jedi:complete-on-dot t)                 ; optional
 
 
+(add-hook 'elpy-mode-hook                                                                                                                                                           |def print_namespace(parsed_namespace):                                                                                  |                                                             
+          (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))                                                                                                                 |    data = []                                                                                                           |                                                             
+                                                                                                                                                                                    |    for k,v in parsed_namespace.__dict__.items():                                                                       |                                                             
+(add-hook 'elpy-mode-hook                                                                                                                                                           |        data += (k,str(v))                                                                                              |                                                             
+          (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))  
+
+
 ;; Used by virtualenvwrapper.el
 ;;(setq venv-location (expand-file-name "/C/Anaconds/envs"))
 ;;(setq python-shell-virtualenv-path "/C/Anaconda3/envs/")
