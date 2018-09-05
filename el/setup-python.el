@@ -86,7 +86,7 @@
 (add-hook 'python-mode-hook 'isort-mode)
 ;;(add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
-
+(add-hook 'python-mode-hook 'jedi:ac-setup)
 
 ;;(setq jedi:setup-keys t)                      ; OBSOLETE
 ;;(setq jedi:complete-on-dot t)                 ; automatically start completing when entering dot
