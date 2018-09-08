@@ -160,13 +160,16 @@
  (autoload 'jedi:setup "jedi" nil t)
  (setq jedi:complete-on-dot t)                 ; optional
 
+(jedi:setup)
+(jedi:ac-setup)
+
 (require 'elpy)
 
-(add-hook 'elpy-mode-hook                                                                                                                                                           |def print_namespace(parsed_namespace):                                                                                  |                                                             
-          (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))                                                                                                                 |    data = []                                                                                                           |                                                             
-                                                                                                                                                                                    |    for k,v in parsed_namespace.__dict__.items():                                                                       |                                                             
-(add-hook 'elpy-mode-hook                                                                                                                                                           |        data += (k,str(v))                                                                                              |                                                             
-          (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))  
+;; (add-hook 'elpy-mode-hook                                                  
+;;           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))        
+                                                                           
+;; (add-hook 'elpy-mode-hook                                                  
+;;           (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))  
 
 
 ;; Used by virtualenvwrapper.el

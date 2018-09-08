@@ -131,16 +131,13 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (tango-dark)))
- '(custom-safe-themes
-   (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "256a381a0471ad344e1ed33470e4c28b35fb4489a67eb821181e35f080083c36" "dfe0523e20114df987a41afb6ac5698307e65e0fcb9bff12dc94621e18d44c3d" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "3fa07dd06f4aff80df2d820084db9ecbc007541ce7f15474f1d956c846a3238f" "cf284fac2a56d242ace50b6d2c438fcc6b4090137f1631e32bedf19495124600" "c616e584f7268aa3b63d08045a912b50863a34e7ea83e35fcab8537b75741956" "0cd56f8cd78d12fc6ead32915e1c4963ba2039890700458c13e12038ec40f6f5" "b563a87aa29096e0b2e38889f7a5e3babde9982262181b65de9ce8b78e9324d5" "d21135150e22e58f8c656ec04530872831baebf5a1c3688030d119c114233c24" "59d1dc166e648573cd7d2fedca89cb5af3309e1a06f230a9c34e02189eb33ab7" "7393c1db792adec2f7ce4e6bdd162d5b1f2621c16dfd2450955b684786b48add" default)))
  '(markdown-command "pandoc")
  '(org-agenda-files
    (quote
     ("/D/myfiles/formalia/cv/Arvato-Vorstellung/notes.org")))
  '(package-selected-packages
    (quote
-    (auctex org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (ample-theme afternoon-theme auctex org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -182,6 +179,7 @@
 (require 'key-bindings)
 (require 'setup-helm)
 (require 'setup-ibuffer)
+(require 'setup-yasnippet)
 
 ;; Misc
 ;; (require 'appearance)

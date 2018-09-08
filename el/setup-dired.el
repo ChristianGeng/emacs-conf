@@ -31,14 +31,10 @@
 ;; not bad but too much rebinding (overrides marking of files etc)
 ;;(dired-fdclone)
 
-
 ;; Make dired less verbose
-(require 'dired-details)
+;; (require 'dired-details)
 ;; (setq-default dired-details-hidden-string "--- ")
-(dired-details-install)
-
-;; Move files between split panes
-(setq dired-dwim-target t)
+;; (dired-details-install)
 
 ;; Reload dired after making changes
 (--each '(dired-do-rename
