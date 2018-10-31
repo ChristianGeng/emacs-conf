@@ -56,9 +56,9 @@
 (setq isortify-line-width python-linewidth)
 
 
-(setq ein:jupyter-default-server-command "/home/christian/.virtualenvs/py3/bin/jupyter")
+;; (setq ein:jupyter-default-server-command "/home/christian/.virtualenvs/py3/bin/jupyter")
 ;;(setq ein:jupyter-default-notebook-directory "/D/myfiles/2018/coursera_DeepLearning_Ng/")
-(setq ein:jupyter-default-notebook-directory "/D/myfiles/2018/coursera_DeepLearning_Ng/4-ConvNets/W4/")
+;; (setq ein:jupyter-default-notebook-directory "/D/myfiles/2018/coursera_DeepLearning_Ng/4-ConvNets/W4/")
 
 
 
@@ -68,9 +68,9 @@
 (elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
 (pyvenv-mode 1)
-(setenv "WORKON_HOME" "/home/christian/.virtualenvs/")
-(pyvenv-activate "/home/christian/.virtualenvs/py3")
-;(pyvenv-activate "py3")
+(setenv "WORKON_HOME" "/home/christian/.venvs/")
+;; (pyvenv-activate "/home/christian/.virtualenvs/py3")
+(pyvenv-activate "py36")
 
 ;; Using ELPA (When installed from `list-packages'):
 (require 'pungi)
@@ -83,7 +83,7 @@
 
 ;; automatically sort imports
 ;; https://github.com/proofit404/isortify/blob/master/isortify.el
-(add-hook 'python-mode-hook 'isort-mode)
+(add-hook 'python-mode-hook 'isortify-mode)
 ;;(add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'jedi:ac-setup)
@@ -135,14 +135,15 @@
 ;; split_before_first_argument = false
 
 
-;; (setq python-shell-interpreter "jupyter"
-;;       python-shell-interpreter-args "console --simple-prompt"
-;;       python-shell-prompt-detect-failure-warning nil)
-;; (add-to-list 'python-shell-completion-native-disabled-interpreters
-;;              "jupyter")
+(setq python-shell-interpreter "jupyter"
+      python-shell-interpreter-args "console --simple-prompt"
+      python-shell-prompt-detect-failure-warning nil)
+(add-to-list 'python-shell-completion-native-disabled-interpreters
+             "jupyter")
 
-(setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "-i --simple-prompt")
+
+;; (setq python-shell-interpreter "ipython"
+;;       python-shell-interpreter-args "-i --simple-prompt")
 
 
 ;; ;; damit bekommt man wenigstens import errors:
