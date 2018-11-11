@@ -137,7 +137,7 @@
     ("/D/myfiles/formalia/cv/Arvato-Vorstellung/notes.org")))
  '(package-selected-packages
    (quote
-    (ac-octave matlab-mode magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -244,6 +244,7 @@
 ;;./elpa/openwith-20120531.1436/openwith.el:1
 (require 'openwith)
 (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
+(setq openwith-associations '(("\\.docx\\'" "lowriter" (file))))
 (openwith-mode t)
 
 (setq openwith-associations '(("\\.doc\\'" "lowriter" (file))))
