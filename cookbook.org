@@ -1,6 +1,5 @@
 #+OPTIONS: prop:t
 
-
 * Lentil Salad with Summer Vegetables
 :PROPERTIES:
 :source-url: https://www.simplyrecipes.com/recipes/lentil_salad_with_summer_vegetables/
@@ -39,7 +38,6 @@
 2. Bring to a simmer and cook uncovered for about 25 minutes. The exact time will vary based on how dry the lentils are. When you get about 10 minutes out from the finished cooking time, start sampling the lentils to check for doneness—when cooked, they should be tender, but still intact. Continue sampling every 5 minutes until they’re ready.
 3. When the lentils are done, drain them and discard the bay leaf, garlic, and parsley stems.
    
-
 
 * Selbst gemachte, gerollte Maultaschen
 :PROPERTIES:
@@ -85,8 +83,7 @@
 5. Nun die Maultaschen portionsweise in kochendes Wasser legen und ca. 10 - 15 min. ziehen lassen. 
 
 
-
-* Maultaschen nach Omi
+* Maultaschen nach BodenseeOmi
 :PROPERTIES:
 :source-url: https://www.simplyrecipes.com/recipes/lentil_salad_with_summer_vegetables/
 :servings: ngs
@@ -111,4 +108,60 @@
 
 
 
+
+* Grünkohl, wie ihn Mutter kochte
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/237101096472618/Gruenkohl-wie-ihn-Mutter-kochte.html
+:servings: 8
+:prep-time: 30 Min
+:cook-time: nil
+:ready-in: 
+:END:
+
+** Ingredients
+
+- 2,4 kg Grünkohl, tiefgefroren
+- 4  Zwiebel(n)
+- 50 g Schmalz (Gänseschmalz)
+- 1 Liter Fleischbrühe, doppelt konzenttrierte (Brühwürfel für 2,5 ltr. Wasser in 1 ltr. auflösen)
+- 2 EL Senf, mittelscharf
+- 10  Würste (Pinkelwürste *)
+- 8  Würste (Kohlwürste, geräucherte Mettenden)
+- 500 g Speck, geräucherter, gestreifter
+- 8  Kasseler - Koteletts
+  Haferflocken
+
+
+* Skirt Steak with Chimichurri Sauce Recipe
+:PROPERTIES:
+:source-url: https://steamykitchen.com/15405-skirt-steak-with-chimichurri-sauce.html
+:servings: 4
+:prep-time: 15 minutes
+:cook-time: 15 minutes
+:ready-in: nil
+:END:
+
+** Ingredients
+
+- FOR THE CHIMICHURRI
+- 1 cup packed fresh flat-leaf parsley leaves
+- 1 cup fresh oregano leaves
+- 4 cloves garlic, minced
+- 2 teaspoons crushed red pepper flakes
+- 1/4 cup red wine vinegar
+- 1/2 cup extra virgin olive oil
+- sea salt
+- FOR THE SKIRT STEAK
+- 2 pounds skirt steak, excess fat trimmed
+- salt and freshly ground black pepper
+
+
+** Directions
+
+1. To make the chimichurri, combine all of the ingredients together in a small bowl.
+2. Season the skirt steak on both sides with salt and pepper. Grill 2-3 minutes on each side over
+   high heat. Lower heat to medium, cover and cook for an additional 2 minutes for medium-rare (If
+   your skirt steak is 1/2" thick or less, skip this step.)
+3. Let steak rest for 5 minutes before slicing. Slice across the grain. Serve with Chimichurri
+   Sauce.
 

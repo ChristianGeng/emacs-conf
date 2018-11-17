@@ -198,12 +198,12 @@
 (defun tpon ()
  "Activate the touchpad"
  (interactive)
- (shell-command ". cglib; tpon"))
+ (shell-command "source cglib; tpon"))
 
 (defun tpoff ()
  "Deactivate the touchpad"
  (interactive)
- (shell-command ". cglib; tpoff"))
+ (shell-command "source cglib; tpoff"))
 
 
 (defun lock-screen ()

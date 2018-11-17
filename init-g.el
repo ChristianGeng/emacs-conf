@@ -18,9 +18,6 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-(setq  realgud-safe-mode nil)
-
-
 (package-initialize)
 ;; Setup packages
 
@@ -86,6 +83,7 @@
 
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
+(setq  realgud-safe-mode nil)
 (require 'realgud)
 
 ;; Setup extensions
@@ -95,6 +93,7 @@
 
 (require 'setup-dired)
 (require 'setup-python)
+
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
@@ -111,6 +110,8 @@
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
 (require 'setup-org) ;; organizer todo notes etc
 (require 'setup-latex)
+
+(require 'setup-calendar)
 (require 'setup-bash)
 (require 'setup-octave)
 ;; (require 'mc)
