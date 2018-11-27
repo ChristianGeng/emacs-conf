@@ -67,3 +67,8 @@ Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
 
 * start using fci-mode
 * (setq fci-rule-column 100)
+
+
+## Java IDE
+
+http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_java_development/

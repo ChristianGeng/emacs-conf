@@ -1,3 +1,10 @@
+;; Links:
+;; https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
+;; https://orgmode.org/worg/org-tutorials/org4beginners.html
+;; cool agenda commands
+;; https://orgmode.org/manual/Agenda-commands.html
+
+
 (add-to-list 'load-path (concat site-lisp-dir "/org-mode/lisp"))
 (require 'org)
 
@@ -53,6 +60,11 @@
       '(("c" "Cookbook" entry (file "~/.emacs.d/cookbook.org")
          "%(org-chef-get-recipe-from-url)"
          :empty-lines 1)))
+
+;; https://orgmode.org/worg/org-tutorials/org4beginners.html
+(setq org-todo-keywords
+  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+
 
 
 (provide 'setup-org)

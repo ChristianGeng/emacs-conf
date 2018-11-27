@@ -205,9 +205,17 @@
  (interactive)
  (shell-command "source cglib; tpoff"))
 
-
 (defun lock-screen ()
  "lock screen using screensaver"
  (interactive)
  (shell-command ". cglib; lock"))
+
+(defun pull-google-cal()
+ "update the google calendar ChristianGeng from google using script"
+ (interactive)
+ (shell-command "source cglib; bash getgooglecal.sh &>/dev/null"))
+
+
+
+
 
