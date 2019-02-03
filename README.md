@@ -44,7 +44,7 @@ from which I take inspiration or shamelessly copy.
 ## python
 1. [lsp-mode](https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/)
 2. [red baron](https://www.reddit.com/r/emacs/comments/4oyvcn/redbaron_for_emacs_refactor_your_python_method/)
-3. [python lsp server implementation](https://github.com/palantir/python-language-server)
+3. [python lsp server imple111mentation](https://github.com/palantir/python-language-server)
 
 
 Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842

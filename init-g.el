@@ -138,7 +138,7 @@
     ("~/.emacs.d/ChristianGeng.org" "~/.emacs.d/agenda.org" "/D/myfiles/formalia/cv/Arvato-Vorstellung/notes.org")))
  '(package-selected-packages
    (quote
-    (visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex org-chef dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -164,6 +164,28 @@
 ;; (require 'change-inner)
 ;; (require 'multifiles)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ansi Farben in compilation buffers:                                                                  ;;
+;; Also hook:                                                                                           ;;
+;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode                       ;;
+;; Als Function:                                                                                        ;;
+;; https://stackoverflow.com/questions/23378271/how-do-i-display-ansi-color-codes-in-emacs-for-any-mode ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun display-ansi-colors ()
+  (interactive)
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region (point-min) (point-max))))
+
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+
+
 ;; Fill column indicator
 ;; (require 'fill-column-indicator)
 ;; (setq fci-rule-color "#111122")
@@ -181,6 +203,8 @@
 (require 'setup-helm)
 (require 'setup-ibuffer)
 (require 'setup-yasnippet)
+
+(require 'setup-java)
 
 ;; Misc
 ;; (require 'appearance)
