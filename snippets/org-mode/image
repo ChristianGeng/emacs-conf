@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: image
+# key: 
+# --
+
+#+CAPTION: Workflow of the Dasense App
+#+NAME: fig.dasenseWf
+[[file:img/filename.png]]

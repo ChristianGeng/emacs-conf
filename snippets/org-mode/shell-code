@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: codebloc
+# key: codebloc
+# --
+#+BEGIN_SRC lang
+
+#+END_SRC
