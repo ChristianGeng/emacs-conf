@@ -95,4 +95,21 @@
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
 
+;; Activate Languages for org mode evaluation
+;; https://orgmode.org/manual/Languages.html
+;; https://emacs.stackexchange.com/questions/17673/no-org-babel-execute-function-for-c-and-no-org-babel-execute-function-for-c
+;; ob-sh was remamed to ob-shell in org 8.2
+;; https://emacs.stackexchange.com/questions/37692/how-to-fix-symbols-function-definition-is-void-org-babel-get-header
+                                                                              
+(require 'ob-async)   
+(setq org-confirm-babel-evaluate nil)     
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((C . t)
+                             (sh . t)
+                             (shell . t)
+                             (python . t)
+                             )
+ )
+
 (provide 'setup-org)
