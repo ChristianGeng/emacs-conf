@@ -8,3 +8,6 @@ smex-items
 tutorial
 ac-comphist.dat
 backups/
+.cache
+tramp
+network-security.data
