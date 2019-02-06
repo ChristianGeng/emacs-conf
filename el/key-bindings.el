@@ -101,10 +101,6 @@
 (add-hook 'elpy-mode-hook
           (lambda () (local-set-key (kbd "C-o") 'elpy-goto-definition)))
 
-
-
-
-
 ;; (global-set-key (kbd "M-h") 'kill-region-or-backward-word)
 
 ;; ;; Transpose stuff with M-t
@@ -188,6 +184,8 @@
 ;; (windmove-default-keybindings) ;; Shift+direction
 (global-set-key (kbd "C-x -") 'rotate-windows)
 (global-set-key (kbd "C-x C--") 'toggle-window-split)
+(windmove-default-keybindings)
+(setq windmove-wrap-around t)
 
 ;; (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
 
@@ -267,10 +265,10 @@
 ;; (global-set-key (kbd "C-c b") 'create-scratch-buffer)
 
 ;; ;; Move windows, even in org-mode
- (global-set-key (kbd "<s-right>") 'windmove-right)
- (global-set-key (kbd "<s-left>") 'windmove-left)
- (global-set-key (kbd "<s-up>") 'windmove-up)
- (global-set-key (kbd "<s-down>") 'windmove-down)
+ ;; (global-set-key (kbd "<s-right>") 'windmove-right)
+ ;; (global-set-key (kbd "<s-left>") 'windmove-left)
+ ;; (global-set-key (kbd "<s-up>") 'windmove-up)
+ ;; (global-set-key (kbd "<s-down>") 'windmove-down)
 
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)

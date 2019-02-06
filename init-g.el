@@ -18,15 +18,39 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+
+
 (package-initialize)
 ;; Setup packages
 
 ;; Switch between windows with Shift+{left,up,down,right}
-(windmove-default-keybindings)
-(setq windmove-wrap-around t)
-
 
 (add-to-list 'load-path "~/.emacs.d/el")
+(message "before yasnippet settup el!")
+
+(use-package yasnippet
+  :if (not noninteractive)
+  :diminish yas-minor-mode
+  :commands (yas-global-mode yas-minor-mode)
+  :config
+  (progn
+    (setq yas-indent-line nil)
+    (setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        ))
+  )
+)
+
+
+
+;; (setq yas-snippet-dirs
+;;       '("~/.emacs.d/snippets"                 ;; personal snippets
+;;         "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+;;         "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+;;         ))
+
+;;(require 'setup-yasnippet)
+(message "AFTER yasnippet settup el!")
 
 ;; (require 'setup-daimler-proxy)
 
@@ -40,6 +64,8 @@
 (setq user-emacs-directory "~/.emacs.d/")
 (message user-emacs-directory)
 
+
+
 ;;(add-to-list 'load-path user-emacs-directory)
 
 ;; Set path to dependencies
@@ -50,6 +76,9 @@
 (setq user-settings-dir
       (concat user-emacs-directory "users/" user-login-name))
 (add-to-list 'load-path user-settings-dir)
+
+
+
 
 ;; Write backup files to own directory
 (setq backup-directory-alist
@@ -73,6 +102,8 @@
 ;; Setup packages
 (require 'setup-package)
 
+
+
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 
@@ -86,13 +117,18 @@
 (setq  realgud-safe-mode nil)
 (require 'realgud)
 
+
+
 ;; Setup extensions
-(require 'setup-themes)
+ (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-;; (eval-after-load 'dired '(require 'setup-python))
+(eval-after-load 'dired '(require 'setup-python))
 
 (require 'setup-dired)
 (require 'setup-python)
+
+
+
 
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
@@ -131,14 +167,13 @@
  '(LaTeX-command "latex -synctex=1")
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(custom-enabled-themes (quote (tango-dark)))
  '(markdown-command "pandoc")
  '(org-agenda-files
    (quote
     ("~/.emacs.d/ChristianGeng.org" "~/.emacs.d/agenda.org" "/D/myfiles/formalia/cv/Arvato-Vorstellung/notes.org")))
  '(package-selected-packages
    (quote
-    (helm-lsp company-lsp lsp-java ecb-snapshot swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (ecb-snapshot swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -202,9 +237,9 @@
 (require 'key-bindings)
 (require 'setup-helm)
 (require 'setup-ibuffer)
-(require 'setup-yasnippet)
 
-(require 'setup-java)
+
+;;(require 'setup-java)
 
 ;; Misc
 ;; (require 'appearance)
@@ -213,7 +248,7 @@
 
 ;; Diminish modeline clutter
 (require 'diminish)
-;; (diminish 'yas-minor-mode)
+(diminish 'yas-minor-mode)
 ;; (diminish 'eldoc-mode)
 ;; (diminish 'paredit-mode)
 
@@ -222,8 +257,8 @@
 ;; (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
 ;; (eval-after-load 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))
 
-;; ;; Email, baby
-;; (require 'setup-mu4e)
+;; Email, baby
+;; (require 'setup-mule)
 
 ;; Emacs server
 (require 'server)
@@ -237,7 +272,7 @@
 ;; electric-pair-mode
 ;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
 ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
-(electric-pair-mode 1)
+;; (electric-pair-mode 1)
 
 ;; company mode autocompletion
 ;;(add-hook 'after-init-hook 'global-company-mode)
@@ -267,14 +302,8 @@
 
 ;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
 ;;./elpa/openwith-20120531.1436/openwith.el:1
-(require 'openwith)
-(setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
-(setq openwith-associations '(("\\.docx\\'" "lowriter" (file))))
-(openwith-mode t)
-
-(setq openwith-associations '(("\\.doc\\'" "lowriter" (file))))
-(openwith-mode t)
-
+;; (require 'openwith)
+;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
 (package-initialize)
 

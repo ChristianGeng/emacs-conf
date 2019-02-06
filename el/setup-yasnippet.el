@@ -6,17 +6,24 @@
 
 ;; Use only own snippets, do not use bundled ones
 ;;
-;;(setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
-;;                         (concat user-emacs-directory "yasnippets")
+(setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
+(setq yas-snippets-dirs (list (concat user-emacs-directory "snippets")))
+
+;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
+;; (setq yas-snippetsg-dirs (list (concat user-emacs-directory "snippets")))
+
+;; (concat user-emacs-directory "yasnippets")
 
 
 ;; (setq yas-snippet-dirs (list
-;;                         (concat user-emacs-directory  "elpa/elpy-20161229.1103/snippets/python-mode/")
-;;                         (concat  user-emacs-directory "elpa/yasnippet-20161221.1953/snippets/")
-;;                         ))
+;;                          (concat user-emacs-directory  "elpa/elpy-20161229.1103/snippets/python-mode/")
+;;                          (concat  user-emacs-directory "elpa/yasnippet-20181211.2219/snippets/")
+;;                          ))
 
 
-;;(yas-global-mode 1)
+
+;;(yas-reload-all)
+(yas-global-mode 1)
 (setq yas-global-mode 1)
 
 ;; Include snippets for Buster.js
@@ -46,7 +53,8 @@
 ;; (define-key yas-keymap (kbd "C-a") 'yas-goto-start-of-active-field)
 
 ;; No dropdowns please, yas
-(setq yas-prompt-functions '(yas-ido-prompt yas-completing-prompt))
+;;(setq yas-prompt-functions '(yas-ido-prompt yas-completing-prompt))
+
 
 ;; Wrap around region
 (setq yas-wrap-around-region t)

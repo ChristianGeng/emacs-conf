@@ -40,7 +40,7 @@
 ;;  Mode specific fill column: 
 ;; https://stackoverflow.com/questions/8080495/how-do-i-set-the-emacs-fill-column-for-a-specific-mode
 
-(defconst python-linewidth 100)
+(defconst python-linewidth 150)
 
 (add-hook 'python-mode-hook 'auto-fill-mode)
 (add-hook 'python-mode-hook
@@ -51,7 +51,7 @@
 (setq fci-rule-column python-linewidth)
 (add-hook 'python-mode-hook 'fci-mode)
 
-(add-to-list 'load-path "/D/myfiles/2018/isortify")
+;;(add-to-list 'load-path "/D/myfiles/2018/isortify")
 (load-library "isortify")
 (setq isortify-line-width python-linewidth)
 
@@ -68,15 +68,17 @@
 (elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
 (pyvenv-mode 1)
-(setenv "WORKON_HOME" "/home/christian/.venvs/")
-;; (pyvenv-activate "/home/christian/.virtualenvs/py3")
-(pyvenv-activate "py36")
+(setenv "WORKON_HOME" "/home/cgn/.venvs/")
+;; (pyvenv-activate "/home/cgn/.virtualenvs/py3")
+
+;; (pyvenv-activate "/home/cgn/.venvs/")
+(pyvenv-workon "dasense-sdk-py2")
 
 ;; Using ELPA (When installed from `list-packages'):
-(require 'pungi)
-(add-hook #'python-mode-hook
-          '(lambda ()
-             (pungi:setup-jedi)))
+;; (require 'pungi)
+;; (add-hook #'python-mode-hook
+;;           '(lambda ()
+;;              (pungi:setup-jedi)))
 
 (add-hook 'python-mode-hook
           (lambda() (which-function-mode 1)))

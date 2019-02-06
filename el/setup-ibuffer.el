@@ -40,6 +40,7 @@
                              (name . "^\\*Elpy Output\\*$")
                              ))
                ("dired" (mode . dired-mode))
+               ("json/js" (mode . javascript-mode))
                ("planner" (or
                            (name . "^\\*Calendar\\*$")
                            (name . "^diary$")
