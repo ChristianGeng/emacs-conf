@@ -1,0 +1,10 @@
+elpa/
+session*
+auto-save-list/
+recentf
+ede-projects.el
+semanticdb/
+smex-items
+tutorial
+ac-comphist.dat
+backups/
