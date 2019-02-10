@@ -42,6 +42,17 @@ C-h b (or M-x describe-bindings) will sh
 C-h k (M-x describe-key) to show what command is bound to a 
 C-x C-h show keybindings  
 
+## Org-Mode
+
+* C-c C-x C-d display: Aufsummieren 
+* C-c C-x C-i clock in 
+* C-c C-x C-o clock out
+* C-c C-x C-j go to clocking task
+* C-c C-x C-q forget current clock info
+* C-c C-x C-x Restart latest clock
+* C-u C-c C-x C-x Clock in on task to select
+
+
 ##  Auto-Fill-Mode
 M-x auto-fill-mode  
 M-x set-fill-column  
