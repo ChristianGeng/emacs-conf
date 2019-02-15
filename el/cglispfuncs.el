@@ -44,15 +44,30 @@
 
 
 
+;; insert current date, use calendar, see for more details:
+;; https://www.emacswiki.org/emacs/InsertingTodaysDate
+(defun insdate-insert-current-date (&optional omit-day-of-week-p)
+  "Insert today's date using the current locale.
+  With a prefix argument, the date is inserted without the day of
+  the week."
+  (interactive "P*")
+  (insert (calendar-date-string (calendar-current-date) nil
+                                omit-day-of-week-p)))
 
+ (defun timestamp ()
+   (interactive)
+   (insert (format-time-string "%Y-%m-%dT%H:%M:%S"))2019-02-11T09:11:19)
+
+ (defun date (arg)
+   (interactive "P")
+   (insert (if arg
+               (format-time-string "%Y-%m-%d")
+             (format-time-string "%Y-%m-%d"))))
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; see https://stackoverflow.com/questions/8674912/how-to-collapse-whitespaces-in-a-region
-
-
-
 
 ;; https://www.emacswiki.org/emacs/ChangingEncodings
 

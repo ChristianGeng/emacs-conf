@@ -44,6 +44,9 @@ C-x C-h show keybindings
 
 ## Org-Mode
 
+
+### Clocking
+
 * C-c C-x C-d display: Aufsummieren 
 * C-c C-x C-i clock in 
 * C-c C-x C-o clock out
@@ -51,6 +54,8 @@ C-x C-h show keybindings
 * C-c C-x C-q forget current clock info
 * C-c C-x C-x Restart latest clock
 * C-u C-c C-x C-x Clock in on task to select
+* M-S-Up and M-S-Down : Einstellen der Uhrzeit
+
 
 
 ##  Auto-Fill-Mode
