@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: unittest_setupClass
+# key: unittest_setupClass
+# --
+import unittest
+import pytest
+
+
+class TestLicenseInContext(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(self):
+        pass
+
+    def test_your_code(self):
+        pass
+
+    @classmethod
+    def tearDownClass(self):
+        pass
