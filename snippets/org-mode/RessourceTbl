@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: RessourceTbl
+# key: RessourceTbl
+# --
+
+| Activity | Dur(h) |
+| A1       |      2 |
+| A2       |      1 |
+| A3       |      4 |
+|----------+--------|
+|          |      3 |
+   #+TBLFM: $2=vsum(@2..@-1)

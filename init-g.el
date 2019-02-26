@@ -126,10 +126,7 @@
 
 (require 'setup-dired)
 (require 'setup-python)
-
-
-
-
+(require 'setup-projectile)
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
