@@ -26,31 +26,6 @@
 ;; Switch between windows with Shift+{left,up,down,right}
 
 (add-to-list 'load-path "~/.emacs.d/el")
-(message "before yasnippet settup el!")
-
-(use-package yasnippet
-  :if (not noninteractive)
-  :diminish yas-minor-mode
-  :commands (yas-global-mode yas-minor-mode)
-  :config
-  (progn
-    (setq yas-indent-line nil)
-    (setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"
-        ))
-  )
-)
-
-
-
-;; (setq yas-snippet-dirs
-;;       '("~/.emacs.d/snippets"                 ;; personal snippets
-;;         "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-;;         "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-;;         ))
-
-;;(require 'setup-yasnippet)
-(message "AFTER yasnippet settup el!")
 
 ;; (require 'setup-daimler-proxy)
 
@@ -127,6 +102,7 @@
 (require 'setup-dired)
 (require 'setup-python)
 (require 'setup-projectile)
+(require 'setup-wttrin)
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
@@ -134,12 +110,24 @@
 ;; (require 'setup-ffip)
 ;; (require 'setup-paredit)
 
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
 
+
 (require 'setup-speedbar)
 
-(eval-after-load 'sgml-mode '(require 'setup-html-mode))
+;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
 (require 'setup-org) ;; organizer todo notes etc
 (require 'setup-latex)
@@ -148,6 +136,9 @@
 (require 'setup-bash)
 (require 'setup-octave)
 ;; (require 'mc)
+
+(require 'js2-mode)
+
 
 ;;(require 'setup-web-mode)
 (require 'setup-jabber) 
@@ -171,7 +162,7 @@
  '(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
  '(package-selected-packages
    (quote
-    (js2-mode org-plus-contrib ecb tj3-mode ag groovy-mode color-theme-solarized atom-dark-theme airline-themes helm-ag wgrep-helm color-theme-github cider-eval-sexp-fu gited ob-async ob-sql-mode ob-ipython ecb-snapshot swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
+    (wttrin jquery-doc multi-web-mode web-mode java-snippets buster-snippets angular-snippets company-tern js2-refactor flycheck jenkins-watch jenkins butler js2-mode org-plus-contrib ecb tj3-mode ag groovy-mode color-theme-solarized atom-dark-theme airline-themes helm-ag wgrep-helm color-theme-github cider-eval-sexp-fu gited ob-async ob-sql-mode ob-ipython ecb-snapshot swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme))))
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
