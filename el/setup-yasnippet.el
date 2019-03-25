@@ -1,4 +1,33 @@
-(require 'yasnippet)
+;; (require 'yasnippet)
+
+
+(message "before yasnippet settup el!")
+
+(use-package yasnippet
+  :if (not noninteractive)
+  :diminish yas-minor-mode
+  :commands (yas-global-mode yas-minor-mode)
+  :config
+  (progn
+    (setq yas-indent-line nil)
+    (setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"
+        ))
+  )
+)
+
+
+
+;; (setq yas-snippet-dirs
+;;       '("~/.emacs.d/snippets"                 ;; personal snippets
+;;         "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+;;         "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+;;         ))
+
+;;(require 'setup-yasnippet)
+(message "AFTER yasnippet settup el!")
+
+
 
 ;; Python devel und yasnippet: http://longhorizon.org/blog/2013/03/31/improving-python-development-in-emacs-with-yasnippet/
 
