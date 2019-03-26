@@ -3,9 +3,15 @@
 (require 'dired-narrow)
 
 
+
+
 ;; (require 'atool)
 ;; (dired-atool-setup)
 
+;; vcs highlighting in dired mode, see
+;; https://emacs.stackexchange.com/questions/9503/how-can-i-visualize-vcs-status-in-dired
+(add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+(add-hook 'dired-mode-hook 'diff-hl-margin-mode)
 
 (define-key dired-mode-map "z" #'dired-atool-do-unpack)
 (define-key dired-mode-map "Z" #'dired-atool-do-pack)
