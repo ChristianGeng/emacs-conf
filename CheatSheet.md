@@ -102,5 +102,9 @@ Resulting Ouput (still with a typo):
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([134217848 102 108 117 115 104 45 108 105 110 101 115 return 94 94 backspace 92 115 45 42 36 return 134217848 107 109 97 99 114 111 45 101 110 100 45 109 97 114 backspace 99 114 111 105 backspace] 0 "%d")) arg)))
 ```
 
+# Use newline or tab in replacement with `replace-string` or `replace-regexp` in emacs
 
- 
+In order to use a literal tab or newline in the replacement string of a replace function in emacs use
+
+C-q tab   # insert tab
+C-q C-j   # insert newline 
