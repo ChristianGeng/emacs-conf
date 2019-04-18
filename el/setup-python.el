@@ -177,9 +177,11 @@
 (add-hook 'python-mode-hook (lambda ()
                               (company-mode -1)))
 
+(push 'company-jedi company-backends)
 
 
 (add-hook 'python-mode-hook 'projectile-mode)
+
 
 ;; (add-hook 'elpy-mode-hook                                                  
 ;;           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))        
