@@ -174,8 +174,8 @@
 (require 'elpy)
 
 ;; company ausschalten in python
-(add-hook 'python-mode-hook (lambda ()
-                              (company-mode -1)))
+;; (add-hook 'python-mode-hook (lambda ()
+;;                               (company-mode -1)))
 
 (push 'company-jedi company-backends)
 
