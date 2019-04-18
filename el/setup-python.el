@@ -40,7 +40,7 @@
 ;;  Mode specific fill column: 
 ;; https://stackoverflow.com/questions/8080495/how-do-i-set-the-emacs-fill-column-for-a-specific-mode
 
-(defconst python-linewidth 150)
+(defconst python-linewidth 120)
 
 (add-hook 'python-mode-hook 'auto-fill-mode)
 (add-hook 'python-mode-hook
@@ -52,8 +52,8 @@
 (add-hook 'python-mode-hook 'fci-mode)
 
 ;;(add-to-list 'load-path "/D/myfiles/2018/isortify")
-(load-library "isortify")
-(setq isortify-line-width python-linewidth)
+;; (load-library "isortify")
+;; (setq isortify-line-width python-linewidth)
 
 
 ;; (setq ein:jupyter-default-server-command "/home/christian/.virtualenvs/py3/bin/jupyter")
@@ -68,11 +68,11 @@
 (elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
 (pyvenv-mode 1)
-(setenv "WORKON_HOME" "/home/cgn/.venvs/")
+(setenv "WORKON_HOME" "/home/cgn/virtualenvs/")
 ;; (pyvenv-activate "/home/cgn/.virtualenvs/py3")
 
 ;; (pyvenv-activate "/home/cgn/.venvs/")
-(pyvenv-workon "dasense-sdk-py2")
+(pyvenv-workon "dasense-sdk-py2_02")
 
 ;; Using ELPA (When installed from `list-packages'):
 ;; (require 'pungi)
@@ -85,7 +85,7 @@
 
 ;; automatically sort imports
 ;; https://github.com/proofit404/isortify/blob/master/isortify.el
-(add-hook 'python-mode-hook 'isortify-mode)
+;; (add-hook 'python-mode-hook 'isortify-mode)
 ;;(add-hook 'python-mode-hook 'linum-mode)
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'jedi:ac-setup)
@@ -137,15 +137,20 @@
 ;; split_before_first_argument = false
 
 
-(setq python-shell-interpreter "jupyter"
-      python-shell-interpreter-args "console --simple-prompt"
-      python-shell-prompt-detect-failure-warning nil)
+;; (setq python-shell-interpreter "jupyter"
+;;       python-shell-interpreter-args "console --simple-prompt"
+;;       python-shell-prompt-detect-failure-warning nil)
+
+(setq python-shell-interpreter "ipython"
+       python-shell-interpreter-args "-i --simple-prompt")
+
+
 (add-to-list 'python-shell-completion-native-disabled-interpreters
              "jupyter")
 
 
-;; (setq python-shell-interpreter "ipython"
-;;       python-shell-interpreter-args "-i --simple-prompt")
+
+
 
 
 ;; ;; damit bekommt man wenigstens import errors:
@@ -167,6 +172,11 @@
 (jedi:ac-setup)
 
 (require 'elpy)
+
+;; company ausschalten in python
+(add-hook 'python-mode-hook (lambda ()
+                              (company-mode -1)))
+
 
 
 (add-hook 'python-mode-hook 'projectile-mode)
