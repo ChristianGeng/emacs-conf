@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: skiptest-decorator
+# key: skiptest
+# --
+
+@pytest.mark.skip(reason=None)
