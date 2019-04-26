@@ -5,8 +5,14 @@
 ;; https://orgmode.org/manual/Agenda-commands.html
 
 
-(require 'ox-taskjuggler)
-(require 'org-tempo)
+:; (require 'ox-taskjuggler)
+;; (require 'org-tempo)
+;;(require 'org-tempo)
+ ;; (require 'ox-rst)
+ ;; (setq org-element-use-cache nil)
+
+
+;;(require 'org-tempo)
 (require 'ox-rst)
 (setq org-element-use-cache nil)
 
