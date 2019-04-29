@@ -68,10 +68,12 @@
 (elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
 (pyvenv-mode 1)
-(setenv "WORKON_HOME" "/home/cgn/virtualenvs/")
+
+
+;; (setenv "WORKON_HOME" "/home/cgn/virtualenvs/")
 ;; (pyvenv-activate "/home/cgn/.virtualenvs/py3")
 
-;; (pyvenv-activate "/home/cgn/.venvs/")
+;;(pyvenv-activate (getenv "WORKON_HOME"))
 (pyvenv-workon "dasense-sdk-py2_02")
 
 ;; Using ELPA (When installed from `list-packages'):
