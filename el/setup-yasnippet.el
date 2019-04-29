@@ -18,6 +18,7 @@
 
 
 
+
 ;; (setq yas-snippet-dirs
 ;;       '("~/.emacs.d/snippets"                 ;; personal snippets
 ;;         "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
@@ -49,7 +50,7 @@
 ;;                          (concat  user-emacs-directory "elpa/yasnippet-20181211.2219/snippets/")
 ;;                          ))
 
-
+(setq yas-prompt-functions '(yas-completing-prompt yas-ido-prompt yas-dropdown-prompt yas-maybe-ido-prompt yas-no-prompt))
 
 ;;(yas-reload-all)
 (yas-global-mode 1)
