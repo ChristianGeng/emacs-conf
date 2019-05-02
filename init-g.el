@@ -18,6 +18,7 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+(require 'title-time)
 
 
 (package-initialize)
