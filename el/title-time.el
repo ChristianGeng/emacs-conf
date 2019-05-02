@@ -53,6 +53,8 @@
 ;;
 ;;; Code:
 
+;; Quelle: https://www.emacswiki.org/emacs/title-time.el
+
 (require 'time)
 
 (defvar title-time-mode t
