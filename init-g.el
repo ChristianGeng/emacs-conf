@@ -18,9 +18,6 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-(require 'title-time)
-
-
 (package-initialize)
 ;; Setup packages
 
@@ -28,6 +25,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/el")
 
+(require 'title-time)
 
 ;; keep automatic customizations separately
 (setq custom-file "~/.emacs.d/custom.el")
