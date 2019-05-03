@@ -62,6 +62,10 @@ Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
 * M-. (that’s Meta-Period) and type the name of the function
 * M-* to navigate to last point
 
+* Use helm to navigate to tags: M-x helm-etags-select
+
+* Use projectile-regenerate-tags to generate tags before. 
+
 
 # Fill column indication
 
