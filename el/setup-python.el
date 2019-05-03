@@ -103,6 +103,11 @@
 ;;  - /Users/nolan/newpath
 
 
+(add-hook 'python-mode-hook (lambda ()
+                              (require 'sphinx-doc)
+                              (sphinx-doc-mode t)))
+
+
 ;; https://github.com/jorgenschaefer/elpy/issues/733
 (setq python-shell-prompt-detect-failure-warning nil)
 
