@@ -37,6 +37,7 @@
                              (mode . shell-mode)
                              (mode . django-mode)
                              (mode . elpy-mode)
+                             (mode . inferior-python-mode)
                              (name . "^\\*Elpy Output\\*$")
                              ))
                ("dired" (mode . dired-mode))
