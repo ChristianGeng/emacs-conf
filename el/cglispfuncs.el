@@ -220,6 +220,20 @@
  (interactive)
  (shell-command "source cglib; tpoff"))
 
+
+(defun cg-pyclean-projectitle ()
+  "clean python project"
+  (interactive)
+  ;; (shell-command "source cglib; tpoff")
+  (defvar activeproject (projectile-project-root)
+    "variable containing the active project")
+  (message activeproject)
+  (shell-command (concat "find " activeproject " -type f -name '*.py[co]' -delete"  ))
+  (shell-command (concat "find " activeproject " -type f -name '__pycache__' -delete"  ))
+  (shell-command (concat "find " activeproject " -name '.ipynb_checkpoints'  -exec rm -r '{}' \;"  ))
+  )
+
+
 (defun lock-screen ()
  "lock screen using screensaver"
  (interactive)
