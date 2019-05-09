@@ -230,9 +230,18 @@
   (message activeproject)
   (shell-command (concat "find " activeproject " -type f -name '*.py[co]' -delete"  ))
   (shell-command (concat "find " activeproject " -type f -name '__pycache__' -delete"  ))
-  (shell-command (concat "find " activeproject " -name '.ipynb_checkpoints'  -exec rm -r '{}' \;"  ))
+  (shell-command (concat "find " activeproject " -name '.ipynb_checkpoints'  -exec rm -r '{}' \\;"  ))
   )
 
+(defun cg-projectile-clean-cfiles ()
+  "clean  projects c files DANGEROUS in c projects!!"
+  (interactive)
+    (defvar activeproject (projectile-project-root)
+      "variable containing the active project")
+      (shell-command (concat "find " activeproject " -type f -name '*.c' -delete"  ))
+    )
+
+  
 
 (defun lock-screen ()
  "lock screen using screensaver"
