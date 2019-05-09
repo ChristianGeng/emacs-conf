@@ -14,11 +14,10 @@
 (defun turn-on-paredit ()
   (paredit-mode +1))
 
-
 ;; (enable-paredit-mode)
-
 ;; (add-hook 'emacs-lisp-mode-hook 'turn-on-paredit)
 
+(add-hook 'emacs-lisp-mode-hook 'projectile-mode)
 
 ;;; Remove compiled .elc files on source changes
 
