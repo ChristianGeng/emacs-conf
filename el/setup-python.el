@@ -32,13 +32,46 @@
 ;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 ;; M-x pyvenv-activate
 
-(require 'python)
-(require 'cl-lib)
-(require 'elpy)
+;; (require 'python)
+;; (require 'cl-lib)
+;; (require 'elpy)
+;; (elpy-enable)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;,,
+;; All it needs to get elpy jedi conmpletion right
+;; see https://stackoverflow.com/questions/29809061/how-to-properly-setup-jedi-with-elpy-in-emacs
+;; and https://github.com/jorgenschaefer/elpy/wiki/Configuration
+(use-package elpy :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
+
+(elpy-enable)  
+(setq elpy-rpc-backend "jedi")  
+
+
+;; see https://www.reddit.com/r/emacs/comments/3uzdx3/change_elpy_keybindings/
+;; (add-hook 'elpy-mode-hook
+;;     (lambda ()
+;;     (local-unset-key (kbd "M-TAB"))
+;;     (define-key elpy-mode-map (kbd "C-TAB") 'elpy-company-backend)))
+
+;; g define-key on elpy-mode-map 
+
+;; (define-key elpy-mode-map (kbd "C-tab") 'elpy-company-backend)
+;; (define-key elpy-mode-map (kbd "C-c tab") 'elpy-company-backend)
+
+;; (add-hook 'elpy-mode-hook
+;;           (lambda () (local-set-key (kbd "C-TAB") 'elpy-company-backend)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;,,
 
 ;;  Mode specific fill column: 
 ;; https://stackoverflow.com/questions/8080495/how-do-i-set-the-emacs-fill-column-for-a-specific-mode
+
+
+;; (setq jedi:complete-on-dot t)                 ; automatically start completing when entering dot
 
 (defconst python-linewidth 120)
 
@@ -65,7 +98,6 @@
 ;;;; PYTHON NEW
 ;;(eval-after-load 'python '(require 'setup-python))
 
-(elpy-enable)
 ;;(setq elpy-rpc-backend "jedi")
 (pyvenv-mode 1)
 
@@ -89,11 +121,10 @@
 ;; https://github.com/proofit404/isortify/blob/master/isortify.el
 ;; (add-hook 'python-mode-hook 'isortify-mode)
 ;;(add-hook 'python-mode-hook 'linum-mode)
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook 'jedi:ac-setup)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'jedi:ac-setup)
 
 ;;(setq jedi:setup-keys t)                      ; OBSOLETE
-;;(setq jedi:complete-on-dot t)                 ; automatically start completing when entering dot
 
 ;;(setq jedi:server-command '("/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py"))
 ;; (setq exec-path (append exec-path '("C:/Users/CHRGENG/home/CHRGENG/.emacs.d/elpa/jedi-core-20170121.610/jediepcserver.py")))
@@ -156,14 +187,10 @@
              "jupyter")
 
 
-
-
-
-
 ;; ;; damit bekommt man wenigstens import errors:
 
- (require 'epc)
- (require 'jedi)
+ ;; (require 'epc)
+ ;; (require 'jedi)
 ;; ;;(add-hook 'python-mode-hook 'jedi:setup)
 
 ;; (if (eq system-type 'windows-nt)
@@ -172,17 +199,17 @@
 ;; 	   (setenv "PATH" (concat msys-bin ";" (getenv "PATH")))))
 
 
- (autoload 'jedi:setup "jedi" nil t)
- (setq jedi:complete-on-dot t)                 ; optional
+;;  (autoload 'jedi:setup "jedi" nil t)
+;;  (setq jedi:complete-on-dot t)                 ; optional
 
-(jedi:setup)
-(jedi:ac-setup)
+;; (jedi:setup)
+;; (jedi:ac-setup)
 
-(require 'elpy)
+;; (require 'elpy)
 
 ;; company ausschalten in python
- (add-hook 'python-mode-hook (lambda ()
-                               (company-mode -1)))
+ ;; (add-hook 'python-mode-hook (lambda ()
+ ;;                               (company-mode -1)))
 
 ;; (push 'company-jedi company-backends)
 
@@ -195,6 +222,17 @@
                                                                            
 ;; (add-hook 'elpy-mode-hook                                                  
 ;;           (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))  
+
+
+(add-hook 'elpy-mode-hook
+          (lambda () (local-set-key (kbd "C-o") 'elpy-goto-definition)))
+
+;; Tbis one is also free: 
+;; (add-hook 'elpy-mode-hook
+;;           (lambda () (local-set-key (kbd "C-,") 'elpy-company-backend)))
+
+(add-hook 'elpy-mode-hook
+          (lambda () (local-set-key [C-tab] 'elpy-company-backend)))
 
 
 ;; Used by virtualenvwrapper.el

@@ -98,8 +98,27 @@
 ;;(elpy-shell-send-statement-and-step)
 ;;(elpy-shell-send-statement-and-step)
 
-(add-hook 'elpy-mode-hook
-          (lambda () (local-set-key (kbd "C-o") 'elpy-goto-definition)))
+
+;; see https://www.reddit.com/r/emacs/comments/3uzdx3/change_elpy_keybindings/
+;; (add-hook 'elpy-mode-hook
+;;     (lambda ()
+;;     (local-unset-key (kbd "M-TAB"))
+;;     (define-key elpy-mode-map (kbd "C-TAB") 'elpy-company-backend)))
+
+;; g define-key on elpy-mode-map 
+
+;; (define-key elpy-mode-map (kbd "C-tab") 'elpy-company-backend)
+;; (define-key elpy-mode-map (kbd "C-c tab") 'elpy-company-backend)
+
+
+
+
+
+
+
+
+
+
 
 ;; (global-set-key (kbd "M-h") 'kill-region-or-backward-word)
 
