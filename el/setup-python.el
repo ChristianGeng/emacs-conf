@@ -32,6 +32,9 @@
 ;;(global-set-key (kbd "C-<return>") (lambda () (interactive) (python-shell-send-line) (next-line)))
 ;; M-x pyvenv-activate
 
+;; Noch ein paar coole tips für Python:
+;; https://github.com/humitos/emacs-configuration/blob/master/startup.d/elpy.el
+
 ;; (require 'python)
 ;; (require 'cl-lib)
 ;; (require 'elpy)
@@ -50,6 +53,18 @@
 (elpy-enable)  
 (setq elpy-rpc-backend "jedi")  
 
+
+;; Company Mode and fci incompatibility workaround.
+;; see here:
+;; https://github.com/alpaker/fill-column-indicator/issues/54
+;; This should also workd
+(defun on-off-fci-before-company(command)
+  (when (string= "show" command)
+    (turn-off-fci-mode))
+  (when (string= "hide" command)
+    (turn-on-fci-mode)))
+
+(advice-add 'company-call-frontends :before #'on-off-fci-before-company)
 
 ;; see https://www.reddit.com/r/emacs/comments/3uzdx3/change_elpy_keybindings/
 ;; (add-hook 'elpy-mode-hook

@@ -300,4 +300,8 @@
  )
 
 
+
 (put 'erase-buffer 'disabled nil)
+
+
+(setq popup-use-optimized-column-computation nil)
