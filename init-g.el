@@ -27,11 +27,6 @@
 
 (require 'title-time)
 
-;; keep automatic customizations separately
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
-
-
 ;; (require 'setup-daimler-proxy)
 
 ;; ;; No splash screen please ... jeez
@@ -56,14 +51,18 @@
 ;; Set path to dependencies
 (setq site-lisp-dir
       (expand-file-name "site-lisp" user-emacs-directory))
-
 ;; Settings for currently logged in user
+
 (setq user-settings-dir
       (concat user-emacs-directory "users/" user-login-name))
 (add-to-list 'load-path user-settings-dir)
 
-
-
+;; keep automatic customizations separately
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+;; Keep emacs Custom-settings in separate file
+;;(setq custom-file (expand-file-name "custom.el" user-settings-dir))
+;;(load custom-file 'noerror)
 
 ;; Write backup files to own directory
 (setq backup-directory-alist
@@ -222,7 +221,7 @@
 (require 'key-bindings)
 (require 'setup-helm)
 (require 'setup-ibuffer)
-
+(require 'setup-doom-modeline)
 
 ;;(require 'setup-java)
 
@@ -262,10 +261,6 @@
 ;; company mode autocompletion
 ;;(add-hook 'after-init-hook 'global-company-mode)
 
-;; Keep emacs Custom-settings in separate file
-;;(setq custom-file (expand-file-name "custom.el" user-settings-dir))
-;;(load custom-file 'noerror)
-
 ;;(message user-settings-dir)
 
 ;; Conclude init by setting up specifics for the current user
@@ -292,16 +287,8 @@
 
 (package-initialize)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
-
 (put 'erase-buffer 'disabled nil)
 
-
+;; fix misalignment in popus:
 (setq popup-use-optimized-column-computation nil)
+
