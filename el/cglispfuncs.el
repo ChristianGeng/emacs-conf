@@ -17,11 +17,7 @@
 	 (message "A buffer named '%s' already exists!" new-name)
 	(progn 	 (rename-file filename new-name 1) 	 (rename-buffer new-name) 	 (set-visited-file-name new-name) 	 (set-buffer-modified-p nil)))))) ;;
 
-
-
-
 ;; interesting: http://web-mode.org/
-
 
 ;; lines words characters
  (defun wc (&optional start end)

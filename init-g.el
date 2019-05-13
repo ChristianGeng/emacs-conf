@@ -45,6 +45,11 @@
 (message user-emacs-directory)
 
 
+;; add Imenu whenever possible.
+;; see https://www.emacswiki.org/emacs/ImenuMode for documentation
+(defun try-to-add-imenu ()
+  (condition-case nil (imenu-add-to-menubar "Index") (error nil)))
+ (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
 ;;(add-to-list 'load-path user-emacs-directory)
 

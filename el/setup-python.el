@@ -213,12 +213,10 @@
 
 ;; (push 'company-jedi company-backends)
 
-
 (add-hook 'python-mode-hook 'projectile-mode)
 
-
 ;; (add-hook 'elpy-mode-hook                                                  
-;;           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))        
+;;           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))     a   
                                                                            
 ;; (add-hook 'elpy-mode-hook                                                  
 ;;           (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))  
