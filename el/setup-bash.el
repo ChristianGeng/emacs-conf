@@ -15,6 +15,15 @@
 ;;   (ac-config-default)
 
 
+
+(use-package company-shell
+  :ensure t
+  :hook
+  (eshell-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-shell company-shell-env company-fish-shell))))
+  (sh-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-shell company-shell-env company-fish-shell))))
+  )
+
+
 ;; (yas-reload-all)
 ;; (add-hook 'shell-script-mode-hook #'yas-minor-mode)
 
