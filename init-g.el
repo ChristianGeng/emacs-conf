@@ -144,7 +144,7 @@
 (require 'setup-latex)
 
 (require 'setup-calendar)
-(require 'setup-bash)
+;;(require 'setup-bash)
 (require 'setup-octave)
 ;; (require 'mc)
 
@@ -258,9 +258,6 @@
 ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 ;; (electric-pair-mode 1)
 
-;; company mode autocompletion
-;;(add-hook 'after-init-hook 'global-company-mode)
-
 ;;(message user-settings-dir)
 
 ;; Conclude init by setting up specifics for the current user
@@ -286,6 +283,11 @@
 ;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
 (require 'setup-nxml)
+
+(require 'setup-auto-complete)
+;; company mode autocompletion
+;;(add-hook 'after-init-hook 'global-company-mode)
+
 
 (package-initialize)
 

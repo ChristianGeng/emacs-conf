@@ -1,4 +1,3 @@
-
 ;; https://github.com/szermatt/emacs-bash-completion
 
 ;; add this into your .emacs file:
@@ -10,10 +9,21 @@
            'bash-completion-dynamic-complete)
 
 
-;; https://stackoverflow.com/questions/1008750/ide-emacs-mode-for-shell-scripting-in-bash-sh-etc
- (require 'auto-complete)
- (require 'auto-complete-config)
- (ac-config-default)
+;; ;; https://stackoverflow.com/questions/1008750/ide-emacs-mode-for-shell-scripting-in-bash-sh-etc
+  (require 'auto-complete)
+  (require 'auto-complete-config)
+;;   (ac-config-default)
+
+
+;; (yas-reload-all)
+;; (add-hook 'shell-script-mode-hook #'yas-minor-mode)
+
+
+;;(add-hook 'shell-script-mode-hook (lambda ()
+;;                                    (yas-minor-mode)))
+
+;;(add-hook 'sh-script-mode-hook (lambda ()  (yas-minor-mode)))
+
 
 ;; or simpler, but forces you to load this file at startup:
 
@@ -27,7 +37,7 @@
 ;;(yas-reload-all)
 ;; (add-hook 'shell-script-mode-hook #'yas-minor-mode)
 
-;; add yas in shell                                                                                                                                                                                                                                                                                                                                                        
+
 ;;(yas-reload-all)
 ;;(add-hook 'shell-mode-hook #'yas-minor-mode)
 
