@@ -9,6 +9,12 @@
  (add-hook 'shell-dynamic-complete-functions
            'bash-completion-dynamic-complete)
 
+
+;; https://stackoverflow.com/questions/1008750/ide-emacs-mode-for-shell-scripting-in-bash-sh-etc
+ (require 'auto-complete)
+ (require 'auto-complete-config)
+ (ac-config-default)
+
 ;; or simpler, but forces you to load this file at startup:
 
 ;; (require 'bash-completion)
