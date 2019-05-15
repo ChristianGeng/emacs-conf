@@ -285,6 +285,8 @@
 ;; (require 'openwith)
 ;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
+(require 'setup-nxml)
+
 (package-initialize)
 
 (put 'erase-buffer 'disabled nil)
