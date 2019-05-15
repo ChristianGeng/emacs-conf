@@ -99,6 +99,9 @@
 (setq fci-rule-column python-linewidth)
 (add-hook 'python-mode-hook 'fci-mode)
 
+(add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+
+
 ;;(add-to-list 'load-path "/D/myfiles/2018/isortify")
 ;; (load-library "isortify")
 ;; (setq isortify-line-width python-linewidth)
