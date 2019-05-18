@@ -283,6 +283,7 @@
 ;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
 (require 'setup-nxml)
+(require 'setup-magit)
 
 (require 'setup-auto-complete)
 ;; company mode autocompletion
