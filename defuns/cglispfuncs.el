@@ -269,28 +269,4 @@
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-
-
-(defun connect-dslstack-1.0.21-databricks ()
-  (interactive)
-  (dired "/ssh:vagrant@172.19.90.176|sudo:172.19.90.176:/opt/norcom/dasense-workspaces/stacks/dslstack-1.0.21-databricks/"))
-
-
 ;; Creating a menu item, under the menu by the id “[menu-bar mymenu]”
-
-;; Creating a new menu pane in the menu bar to the right of “Tools” menu
-(define-key-after
-  global-map
-  [menu-bar mymenu]
-  (cons "ccgengs" (make-sparse-keymap "hoot hoot"))
-  'tools )
-
-;; Creating a menu item, under the menu by the id “[menu-bar mymenu]”
-(define-key
-  global-map
-  [menu-bar mymenu nl]
-  '("zu dslstack-1.0.21-databricks" . connect-dslstack-1.0.21-databricks))
-
-
-
-

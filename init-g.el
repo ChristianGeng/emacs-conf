@@ -171,6 +171,9 @@
 (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
   (when (file-regular-p file)
     (load (file-name-sans-extension file))))
+;; (load-library "cglispfuncs")
+
+
 ;; (require 'expand-region)
 ;; (require 'mark-more-like-this)
 ;; (require 'inline-string-rectangle)
@@ -274,8 +277,6 @@
 
   (setq abbrev-file-name             ;; tell emacs where to read abbrev
         "~/.emacs.d/abbrev_defs")    ;; definitions from...
-
-(load-library "cglispfuncs")
 
 ;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
 ;;./elpa/openwith-20120531.1436/openwith.el:1
