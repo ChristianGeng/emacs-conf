@@ -206,6 +206,13 @@
            (backward-up-sexp (1- arg)))
           ((backward-up-list arg)))))
 
+;; https://www.emacswiki.org/emacs/BackwardKillLine
+(defun backward-kill-line (arg)
+  "Kill ARG lines backward."
+  (interactive "p")
+  (kill-line (- 1 arg)))
+
+
 (defun tpon ()
  "Activate the touchpad"
  (interactive)
@@ -236,8 +243,7 @@
       "variable containing the active project")
       (shell-command (concat "find " activeproject " -type f -name '*.c' -delete"  ))
     )
-
-  
+ 
 
 (defun lock-screen ()
  "lock screen using screensaver"
