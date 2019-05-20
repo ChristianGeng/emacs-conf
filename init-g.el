@@ -226,7 +226,8 @@
 (require 'setup-ibuffer)
 (require 'setup-doom-modeline)
 
-;;(require 'setup-java)
+(require 'setup-java)
+(require 'setup-eclim)
 
 ;; Misc
 ;; (require 'appearance)
