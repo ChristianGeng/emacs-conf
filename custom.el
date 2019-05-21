@@ -9,8 +9,6 @@
  '(custom-safe-themes
    (quote
     ("d61f6c49e5db58533d4543e33203fd1c41a316eddb0b18a44e0ce428da86ef98" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "10461a3c8ca61c52dfbbdedd974319b7f7fd720b091996481c8fb1dded6c6116" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "64ca5a1381fa96cb86fd6c6b4d75b66dc9c4e0fc1288ee7d914ab8d2638e23a9" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "2642a1b7f53b9bb34c7f1e032d2098c852811ec2881eec2dc8cc07be004e45a0" "251348dcb797a6ea63bbfe3be4951728e085ac08eee83def071e4d2e3211acc3" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "2540689fd0bc5d74c4682764ff6c94057ba8061a98be5dd21116bf7bf301acfb" "d8dc153c58354d612b2576fea87fe676a3a5d43bcc71170c62ddde4a1ad9e1fb" default)))
- '(eclim-eclipse-dirs (quote ("/opt/eclipse-jee-photon/eclipse")))
- '(eclim-executable "~/.vim/bundle/eclim/eclim")
  '(markdown-command "pandoc")
  '(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
  '(package-selected-packages
