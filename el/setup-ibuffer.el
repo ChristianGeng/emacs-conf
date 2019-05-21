@@ -31,7 +31,8 @@
 
 
 (setq ibuffer-saved-filter-groups
-      (quote (("default"
+      (quote (
+              ("pythonic"
                ("python" (
                           or (mode . python-mode)
                              (mode . shell-mode)
@@ -52,14 +53,44 @@
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$")
                          (mode . emacs-lisp-mode)))
-               ))))
+               )
+              ("default2"
+               ("python" (
+                          or (mode . python-mode)
+                             (mode . shell-mode)
+                             (mode . django-mode)
+                             (mode . elpy-mode)
+                             (mode . inferior-python-mode)
+                             (name . "^\\*Elpy Output\\*$")
+                             ))
+               ("dired" (mode . dired-mode))
+               ("json/js" (mode . javascript-mode))
+               ("planner" (or
+                           (name . "^\\*Calendar\\*$")
+                           (name . "^diary$")
+                           (mode . muse-mode)
+                           (mode . org-mode)
+                           ))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")
+                         (mode . emacs-lisp-mode)))
+               )
 
+              
+              )
+             )
+      )
+
+
+
+;;(add-to-list 'ibuffer-never-show-predicates "^\\*Hmm")
 
 
 
  (add-hook 'ibuffer-mode-hook
               (lambda ()
-                (ibuffer-switch-to-saved-filter-groups "default")))
+                (ibuffer-switch-to-saved-filter-groups "pythonic")))
 
 
 
