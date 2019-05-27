@@ -228,6 +228,7 @@
 
 (require 'setup-java)
 (require 'setup-eclim)
+(require 'setup-ensime)
 
 ;; Misc
 ;; (require 'appearance)

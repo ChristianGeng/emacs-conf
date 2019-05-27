@@ -76,3 +76,6 @@ Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
 ## Java IDE
 
 http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_java_development/
+http://www.skybert.net/emacs/java/
+https://github.com/skybert/my-little-friends/blob/master/emacs/.emacs.d/tkj-java-meghanada.el
+https://github.com/skybert/my-little-friends/blob/master/emacs/.emacs.d/tkj-java-meghanada.el
