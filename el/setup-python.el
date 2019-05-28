@@ -123,8 +123,13 @@
 ;; (setenv "WORKON_HOME" "/home/cgn/virtualenvs/")
 ;; (pyvenv-activate "/home/cgn/.virtualenvs/py3")
 
+
+;; (getenv "WORKON_HOME")
+
 ;;(pyvenv-activate (getenv "WORKON_HOME"))
-(pyvenv-workon "dasense-sdk-py2_02")
+;;(pyvenv-workon "dasense-sdk-py2_02")
+;; Mauniele setzen (setenv "WORKON_HOME"  "~/.venvs/")
+
 
 ;; Using ELPA (When installed from `list-packages'):
 ;; (require 'pungi)

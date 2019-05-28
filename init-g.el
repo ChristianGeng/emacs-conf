@@ -226,9 +226,14 @@
 (require 'setup-ibuffer)
 (require 'setup-doom-modeline)
 
-(require 'setup-java)
-(require 'setup-eclim)
+
+;; (require 'setup-java)
+;; (require 'setup-eclim)
 (require 'setup-ensime)
+
+;; (require 'setup-java)
+;; (require 'setup-eclim)
+
 
 ;; Misc
 ;; (require 'appearance)
@@ -285,7 +290,7 @@
 ;; (require 'openwith)
 ;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
-(require 'setup-nxml)
+;; (require 'setup-nxml)
 (require 'setup-magit)
 
 (require 'setup-auto-complete)
@@ -300,3 +305,4 @@
 ;; fix misalignment in popus:
 (setq popup-use-optimized-column-computation nil)
 
+(put 'dired-find-alternate-file 'disabled nil)
