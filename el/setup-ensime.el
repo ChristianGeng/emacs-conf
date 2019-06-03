@@ -11,4 +11,13 @@
    'self-insert-command
    minibuffer-local-completion-map))
 
+
+(defun local-scala-hook ()
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  )
+
+(add-hook 'scala-mode-hook '(lambda () (local-scala-hook)))
+
+
 (provide 'setup-ensime)
