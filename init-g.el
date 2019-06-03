@@ -227,7 +227,7 @@
 (require 'setup-doom-modeline)
 
 
-;; (require 'setup-java)
+(require 'setup-java)
 ;; (require 'setup-eclim)
 (require 'setup-ensime)
 
@@ -306,3 +306,6 @@
 (setq popup-use-optimized-column-computation nil)
 
 (put 'dired-find-alternate-file 'disabled nil)
+
+
+(add-hook 'makefile-mode-hook 'makefile-executor-mode)

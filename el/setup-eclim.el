@@ -34,6 +34,12 @@
 ;;   -Declipse.local=$HOME/.eclipse/org.eclipse.platform_4.11.0_816259024_linux_gtk_x86_64
 
 
+;; das klappt auf meinem Arbeitsrechner: 
+;; ant -Declipse.home=/opt/eclipse-2019-3/ \
+;; -Declipse.local=$HOME/.eclipse/org.eclipse.platform_4.11.0_1033723747_linux_gtk_x86_64/
+
+
+
 ;; /home/christian/.eclipse/org.eclipse.platform_4.11.0_816259024_linux_gtk_x86_64/eclimd
 ;;  ~/.eclipse/org.eclipse.platform_4.11.0_816259024_linux_gtk_x86_64/
 
@@ -56,6 +62,13 @@
  (custom-set-variables
    '(eclim-eclipse-dirs '("/opt/eclipse-jee-photon/"))
    '(eclim-executable "/opt/eclipse-jee-photon/plugins/org.eclim_2.8.0/bin/eclim"))
+
+
+ (custom-set-variables
+   '(eclim-eclipse-dirs '("/opt/eclipse-2019-3/"))
+   '(eclim-executable "/home/cgn/.eclipse/org.eclipse.platform_4.11.0_1033723747_linux_gtk_x86_64/plugins/org.eclim_2.8.0/bin/eclim")
+   '(eclimd-executable "/home/cgn/.eclipse/org.eclipse.platform_4.11.0_1033723747_linux_gtk_x86_64/eclimd"))
+
 
 
 
