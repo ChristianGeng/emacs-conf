@@ -290,7 +290,8 @@
 ;; (require 'openwith)
 ;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
-;; (require 'setup-nxml)
+(require 'setup-nxml)
+(require 'setup-json-mode)
 (require 'setup-magit)
 
 (require 'setup-auto-complete)
