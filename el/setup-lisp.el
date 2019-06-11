@@ -7,8 +7,9 @@
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 
 
-;;; Lisp without paredit is a pain
 
+
+;;; Lisp without paredit is a pain
 (require 'paredit)
 
 (defun turn-on-paredit ()

@@ -20,6 +20,9 @@
 ;;     compile 'com.android.support:design:23.2.0'
 
 
+(defvar curwd (shell-command-to-string "pwd"))
+(message curwd)
+
 
 ;; abelson
 (defun square (x) (* x x))
