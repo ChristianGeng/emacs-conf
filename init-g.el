@@ -310,3 +310,7 @@
 
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
+
+
+;; fix missing alt-key in WSL
+(setq x-alt-keysym 'meta)
