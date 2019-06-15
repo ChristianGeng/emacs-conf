@@ -483,7 +483,7 @@
 (mapcar 'square (list 1 2 3 4 5))
 ;;(1 4 9 16 25)
 
-(defun filter (prd sequence)
+(defun filter (predicateprd sequence)
   (cond ((null sequence) nil)
         ((prd (car sequence))
          (cons (car sequence)
