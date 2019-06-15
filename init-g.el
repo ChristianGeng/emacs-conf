@@ -290,7 +290,8 @@
 ;; (require 'openwith)
 ;; (setq openwith-associations '(("\\.pdf\\'" "okular" (file))))
 
-;; (require 'setup-nxml)
+(require 'setup-nxml)
+(require 'setup-json-mode)
 (require 'setup-magit)
 
 (require 'setup-auto-complete)
@@ -309,3 +310,7 @@
 
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
+
+
+;; fix missing alt-key in WSL
+(setq x-alt-keysym 'meta)

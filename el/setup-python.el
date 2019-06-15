@@ -137,6 +137,14 @@
 ;;           '(lambda ()
 ;;              (pungi:setup-jedi)))
 
+
+(add-hook 'python-mode-hook 'python-hook-defun)
+(defun my-python-hook-defun ()
+  "Custom behaviours for `MODE'."
+  (setq-local require-final-newline nil))
+
+;;(setq-local require-final-newline nil)
+
 (add-hook 'python-mode-hook
           (lambda() (which-function-mode 1)))
 
@@ -275,5 +283,17 @@
 ;(setq jedi:server-command '("C:\\cygwin\\home\\CHRGENG\\.emacs.d\\elpa\\jedi-core-20170121.610\\jediepcserver.py c"))
 
 
+;; setup conda:
+(require 'conda)
+;; if you want interactive shell support, include:
+(conda-env-initialize-interactive-shells)
+;; if you want eshell support, include:
+(conda-env-initialize-eshell)
+;; if you want auto-activation (see below for details), include:
+(conda-env-autoactivate-mode t)
+
+;; (custom-set-variables
+;;  '(conda-anaconda-home "~/.conda/"))
+;; (setq conda-anaconda-home "~/.conda/")
 
 (provide 'setup-python)
