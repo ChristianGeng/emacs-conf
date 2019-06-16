@@ -47,6 +47,7 @@
 ;; https://masteringemacs.org/article/evaluating-elisp-emacs
 ;; http://cl-cookbook.sourceforge.net/emacs-ide.html
 ;; https://nullprogram.com/blog/2018/05/31/
+;; https://stackoverflow.com/questions/2234860/lisp-filter-out-results-from-list-not-matching-predicate
 
 ;; This evaluates the contents of buffer evaluate-me and prints the value of each toplevel form to the buffer output:
 ;; (eval-buffer "ch02.el" (get-buffer-create "output"))
@@ -70,6 +71,9 @@
 ;; 
 
 ;;; Code:
+
+
+
 
 (defvar curwd (shell-command-to-string "pwd"))
 
@@ -483,18 +487,67 @@
 (mapcar 'square (list 1 2 3 4 5))
 ;;(1 4 9 16 25)
 
-(defun filter (predicateprd sequence)
+
+
+;; https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.3
+;; using cl
+(require 'cl)
+(remove-if-not #'oddp '(1 2 3 4 5))
+
+;; using cl-lib
+(require 'cl-lib)
+(cl-remove-if-not #'oddp '(1 2 3 4 5))
+
+;; using dash
+(require 'dash)
+(-filter (lambda (x) (cl-oddp x)) '(1 2 3 4 5)) ; (3 4 5)
+
+;; 
+(defun my-filter  (f args)
+    (cond ((null args) nil)
+        ((if (funcall f (car args))
+            (cons (car args) (my-filter  f (cdr args)))
+            (my-filter  f (cdr args))))))
+
+(my-filter #'oddp '(1 2 3 4 5)))
+
+;; does not work
+(defun filter (predicate sequence)
   (cond ((null sequence) nil)
-        ((prd (car sequence))
+        ((predicate (car sequence))
          (cons (car sequence)
-               (filter prd (cdr sequence))))
-        (else (filter prd (cdr sequence)))))
+               (filter predicate (cdr sequence))))
+        ((filter predicate (cdr sequence)))))
 
 
-(filter 'cl-oddp (list 1 2 3 4 5))
 
+(filter #'oddp '(list 1 2 3 4 5))
+;; (1 3 5)
 ;; (predicate)
 
-(provide 'ch02)
 
+
+;; 2.3  Symbolic Data
+
+;; All the compound data objects we have used so far were constructed ultimately from numbers.
+;; In this section we extend the representational capability of our language by introducing the ability to
+;; work with arbitrary symbols as data.
+
+;; 2.3.1  Quotation
+
+(a b c d)
+(23 45 17)
+((Norah 12) (Molly 9) (Anna 7) (Lauren 6) (Charlotte 4))
+
+(* (+ 23 45) (+ x 9))
+
+(defun fact (n)
+  (if (= n 1) 1
+    (* n (fact (- n 1)))))
+
+(fact 5)
+
+(provide 'ch02)
 ;;; ch02.el ends here
+
+
