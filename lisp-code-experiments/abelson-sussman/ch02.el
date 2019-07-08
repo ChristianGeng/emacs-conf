@@ -550,4 +550,287 @@
 (provide 'ch02)
 ;;; ch02.el ends here
 
+(defvar a 1)
+(defvar b 2)
 
+(list a b)
+;; (1 2)
+
+(list 'a 'b)
+;; (a b)
+
+(list 'a b)
+;; (a 2)
+
+(car '(a b c))
+;; a
+
+(cdr '(a b c))
+;;(b c)
+
+
+
+;; memq: if the symbol is not contained in the list
+;; (i.e., is not eq? to any item in the list), then memq returns false.
+;; Otherwise, it returns the sublist of the list beginning with the first occurrence of the symbol
+(defun memq (item x)
+  (cond ((null x) nil)
+        ((eq item (car x)) x)
+        ((memq item (cdr x)))))
+
+(memq 'apple '(pear banana prune))
+;; nil 
+(memq 'apple '(x (apple sauce) y apple pear))
+;; (apple pear)
+
+;; 02.3.2  Example: Symbolic Differentiation
+
+;; The differentiation program with abstract data
+(defun deriv (exp var)
+  (cond ((numberp exp) 0)
+        ((variable? exp)
+         (if (same-variable? exp var) 1 0))
+        ((sum? exp)
+         (make-sum (deriv (addend exp) var)
+                   (deriv (augend exp) var)))
+        ((product? exp)
+         (make-sum
+           (make-product (multiplier exp)
+                         (deriv (multiplicand exp) var))
+           (make-product (deriv (multiplier exp) var)
+                         (multiplicand exp))))
+        (
+         (error "unknown expression type -- DERIV" exp))))
+
+;;Representing algebraic expressions
+
+;; The variables are symbols. They are identified by the primitive predicate symbol?:
+
+(defun variable? (x) (symbolp x))
+
+;; Two variables are the same if the symbols representing them are eq?:
+
+(defun same-variable? (v1 v2)
+  (and (variable? v1) (variable? v2) (eq v1 v2)))
+
+;; Sums and products are constructed as lists:
+
+(defun make-sum (a1 a2) (list '+ a1 a2))
+(defun make-product (m1 m2) (list '* m1 m2))
+
+;; A sum is a list whose first element is the symbol +:
+(defun sum? (x)
+  (and (consp x) (eq (car x) '+)))
+
+;; The addend is the second item of the sum list:
+(defun addend (s) (cadr s))
+
+;; The augend is the third item of the sum list:
+(defun augend (s) (caddr s))
+
+;; A product is a list whose first element is the symbol *:
+(defun product? (x)
+  (and (consp x) (eq (car x) '*)))
+
+;; The multiplier is the second item of the product list:
+(defun multiplier (p) (cadr p))
+
+;; The multiplicand is the third item of the product list:
+(defun multiplicand (p) (caddr p))
+
+(deriv '(+ x 3) 'x)
+;; (+ 1 0)
+(deriv '(* x y) 'x)
+;; (+ (* x 0) (* 1 y))
+(deriv '(* (* x y) (+ x 3)) 'x)
+;; (+ (* (* x y) (+ 1 0))
+;;    (* (+ (* x 0) (* 1 y))
+;;       (+  x 3)))
+
+;; Abelson benutzt =number?, which checks whether an expression is equal to a given number:
+(defun =number? (exp num)
+  (and (numberp exp) (= exp num)))
+
+(defun make-sum (a1 a2)
+  (cond ((=number? a1 0) a2)
+        ((=number? a2 0) a1)
+        ((and (numberp a1) (numberp a2)) (+ a1 a2))
+        ((list '+ a1 a2))))
+
+(defun make-product (m1 m2)
+  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
+        ((=number? m1 1) m2)
+        ((=number? m2 1) m1)
+        ((and (numberp m1) (numberp m2)) (* m1 m2))
+        ((list '* m1 m2))))
+
+;; Here is how this version works on our three examples:
+(deriv '(+ x 3) 'x)
+;; 1
+(deriv '(* x y) 'x)
+;;y
+(deriv '(* (* x y) (+ x 3)) 'x)
+;; (+ (* x y) (* y (+ x 3)))
+
+
+
+;; Sets as unordered lists
+
+;; element-of-set? is similar to the procedure memq of section 2.3.1.
+;; It uses equal? instead of eq? so that the set elements need not be symbols:
+(defun element-of-set? (x set)
+  (cond ((null set) false)
+        ((equal x (car set)) true)
+        ((element-of-set? x (cdr set)))))
+
+
+;; Using this, we can write adjoin-set. If the object to be adjoined is already in the set, we just return the set.
+;; Otherwise, we use cons to add the object to the list that represents the set:
+
+(defun adjoin-set (x set)
+  (if (element-of-set? x set)
+      set
+      (cons x set)))
+
+;; For intersection-set we can use a recursive strategy.
+;; If we know how to form the intersection of set2 and the cdr of set1,
+;; we only need to decide whether to include the car of set1 in this.
+;; But this depends on whether (car set1) is also in set2. Here is the resulting procedure:
+
+(defun intersection-set (set1 set2)
+  (cond ((or (null set1) (null set2)) '())
+        ((element-of-set? (car set1) set2)        
+         (cons (car set1)
+               (intersection-set (cdr set1) set2)))
+        ((intersection-set (cdr set1) set2))))
+
+;;(element-of-set? 4 (list 1 2 3))
+
+;; Issue:
+;;  For intersection-set, which does an element-of-set? check for each element of set1,
+;; the number of steps required grows as the product of the sizes of the sets involved, or (n2) for two sets of size n.
+;; The same will be true of union-set.
+
+
+;; Sets as ordered lists
+
+;;If we reach a set element that is larger than the item we are looking for, then we know that the item is not in the set:
+
+;; the average number of steps required will be about n/2:
+;; Warum: 
+;; manchmal muss man bis zum Ende suchen (worst case)
+;; aber andermal finden wir da Element recht schnell
+
+(defun element-of-set? (x set)
+  (cond ((null set) nil)
+        ((= x (car set)) t)
+        ((< x (car set)) nil)
+        ((element-of-set? x (cdr set)))))
+
+(element-of-set? 3 (list 1 2 3))
+(element-of-set? 3 (list 1 2 4))
+
+;; more impressive speedup with intersection-set
+(cdr (list 1 2 3))
+
+
+
+;; Big O für die Lösung
+;;  bei jeder Iteration wird ein Element entfernt
+;; Worst Case: Anzahl calls ist maxumal der Länger der Sets 1 und Set 2
+(defun intersection-set (set1 set2)
+  (if (or (null set1) (null set2))
+      '()    
+      (let ((x1 (car set1)) (x2 (car set2)))
+        ;; wenn x1 gleich x2, wird x1 dem Intersection set angehängt
+        (cond ((= x1 x2)
+               (cons x1
+                     (intersection-set (cdr set1)
+                                       (cdr set2))))
+              ;; wenn x1 < x2 wissen wir, dass keines der vorherigen Elemente in x2 noch auftauchen kann
+              ;; deshalb kann man am nächsten Element weitermachen (cdr set1)
+              ((< x1 x2)
+               (intersection-set (cdr set1) set2))
+              ;; im umgekehrten Fall geht das für set2 auch, wir können auch cdren
+              ((< x2 x1)
+               (intersection-set set1 (cdr set2)))))))
+
+(intersection-set (list 9 ) (list 1 2 4 5))
+
+
+
+;; Sets as binary trees
+;; O(n): jedes Mal wird der Suchraum habiert => O(log n)
+
+(car (list 1 2 3))
+;; 1
+(caddr (list 1 2 3))
+;; 3
+(cadr (list 1 2 3))
+;; 2
+
+
+(defun entry (tree) (car tree))
+(defun left-branch (tree) (cadr tree))
+
+(defun right-branch (tree) (caddr tree))
+
+;; Triple
+(defun make-tree (entry left right)
+  (list entry left right))
+
+(defun element-of-set? (x set)
+
+  (cond ((null set) nil) ;; am terminalen Ende angekommen, nichts gefunden ->  false 
+        ((= x (entry set)) t)
+        ((< x (entry set)) ;; < => im linken unterbaum weitersuchen
+         (element-of-set? x (left-branch set)))
+        ((> x (entry set)) ;; > => im rechten unterbaun weitersuchen
+         (element-of-set? x (right-branch set)))))
+
+;; adjoin:
+;; ist auch O(log n)
+;; das neue Element schaut, ob es links oder rechts einsortiert werden muss.
+
+(defun adjoin-set (x set)
+  (cond ((null? set) (make-tree x '() '())) ;; leere Menge: Man macht einen Baum aus dem Element x
+        ((= x (entry set)) set) ;; Wenn das element = dem Element ist => die Menge zurückgeben
+        ((< x (entry set)) ;; man lässt den Node hinter sich und steigt eins nach links in den Unterbaum hinab
+         (make-tree (entry set) 
+                    (adjoin-set x (left-branch set)) 
+                    (right-branch set)))
+        ((> x (entry set))
+         (make-tree (entry set)
+                    (left-branch set)
+                    (adjoin-set x (right-branch set))))))
+
+
+;; Sets and information retrieval
+
+
+;;  Lookup is implemented in almost the same way as element-of-set?.
+;; For example, if the set of records is implemented as an unordered list, we could use (bad)
+(defun lookup (given-key set-of-records)
+  (cond ((null set-of-records) nil)
+        ((equal given-key (key (car set-of-records)))
+         (car set-of-records))
+        (else (lookup given-key (cdr set-of-records)))))
+
+;;  Of course, there are better ways to represent large sets than as unordered lists.
+;; Information-retrieval systems in which records have to be ``randomly accessed'' are typically implemented by a tree-based method
+
+
+;; 2.3.4  Example: Huffman Encoding Trees
+
+;; In general, if we want to distinguish n different symbols, we will need to use log2 n bits per symbol.
+;; symbols A, B, C, D, E, F, G, and H, -> 8 = 2**3
+;; we can choose a code with three bits per character, for example 
+;; A 000 	C 010 	E 100 	G 110
+;; B 001 	D 011 	F 101 	H 111 
+
+;; BACADAEAFABBAAAGAH
+;; is encoded as the string of 54 bits
+;; 001000010000011000100000101000001001000000000110000111
+;; -> fixed - length codes
+;;
+;; 
