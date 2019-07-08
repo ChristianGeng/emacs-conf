@@ -17,6 +17,9 @@
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   )
 
+
+(add-hook 'prog-mode-hook #'flycheck-mode)
+
 (add-hook 'scala-mode-hook '(lambda () (local-scala-hook)))
 
 
