@@ -136,7 +136,7 @@
 (require 'setup-web-mode)
 (require 'setup-js2-mode)
 
-(require 'setup-speedbar)
+;; (require 'setup-speedbar)
 
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
@@ -205,8 +205,8 @@
   (ansi-color-apply-on-region compilation-filter-start (point))
   (toggle-read-only))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-;; gehen alle nicht
-;; (add-hook 'sbt-mode-hook 'display-ansi-colors)
+;; gehen alle nicht;
+; (add-hook 'sbt-mode-hook 'display-ansi-colors)
 ;; (add-hook 'sbt-mode-hook 'ansi-color-for-comint-mode-on)
 ;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 ;; (add-hook 'async-bytecomp-package-mode-hook 'colorize-compilation-buffer)
