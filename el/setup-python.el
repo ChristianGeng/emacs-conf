@@ -1,5 +1,5 @@
 ;;
-;; elpy documentation online
+;; elpy documpyentation online
 ;; http://elpy.readthedocs.io/en/latest/ide.html
 ;; help on configuration
 ;; https://github.com/jorgenschaefer/elpy/wiki/Configuration
@@ -137,11 +137,11 @@
 ;;           '(lambda ()
 ;;              (pungi:setup-jedi)))
 
+;; (defun my-python-hook-defun ()
+;;   "Custom behaviours for `MODE'."
+;;   (setq-local require-final-newline nil))
 
-(add-hook 'python-mode-hook 'python-hook-defun)
-(defun my-python-hook-defun ()
-  "Custom behaviours for `MODE'."
-  (setq-local require-final-newline nil))
+;; (add-hook 'python-mode-hook 'python-hook-defun)
 
 ;;(setq-local require-final-newline nil)
 
@@ -205,17 +205,46 @@
 ;; based_on_style = pep8
 ;; split_before_first_argument = false
 
+;; /home/christian/.conda/envs/speech-recognition/bin/
 
 ;; (setq python-shell-interpreter "jupyter"
 ;;       python-shell-interpreter-args "console --simple-prompt"
 ;;       python-shell-prompt-detect-failure-warning nil)
+;; (add-to-list 'python-shell-completion-native-disabled-interpreters
+;;               "jupyter")
 
-(setq python-shell-interpreter "ipython"
-       python-shell-interpreter-args "-i --simple-prompt")
 
-
+(setq python-shell-interpreter "jupyter"
+      python-shell-interpreter-args "console --simple-prompt"
+      python-shell-prompt-detect-failure-warning nil)
 (add-to-list 'python-shell-completion-native-disabled-interpreters
              "jupyter")
+
+
+;;(setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python")
+;; (setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python3.7")
+
+
+;; https://github.com/jorgenschaefer/elpy/issues/1414
+(defun elpy-shell-get-or-create-process (&optional sit)
+  "Get or create an inferior Python process for current buffer and return it.
+
+If SIT is non-nil, sit for that many seconds after creating a
+Python process. This allows the process to start up."
+  (let* ((bufname (format "*%s*" (python-shell-get-process-name nil)))
+         (proc (get-buffer-process bufname)))
+    (if proc
+        proc
+      (run-python (python-shell-parse-command) nil t)
+      (when sit (sit-for sit))
+      (get-buffer-process bufname))))
+
+
+
+;; (setq python-shell-interpreter "ipython"
+;;        python-shell-interpreter-args "-i --simple-prompt")
+
+
 
 
 ;; ;; damit bekommt man wenigstens import errors:
@@ -238,7 +267,7 @@
 
 ;; (require 'elpy)
 
-;; company ausschalten in python
+;; company au-sschalten in python
  ;; (add-hook 'python-mode-hook (lambda ()
  ;;                               (company-mode -1)))
 
@@ -290,10 +319,14 @@
 ;; if you want eshell support, include:
 (conda-env-initialize-eshell)
 ;; if you want auto-activation (see below for details), include:
-(conda-env-autoactivate-mode t)
+;; (conda-env-autoactivate-mode t)
 
-;; (custom-set-variables
-;;  '(conda-anaconda-home "~/.conda/"))
+(custom-set-variables
+ '(conda-anaconda-home "/opt/conda/")
+ '(conda-env-home-directory "/home/christian/.conda/envs/")
+ )
+
+
 ;; (setq conda-anaconda-home "~/.conda/")
 
 (provide 'setup-python)
