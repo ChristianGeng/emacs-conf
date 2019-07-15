@@ -270,3 +270,13 @@
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
 ;; Creating a menu item, under the menu by the id “[menu-bar mymenu]”
+
+
+
+(defun cg-remove-newlines-in-region ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n" nil t) (replace-match "" nil t))))
