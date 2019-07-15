@@ -11,3 +11,20 @@ backups/
 .cache
 tramp
 network-security.data
+.dap-breakpointsg
+ChristianGeng.*
+agenda.org
+eshell/*
+image-dired/*
+projectile-bookmarks.eld
+# magit history:
+transient/*
+# jdt workspaces: 
+workspace/*
+eclipse.jdt.ls/*
+# cookies
+url/
+# ??
+srecode-map.el
+# abbrevs
+abbrev_defs
