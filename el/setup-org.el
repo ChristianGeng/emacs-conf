@@ -142,4 +142,7 @@
                              )
  )
 
+(load "auctex.el" nil t t)
+(setq exec-path (append exec-path '("/usr/bin/latex")))
+
 (provide 'setup-org)
