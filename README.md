@@ -33,7 +33,8 @@ from which I take inspiration or shamelessly copy.
 ## Lisp
 
 1. [Learn Emacs Lips the Hard Way](https://github.com/hypernumbers/learn_elisp_the_hard_way/tree/master/contents)
-
+2. [Emacs Lisp caiorss](https://caiorss.github.io/Emacs-Elisp-Programming/Elisp_Programming.html#sec-4-2)
+3. [Elisp versus Scheme Lisp keywords](https://www.cs.utexas.edu/~novak/schemevscl.html)
 
 ## Helm
 1. [A Package in a league of its own](https://tuhdo.github.io/helm-intro.html)
