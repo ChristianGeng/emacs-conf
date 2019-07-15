@@ -297,6 +297,7 @@
 (setq openwith-associations '(
                               ("\\.pdf\\'" "okular" (file))
                               ("\\.mp4\\'" "vlc" (file))
+                              ("\\.png\\'" "okular" (file))
                               ))
 
 (require 'setup-nxml)
