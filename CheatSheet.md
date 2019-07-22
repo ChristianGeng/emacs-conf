@@ -57,6 +57,13 @@ C-x C-h show keybindings
 * M-S-Up and M-S-Down : Einstellen der Uhrzeit
 
 
+### Misc
+
+* M-x org-insert-structure-table: Code Cells einfügen etc. [[https://emacs.stackexchange.com/questions/40571/how-to-set-a-short-cut-for-begin-src-end-src][see here]]
+
+
+
+
 
 ##  Auto-Fill-Mode
 M-x auto-fill-mode  
