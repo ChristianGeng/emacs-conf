@@ -295,19 +295,23 @@
 ;;./elpa/openwith-20120531.1436/openwith.el:1
 (require 'openwith)
 (setq openwith-associations '(
-                              ("\\.pdf\\'" "okular" (file))
-                              ("\\.mp4\\'" "vlc" (file))
-                              ("\\.png\\'" "okular" (file))
+                              ("\\.pdf\\'"  "okular" (file))
+                              ("\\.mp4\\'"  "vlc" (file))
+                              ("\\.png\\'"  "okular" (file))
+                              ("\\.docx\\'" "lowriter" (file))
+                              ("\\.odt\\'"  "lowriter" (file))
                               ))
 
 (require 'setup-nxml)
 (require 'setup-json-mode)
 (require 'setup-magit)
+;; (require 'setup-tags)
 
 (require 'setup-auto-complete)
 ;; company mode autocompletion
 ;;(add-hook 'after-init-hook 'global-company-mode)
 
+;;(require 'pasc-mode)
 
 (package-initialize)
 

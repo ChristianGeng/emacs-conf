@@ -271,8 +271,6 @@
 
 ;; Creating a menu item, under the menu by the id “[menu-bar mymenu]”
 
-
-
 (defun cg-remove-newlines-in-region ()
   "Removes all newlines in the region."
   (interactive)

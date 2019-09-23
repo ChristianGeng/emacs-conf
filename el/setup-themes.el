@@ -1,7 +1,7 @@
 
 ;; (load-theme 'misterioso)
 
-(defcustom cycle-themes '(atom-dark)
+(defcustom cycle-themes '(doom-opera-light)
   "List of themes through which one can switch easily by calling
 `cycle-themes' repeatedly. The first element is loaded at
 startup."
