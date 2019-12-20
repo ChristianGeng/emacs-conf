@@ -1,5 +1,22 @@
 #+OPTIONS: prop:t
 
+#+TITLE:     Rezept
+#+EMAIL:     e.fraga@ucl.ac.uk
+#+DATE:      2010-03-30 Tue
+#+DESCRIPTION: 
+#+KEYWORDS: 
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:https://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+
+#+BEAMER_FRAME_LEVEL: 4
+
+
 * Lentil Salad with Summer Vegetables
 :PROPERTIES:
 :source-url: https://www.simplyrecipes.com/recipes/lentil_salad_with_summer_vegetables/
@@ -165,3 +182,46 @@
 3. Let steak rest for 5 minutes before slicing. Slice across the grain. Serve with Chimichurri
    Sauce.
 
+
+* Hausfreunde 
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/586771157900105/Hausfreunde-mit-Marzipan.html
+:servings: 1
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+** Hausfreunde 
+
+** Zutaten
+
+Zutaten für 4 Personen
+- 175 g 	Mehl
+- 75 g 	Speisestärke
+- 65 g 	Zucker
+- 1 Pck. 	Vanillinzucker
+- 1 	Ei(er)
+- 165 g 	Butter
+- etwas 	Aprikosenkonfitüre
+- 200 g 	Marzipan - Rohmasse
+- 100 g 	Puderzucker
+- Kuchenglasur, Schoko
+- Walnüsse (Hälften)
+
+
+** Directions
+
+- Aus Mehl, Speisestärke, Zucker, Vanillinzucker, Ei und Butter einen Mürbteig herstellen. Im
+  Kühlschrank ca. 1 Stunde ruhen lassen.
+
+- Messerdick ausrollen und mit einem runden Förmchen ausstechen. Auf ein mit Backpapier belegtes
+  Backblech geben und bei 180°C ca. 10 Minuten backen.
+
+- Nach dem Erkalten je ein Plätzchen mit Marmelade bestreichen und mit einem 2. zusammensetzen.
+
+- Marzipan und Puderzucker miteinander verkneten und dünn ausrollen. Wieder mit runden Förmchen ausstechen.
+
+- Die Plätzchen nochmals mit Marmelade bestreichen und auf jedes ein ausgestochenes Marzipanteil geben.
+
+- Mit Schokoglasur bestreichen und mit einer Walnusshälfte verzieren. 

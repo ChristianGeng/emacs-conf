@@ -3,7 +3,7 @@
       :hook (after-init . doom-modeline-mode))
 
 ;; How tall the mode-line should be (only respected in GUI Emacs).
-(setq doom-modeline-height 25)
+(setq doom-modeline-height 1)
 
 ;; How wide the mode-line bar should be (only respected in GUI Emacs).
 (setq doom-modeline-bar-width 3)

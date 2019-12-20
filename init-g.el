@@ -301,6 +301,7 @@
                               ("\\.docx\\'" "lowriter" (file))
                               ("\\.odt\\'"  "lowriter" (file))
                               ))
+(openwith-mode)
 
 (require 'setup-nxml)
 (require 'setup-json-mode)

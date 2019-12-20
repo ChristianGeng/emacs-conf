@@ -278,3 +278,12 @@
     (narrow-to-region (point) (mark))
     (goto-char (point-min))
     (while (search-forward "\n" nil t) (replace-match "" nil t))))
+
+
+(defun cg-remove-consecutive-newlines-in-region ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward "\n\n" nil t) (replace-match "\n" nil t))))

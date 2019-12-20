@@ -41,7 +41,7 @@
   (dap-ui-mode t))
 
 (use-package dap-java :after (lsp-java))
-(use-package lsp-java-treemacs :after (treemacs))
+;; (use-package lsp-java-treemacs :after (treemacs))
 
 
 (provide 'setup-java)
