@@ -300,6 +300,7 @@
                               ("\\.png\\'"  "okular" (file))
                               ("\\.docx\\'" "lowriter" (file))
                               ("\\.odt\\'"  "lowriter" (file))
+                              ("\\.pptx\\'"  "loimpress" (file))
                               ))
 (openwith-mode)
 
