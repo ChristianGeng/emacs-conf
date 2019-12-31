@@ -1,4 +1,8 @@
- ;; Try to execute
+;;; package --- setup java
+;;; Commentary:
+;;; Setup Java
+;;;
+;; Try to execute
  ;; mvn -U clean
 ;; https://github.com/jdee-emacs/jdee-server
 ;; quicktour
@@ -10,6 +14,8 @@
 ;; (setq jdee-server-dir "/home/christian/jars/jdee-server/target/jdee-bundle-1.1-SNAPSHOT.jar")
 ;;(setq jdee-server-dir "/home/christian/jars/jdee-server/target/")
 ;;(setq jdee-server-dir "/home/christian/jars/jdee-server/target/")
+;;; Code:
+
 (setq jdee-server-dir (concat  (getenv "HOME")  "/jars/"))
 
 (require 'cc-mode)
@@ -43,5 +49,9 @@
 (use-package dap-java :after (lsp-java))
 ;; (use-package lsp-java-treemacs :after (treemacs))
 
+(require 'gradle-mode)
+(add-hook 'java-mode-hook '(lambda() (gradle-mode 1)))
+
 
 (provide 'setup-java)
+;;; setup-java ends here
