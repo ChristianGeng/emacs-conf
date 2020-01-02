@@ -1,10 +1,9 @@
 
 (load-theme 'misterioso)
-;; 
-(defcustom cycle-themes '(atom-dark)
+ 
+(defcustom cycle-themes '(atom-dark intellij idea-darkula subatomic solarized)
   "List of themes through which one can switch easily by calling
-`cycle-themes' repeatedly. The first element is loaded at
-startup."
+`cycle-themes' repeatedly. The first element is loaded at startup."
   :type '(repeat symbol))
 
 (defvar cycle-current-theme nil
