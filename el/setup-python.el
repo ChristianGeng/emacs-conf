@@ -214,6 +214,10 @@
 ;;               "jupyter")
 
 
+;; setzt die venv auf momentan aktive venv
+;; https://elpy.readthedocs.io/en/latest/concepts.html
+(setq elpy-rpc-virtualenv-path 'current)
+
 (setq python-shell-interpreter "jupyter"
       python-shell-interpreter-args "console --simple-prompt"
       python-shell-prompt-detect-failure-warning nil)
