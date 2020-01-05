@@ -1,3 +1,4 @@
+auto/
 elpa/
 session*
 auto-save-list/
@@ -19,7 +20,7 @@ image-dired/*
 projectile-bookmarks.eld
 # magit history:
 transient/*
-# jdt workspaces: 
+# jdt workspaces:
 workspace/*
 eclipse.jdt.ls/*
 # cookies
