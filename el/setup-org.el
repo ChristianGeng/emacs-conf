@@ -13,14 +13,13 @@
 
 
 ;; Org-mode
-(load "~/.emacs.d/org-mode-config/org-general")
-(load "~/.emacs.d/org-mode-config/org-todo-states")
-(load "~/.emacs.d/org-mode-config/org-capture-templates")
-(load "~/.emacs.d/org-mode-config/org-agenda-custom")
-(load "~/.emacs.d/org-mode-config/org-abbreviations")
-(load "~/.emacs.d/org-mode-config/org-hyperlinks")
-(load "~/.emacs.d/org-mode-config/org-linux")
-
+(load "org-general")
+(load "org-todo-states")
+(load "org-capture-templates")
+(load "org-agenda-custom")
+(load "org-abbreviations")
+(load "org-hyperlinks")
+(load "org-linux")
 
 ;;(require 'org-tempo)
 (require 'ox-rst)
@@ -129,9 +128,9 @@
 ;; https://emacs.stackexchange.com/questions/17673/no-org-babel-execute-function-for-c-and-no-org-babel-execute-function-for-c
 ;; ob-sh was remamed to ob-shell in org 8.2
 ;; https://emacs.stackexchange.com/questions/37692/how-to-fix-symbols-function-definition-is-void-org-babel-get-header
-                                                                              
-(require 'ob-async)   
-(setq org-confirm-babel-evaluate nil)     
+
+(require 'ob-async)
+(setq org-confirm-babel-evaluate nil)
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
