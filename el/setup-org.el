@@ -12,6 +12,16 @@
  ;; (setq org-element-use-cache nil)
 
 
+;; Org-mode
+(load "~/.emacs.d/org-mode-config/org-general")
+(load "~/.emacs.d/org-mode-config/org-todo-states")
+(load "~/.emacs.d/org-mode-config/org-capture-templates")
+(load "~/.emacs.d/org-mode-config/org-agenda-custom")
+(load "~/.emacs.d/org-mode-config/org-abbreviations")
+(load "~/.emacs.d/org-mode-config/org-hyperlinks")
+(load "~/.emacs.d/org-mode-config/org-linux")
+
+
 ;;(require 'org-tempo)
 (require 'ox-rst)
 (setq org-element-use-cache nil)

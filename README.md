@@ -3,10 +3,10 @@
 
 =======
 
-My adapation of  
+My adapation of
 https://github.com/chaoflow/.emacs.d
 
-Original README: 
+Original README:
 
 Be prepared for rebases.
 
@@ -29,6 +29,28 @@ from which I take inspiration or shamelessly copy.
 - https://www.masteringemacs.org
 - https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
 - http://ergoemacs.org/emacs/emacs_find_replace.html
+
+
+## org mode
+
+* http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org3c16bce
+* https://sachachua.com/blog/2013/08/emacs-how-i-organize-my-org-files/
+* https://orgmode.org/worg/org-hacks.html
+* https://en.wikipedia.org/wiki/Getting_Things_Done
+
+### Capturing
+
+* C-c c - Capturn
+
+#### Links für Capturing Templates
+
+* https://gist.github.com/prassee/1d0678ad1c86481176a39ccb4441c53b
+* https://gist.github.com/spacebat/097f3e7469edf2eaa6a9
+* https://www.reddit.com/r/emacs/comments/7zqc7b/share_your_org_capture_templates/
+* Die Org-Config von ist sehr mächtig, https://github.com/sk8ingdom/.emacs.d/tree/master/. Diese habe ich assimiliert. Insbesondere die Capture-Templates sind ein sehr toller Ausgangspunkt. Der Hinweis ist auch aus dem Reddit-Post: https://www.reddit.com/r/emacs/comments/7zqc7b/share_your_org_capture_templates/
+
+
+
 
 ## Lisp
 
@@ -65,7 +87,7 @@ Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
 
 * Use helm to navigate to tags: M-x helm-etags-select
 
-* Use projectile-regenerate-tags to generate tags before. 
+* Use projectile-regenerate-tags to generate tags before.
 
 
 # Fill column indication
