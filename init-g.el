@@ -152,12 +152,12 @@
 
 
 ;;(require 'setup-web-mode)
-(require 'setup-jabber) 
+(require 'setup-jabber)
 (require 'setup-chat-tracking)
 ;; (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
  (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
 ;; (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
-;;(require 'setup-pandoc) 
+;;(require 'setup-pandoc)
 
 ;; Load slime-js when asked for
 ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
@@ -293,9 +293,11 @@
 
 ;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
 ;;./elpa/openwith-20120531.1436/openwith.el:1
+
+;; ("\\.pdf\\'"  "okular" (file))
+
 (require 'openwith)
 (setq openwith-associations '(
-                              ("\\.pdf\\'"  "okular" (file))
                               ("\\.mp4\\'"  "vlc" (file))
                               ("\\.png\\'"  "okular" (file))
                               ("\\.docx\\'" "lowriter" (file))
@@ -305,6 +307,7 @@
 (openwith-mode)
 
 (require 'setup-nxml)
+(require 'setup-pdf-tools)
 (require 'setup-json-mode)
 (require 'setup-magit)
 ;; (require 'setup-tags)
