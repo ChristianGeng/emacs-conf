@@ -69,14 +69,25 @@ Das ist praktisch um sich beispielsweise Code-Stellen zu merken.
 * M-x org-insert-structure-table: Code Cells einfügen etc. [[https://emacs.stackexchange.com/questions/40571/how-to-set-a-short-cut-for-begin-src-end-src][see here]]
 
 
+## Java
+
+### lsp
+
+Code Following
+
+* lsp-goto-implementation
+* lsp-goto-definition
+
+* M-/    complete: das führt dabbrev-expand
+* C-M-i  complete, das führt complete-symbol aus
 
 
-
-##  Auto-Fill-Mode
+## Misc
+###  Auto-Fill-Mode
 M-x auto-fill-mode
 M-x set-fill-column
 
-## [realgud]("https://github.com/realgud/realgud")
+### [realgud]("https://github.com/realgud/realgud")
 
 * [ipdb-Notes](https://github.com/realgud/realgud/wiki/ipdb-notes)
 * M-x load-library realgud
@@ -85,7 +96,8 @@ M-x set-fill-column
 # Functions:
 * show-file-name (cglispfunctions.el)
 * flush-lines with regex `^\s-*$` - remove all blank lines
-# dired
+
+### dired
 
 ## Rename many:
 * wdired-change-to-wdired-mode
