@@ -50,8 +50,8 @@
   :init
   (advice-add 'python-mode :before 'elpy-enable))
 
-(elpy-enable)  
-(setq elpy-rpc-backend "jedi")  
+(elpy-enable)
+(setq elpy-rpc-backend "jedi")
 
 
 ;; Company Mode and fci incompatibility workaround.
@@ -72,7 +72,7 @@
 ;;     (local-unset-key (kbd "M-TAB"))
 ;;     (define-key elpy-mode-map (kbd "C-TAB") 'elpy-company-backend)))
 
-;; g define-key on elpy-mode-map 
+;; g define-key on elpy-mode-map
 
 ;; (define-key elpy-mode-map (kbd "C-tab") 'elpy-company-backend)
 ;; (define-key elpy-mode-map (kbd "C-c tab") 'elpy-company-backend)
@@ -82,7 +82,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;,,
 
-;;  Mode specific fill column: 
+;;  Mode specific fill column:
 ;; https://stackoverflow.com/questions/8080495/how-do-i-set-the-emacs-fill-column-for-a-specific-mode
 
 
@@ -123,6 +123,10 @@
 ;; (setenv "WORKON_HOME" "/home/cgn/virtualenvs/")
 ;; (pyvenv-activate "/home/cgn/.virtualenvs/py3")
 
+;; get workon home from the zhell file
+(let ((my-workon-home (shell-command-to-string ". ~/.zshrc; echo -n $WORKON_HOME")))
+  (setenv "WORKON_HOME" my-workon-home))
+(getenv "WORKON_HOME")
 
 ;; (getenv "WORKON_HOME")
 
@@ -279,17 +283,17 @@ Python process. This allows the process to start up."
 
 (add-hook 'python-mode-hook 'projectile-mode)
 
-;; (add-hook 'elpy-mode-hook                                                  
-;;           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))     a   
-                                                                           
-;; (add-hook 'elpy-mode-hook                                                  
-;;           (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))  
+;; (add-hook 'elpy-mode-hook
+;;           (λ () (local-set-key (kbd "C-o") 'elpy-goto-definition)))     a
+
+;; (add-hook 'elpy-mode-hook
+;;           (λ () (local-set-key (kbd "C-i") 'ac-complete-jedi-direct)))
 
 
 (add-hook 'elpy-mode-hook
           (lambda () (local-set-key (kbd "C-o") 'elpy-goto-definition)))
 
-;; Tbis one is also free: 
+;; Tbis one is also free:
 ;; (add-hook 'elpy-mode-hook
 ;;           (lambda () (local-set-key (kbd "C-,") 'elpy-company-backend)))
 
