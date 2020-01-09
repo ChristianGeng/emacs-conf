@@ -51,8 +51,17 @@ C-h b (or M-x describe-bindings) will sh
 C-h k (M-x describe-key) to show what command is bound to a
 C-x C-h show keybindings
 
-## Org-Mode
+## Code Folding mit Hide Show (hs)
 
+Invoke HideShow mode with M-x hs-minor-mode.
+
+    C-c @ C-M-s show all
+    C-c @ C-M-h hide all
+    C-c @ C-s show block
+    C-c @ C-h hide block
+    C-c @ C-c toggle hide/show
+
+## Org-Mode
 
 ### Clocking
 
