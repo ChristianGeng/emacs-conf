@@ -25,6 +25,15 @@ C-j Insert New line
 * C-M-e     Move to end of current or following defun (end-of-defun).
 * C-M-h     Put region around whole current or following defun (mark-defun).
 
+### Marking der momentan aktiven Klammernkonstruktion
+
+https://emacs.stackexchange.com/questions/37832/can-i-highlight-lisp-like-this
+(show-paren-mode t) ;; enable show paren mode
+(setq show-paren-style 'expression) ;; highlight whole expression, set back to parenthesis
+(setq show-paren-style 'parenthesis) ;; ausstellen
+macht etwas anderes als mark-sexp
+http://emacs-fu.blogspot.com/2009/01/balancing-your-parentheses.html
+
 ## Navigation between Windows , switching
 * C-x 0 - delete current "split"
 * S-{right,left,up,down} - move windows  windmove-right|left ....
