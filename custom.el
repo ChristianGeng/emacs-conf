@@ -35,16 +35,44 @@
      (object :foreground "#5974ab" :slant italic)
      (package :foreground "#000000")
      (deprecated :strike-through "#000000"))))
+ '(fci-rule-color "#D6D6D6")
  '(helm-completion-style (quote emacs))
+ '(jdee-db-active-breakpoint-face-colors (cons "#FFFBF0" "#268bd2"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#FFFBF0" "#859900"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#FFFBF0" "#E1DBCD"))
  '(markdown-command "pandoc")
+ '(objed-cursor-color "#dc322f")
  '(openwith-mode t)
  '(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
  '(package-selected-packages
    (quote
-    (pdf-tools gnu-elpa-keyring-update adaptive-wrap with-simulated-input atom-one-dark-theme atomic-chrome doom subatomic-theme intellij-theme idea-darkula-theme lsp-java lsp-ui lsp-mode py-yapf gradle-mode ein-mumamo vmd-mode mkdown grip-mode gh-md inf-groovy isortify conda treemacs-projectile docker docker-api docker-cli docker-compose-mode docker-tramp makefile-executor pymacs dap-mode company-lsp ensime treemacs company-emacs-eclim eclim dumb-jump plantuml-mode company-shell yafolding ox-rst js-import js-auto-beautify indium xref-js2 web-mode-edit-element web-completion-data web-beautify rainbow-delimiters doom-modeline doom-themes popup-imenu sphinx-doc anti-zenburn-theme dockerfile-mode diff-hl git-wip-timemachine js-comint wttrin jquery-doc multi-web-mode web-mode java-snippets buster-snippets angular-snippets company-tern js2-refactor flycheck jenkins-watch jenkins butler js2-mode org-plus-contrib ecb tj3-mode ag groovy-mode color-theme-solarized atom-dark-theme airline-themes helm-ag wgrep-helm color-theme-github cider-eval-sexp-fu gited ob-async ob-sql-mode ob-ipython ecb-snapshot swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme)))
+    (sx sl pdf-tools gnu-elpa-keyring-update adaptive-wrap with-simulated-input atom-one-dark-theme atomic-chrome doom subatomic-theme intellij-theme idea-darkula-theme lsp-java lsp-ui lsp-mode py-yapf gradle-mode ein-mumamo vmd-mode mkdown grip-mode gh-md inf-groovy isortify conda treemacs-projectile docker docker-api docker-cli docker-compose-mode docker-tramp makefile-executor pymacs dap-mode company-lsp ensime treemacs company-emacs-eclim eclim dumb-jump plantuml-mode company-shell yafolding ox-rst js-import js-auto-beautify indium xref-js2 web-mode-edit-element web-completion-data web-beautify rainbow-delimiters doom-modeline doom-themes popup-imenu sphinx-doc anti-zenburn-theme dockerfile-mode diff-hl git-wip-timemachine js-comint wttrin jquery-doc multi-web-mode web-mode java-snippets buster-snippets angular-snippets company-tern js2-refactor flycheck jenkins-watch jenkins butler js2-mode org-plus-contrib ecb tj3-mode ag groovy-mode color-theme-solarized atom-dark-theme airline-themes helm-ag wgrep-helm color-theme-github cider-eval-sexp-fu gited ob-async ob-sql-mode ob-ipython ecb-snapshot swoop mvn mvn-help projectile-extras maven-test-mode jdee visual-regexp projectile-speedbar ac-octave magit-gh-pulls magit-find-file magit yaml-mode cdlatex apt-sources-list wgrep py-isort jedi-core jedi elpygen common-lisp-snippets yasnippet-classic-snippets markdown-mode markdown-preview-eww markdown-toc ample-theme afternoon-theme auctex dired-atool openwith dired-fdclone dired-explorer yasnippet-snippets virtualenv use-package undo-tree tagedit sr-speedbar spacemacs-theme smooth-scrolling smex realgud python-x python-mode python-django pyenv-mode-auto py-autopep8 pungi pony-mode pippel pip-requirements paredit markdown-preview-mode markdown-mode+ magit-svn jump-to-line isend-mode image-dired+ helm-swoop flymd fill-column-indicator fancy-battery elpy ein egg django-theme django-snippets django-mode django-manage dired-sidebar dired-rsync dired-quick-sort dired-narrow dired-k dired-du dired-details dired-collapse diminish cyberpunk-theme browse-kill-ring bash-completion all-the-icons-dired abyss-theme)))
+ '(pdf-view-midnight-colors (cons "#556b72" "#FDF6E3"))
  '(rng-schema-locating-files
    (quote
     ("schemas.xml" "/usr/share/emacs/25.2/etc/schema/schemas.xml" "~/.emacs.d/schemas.xml")))
+ '(vc-annotate-background "#FDF6E3")
+ '(vc-annotate-color-map
+   (list
+    (cons 20 "#859900")
+    (cons 40 "#959300")
+    (cons 60 "#a58e00")
+    (cons 80 "#b58900")
+    (cons 100 "#bc7407")
+    (cons 120 "#c35f0e")
+    (cons 140 "#cb4b16")
+    (cons 160 "#cd4439")
+    (cons 180 "#d03d5d")
+    (cons 200 "#d33682")
+    (cons 220 "#d63466")
+    (cons 240 "#d9334a")
+    (cons 260 "#dc322f")
+    (cons 280 "#dd5c56")
+    (cons 300 "#de867e")
+    (cons 320 "#dfb0a5")
+    (cons 340 "#D6D6D6")
+    (cons 360 "#D6D6D6")))
+ '(vc-annotate-very-old-color nil)
  '(yas-prompt-functions
    (quote
     (yas-completing-prompt yas-dropdown-prompt yas-maybe-ido-prompt yas-no-prompt))))

@@ -1,5 +1,65 @@
+;;; name.el --- summary -*- lexical-binding: t -*-
+
+;; Author: christian
+;; Maintainer: christian
+;; Version: version
+;; Package-Requires: (dependencies)
+;; Homepage: homepage
+;; Keywords: keywords
+
+
+;; This file is not part of GNU Emacs
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 3, or (at your option)
+;; any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; For a full copy of the GNU General Public License
+;; see <http://www.gnu.org/licenses/>.
+
+
+;;; Commentary:
+
+;; commentary
+
+;;; Code:
+
+;;; see http://ergoemacs.org/emacs/modernization_elisp_lib_problem.html
+;;; stammen aus der s-bibliothek
+(defun s-trim-left (s)
+  "Remove whitespace at the beginning of S."
+  (if (string-match "\\`[ \t\n\r]+" s)
+      (replace-match "" t t s)
+    s))
+
+(defun s-trim-right (s)
+  "Remove whitespace at the end of S."
+  (if (string-match "[ \t\n\r]+\\'" s)
+      (replace-match "" t t s)
+    s))
+
+(defun s-trim (s)
+  "Remove whitespace at the beginning and end of S."
+  (s-trim-left (s-trim-right s)))
+
+;;; see https://emacs.stackexchange.com/questions/36299/move-file-associated-with-open-buffer-to-a-specific-folder
+(defun move-buffer-file ()
+  "Move visited file to another directory, for which you're prompted.
+Directory defaults to the value of `my-archive-dir'."
+  (interactive)
+  (let ((old  (or (buffer-file-name)  (user-error "Not visiting a file")))
+        (dir  (read-directory-name "Move to: " (s-trim (shell-command-to-string "pwd")))))
+    (write-file (expand-file-name (file-name-nondirectory old) dir) t)
+    (delete-file old)))
 
 (defun close-all-buffers ()
+  "Close all open buffers."
 (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
@@ -124,14 +184,14 @@
       (just-one-space-in-region b e)
       (kill-space-before-semicolon)
       )))
-  
+
 ;; (global-set-key [f8] 'format-properly)
 
 
 ;;;;;;;;;;;;;;;;;;
 ;;; see https://stackoverflow.com/questions/5194294/how-to-remove-all-newlines-from-selected-region-in-emacs
 (defun remove-newlines-in-region ()
-  "Removes all newlines in the region."
+  q"Removes all newlines in the region."
   (interactive)
   (save-restriction
     (narrow-to-region (point) (mark))
@@ -243,7 +303,7 @@
       "variable containing the active project")
       (shell-command (concat "find " activeproject " -type f -name '*.c' -delete"  ))
     )
- 
+
 
 (defun lock-screen ()
  "lock screen using screensaver"
@@ -287,3 +347,6 @@
     (narrow-to-region (point) (mark))
     (goto-char (point-min))
     (while (search-forward "\n\n" nil t) (replace-match "\n" nil t))))
+
+
+(provide 'cglispfuncs)

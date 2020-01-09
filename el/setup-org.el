@@ -21,6 +21,9 @@
 (load "org-hyperlinks")
 (load "org-linux")
 
+;; Den Standard File mit den Bookmarks immer aufmachen
+(find-file "/D/myfiles/org/ref.org")
+
 ;;(require 'org-tempo)
 (require 'ox-rst)
 (setq org-element-use-cache nil)
@@ -153,5 +156,14 @@
 
 (load "auctex.el" nil t t)
 (setq exec-path (append exec-path '("/usr/bin/latex")))
+
+
+;; für das schreiben von Briefen. Bisher nicht konfiguriert
+(eval-after-load 'ox '(require 'ox-koma-letter))
+
+
+(eval-after-load 'ox-latex
+  '(add-to-list 'org-latex-packages-alist '("AUTO" "babel" t) t))
+
 
 (provide 'setup-org)
