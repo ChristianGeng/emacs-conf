@@ -61,6 +61,9 @@ Invoke HideShow mode with M-x hs-minor-mode.
     C-c @ C-h hide block
     C-c @ C-c toggle hide/show
 
+weiterer Link (dwim do what I mean):
+https://stackoverflow.com/questions/2399612/why-is-there-no-code-folding-in-emacs
+
 ## Org-Mode
 
 ### Clocking
@@ -80,6 +83,13 @@ Invoke HideShow mode with M-x hs-minor-mode.
 Das ist praktisch um sich beispielsweise Code-Stellen zu merken.
 
 * org-capture C-c c
+
+
+
+### Org as s Spreadsheet
+
+* C-c ? - in einer Zelle ausführen sagt mir die Zeilen Spaltennummer
+* C-c } - malt Zellreferenzen rein
 
 
 ### Misc

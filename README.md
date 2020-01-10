@@ -34,6 +34,7 @@ from which I take inspiration or shamelessly copy.
 ## org mode
 
 * http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org3c16bce
+* http://doc.norang.ca/org-mode.html
 * https://sachachua.com/blog/2013/08/emacs-how-i-organize-my-org-files/
 * https://orgmode.org/worg/org-hacks.html
 * https://en.wikipedia.org/wiki/Getting_Things_Done
