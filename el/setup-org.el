@@ -11,8 +11,22 @@
  ;; (require 'ox-rst)
  ;; (setq org-element-use-cache nil)
 
+
+(setq org-directory "/D/myfiles/org/")
 (setq org-default-notes-file (concat org-directory "/ref.org"))
+;; Targets that contribute to the agenda view
+(setq org-agenda-files (quote ("/D/myfiles/org")))
+;; '(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
+
+;; Abbreviations
+(add-to-list 'org-link-abbrev-alist '("local"   ."~/"))
+(add-to-list 'org-link-abbrev-alist '("val"     . "TBA"))
+
+
+;; (setq org-default-notes-file (concat org-directory "/ref.org"))
 ;;'(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
+;; Den Standard File mit den Bookmarks immer aufmachen
+(find-file "/D/myfiles/org/ref.org")
 
 ;; Org-mode
 (load "org-general")
@@ -21,20 +35,19 @@
 (load "org-agenda-custom")
 (load "org-abbreviations")
 (load "org-hyperlinks")
-(load "org-linux")
+;;(load "org-linux")
 
 ;; Default programs
 ;; https://dontomp.wordpress.com/2015/01/31/in-org-mode-have-the-default-program-openoffice-word-or-whatever-open-docx-file-links/
-(setq org-file-apps
-      '((auto-mode . emacs)
-        ("\\.mm\\'" . default)
-        ("\\.x?html?\\'" . default)
-        ("\\.pdf\\'" . "okular %s")
-        ("\\.docx\\'" . default)
-        ("\\.doc\\'" . default)))
+;; (setq org-file-apps
+;;       '((auto-mode . emacs)
+;;         ("\\.mm\\'" . default)
+;;         ("\\.x?html?\\'" . default)
+;;         ("\\.pdf\\'" . "okular %s")
+;;         ("\\.docx\\'" . default)
+;;         ("\\.doc\\'" . default)))
 
-;; Den Standard File mit den Bookmarks immer aufmachen
-(find-file "/D/myfiles/org/ref.org")
+
 
 ;;(require 'org-tempo)
 (require 'ox-rst)
