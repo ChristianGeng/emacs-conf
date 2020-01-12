@@ -11,6 +11,8 @@
  ;; (require 'ox-rst)
  ;; (setq org-element-use-cache nil)
 
+(setq org-default-notes-file (concat org-directory "/ref.org"))
+;;'(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
 
 ;; Org-mode
 (load "org-general")
@@ -20,6 +22,16 @@
 (load "org-abbreviations")
 (load "org-hyperlinks")
 (load "org-linux")
+
+;; Default programs
+;; https://dontomp.wordpress.com/2015/01/31/in-org-mode-have-the-default-program-openoffice-word-or-whatever-open-docx-file-links/
+(setq org-file-apps
+      '((auto-mode . emacs)
+        ("\\.mm\\'" . default)
+        ("\\.x?html?\\'" . default)
+        ("\\.pdf\\'" . "okular %s")
+        ("\\.docx\\'" . default)
+        ("\\.doc\\'" . default)))
 
 ;; Den Standard File mit den Bookmarks immer aufmachen
 (find-file "/D/myfiles/org/ref.org")
@@ -97,8 +109,8 @@
 
 
 ;; https://orgmode.org/worg/org-tutorials/org4beginners.html
-(setq org-todo-keywords
-  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+;; (setq org-todo-keywords
+;;   '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
 
 
