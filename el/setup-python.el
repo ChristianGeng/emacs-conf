@@ -101,6 +101,7 @@
 
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 
+(add-hook 'python-mode-hook 'electric-pair-mode)
 
 ;;(add-to-list 'load-path "/D/myfiles/2018/isortify")
 ;; (load-library "isortify")
@@ -124,7 +125,8 @@
 ;; (pyvenv-activate "/home/cgn/.virtualenvs/py3")
 
 ;; get workon home from the zhell file
-(let ((my-workon-home (shell-command-to-string ". ~/.zshrc; echo -n $WORKON_HOME")))
+;; TODO: Die WORKON HOME DEF IST BESSER IN DIESER LOCATION ALS IN DER z.shrc
+(let ((my-workon-home (shell-command-to-string ". ~/.bash_variables; echo -n $WORKON_HOME")))
   (setenv "WORKON_HOME" my-workon-home))
 (getenv "WORKON_HOME")
 
@@ -228,6 +230,8 @@
 (add-to-list 'python-shell-completion-native-disabled-interpreters
              "jupyter")
 
+(setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+(setenv "JUPYTER_CONSOLE_TEST" "1")
 
 ;;(setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python")
 ;; (setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python3.7")

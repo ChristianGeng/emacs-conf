@@ -12,7 +12,6 @@
 ;; (setq coding-system-for-read 'utf-8)
 ;; (setq coding-system-for-write 'utf-8)
 
-
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-language-environment 'utf-8)
@@ -236,6 +235,7 @@
 (require 'setup-java)
 ;; (require 'setup-eclim)
 (require 'setup-ensime)
+(require 'setup-groovy)
 
 ;; (require 'setup-java)
 ;; (require 'setup-eclim)

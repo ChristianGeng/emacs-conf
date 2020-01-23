@@ -30,6 +30,15 @@
 
 ;;; Code:
 
+(defun edit-current-file-as-root ()
+  "Edit the file that is associated with the current buffer as root"
+  (interactive)
+  (if (buffer-file-name)
+      (progn
+        (setq file (concat "/sudo:localhost:" (buffer-file-name)))
+        (find-file file))
+    (message "Current buffer does not have an associated file.")))
+
 ;;; see http://ergoemacs.org/emacs/modernization_elisp_lib_problem.html
 ;;; stammen aus der s-bibliothek
 (defun s-trim-left (s)
