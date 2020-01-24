@@ -15,7 +15,11 @@
 (add-hook 'groovy-mode-hook
           '(lambda ()
              (require 'groovy-electric)
-             (groovy-electric-mode)))
+;;             (groovy-electric-mode)
+             (paren-activate)
+             (rainbow-delimiters-mode)
+             )
+          )
 
 (add-hook 'groovy-mode-hook
           (lambda ()  (yas-minor-mode 1))
