@@ -14,7 +14,7 @@
 ;;; make Groovy mode electric by default.
 (add-hook 'groovy-mode-hook
           '(lambda ()
-             (require 'groovy-electric)
+;;             (require 'groovy-electric)
 ;;             (groovy-electric-mode)
              (paren-activate)
              (rainbow-delimiters-mode)
