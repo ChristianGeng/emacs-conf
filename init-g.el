@@ -23,6 +23,7 @@
 ;; Switch between windows with Shift+{left,up,down,right}
 
 (add-to-list 'load-path "~/.emacs.d/el")
+(add-to-list 'load-path "~/.emacs.d/el-get/dired+")
 
 (require 'title-time)
 
