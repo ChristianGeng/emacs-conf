@@ -16,7 +16,7 @@
 
 
 
-(setq ibuffer-formats 
+(setq ibuffer-formats
       '((mark modified read-only " "
               (name 40 40 :left :elide) ; change: 30s were originally 18s
               " "
@@ -27,7 +27,7 @@
         (mark " "
               (name 16 -1)
               " " filename)))
-              
+
 
 
 (setq ibuffer-saved-filter-groups
@@ -42,6 +42,10 @@
                              (name . "^\\*Elpy Output\\*$")
                              ))
                ("dired" (mode . dired-mode))
+               ("groovy / gradle" (or
+                             (mode . groovy-mode)
+                             (mode . shell-mode)
+                          ))
                ("json/js" (mode . javascript-mode))
                ("planner" (or
                            (name . "^\\*Calendar\\*$")
@@ -77,7 +81,7 @@
                          (mode . emacs-lisp-mode)))
                )
 
-              
+
               )
              )
       )
