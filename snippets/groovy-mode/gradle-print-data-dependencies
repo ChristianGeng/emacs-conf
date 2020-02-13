@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: gradle-print-data-dependencies
+# key: gradle
+# --
+
+task printDataDependencies {
+    doLast {
+        project.configurations.getByName('data') { conf ->
+            conf.dependencies.each { dep ->
+                println("${dep.name}")
+            }
+        }
+    }
+}

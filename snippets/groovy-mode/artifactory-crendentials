@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: artifactory-credentials
+# key: artifactory
+# --
+
+credentials {
+            username findProperty('artifactoryUser')
+            password findProperty('artifactoryApiKey')
+        }
