@@ -306,6 +306,7 @@
                               ("\\.pptx\\'"  "loimpress" (file))
                               ))
 (openwith-mode)
+(display-battery-mode)
 
 (require 'setup-nxml)
 (require 'setup-pdf-tools)
