@@ -12,6 +12,17 @@
 ;; (setq coding-system-for-read 'utf-8)
 ;; (setq coding-system-for-write 'utf-8)
 
+
+(defun edit-current-file-as-root ()
+  "Edit the file that is associated with the current buffer as root"
+  (interactive)
+  (if (buffer-file-name)
+      (progn
+        (setq file (concat "/sudo:localhost:" (buffer-file-name)))
+        (find-file file))
+    (message "Current buffer does not have an associated file.")))
+
+
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-language-environment 'utf-8)
@@ -307,10 +318,10 @@
                               ))
 (openwith-mode)
 (display-battery-mode)
-(setq require-final-newline nil)
+(setq require-final-newline t)
 
 (require 'setup-nxml)
-(require 'setup-pdf-tools)
+;; (require 'setup-pdf-tools)
 (require 'setup-json-mode)
 (require 'setup-magit)
 ;; (require 'setup-tags)
