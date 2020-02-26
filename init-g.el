@@ -23,8 +23,6 @@
     (message "Current buffer does not have an associated file.")))
 
 
-
->>>>>>> Stashed changes
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-language-environment 'utf-8)
@@ -320,6 +318,7 @@
                               ))
 (openwith-mode)
 (display-battery-mode)
+(setq require-final-newline t)
 
 (require 'setup-nxml)
 ;; (require 'setup-pdf-tools)
