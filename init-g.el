@@ -12,6 +12,19 @@
 ;; (setq coding-system-for-read 'utf-8)
 ;; (setq coding-system-for-write 'utf-8)
 
+
+(defun edit-current-file-as-root ()
+  "Edit the file that is associated with the current buffer as root"
+  (interactive)
+  (if (buffer-file-name)
+      (progn
+        (setq file (concat "/sudo:localhost:" (buffer-file-name)))
+        (find-file file))
+    (message "Current buffer does not have an associated file.")))
+
+
+
+>>>>>>> Stashed changes
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-language-environment 'utf-8)
@@ -309,7 +322,7 @@
 (display-battery-mode)
 
 (require 'setup-nxml)
-(require 'setup-pdf-tools)
+;; (require 'setup-pdf-tools)
 (require 'setup-json-mode)
 (require 'setup-magit)
 ;; (require 'setup-tags)
