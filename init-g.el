@@ -307,6 +307,7 @@
                               ))
 (openwith-mode)
 (display-battery-mode)
+(setq require-final-newline nil)
 
 (require 'setup-nxml)
 (require 'setup-pdf-tools)
