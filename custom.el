@@ -35,7 +35,6 @@
      (object :foreground "#5974ab" :slant italic)
      (package :foreground "#000000")
      (deprecated :strike-through "#000000"))))
- '(fci-rule-color "#405A61")
  '(helm-completion-style (quote emacs))
  '(jdee-db-active-breakpoint-face-colors (cons "#073642" "#268bd2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#073642" "#859900"))
