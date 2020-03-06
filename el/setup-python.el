@@ -52,7 +52,7 @@
 
 (elpy-enable)
 (setq elpy-rpc-backend "jedi")
-
+(defconst python-linewidth 120)
 
 ;; Company Mode and fci incompatibility workaround.
 ;; see here:
@@ -91,8 +91,6 @@
 
 
 ;; (setq jedi:complete-on-dot t)                 ; automatically start completing when entering dot
-
-(defconst python-linewidth 120)
 
 (add-hook 'python-mode-hook 'auto-fill-mode)
 (add-hook 'python-mode-hook
