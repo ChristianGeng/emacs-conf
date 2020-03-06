@@ -338,4 +338,8 @@ Python process. This allows the process to start up."
 
 ;; (setq conda-anaconda-home "~/.conda/")
 
+;; unbind the tab for the snippets
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+
 (provide 'setup-python)

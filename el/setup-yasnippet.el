@@ -87,8 +87,4 @@
 ;; Wrap around region
 (setq yas-wrap-around-region t)
 
-;; unbind the tab for the snippets
-(define-key yas-minor-mode-map (kbd "<tab>") nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-
 (provide 'setup-yasnippet)
