@@ -127,6 +127,14 @@ M-x set-fill-column
 
 ### dired
 
+## Delete all dired buffers
+
+see https://emacs.stackexchange.com/questions/202/close-all-dired-buffers
+M-x ibuffer
+* / to mark buffers in dired mode.
+D to delete them.
+
+
 ## Rename many:
 * wdired-change-to-wdired-mode
 * wdired-finish-edit
@@ -168,3 +176,16 @@ C-q C-j   # insert newline
 * cg-remove-newlines-in-region
 *  visual-line-mode
 * https://www.emacswiki.org/emacs/FillParagraph
+
+# Daemon Mode.
+
+https://medium.com/@lukaszkorecki/emacs-as-tmux-replacement-2acd10d7dfc8
+https://emacs.stackexchange.com/questions/53036/switching-from-tmux-terminal-emacs-to-emacs-only
+
+
+# Helm
+
+## Search Open Buffers:
+
+- M-x helm-multi-occur RET M-a RET
+https://emacs.stackexchange.com/questions/737/how-do-i-find-text-across-many-open-buffers
