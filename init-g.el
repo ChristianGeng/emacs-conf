@@ -12,7 +12,6 @@
 ;; (setq coding-system-for-read 'utf-8)
 ;; (setq coding-system-for-write 'utf-8)
 
-
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
   (interactive)
@@ -112,6 +111,14 @@
 (setq  realgud-safe-mode nil)
 (require 'realgud)
 
+
+(setq visible-bell t)
+;; ring-bell function not doing what its supposed to?
+;; see https://www.emacswiki.org/emacs/AlarmBell
+;; (defun ring-bell-function()
+;;   "do not ring the bell when cursor has gone too far outside."
+;;   (message "Went outside but not ringing the bell.")
+;;     )
 
 
 ;; Setup extensions
