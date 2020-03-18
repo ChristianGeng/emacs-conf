@@ -31,7 +31,7 @@
 ;;; Code:
 
 (defun edit-current-file-as-root ()
-  "Edit the file that is associated with the current buffer as root"
+  "Edit the file that is associated with the current buffer as root."
   (interactive)
   (if (buffer-file-name)
       (progn
@@ -121,7 +121,7 @@ Directory defaults to the value of `my-archive-dir'."
 
  (defun timestamp ()
    (interactive)
-   (insert (format-time-string "%Y-%m-%dT%H:%M:%S"))2019-02-11T09:11:19)
+   (insert (format-time-string "%Y-%m-%dT%H:%M:%S")))
 
  (defun date (arg)
    (interactive "P")
@@ -242,7 +242,7 @@ Directory defaults to the value of `my-archive-dir'."
 
 
 (defun forwardize-slashes (beg end)
-  "replace all backward slashes in the region with forward slashes"
+  "Replace all backward slashes in the region with forward slashes."
   (interactive "r")
   (save-excursion
     (save-restriction
@@ -253,7 +253,7 @@ Directory defaults to the value of `my-archive-dir'."
   )
 
 (defun backwardize-slashes (beg end)
-  "replace all forward slashes in the region with backward slashes"
+  "Replace all forward slashes in the region with backward slashes."
   (interactive "r")
   (save-excursion
     (save-restriction
@@ -306,7 +306,7 @@ Directory defaults to the value of `my-archive-dir'."
   )
 
 (defun cg-projectile-clean-cfiles ()
-  "clean  projects c files DANGEROUS in c projects!!"
+  "Clean  projects c files DANGEROUS in c projects!!"
   (interactive)
     (defvar activeproject (projectile-project-root)
       "variable containing the active project")
@@ -315,7 +315,7 @@ Directory defaults to the value of `my-archive-dir'."
 
 
 (defun lock-screen ()
- "lock screen using screensaver"
+ "Lock screen using screensaver"
  (interactive)
  (shell-command ". cglib; lock"))
 
@@ -341,7 +341,7 @@ Directory defaults to the value of `my-archive-dir'."
 ;; Creating a menu item, under the menu by the id “[menu-bar mymenu]”
 
 (defun cg-remove-newlines-in-region ()
-  "Removes all newlines in the region."
+  "Remove all newlines in the region."
   (interactive)
   (save-restriction
     (narrow-to-region (point) (mark))
@@ -350,7 +350,7 @@ Directory defaults to the value of `my-archive-dir'."
 
 
 (defun cg-remove-consecutive-newlines-in-region ()
-  "Removes all newlines in the region."
+  "Remove all newlines in the region."
   (interactive)
   (save-restriction
     (narrow-to-region (point) (mark))
@@ -358,4 +358,12 @@ Directory defaults to the value of `my-archive-dir'."
     (while (search-forward "\n\n" nil t) (replace-match "\n" nil t))))
 
 
+(defun markdown-convert-buffer-to-org ()
+    "Convert the current buffer's content from markdown to orgmode format and save it with the current buffer's file name but with .org extension."
+    (interactive)
+    (shell-command-on-region (point-min) (point-max)
+                             (format "pandoc -f markdown -t org -o %s"
+                                     (concat (file-name-sans-extension (buffer-file-name)) ".org"))))
+
 (provide 'cglispfuncs)
+;;; cglispfuncs.el ends here
