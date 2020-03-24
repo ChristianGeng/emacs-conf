@@ -1,3 +1,7 @@
+;;; package --- Summary"
+;;; Commentary:
+;;; Code:
+;;;
 ;; nearly all of this is the default layout
 ;; interesting example conf at https://github.com/purcell/emacs.d/blob/master/lisp/init-ibuffer.el
 ;; https://www.emacswiki.org/emacs/IbufferMode#toc4
@@ -12,7 +16,6 @@
 ;;      ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
 ;;      ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
 ;;      (t (format "%8d" (buffer-size))))))
-
 
 
 
@@ -41,6 +44,11 @@
                              (mode . inferior-python-mode)
                              (name . "^\\*Elpy Output\\*$")
                              ))
+               ("config"(
+                         or (mode . yaml-mode)
+                            (mode . nxml-mode)
+
+                         ))
                ("dired" (mode . dired-mode))
                ("groovy / gradle" (or
                              (mode . groovy-mode)
@@ -99,4 +107,5 @@
 
 
 
- (provide 'setup-ibuffer)
+(provide 'setup-ibuffer)
+;;; setup-ibuffer.el ends here
