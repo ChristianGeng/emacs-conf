@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: gradle-list-publication-info
+# key: gradle
+# --
+
+publishing {
+  repositories.each {repo->
+    println("repo: ${repo.url}")
+  }
+}
+allprojects{
+  afterEvaluate {
+
+    println(">>")
+    project.publishing.publications.each{publication->
+
+      if(publication instanceof MavenPublication){
+        println(">>: ${publication.groupId}:${publication.artifactId}:${publication.version}")
+        publication.artifacts.each{artifact->
+          println("\t${artifact.classifier}:${artifact.extension}")
+        }
+      }
+    }
+  }
+}

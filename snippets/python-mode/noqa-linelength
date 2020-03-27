@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: noqa-linelength
+# key:
+# --
+  # noqa: E501
