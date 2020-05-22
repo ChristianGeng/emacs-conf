@@ -49,6 +49,8 @@
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
+;;; lets test: hopefully works globally
+(global-set-key (kbd "M-*") 'insert-curly-braces)
 ;; Mark additional regions matching current region (proposed bindings)
 ;; (global-set-key (kbd "M-æ") 'mc/mark-all-like-this-dwim)
 ;; (global-set-key (kbd "C-å") 'mc/mark-previous-like-this)
