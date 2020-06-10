@@ -52,7 +52,7 @@
 
 (elpy-enable)
 (setq elpy-rpc-backend "jedi")
-
+(defconst python-linewidth 120)
 
 ;; Company Mode and fci incompatibility workaround.
 ;; see here:
@@ -65,6 +65,10 @@
     (turn-on-fci-mode)))
 
 (advice-add 'company-call-frontends :before #'on-off-fci-before-company)
+
+(require 'fill-column-indicator)
+(setq fci-rule-column python-linewidth)
+;; (add-hook 'python-mode-hook 'fci-mode)
 
 ;; see https://www.reddit.com/r/emacs/comments/3uzdx3/change_elpy_keybindings/
 ;; (add-hook 'elpy-mode-hook
@@ -88,19 +92,12 @@
 
 ;; (setq jedi:complete-on-dot t)                 ; automatically start completing when entering dot
 
-(defconst python-linewidth 120)
-
 (add-hook 'python-mode-hook 'auto-fill-mode)
 (add-hook 'python-mode-hook
           (lambda ()
             (set-fill-column python-linewidth)))
 
-(require 'fill-column-indicator)
-(setq fci-rule-column python-linewidth)
-(add-hook 'python-mode-hook 'fci-mode)
-
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-
 (add-hook 'python-mode-hook 'electric-pair-mode)
 
 ;;(add-to-list 'load-path "/D/myfiles/2018/isortify")
@@ -324,5 +321,9 @@
 
 
 ;; (setq conda-anaconda-home "~/.conda/")
+
+;; unbind the tab for the snippets
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
 
 (provide 'setup-python)

@@ -9,6 +9,9 @@
   (add-to-list 'company-backends 'company-dabbrev)
   (add-to-list 'company-backends 'company-dabbrev-code)
   (add-to-list 'company-backends 'company-etags)
+  (add-to-list 'company-backends 'company-web-html)
+  (add-to-list 'company-backends 'company-web-jade)
+  (add-to-list 'company-backends 'company-web-slim)
   (setq company-auto-complete nil
         company-tooltip-flip-when-above t
         company-minimum-prefix-length 2

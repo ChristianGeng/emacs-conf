@@ -37,9 +37,9 @@
      (deprecated :strike-through "#000000"))))
  '(fci-rule-color "#D6D6D6")
  '(helm-completion-style (quote emacs))
- '(jdee-db-active-breakpoint-face-colors (cons "#FFFBF0" "#268bd2"))
- '(jdee-db-requested-breakpoint-face-colors (cons "#FFFBF0" "#859900"))
- '(jdee-db-spec-breakpoint-face-colors (cons "#FFFBF0" "#E1DBCD"))
+ '(jdee-db-active-breakpoint-face-colors (cons "#073642" "#268bd2"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#073642" "#859900"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#073642" "#56697A"))
  '(markdown-command "pandoc")
  '(objed-cursor-color "#dc322f")
  '(openwith-mode t)
@@ -50,7 +50,18 @@
  '(rng-schema-locating-files
    (quote
     ("schemas.xml" "/usr/share/emacs/25.2/etc/schema/schemas.xml" "~/.emacs.d/schemas.xml")))
- '(vc-annotate-background "#FDF6E3")
+ '(rustic-ansi-faces
+   ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
+ '(sql-connection-alist
+   (quote
+    (("dataupload local container mysql"
+      (sql-product
+       (quote mysql))
+      (sql-user "root")
+      (sql-database "dataupload")
+      (sql-server "127.0.0.1")))))
+ '(treemacs-git-mode (quote extended))
+ '(vc-annotate-background "#002b36")
  '(vc-annotate-color-map
    (list
     (cons 20 "#859900")
@@ -66,11 +77,11 @@
     (cons 220 "#d63466")
     (cons 240 "#d9334a")
     (cons 260 "#dc322f")
-    (cons 280 "#dd5c56")
-    (cons 300 "#de867e")
-    (cons 320 "#dfb0a5")
-    (cons 340 "#D6D6D6")
-    (cons 360 "#D6D6D6")))
+    (cons 280 "#ba3f41")
+    (cons 300 "#994d54")
+    (cons 320 "#775b67")
+    (cons 340 "#405A61")
+    (cons 360 "#405A61")))
  '(vc-annotate-very-old-color nil)
  '(yas-prompt-functions
    (quote

@@ -9,8 +9,6 @@
     (setq org-agenda-skip-function-global '(org-agenda-skip-entry-if 'scheduled)))
   (org-agenda-redo))
 
-(define-key org-agenda-keymap (kbd "i") 'my/org-agenda-scheduled-toggle)
-
 ;; Only show deadlines if they're past due
 (setq org-deadline-warning-days 0)
 
@@ -365,8 +363,6 @@
 (advice-add #'org-agenda-goto :after #'org-reveal)
 (advice-add #'org-agenda-switch-to :after #'org-reveal)
 
-;; Remap <RET> to org-agenda-godo
-(define-key org-agenda-mode-map (kbd "<return>") 'org-agenda-goto)
 
 ;; Switch left window to appropriate buffer prior to org-agenda-goto
 (defun my/org-agenda-correct-buffer ()
@@ -424,4 +420,4 @@ and run `org-agenda-bulk-action' with this function. Do NOT confused with
     '(define-key org-agenda-mode-map (kbd "M-k") nil)))
 
 ;; Change display of agenda
-(setf (alist-get 'todo org-agenda-prefix-format) " %i %-12:c %l")
+;;(setf (alist-get 'todo org-agenda-prefix-format) " %i %-12:c %l")
