@@ -104,3 +104,77 @@ http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting_up_emacs_for_
 http://www.skybert.net/emacs/java/
 https://github.com/skybert/my-little-friends/blob/master/emacs/.emacs.d/tkj-java-meghanada.el
 https://github.com/skybert/my-little-friends/blob/master/emacs/.emacs.d/tkj-java-meghanada.el
+
+
+## Web Development
+
+Currently used Major Modes
+- mmm mode are two multi-mode enginges web mode. I have  mainly configured
+- vue-mode for vue framework files
+- js2-mode for javascript
+
+### Important Minor Modes
+
+#### emmet mode
+
+Completion for css, js, html. Abbreviations on homepage,
+
+https://github.com/smihica/emmet-mode
+
+C-j
+
+#### Company-web
+
+Company backend for web completion https://github.com/osv/company-web
+configured in setup-web-mode.el and setup-auto-complete.el
+
+M-x company-web-html
+
+see this for language server alternative
+https://emacs.stackexchange.com/questions/55230/help-setting-up-company-mode-autocompletion-of-html-css-files
+
+
+### Web Mode -> Major Mode for mainly Templates, html
+
+Flycheck use eslint:
+http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html
+
+C-c C-f         web-mode-fold-or-unfold
+C-c C-e i       web-mode-element-insert
+C-c C-s         insert  snippets
+M-;             comment out regions
+C-c C-w         show whitespaces
+C-c C-m         mark region
+
+Selection Expansion
+C-n marks current element
+
+Tag Navigation:
+
+Closing element : type '</' and it happens in html
+similarly for templates
+
+Type faster: emmet-mode: But web-mode has sth similar
+d/ -> creates div, /s creates spna
+
+## Vue Mode
+
+- To be described - Using lsp is quite cool
+
+
+## Web Development further  links:
+
+- https://github.com/jerryhsieh/Emacs-config
+- https://blog.onionstudio.com.tw/emacs-%E5%AF%AB-vue-js/
+- https://emacs-lsp.github.io/lsp-ui/
+
+
+# Misc
+
+## Misc Links
+
+- https://github.com/redguardtoo/emacs.d/tree/master/lisp
+
+## TODOS
+
+Lern use-package and stream the configurations: https://github.com/jwiegley/use-package

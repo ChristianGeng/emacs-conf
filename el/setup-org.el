@@ -12,10 +12,11 @@
  ;; (setq org-element-use-cache nil)
 
 
-(setq org-directory "/D/myfiles/org/")
+;;(setq org-directory "/D/myfiles/org/")
+(setq org-directory "~/org/")
 (setq org-default-notes-file (concat org-directory "/ref.org"))
 ;; Targets that contribute to the agenda view
-(setq org-agenda-files (quote ("/D/myfiles/org")))
+;; (setq org-agenda-files (quote org-directory))
 ;; '(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
 
 ;; Abbreviations
@@ -26,7 +27,7 @@
 ;; (setq org-default-notes-file (concat org-directory "/ref.org"))
 ;;'(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
 ;; Den Standard File mit den Bookmarks immer aufmachen
-(find-file "/D/myfiles/org/ref.org")
+;; (find-file (concat (org-directory "/ref.org")))
 
 ;; Org-mode
 (load "org-general")
@@ -97,7 +98,17 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-(define-key org-mode-map (kbd "C-c f") 'org-footnote-action)
+;; (eval-after-load "org-agenda"
+;; '(progn
+;; ;;   (define-key org-agenda-mode-map "\C-n" 'next-line)
+;;    (define-key org-mode-map (kbd "C-c f") 'org-footnote-action)
+;;    (define-key org-agenda-keymap (kbd "i") 'my/org-agenda-scheduled-toggle)
+;; Remap <RET> to org-agenda-godo
+;; (define-key org-agenda-mode-map (kbd "<return>") 'org-agenda-goto)
+
+;; )
+
+
 
 
 (use-package org-chef
@@ -165,17 +176,17 @@
                              (sh . t)
                              (shell . t)
                              (python . t)
-                             (emacs-lisp . t)
-                             (ruby . t)
-                             (clojure . t)
-                             (sql . t)
-                             (matlab . t)
-                             (java . t)
-                             (latex . t)
-                             (awk . t)
-                             (R . t)
-                             (sqlite t)
-                             (sed . t)
+                             ;; (emacs-lisp . t)
+                             ;; (ruby . t)
+                             ;; (clojure . t)
+                             ;; (sql . t)
+                             ;; (matlab . t)
+                             ;; (java . t)
+                             ;; (latex . t)
+                             ;; (awk . t)
+                             ;; (R . t)
+                             ;; (sqlite t)
+                             ;; (sed . t)
                              )
  )
 

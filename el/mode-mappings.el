@@ -24,9 +24,14 @@
 ;; (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
 ;; HTML
-(add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
+;; currently defined in web-mode!
+;; (add-to-list 'auto-mode-alist '("\\.html\\'" . html-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tag$" . html-mode))
+;; (add-to-list 'auto-mode-alist '("\\.vm$" . html-mode))
+
+
+
+
 
 ;; JSP
 (autoload 'crappy-jsp-mode "crappy-jsp-mode")
@@ -82,7 +87,7 @@
 (autoload 'markdown-mode "markdown-mode")
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
-(add-hook 'markdown-mode-hook (lambda () (define-key markdown-mode-map (kbd "<tab>") 'yas-expand)))
+;; (add-hook 'markdown-mode-hook (lambda () (define-key markdown-mode-map (kbd "<tab>") 'yas-expand)))
 
 ;; org-mode
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))

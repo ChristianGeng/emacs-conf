@@ -143,8 +143,8 @@
 (require 'setup-js2-mode)
 (require 'setup-web-mode)
 (require 'mmm-auto)
+(require 'setup-web-mode)
 (require 'setup-vue-mode)
-;; (require 'js2-mode)
 
 ;; (require 'setup-speedbar)
 
@@ -218,12 +218,8 @@
 ;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 ;; (add-hook 'async-bytecomp-package-mode-hook 'colorize-compilation-buffer)
 
-
-
-
 ;; Fill column indicator
 ;; (require 'fill-column-indicator)
-;; (setq fci-rule-color "#111122")
 
 ;; Browse kill ring
 (require 'browse-kill-ring)
@@ -345,3 +341,4 @@
 
 ;; fix missing alt-key in WSL
 (setq x-alt-keysym 'meta)
+(put 'set-goal-column 'disabled nil)
