@@ -211,18 +211,9 @@
 ;; based_on_style = pep8
 ;; split_before_first_argument = false
 
-;; /home/christian/.conda/envs/speech-recognition/bin/
-
-;; (setq python-shell-interpreter "jupyter"
-;;       python-shell-interpreter-args "console --simple-prompt"
-;;       python-shell-prompt-detect-failure-warning nil)
-;; (add-to-list 'python-shell-completion-native-disabled-interpreters
-;;               "jupyter")
-
-
-;; setzt die venv auf momentan aktive venv
-;; https://elpy.readthedocs.io/en/latest/concepts.html
+;;(setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python")
 (setq elpy-rpc-virtualenv-path 'current)
+
 
 (setq python-shell-interpreter "jupyter"
       python-shell-interpreter-args "console --simple-prompt"
@@ -230,33 +221,26 @@
 (add-to-list 'python-shell-completion-native-disabled-interpreters
              "jupyter")
 
-(setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-(setenv "JUPYTER_CONSOLE_TEST" "1")
-
-;;(setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python")
-;; (setq python-shell-interpreter "/home/christian/.conda/envs/speech-recognition/bin/python3.7")
-
-
-;; https://github.com/jorgenschaefer/elpy/issues/1414
-(defun elpy-shell-get-or-create-process (&optional sit)
-  "Get or create an inferior Python process for current buffer and return it.
-
-If SIT is non-nil, sit for that many seconds after creating a
-Python process. This allows the process to start up."
+(defun elpy-debug ()
+  (interactive)
   (let* ((bufname (format "*%s*" (python-shell-get-process-name nil)))
-         (proc (get-buffer-process bufname)))
-    (if proc
-        proc
-      (run-python (python-shell-parse-command) nil t)
-      (when sit (sit-for sit))
-      (get-buffer-process bufname))))
+         (proc (get-buffer-process bufname))
+         (default-directory (or (and elpy-shell-use-project-root
+                                     (elpy-project-root))
+                                default-directory)))
+    (message "==================")
+    (message "=== Elpy debug ===")
+    (message "==================")
+    (message "bufname: %s" bufname)
+    (message "proc: %s" proc)
+    (message "elpy-shell-use-project-root: %s" elpy-shell-use-project-root)
+    (message "(elpy-project-root): %s" (elpy-project-root))
+    (message "default-directory: %s" default-directory)
+    (message "(python-shell-parse-command): %s" (python-shell-parse-command))
+    ))
 
-
-
-;; (setq python-shell-interpreter "ipython"
-;;        python-shell-interpreter-args "-i --simple-prompt")
-
-
+;; (setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+;; (setenv "JUPYTER_CONSOLE_TEST" "1")
 
 
 ;; ;; damit bekommt man wenigstens import errors:

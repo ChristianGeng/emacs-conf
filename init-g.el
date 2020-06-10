@@ -137,22 +137,14 @@
 ;; (require 'setup-ffip)
 ;; (require 'setup-paredit)
 
+(require 'mmm-auto)
+(mmm-add-mode-ext-class 'html-mode "\\.php\\'" 'html-php)
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-;; Language specific setup files
-;; (eval-after-load 'js2-mode '(require 'setup-web-mode))
-;; (eval-after-load 'js2-mode '(require 'setup-js2-mode))
-(require 'setup-web-mode)
 (require 'setup-js2-mode)
+(require 'setup-web-mode)
+(require 'mmm-auto)
+(require 'setup-vue-mode)
+;; (require 'js2-mode)
 
 ;; (require 'setup-speedbar)
 
@@ -165,9 +157,6 @@
 ;;(require 'setup-bash)
 (require 'setup-octave)
 ;; (require 'mc)
-
-(require 'js2-mode)
-
 
 ;;(require 'setup-web-mode)
 (require 'setup-jabber)
@@ -334,6 +323,8 @@
 ;; (require 'setup-tags)
 
 (require 'setup-auto-complete)
+
+(require 'setup-flycheck-mode)
 ;; company mode autocompletion
 ;;(add-hook 'after-init-hook 'global-company-mode)
 

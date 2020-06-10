@@ -26,7 +26,9 @@
 ;; with tramp, please try `file-name' style.
 ;; Please refer to https://github.com/bbatsov/projectile/issues/657.
 ;; (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-(setq doom-modeline-buffer-file-name-style 'relative-from-project)
+;; (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+(setq doom-modeline-buffer-file-name-style 'truncate-all)
+
 
 ;; Whether display icons in mode-line or not.
 (setq doom-modeline-icon t)
@@ -53,7 +55,7 @@
 
 ;; If non-nil, only display one number for checker information if applicable.
 (setq doom-modeline-checker-simple-format t)
-  
+
 ;; The maximum displayed length of the branch name of version control.
 (setq doom-modeline-vcs-max-length 12)
 
