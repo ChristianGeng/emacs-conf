@@ -326,6 +326,8 @@
 
 ;;(require 'pasc-mode)
 
+(require 'setup-yaml-mode)
+
 (package-initialize)
 
 (put 'erase-buffer 'disabled nil)
