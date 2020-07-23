@@ -1,15 +1,18 @@
-;; Links:
-;; https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
-;; https://orgmode.org/worg/org-tutorials/org4beginners.html
-;; cool agenda commands
-;; https://orgmode.org/manual/Agenda-commands.html
-
+;;; setup-org --- Main Setup Routine for org mode
+;;; Commentary:
+;;; Another setup file
+;;; Links:
+;;  https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
+;;; https://orgmode.org/worg/org-tutorials/org4beginners.html
+;;; cool agenda commands
+;;; https://orgmode.org/manual/Agenda-commands.html
+;;; Code:
 
 :; (require 'ox-taskjuggler)
 ;; (require 'org-tempo)
-;;(require 'org-tempo)
- ;; (require 'ox-rst)
- ;; (setq org-element-use-cache nil)
+;; (require 'org-tempo)
+;; (require 'ox-rst)
+;; (setq org-element-use-cache nil)
 
 
 ;;(setq org-directory "/D/myfiles/org/")
@@ -89,7 +92,7 @@
       org-src-tab-acts-natively t
       org-startup-indented t
       org-log-into-drawer t
-      org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+      org-duration-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
 
 ;;; a few undisputed global keybindings every org'er will want
 
@@ -161,7 +164,6 @@
 (add-hook 'org-shiftdown-final-hook 'windmove-down)
 (add-hook 'org-shiftright-final-hook 'windmove-right)
 
-
 ;; Activate Languages for org mode evaluation
 ;; https://orgmode.org/manual/Languages.html
 ;; https://emacs.stackexchange.com/questions/17673/no-org-babel-execute-function-for-c-and-no-org-babel-execute-function-for-c
@@ -173,9 +175,9 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages '((C . t)
-                             (sh . t)
                              (shell . t)
                              (python . t)
+                             (plantuml . t)
                              ;; (emacs-lisp . t)
                              ;; (ruby . t)
                              ;; (clojure . t)
@@ -203,3 +205,4 @@
 
 
 (provide 'setup-org)
+;;; setup-org.el ends here

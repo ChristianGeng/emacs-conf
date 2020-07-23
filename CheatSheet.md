@@ -181,7 +181,7 @@ C-q C-j   # insert newline
 
 https://medium.com/@lukaszkorecki/emacs-as-tmux-replacement-2acd10d7dfc8
 https://emacs.stackexchange.com/questions/53036/switching-from-tmux-terminal-emacs-to-emacs-only
-
+https://emacs.stackexchange.com/questions/35587/emacs-client-cant-find-server-in-terminal
 
 # Helm
 

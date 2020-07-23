@@ -35,7 +35,7 @@
 (add-to-list 'load-path "~/.emacs.d/el")
 (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
 
-(require 'title-time)
+;;  (require 'title-time)
 
 ;; (require 'setup-daimler-proxy)
 
@@ -151,6 +151,8 @@
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
 (require 'setup-org) ;; organizer todo notes etc
+(require 'setup-plantuml) ;; organizer todo notes etc
+
 (require 'setup-latex)
 
 (require 'setup-calendar)

@@ -32,36 +32,54 @@
               " " filename)))
 
 
-
 (setq ibuffer-saved-filter-groups
       (quote (
               ("pythonic"
+               ("shell" (
+                         or
+                         (mode . shell-mode)
+                         (mode . eshell-mode)
+                         (mode . term-mode)
+                         ))
                ("python" (
                           or (mode . python-mode)
-                             (mode . shell-mode)
                              (mode . django-mode)
                              (mode . elpy-mode)
                              (mode . inferior-python-mode)
                              (name . "^\\*Elpy Output\\*$")
                              ))
-               ("config"(
-                         or (mode . yaml-mode)
-                            (mode . nxml-mode)
 
-                         ))
-               ("dired" (mode . dired-mode))
-               ("groovy / gradle" (or
-                             (mode . groovy-mode)
-                             (mode . shell-mode)
-                          ))
-               ("json/js" (mode . javascript-mode))
                ("planner" (or
                            (name . "^\\*Calendar\\*$")
                            (name . "^diary$")
                            (mode . muse-mode)
                            (mode . org-mode)
+                           (mode . markdown-mode)
+                           (mode . rst-mode)
                            ))
-               ("emacs" (or
+               ("config"(
+                         or (mode . yaml-mode)
+                            (mode . nxml-mode)
+                            (mode . json-mode)
+                            (mode . conf-mode)
+                            (mode . conf-space-mode)
+                            (mode . shell-script-mode)
+                            (mode . dockerfile-mode)
+                            (mode . jinja2-mode)
+                         ))
+               ("jvm languages" (or
+                             (mode . groovy-mode)
+                             (mode . shell-mode)
+                             ))
+               ("web" (or
+                       (mode . javascript-mode)
+                       (mode . web-mode)
+                       (mode . vue-mode)
+                       (mode . js-mode)
+                       (mode . js2-mode)
+                             ))
+               ("dired" (mode . dired-mode))
+               ("emacs/lisp" (or
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$")
                          (mode . emacs-lisp-mode)))
@@ -98,14 +116,9 @@
 
 ;;(add-to-list 'ibuffer-never-show-predicates "^\\*Hmm")
 
-
-
  (add-hook 'ibuffer-mode-hook
               (lambda ()
                 (ibuffer-switch-to-saved-filter-groups "pythonic")))
-
-
-
 
 (provide 'setup-ibuffer)
 ;;; setup-ibuffer.el ends here
