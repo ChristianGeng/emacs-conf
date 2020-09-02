@@ -1,3 +1,7 @@
+;;; package --- Helm Configuration
+;;; Commentary:
+;;; Helm Setup
+;;; Code:
 
 (require 'helm)
 (require 'helm-config)
@@ -47,4 +51,7 @@
 (setq helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t)
 
+(require 'helm-dictionary)
+
 (provide 'setup-helm)
+;;; setup-helm.el ends here
