@@ -2,6 +2,6 @@
 # name: codeblock
 # key: codeblock
 # --
-#+BEGIN_SRC lang
+#+BEGIN_SRC lang  :format pp :results output
 
 #+END_SRC

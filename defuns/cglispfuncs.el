@@ -240,9 +240,20 @@ Directory defaults to the value of `my-archive-dir'."
       (while (re-search-forward "\\s-+" nil t)
         (replace-match " ")))))
 
+(defun whitespace-to-underscore (beg end)
+  "BEG Replace all backward slashes in the region with forward slashes.  END.  "
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (search-forward " " nil t)
+        (replace-match "_"))))
+  )
+
 
 (defun forwardize-slashes (beg end)
-  "Replace all backward slashes in the region with forward slashes."
+  "BEG Replace all backward slashes in the region with forward slashes.  END.  "
   (interactive "r")
   (save-excursion
     (save-restriction

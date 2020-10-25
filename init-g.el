@@ -329,6 +329,7 @@
 ;;(require 'pasc-mode)
 
 (require 'setup-yaml-mode)
+(require 'setup-editorconfig)
 
 (package-initialize)
 
