@@ -330,6 +330,8 @@
 
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
+(require 'setup-c++)
+
 
 (package-initialize)
 
