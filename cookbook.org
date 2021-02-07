@@ -3,16 +3,16 @@
 #+TITLE:     Rezept
 #+EMAIL:     e.fraga@ucl.ac.uk
 #+DATE:      2010-03-30 Tue
-#+DESCRIPTION: 
-#+KEYWORDS: 
+#+DESCRIPTION:
+#+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
 #+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:https://orgmode.org/org-info.js
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
-#+LINK_UP:   
-#+LINK_HOME: 
+#+LINK_UP:
+#+LINK_HOME:
 
 #+BEAMER_FRAME_LEVEL: 4
 
@@ -54,7 +54,7 @@
 1. : In a medium pot combine lentils, smashed garlic cloves, bay leaf, a handful of parsley stems. Add enough water to cover the lentils by 1 1/2 to 2 inches (about 2 1/2 cups).
 2. Bring to a simmer and cook uncovered for about 25 minutes. The exact time will vary based on how dry the lentils are. When you get about 10 minutes out from the finished cooking time, start sampling the lentils to check for doneness—when cooked, they should be tender, but still intact. Continue sampling every 5 minutes until they’re ready.
 3. When the lentils are done, drain them and discard the bay leaf, garlic, and parsley stems.
-   
+
 
 * Selbst gemachte, gerollte Maultaschen
 :PROPERTIES:
@@ -62,8 +62,8 @@
 :servings: 10
 :prep-time: 45 Min
 :cook-time: 15 Min
-:ready-in: 
-:END:      
+:ready-in:
+:END:
 
 ** Ingredients
 
@@ -97,7 +97,7 @@
 4. Dieses Vorgehen solange wiederholen, bis Teig aufgebraucht ist. Falls von der Hackmasse noch
    etwas übrig ist, kann man Klöße formen und diese später auch kochen.
 
-5. Nun die Maultaschen portionsweise in kochendes Wasser legen und ca. 10 - 15 min. ziehen lassen. 
+5. Nun die Maultaschen portionsweise in kochendes Wasser legen und ca. 10 - 15 min. ziehen lassen.
 
 
 * Maultaschen nach BodenseeOmi
@@ -107,7 +107,7 @@
 :prep-time: 120 minutes
 :cook-time: 15 minutes
 :ready-in: 3h
-:END:      
+:END:
 **** Ingredients
 
 - 350g Hackfleisch
@@ -132,7 +132,7 @@
 :servings: 8
 :prep-time: 30 Min
 :cook-time: nil
-:ready-in: 
+:ready-in:
 :END:
 
 ** Ingredients
@@ -183,7 +183,7 @@
    Sauce.
 
 
-* Hausfreunde 
+* Hausfreunde
 :PROPERTIES:
 :source-url: https://www.chefkoch.de/rezepte/586771157900105/Hausfreunde-mit-Marzipan.html
 :servings: 1
@@ -192,7 +192,7 @@
 :ready-in:
 :END:
 
-** Hausfreunde 
+** Hausfreunde
 
 ** Zutaten
 
@@ -224,4 +224,179 @@ Zutaten für 4 Personen
 
 - Die Plätzchen nochmals mit Marmelade bestreichen und auf jedes ein ausgestochenes Marzipanteil geben.
 
-- Mit Schokoglasur bestreichen und mit einer Walnusshälfte verzieren. 
+- Mit Schokoglasur bestreichen und mit einer Walnusshälfte verzieren.
+
+
+
+* Pfitzauf
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/414401131482371/Pfitzauf.html
+:servings: 12
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+*** Ingredients
+
+
+- 250 g Mehl
+- 250 ml Milch
+- 4 Ei(er)
+- 1 P ise( ) Salz
+- Fett für die Form
+- ev l. Zucker
+- ev l. Sauce (Vanille)
+
+
+*** Directions
+
+1. Die Angaben im Rezept reichen für zwei Pfitzaufformen à 6 Vertiefungen, also 12 Stück.
+2. Mehl, Eier, Milch und Salz zu einem flüssigen Teig verrühren. Die Pfitzaufformen (oder, wenn
+   keine vorhanden, Tassen oder kleine Schälchen) einfetten. Den Teig gleichmäßig in den
+   Vertiefungen verteilen. Ca. 30 Minuten bei 200 Grad im vor geheizten Ofen backen, dann bei
+   geringer Hitze nochmals 10-20 Minuten, bis die Pfitzauf goldbraun sind (Gasherd Stufe 3-4, dann
+   Stufe 2, aber nur noch 10 Minuten).
+3. Falls die Pfitzauf sich nicht von alleine von der Form lösen, vorsichtig mit einem Messer am Rand
+   entlang fahren. Dann müssten sie sich vollständig aus der Form lösen lassen.
+4. Mit Zucker bestreut oder mit Vanillesoße noch warm essen. Natürlich schmeckt der Pfitzauf auch
+   mit Obstkompott.
+5. Diese Variante wird als "feine Art" bezeichnet, neben der "deftigen Art", bei der auch Fett und
+   Zucker in den Teig kommen.
+
+
+* Mürbteig
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/509051146386295/Muerbteig.html
+:servings: 1
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+**** Ingredients
+
+- 300 g Mehl
+- 200 g Butter, kalte
+- 100 g Puderzucker
+- 2 Eigelb
+- Salz
+- Vanillezucker
+- Zitrone(n) - Schale
+
+
+**** Directions
+
+1. Alle Zutaten rasch zu einem Teig kneten. In eine Klarsichtfolie eingewickelt mindestens eine
+   halbe Stunde im Kühlschrank rasten lassen.
+2. Allgemeines zum Mürbteig: Der Mürbteig wird wegen seiner Zutatenbemessung auch
+   Eins-Zwei-Drei-Teig genannt (1 Teil Zucker, 2 Teile Butter, 3 Teile Mehl). Er ist ein
+   fettreicher, mürber Teig der vielseitig z. B. für Kekse, Teegebäck, Tortenböden usw. verwendet
+   wird. Durch Beigabe von geschälten Mandeln (= weißer Linzerteig), ungeschälten Mandeln (= brauner
+   Linzerteig) oder aufgelöste Tunkmasse (Kochschokolade) kann der Teig geschmacklich variiert
+   werden. Das Wichtigste bei der Herstellung ist, das möglichst rasche Zusammenkneten. da durch zu
+   langes Bearbeiten die Butter im Teig zu weich wird und der Teig die Bindung verlieren würde. Der
+   Fachmann spricht von "brandig" werden. Sollte er trotzdem brandig werden, kann man mit etwas
+   Milch den Teig wieder binden. Durch Zugabe von Eidotter wird der Teig nicht nur geschmacklich
+   verbessert, sondern er erhält auch eine bessere Bindung. Nach einer Rastzeit von mindestens einer
+   halben Stunde im Kühlschrank wird der Mürbteig auf ca. 2 cm ausgerollt und durch ausstechen oder
+   schneiden in die gewünschte Form gebracht. Größere Flächen von Mürbteig werden in regelmäßigen
+   Abstanden mit einer Gabel gestupft (eingestochen) um Blasenbildung zu vermeiden. Mürbteig sollte
+   ohne starke Farbe zu nehmen, da er sonst bitter schmeckt, gebacken werden.
+
+* Schneeflöckchen
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/794311183012481/Schneefloeckchen.html
+:servings: 1
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+** Ingredients
+
+- 250 g Butter
+- 100 g Puderzucker
+- 1 Vanilleschote(n), das Mark davon
+- 250 g Speisestärke (Mondamin)
+- 100 g Mehl
+
+
+** Directions
+
+1. Die Zutaten in eine Schüssel geben und zu einem geschmeidigen Teig kneten. Aus diesem Teig Rollen
+   formen, gleichmäßige Stücke abschneiden und diese zu Kugeln formen. Die Kugeln auf ein
+   ungefettetes Blech setzten und mit einer bemehlten Gabel breitdrücken.
+2. Im vorgeheizten Backofen bei 200°C ca. 10 - 12 Min. backen.
+3. Die Plätzchen vorsichtig vom Blech heben.
+
+
+* Dampfnudeln
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/163561071239733/Dampfnudeln.html
+:servings: 6
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+** Ingredients
+
+- 300 ml Milch
+- 25 g Butter
+- 500 g Mehl
+- 1 Pck. Hefe (Trockenhefe)
+- 2 EL Zucker
+- 1 Ei(er)
+- 1 L Zitronenabrieb
+- 1 P ise( ) Salz
+
+
+
+
+** Zubereitung
+
+In einem Topf 300 ml Milch erwärmen. 25 g Butter darin zerlassen. In einer Schüssel 500 g Mehl mit der Trockenhefe und 2 EL Zucker mischen. Zusammen mit der lauwarmen Milch, dem Ei, 1 TL Zitronenschale, abgerieben und 1 Prise Salz mit dem Knethaken des Rührgerätes 5 Min. gut durchkneten. Den Teig an einem warmen, zugluftgeschützten Ort zugedeckt ca. 1 Std. gehen lassen, bis sich sein Volumen verdoppelt hat.
+
+Nochmals durchkneten und daraus 12 kleine Kugeln formen.
+
+In einem gut schließenden Topf (Durchmesser ca. 25 cm) 50 g Butter heiß werden lassen. 100 g Zucker zufügen und goldbraun karamellisieren lassen. 250 ml Milch einrühren und das Karamell darin auflösen. Die Dampfnudeln nebeneinander in den Topf setzen. Zugedeckt bei mittlerer bis starker Wärmezufuhr langsam zum Sieden bringen. Die Dampfnudeln bei geringer Wärmezufuhr ca. 30 Min. garen. Dabei den Deckel fest geschlossen lassen.
+
+Die Dampfnudeln vom Topfboden lösen und auf Tellern anrichten. Vanillesauce dazu schmeckt superlecker!
+
+* Arabische Kichererbsen-Spinat Suppe
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/176301077099240/Arabische-Kichererbsen-Spinat-Suppe.html
+:servings: 4
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+** Ingredients
+
+- 1 g oße Zwiebel(n)
+- 2 Zehe/  Knoblauch
+- 1 L Kreuzkümmel
+- 1 L Kurkuma
+- 1 L Paprikapulver
+- ½ L Zimt
+- 2 Dose/  Kichererbsen à 425 g
+- 1 Dose/  Kidneybohnen
+- ½ asse/  Linsen, rote
+- 1 ¼ Li e  Gemüsebrühe, wahlweise auch Hühnerbrühe
+- ¼ asse/  Zitronensaft
+- e was Minze, frische (kann auch getrocknet sein)
+- 1 Bu d Spinat, (ich nehm immer eine Packung TK Spinat)
+- Olivenöl
+
+
+** Directions
+
+Das Öl in einem Topf erhitzen. Gewürfelte Zwiebeln und gepressten Knoblauch dazugeben und dünsten, bis die Zwiebeln weich sind. Mit der Brühe auffüllen, Kichererbsen, Kidneybohnen, Linsen, Zitronensaft und gehackte Minze dazugeben. Zugedeckt etwa 20 Minuten kochen, bis die Linsen zart sind.
+
+Tipp: Wer es nicht so suppig mag, kann es auch offen köcheln lassen, dann ist das Ergebnis mehr wie ein Eintopf.
+
+Spinat zugeben und unbedeckt so lange simmern lassen, bis der Spinat zusammengefallen ist. Zwischendurch mit Salz abschmecken.
+
+Die Suppe schmeckt auch am nächsten Tag noch sehr gut, wenn alles schön durchgezogen ist. Sie schmeckt am besten mit frischem Fladenbrot oder arabischem Brot.

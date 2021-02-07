@@ -81,7 +81,7 @@
 (setq-default package-user-dir (concat user-emacs-directory "elpa"))
 
 ;; Add marmalade to package repos
-(add-to-list 'package-archives marmalade)
+;; (add-to-list 'package-archives marmalade)
 (add-to-list 'package-archives melpa t)
 (add-to-list 'package-archives org t)
 
