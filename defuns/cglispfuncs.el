@@ -333,7 +333,7 @@ Directory defaults to the value of `my-archive-dir'."
 (defun pull-google-cal()
  "update the google calendar ChristianGeng from google using script"
  (interactive)
- (shell-command "source cglib; bash getgooglecal.sh &>/dev/null"))
+ (shell-command "source ~/.shell_scripts; bash getgooglecal.sh &>/dev/null"))
 
 
 ;; shamelessly adopted from here
