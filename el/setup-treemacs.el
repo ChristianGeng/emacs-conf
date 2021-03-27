@@ -30,10 +30,55 @@
 ;;; https://raw.githubusercontent.com/torbenwilkening/dotfiles/master/emacs.d/init.el
 
 
+;; (setq treemacs-git-mode nil)
+
+;; (treemacs-git-mode 'simple)
+;; Meine config ist stark von hier beeinflusst:
+;; https://github.com/cedarbaum/.emacs.d
+;; diese ist aber auch gut:
+;; https://huadeyu.tech/tools/emacs-setup-notes.html#orga1adbf9
+;; 
 ;;; Code:
 
 ;;; (setq all-the-icons-scale-factor 1.0))
 (setq doom-variable-pitch-font (font-spec :family "Noto Sans" :size 10))
+
+
+(use-package treemacs
+  :demand t
+  :config
+  (treemacs-git-mode 'deferred)
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-fringe-indicator-mode t)
+  :bind
+  (:map global-map
+        ("C-c t" . treemacs)
+        ("C-x t 0"   . treemacs-select-window)
+        ("C-x t 1"   . treemacs-delete-other-windows)
+        ("C-x t t"   . treemacs)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag)
+        )
+  )
+
+(use-package treemacs-evil
+  :after (treemacs evil))
+
+(use-package treemacs-projectile
+  :after (treemacs projectile))
+
+(use-package treemacs-icons-dired
+  :after (treemacs dired)
+  :config (treemacs-icons-dired-mode))
+
+(use-package treemacs-magit
+  :after (treemacs magit))
+
+(use-package treemacs-all-the-icons
+  :after (treemacs all-the-icons))
+
 
 ;;(treemacs-git-mode 'deferred)
 

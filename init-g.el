@@ -330,8 +330,10 @@
 
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
+(require 'setup-rtags)
 (require 'setup-c++)
-
+(require 'setup-treemacs)
+(require 'setup-angular)
 
 (package-initialize)
 
