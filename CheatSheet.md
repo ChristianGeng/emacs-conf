@@ -64,6 +64,12 @@ Invoke HideShow mode with M-x hs-minor-mode.
 weiterer Link (dwim do what I mean):
 https://stackoverflow.com/questions/2399612/why-is-there-no-code-folding-in-emacs
 
+## shell interaction 
+
+Clear the shell output when run full: 
+
+    M-x comint-clear-buffer
+
 ## Org-Mode
 
 ### Clocking
@@ -140,6 +146,9 @@ D to delete them.
 * wdired-finish-edit
 
 # Edit multiple files / Refactoring
+
+
+##  Using grep 
 https://emacs.stackexchange.com/questions/7595/how-do-i-refactor-across-a-project-in-emacs-change-method-name-everywhere
 
 * The approach using [helm-ag](https://github.com/syohex/emacs-helm-ag) requires the silver searcher. helm-swoop will also come in handy
@@ -150,6 +159,23 @@ https://emacs.stackexchange.com/questions/7595/how-do-i-refactor-across-a-projec
    2. *M-x wgrep-change-to-wgrep-mode*. This buffer is now editable. Any changes you make here will be reflected in the files themselves.
    3. Run a replace-regexp or a query-replace-regexp in this buffer, to do the refactoring.
    4. Finish your edits with M-x wgrep-save-all-buffers and M-x wgrep-finish-edit.
+
+## Using helm grep projectile, shamelessly from [here](https://tech.toryanderson.com/posts/helm-grep-search-replace/)
+
+
+With this you can readily search an entire project directory for some text, and then make whole-scale changes to any or all files containing that text. 
+I assume you already have helm-projectile installed and you use it; if not, you’re missing out!
+
+    First, install wgrep and helm-wgrep, for which I use use-package and my emacs.el init file:
+
+(use-package wgrep
+  :ensure t
+  :config (use-package wgrep-helm :ensure t))
+
+    Then, execute helm-projectile-grep for the text you desire.
+    Use C-x C-s to make permanent your search results to a buffer
+    Use C-c C-p within that result buffer to execute wgrep-change-to-wgrep-mode and now you can make edits to any lines you please (including regular emacs search-and-replace commands)
+    Use C-c C-c to save you changes, which will be promulgated to all files you’ve chosen to edit
 
 # [Recording and Persisting macros](https://emacs.stackexchange.com/questions/70/how-to-save-a-keyboard-macro-as-a-lisp-function)
 1. M-x start-kbd-macro
