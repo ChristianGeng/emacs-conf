@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: elisp-package-footer
+# key: elisp
+# --
+
+(provide 'setup-groovy)
+;;; setup-groovy ends here
