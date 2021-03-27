@@ -234,6 +234,8 @@
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
+(global-set-key (kbd "C-M-ü") 'company-complete-common-or-cycle)
+
 ;; (global-set-key (kbd "M-<up>") 'smart-up)
 ;; (global-set-key (kbd "M-<down>") 'smart-down)
 ;; (global-set-key (kbd "M-<left>") 'smart-backward)
