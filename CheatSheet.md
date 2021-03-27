@@ -215,3 +215,8 @@ https://emacs.stackexchange.com/questions/35587/emacs-client-cant-find-server-in
 
 - M-x helm-multi-occur RET M-a RET
 https://emacs.stackexchange.com/questions/737/how-do-i-find-text-across-many-open-buffers
+
+
+# dir local variables
+
+https://endlessparentheses.com/a-quick-guide-to-directory-local-variables.html

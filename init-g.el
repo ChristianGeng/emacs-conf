@@ -49,6 +49,8 @@
 (setq user-emacs-directory "~/.emacs.d/")
 (message user-emacs-directory)
 
+(setq plantuml-jar-path "/home/audeering.local/cgeng/bin/plantuml.jar")
+
 
 ;; add Imenu whenever possible.
 ;; see https://www.emacswiki.org/emacs/ImenuMode for documentation

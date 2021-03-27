@@ -186,7 +186,7 @@
                              ;; (java . t)
                              ;; (latex . t)
                              ;; (awk . t)
-                             ;; (R . t)
+                             (R . t)
                              ;; (sqlite t)
                              ;; (sed . t)
                              )
