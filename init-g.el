@@ -242,7 +242,10 @@
 
 (require 'setup-java)
 ;; (require 'setup-eclim)
-(require 'setup-ensime)
+;; This currently breaks dired icons. Why?
+;; (require 'setup-scala)
+(require 'setup-treemacs)
+(require 'setup-angular)
 (require 'setup-groovy)
 
 ;; (require 'setup-java)
@@ -334,8 +337,7 @@
 (require 'setup-editorconfig)
 (require 'setup-rtags)
 (require 'setup-c++)
-(require 'setup-treemacs)
-(require 'setup-angular)
+
 
 (package-initialize)
 

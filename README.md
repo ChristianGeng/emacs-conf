@@ -178,3 +178,8 @@ d/ -> creates div, /s creates spna
 ## TODOS
 
 Lern use-package and stream the configurations: https://github.com/jwiegley/use-package
+
+
+# LSP und DAP
+
+- https://emacs-lsp.github.io/dap-mode/page/configuration/
