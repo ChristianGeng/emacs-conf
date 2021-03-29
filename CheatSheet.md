@@ -203,7 +203,7 @@ C-q C-j   # insert newline
 *  visual-line-mode
 * https://www.emacswiki.org/emacs/FillParagraph
 
-# Daemon Mode.
+# Daemon Mode
 
 https://medium.com/@lukaszkorecki/emacs-as-tmux-replacement-2acd10d7dfc8
 https://emacs.stackexchange.com/questions/53036/switching-from-tmux-terminal-emacs-to-emacs-only

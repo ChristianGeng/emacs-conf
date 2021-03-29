@@ -337,7 +337,9 @@
 (require 'setup-editorconfig)
 (require 'setup-rtags)
 (require 'setup-c++)
-
+(require 'setup-treemacs)
+(require 'setup-angular)
+(require 'setup-shell-scripting)
 
 (package-initialize)
 
