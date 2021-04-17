@@ -12,8 +12,14 @@
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 (add-hook 'dired-mode-hook 'diff-hl-margin-mode)
 
+;; Note: atool needs to be installed using apt-get install
 (define-key dired-mode-map "z" #'dired-atool-do-unpack)
 (define-key dired-mode-map "Z" #'dired-atool-do-pack)
+;; alternative:
+;; https://stackoverflow.com/questions/1431351/how-do-i-uncompress-unzip-within-emacs
+;; (eval-after-load "dired-aux"
+;;    '(add-to-list 'dired-compress-file-suffixes 
+;;                  '("\\.zip\\'" ".zip" "unzip")))
 
 ;;narrow dired to match filter
 (use-package dired-narrow
