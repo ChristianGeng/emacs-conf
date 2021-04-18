@@ -27,6 +27,12 @@
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
+
+;; Inside `use-package dired`
+;; https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-10.org
+(use-package dired-single)
+
+
 ;; https://www.emacswiki.org/emacs/DiredSorting
 ;; (setq dired-listing-switches "-alh")
 (setq dired-listing-switches "-aBhl  --group-directories-first")
