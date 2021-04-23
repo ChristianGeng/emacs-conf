@@ -75,10 +75,15 @@ from which I take inspiration or shamelessly copy.
 
 Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
 
+
+### Newer Python lsp Links
+
+- https://github.com/rememberYou/.emacs.d/blob/master/config.org#python
+- add python  from  scratch link here
+- https://www.youtube.com/watch?v=74zOY-vgkyw
+
 ###  Autopep
 1. [Anleitung für pep mode hook](https://avilpage.com/2015/05/automatically-pep8-your-python-code.html)
-
-
 
 # Code Navigation
 
@@ -180,7 +185,11 @@ d/ -> creates div, /s creates spna
 
 Lern use-package and stream the configurations: https://github.com/jwiegley/use-package
 
+##  .dir-locals 
 
-# LSP und DAP
+-  https://emacs.stackexchange.com/questions/24907/how-to-use-dir-locals-el-with-projectile
+
+## LSP und DAP
 
 - https://emacs-lsp.github.io/dap-mode/page/configuration/
+

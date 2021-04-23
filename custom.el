@@ -65,7 +65,7 @@
      ("sqlite-voicetest-backend"
       (sql-product
        (quote sqlite))
-      (sql-database "/home/audeering.local/cgeng/code/data_collection/voicetest/voicetest-backend/app/db.sqlite3")))))
+      (sql-database "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/sqlite/db.sqlite3")))))
  '(vc-annotate-background "#002b36")
  '(vc-annotate-color-map
    (list
