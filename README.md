@@ -189,6 +189,19 @@ Lern use-package and stream the configurations: https://github.com/jwiegley/use-
 
 -  https://emacs.stackexchange.com/questions/24907/how-to-use-dir-locals-el-with-projectile
 
+
+- https://emacs.stackexchange.com/questions/61493/confused-regarding-dir-locals-el-and-projectile/61594#61594
+- https://emacs.stackexchange.com/questions/63417/adding-directory-local-variable-for-projectile-test-command-is-not-working
+
+```
+((nil .
+      (
+;;     (compilation-read-command . nil)
+       (projectile-project-test-cmd . "pytest --color=no")
+       )))
+```
+
+
 ## LSP und DAP
 
 - https://emacs-lsp.github.io/dap-mode/page/configuration/
