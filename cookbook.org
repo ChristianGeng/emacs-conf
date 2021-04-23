@@ -400,3 +400,39 @@ Tipp: Wer es nicht so suppig mag, kann es auch offen köcheln lassen, dann ist d
 Spinat zugeben und unbedeckt so lange simmern lassen, bis der Spinat zusammengefallen ist. Zwischendurch mit Salz abschmecken.
 
 Die Suppe schmeckt auch am nächsten Tag noch sehr gut, wenn alles schön durchgezogen ist. Sie schmeckt am besten mit frischem Fladenbrot oder arabischem Brot.
+
+* Semmelknödeln
+:PROPERTIES:
+:source-url: https://www.chefkoch.de/rezepte/544041151849391/Bayrische-Semmelknoedel.html
+:servings: 2
+:prep-time: nil
+:cook-time: nil
+:ready-in:
+:END:
+
+** Ingredients
+
+2 Portionen
+- 6 Brötchen, altbacken
+- 1 Zwiebel(n)
+- 1 Knoblauchzehe(n)
+- 1 Bu d Petersilie, gehackte
+- 10 g Butter
+- ¼ Li e  Milch, lauwarme
+- 3 Ei(er)
+- Salz
+- Pfeffer
+- 1 EL Mehl
+
+
+** Directions
+
+1. Die Zwiebel und die Knoblauchzehe schälen, würfeln und in der heißen Butter anbraten. Gehackte
+   Petersilie unterrühren und zum Abkühlen zur Seite stellen.
+2. Brötchen in dünne Scheiben schneiden und in einer großen Schüssel mit lauwarmer Milch
+   übergießen. Eier, Salz und Pfeffer unterrühren. Zwiebel-Petersilien-Mischung unterarbeiten und
+   zum Schluss mit einem Esslöffel Mehl binden. Ist die Masse zu matschig, kann sie mit
+   Semmelbröseln gefestigt werden.
+3. Mit feuchten Händen mittelgroße Knödel formen und im kochenden Salzwasser ca. 15 Minuten lang
+   mehr ziehen als kochen lassen.
+4. Die Knödel sind gar, wenn sie nach oben steigen.
