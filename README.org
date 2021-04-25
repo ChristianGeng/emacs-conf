@@ -263,11 +263,6 @@ https://github.com/jwiegley/use-package
    :CUSTOM_ID: dir-locals
    :END:
 
--  https://emacs.stackexchange.com/questions/24907/how-to-use-dir-locals-el-with-projectile
-
--  https://emacs.stackexchange.com/questions/61493/confused-regarding-dir-locals-el-and-projectile/61594#61594
--  https://emacs.stackexchange.com/questions/63417/adding-directory-local-variable-for-projectile-test-command-is-not-working
-
 #+BEGIN_EXAMPLE
     ((nil .
           (
@@ -275,6 +270,16 @@ https://github.com/jwiegley/use-package
            (projectile-project-test-cmd . "pytest --color=no")
            )))
 #+END_EXAMPLE
+
+
+** Links
+
+- https://emacs.stackexchange.com/questions/24907/how-to-use-dir-locals-el-with-projectile
+- https://emacs.stackexchange.com/questions/13080/reloading-directory-local-variables
+- https://emacs.stackexchange.com/questions/21955/calling-functions-in-dir-locals-in-emacs - cmake beispiele
+- https://emacs.stackexchange.com/questions/61493/confused-regarding-dir-locals-el-and-projectile/61594#61594
+- https://emacs.stackexchange.com/questions/63417/adding-directory-local-variable-for-projectile-test-command-is-not-working
+
 
 ** LSP und DAP
    :PROPERTIES:
