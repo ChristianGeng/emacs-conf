@@ -126,7 +126,7 @@
 ;; Setup extensions
  (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-(eval-after-load 'dired '(require 'setup-python))
+;; (eval-after-load 'dired '(require 'setup-python))
 
 (require 'setup-dired)
 (require 'setup-python)
