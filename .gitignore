@@ -29,3 +29,6 @@ url/
 srecode-map.el
 # abbrevs
 abbrev_defs
+/.dap-breakpoints
+/cookbook.pdf
+/cookbook.tex
