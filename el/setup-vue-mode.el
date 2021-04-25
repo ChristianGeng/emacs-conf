@@ -21,9 +21,9 @@
   :commands lsp)
 
 ;; for completions
-(use-package company-lsp
-  :after lsp-mode
-  :config (push 'company-lsp company-backends))
+;; (use-package company-lsp
+;;   :after lsp-mode
+;;   :config (push 'company-lsp company-backends))
 
 (use-package vue-mode
   :mode "\\.vue\\'"
