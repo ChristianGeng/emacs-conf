@@ -128,6 +128,10 @@
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
 ;; (eval-after-load 'dired '(require 'setup-python))
 
+;; Setup lsp mode prior to setup-java
+;; setup for lsp and dap
+;;(require 'setup-auto-complete)
+(require 'setup-lsp)
 (require 'setup-dired)
 (require 'setup-python)
 (require 'setup-projectile)
@@ -247,8 +251,6 @@
 (require 'setup-treemacs)
 (require 'setup-angular)
 (require 'setup-groovy)
-
-;; (require 'setup-java)
 ;; (require 'setup-eclim)
 
 
@@ -324,8 +326,6 @@
 (require 'setup-json-mode)
 (require 'setup-magit)
 ;; (require 'setup-tags)
-
-(require 'setup-auto-complete)
 
 (require 'setup-flycheck-mode)
 ;; company mode autocompletion
