@@ -281,4 +281,10 @@ https://github.com/jwiegley/use-package
    :CUSTOM_ID: lsp-und-dap
    :END:
 
+*** Emacs from scratch Video https://www.youtube.com/watch?v=E-NAM9U5JYE
+
+- https://emacs-lsp.github.io/lsp-mode/page/languages/
+
+
+*** Links
 -  https://emacs-lsp.github.io/dap-mode/page/configuration/
