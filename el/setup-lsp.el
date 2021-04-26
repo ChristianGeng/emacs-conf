@@ -143,6 +143,7 @@
 (setq lsp-enable-links nil)
 
 
+
 ;; TypeScript
 ;;
 ;; This is a basic configuration for the TypeScript language so that .ts files activate
@@ -161,7 +162,40 @@
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq typescript-indent-level 2))
+  (setq typescript-indent-level 2)
+  )
+
+
+;; dap mode
+;; emacs from scratch video https://www.youtube.com/watch?v=0bilcQVSlbM
+;; documentation:https://emacs-lsp.github.io/dap-mode/page/configuration/
+;; configuration files for the video
+;; https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-IDE-01.org
+;; https://github.com/daviwil/dotfiles/blob/master/Emacs.org
+;; Video uses straight for package management
+;;   :straight t
+;; https://github.com/daviwil/dotfiles/blob/master/Emacs.org#straightel
+;;
+;; Launch Debugger:
+;; M-x dap-debug
+;; Toggle breakpoint
+;; dap-breakpoint-toggle
+;; Run last configuratuib
+;; sudo lsof -i :3001
+;; sudo kill -9 27036q
+
+
+(use-package dap-mode
+  :custom
+  (lsp-enable-dap-auto-configure nil)
+  :config
+  (dap-ui-mode 1)
+  (dap-tooltip-mode 1)
+  (require 'dap-node)
+  (dap-node-setup))  ;; dap-node-setup setups the debug adapter
+
+
+
 
 ;;; setup-lsp.el ends here
 
