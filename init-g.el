@@ -27,7 +27,8 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-(package-initialize)
+;; obsolete in emacs27
+;; (package-initialize)
 ;; Setup packages
 
 ;; Switch between windows with Shift+{left,up,down,right}
@@ -341,7 +342,8 @@
 (require 'setup-angular)
 (require 'setup-shell-scripting)
 
-(package-initialize)
+;; obsolete in emacs27
+;; (package-initialize)
 
 (put 'erase-buffer 'disabled nil)
 
