@@ -90,7 +90,7 @@
   :init
   (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   :config
-  ;; (lsp-enable-which-key-integration t)  -package missing
+  (lsp-enable-which-key-integration t)
   )
 
 
@@ -183,10 +183,68 @@
 ;; Run last configuratuib
 ;; sudo lsof -i :3001
 ;; sudo kill -9 27036q
+;; sudo lsof -i :3000 | grep ^node | awk -F " " '{print $2}' | xargs kill -9
+;; better: dap-disconnct -> stop debugger
+;; dap-debug-recent
+
+
+;; In the buffer list: complete "node" then there are "Node::run-out" buffers
+;; go to dap-ui-sessions, then Shift-D should delete a session
+;;
+;; dap debug templates
+;; dap-debug-edit-template
+;; das ist das Standardtemplate:
+;; (dap-register-debug-template
+;;   "Node::Run"   -> Template Name
+;;   (list :type "node" -> this is for the node js debugger
+;;         :cwd nil
+;;         :request "launch"
+;;         :program nil  -> what program to run
+;;         :name "Node::Run"))
+;;
+;; How to create a configuration yourself:
+;; C-x e is not the best way to go
+;; betters: Create a file debug.el in the directory
+;; 
+;; This is the template in the video:
+;; https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-IDE-01.org
+;; the variables here have to be read from vs code!
+;; e.g. in the case here: https://code.visualstudio.com/docs/nodejs/nodejs-debugging
+;; (dap-register-debug-template
+;;   "Debug Server"
+;;   (list :type "node"
+;;         :request "launch"
+;;         :program "${workspaceFolder}/src/server/index.ts"
+;;         :outFiles ["${workspaceFolder}/public/src/server/**/*.js"]
+;;         :name "Debug Server"))
+;; 
+;; npm run build
+;; = tsc -p .
+;; dap-breakpoint-log-message - ohne breakpoint: Dann Expression angeben
+;; dap-breakpoint-condition I === 5
+;; dap-breakpoint-hit-condition -> integer eingeben, bei 5 stoppt er beim 5.Mal
+;; kann sein dass das nicht immer geht!
+;;
+;; Hydra:
+;; dap-hydra
+;; dap-ui-expressions -> watch expressions
+;;
+;; repl
+;;
+;; dap-ui-repl
+;;
+;; tooltips
+;;
+;; dap-tooltip-at-point
+;;
+;; Configure panels by default
+;; dap-auto.configure-fatures -> '(sessions locals tooltip)
+;; sessions locals breakpoints expression controls tooltip
 
 
 (use-package dap-mode
   :custom
+  ;; (dap-auto-configure-features '(sessions locals tooltip)) -> alternativ
   (lsp-enable-dap-auto-configure nil)
   :config
   (dap-ui-mode 1)
