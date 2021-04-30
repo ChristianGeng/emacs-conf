@@ -123,6 +123,10 @@
 ;;   (message "Went outside but not ringing the bell.")
 ;;     )
 
+(require 'setup-dired)
+(require 'setup-projectile)
+(require 'setup-wttrin)
+
 
 ;; Setup extensions
  (require 'setup-themes)
@@ -133,12 +137,11 @@
 ;; setup for lsp and dap
 ;;(require 'setup-auto-complete)
 (require 'setup-lsp)
-(require 'setup-dired)
+;; (require 'setup-java)
 ;; (require 'setup-python)
 (require 'setup-python-lsp-emacs-from-scratch)
 ;; (require 'setup-python-lsp-remember-you)
-(require 'setup-projectile)
-(require 'setup-wttrin)
+(require 'setup-dap-mode)
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
@@ -246,8 +249,6 @@
 (require 'setup-ibuffer)
 (require 'setup-doom-modeline)
 
-
-(require 'setup-java)
 ;; (require 'setup-eclim)
 ;; This currently breaks dired icons. Why?
 ;; (require 'setup-scala)

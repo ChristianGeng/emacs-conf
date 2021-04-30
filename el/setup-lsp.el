@@ -82,8 +82,15 @@
 ;; setup hook: top line breadcrumbs
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
+  (lsp-headerline-breadcrumb-mode)
+  (python-mode . lsp-deferred)
+  )
 
+;; lsp-keymap-prefix prefix does not work in current setup
+;; removed
+;; # Mod4 l : Exec systemctl suspend
+;; (setq lsp-keymap-prefix "C-c l")
+;; so back to default WindowsKey-l
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :hook (lsp-mode . efs/lsp-mode-setup)
@@ -91,6 +98,7 @@
   (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   :config
   (lsp-enable-which-key-integration t)
+  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   )
 
 
@@ -141,7 +149,6 @@
 ;; This fixes a bug:
 ;; Error running timer ‘lsp--on-idle’: (error "The connected server(s) does not support method textDocument/documentLink
 (setq lsp-enable-links nil)
-
 
 
 ;; TypeScript
@@ -240,19 +247,6 @@
 ;; Configure panels by default
 ;; dap-auto.configure-fatures -> '(sessions locals tooltip)
 ;; sessions locals breakpoints expression controls tooltip
-
-
-(use-package dap-mode
-  :custom
-  ;; (dap-auto-configure-features '(sessions locals tooltip)) -> alternativ
-  (lsp-enable-dap-auto-configure nil)
-  :config
-  (dap-ui-mode 1)
-  (dap-tooltip-mode 1)
-  (require 'dap-node)
-  (dap-node-setup))  ;; dap-node-setup setups the debug adapter
-
-
 
 
 ;;; setup-lsp.el ends here
