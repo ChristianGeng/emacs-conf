@@ -61,6 +61,7 @@
 ;;; breakpoint: dap-toogle-breakpoint
 ;;;
 ;;; Debugging Template
+
 ;;; dap-debug-edit-template. Then: What for do you want to add teplate
 ;;; e.g. pytest for buffer
 ;;; Es gibt ein template directory
@@ -73,7 +74,8 @@
 
 ;; M-x flyckeck-list-errors
 
-;; commentary
+;; Problem:
+;; lsp Exception has occured OSError No such device or address /dev/tty
 
 ;;; Code:
 
@@ -92,6 +94,9 @@
   (dap-python-debugger 'debugpy)
   :config
   (require 'dap-python))
+
+(require 'dap-python)
+
 
 (use-package company
   :after lsp-mode
@@ -112,7 +117,7 @@
   :config
   (pyvenv-mode 1))
 
-(provide 'setup-python-lsp)
+(provide 'setup-python-lsp-emacs-from-scratch)
 
 ;;; setup-python-lsp.el ends here
 

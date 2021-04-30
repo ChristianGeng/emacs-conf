@@ -134,7 +134,9 @@
 ;;(require 'setup-auto-complete)
 (require 'setup-lsp)
 (require 'setup-dired)
-(require 'setup-python)
+;; (require 'setup-python)
+(require 'setup-python-lsp-emacs-from-scratch)
+;; (require 'setup-python-lsp-remember-you)
 (require 'setup-projectile)
 (require 'setup-wttrin)
 

@@ -112,10 +112,12 @@ Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
     :CUSTOM_ID: newer-python-lsp-links
     :END:
 
--  https://github.com/rememberYou/.emacs.d/blob/master/config.org#python
--  add python from scratch link here
--  https://www.youtube.com/watch?v=74zOY-vgkyw
--  lsp languages https://emacs-lsp.github.io/lsp-mode/page/languages/
+- https://github.com/rememberYou/.emacs.d/blob/master/config.org#python
+- add python from scratch link here
+- https://www.youtube.com/watch?v=74zOY-vgkyw
+- lsp languages https://emacs-lsp.github.io/lsp-mode/page/languages/
+- https://github.com/seblemaguer/dotfiles -> has one too
+- Medium Post on LSP: https://alpha2phi.medium.com/emacs-lsp-and-dap-7c1786282324
 
 *** Autopep
     :PROPERTIES:
