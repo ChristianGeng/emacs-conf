@@ -75,9 +75,14 @@
 ;;
 ;; evil-nerd commenter might be worth to have a look
 ;;
+;; Reference(s)
+;; C-Example: https://www.reddit.com/r/spacemacs/comments/e7swwd/debugging_with_debug_layer/
+;;
+
+
 ;;; Code:
 
-(message "Hello World!")
+(message "Entering LSP Setup!")
 
 ;; setup hook: top line breadcrumbs
 (defun efs/lsp-mode-setup ()
