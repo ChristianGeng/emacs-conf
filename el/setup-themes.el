@@ -1,7 +1,7 @@
 
-(load-theme 'misterioso)
+(load-theme 'fantom)
 
-(defcustom cycle-themes '(material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic solarized)
+(defcustom cycle-themes '(fantom material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic solarized)
   "List of themes through which one can switch easily by calling
 `cycle-themes' repeatedly. The first element is loaded at startup."
   :type '(repeat symbol))
