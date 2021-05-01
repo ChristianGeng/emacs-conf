@@ -36,6 +36,7 @@
 ;; M-x python-shell-send-defun
 
 ;; pip install --user "python-language-server[all]"
+;; pip install debugpy
 ;; pyls command line must be there
 
 ;; https://emacs-lsp.github.io/lsp-mode/page/languages/
