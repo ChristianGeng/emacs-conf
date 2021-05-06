@@ -140,6 +140,8 @@
 ;; (require 'setup-java)
 ;; (require 'setup-python)
 (require 'setup-python-lsp-emacs-from-scratch)
+(require 'setup-c-lsp-clangd)
+
 ;; (require 'setup-python-lsp-remember-you)
 (require 'setup-dap-mode)
 
