@@ -113,7 +113,7 @@ Code Following
 * lsp-goto-definition
 
 * M-/    complete: das führt dabbrev-expand
-* C-M-i  complete, das führt complete-symbol aus
+* C-M-i  complete, das führt company-complete-symbol aus
 
 
 ## Misc
@@ -197,7 +197,6 @@ In order to use a literal tab or newline in the replacement string of a replace 
 C-q tab   # insert tab
 C-q C-j   # insert newline
 
-# Emails skizzieren:
 
 * cg-remove-newlines-in-region
 *  visual-line-mode

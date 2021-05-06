@@ -1,7 +1,5 @@
-* README
-  :PROPERTIES:
-  :CUSTOM_ID: README
-  :END:
+#+title: README
+
 
 My adapation of https://github.com/chaoflow/.emacs.d
 
@@ -9,39 +7,29 @@ Original README:
 
 Be prepared for rebases.
 
-Better take a look at:
+Better take a look at other sources for configuration files:
 
--  https://github.com/corecode/skel/tree/master/.emacs.d
--  https://github.com/magnars/.emacs.d/
--  https://github.com/cjohansen/.emacs.d
--  https://github.com/technomancy/emacs-starter-kit from which I take
-   inspiration or shamelessly copy.
-
-* Further Links
-  :PROPERTIES:
-  :CUSTOM_ID: further-links
-  :END:
-
+- [[-  https://github.com/redguardtoo/emacs.d/tree/master/lisp][https://github.com/redguardtoo/emacs.d/tree/master/lisp]]
+- https://github.com/corecode/skel/tree/master/.emacs.d
+- https://github.com/magnars/.emacs.d/
+- https://github.com/cjohansen/.emacs.d
+- https://github.com/technomancy/emacs-starter-kit from which I take inspiration or shamelessly copy.
 -  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top][Emacs
    Manual]]
 -  [[https://www.emacswiki.org/emacs/ImenuMode#toc3][imenu and icycles]]
--  [[http://avilpage.com/2015/05/automatically-pep8-your-python-code.html][Emacs
-   Mode Hook for autopep]]
-
+-  [[http://avilpage.com/2015/05/automatically-pep8-your-python-code.html][Emacs Mode Hook for autopep]]
 -  http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org67e2b1b
    -> moved https://github.com/seblemaguer/dotfiles
--  https://github.com/daviwil/emacs-from-scratch - emacs from Scratch
-   Series
+-  https://github.com/daviwil/emacs-from-scratch - emacs from Scratch Series
 -  https://github.com/Schnouki
 -  https://github.com/tmtxt/.emacs.d/tree/master/config
 -  https://www.masteringemacs.org
 -  https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
 -  http://ergoemacs.org/emacs/emacs\_find\_replace.html
 
-** org mode
-   :PROPERTIES:
-   :CUSTOM_ID: org-mode
-   :END:
+* Languages / Modes
+
+** Org mode
 
 -  http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org3c16bce
 -  http://doc.norang.ca/org-mode.html
@@ -50,9 +38,6 @@ Better take a look at:
 -  https://en.wikipedia.org/wiki/Getting\_Things\_Done
 
 *** Capturing
-    :PROPERTIES:
-    :CUSTOM_ID: capturing
-    :END:
 
 -  C-c c - Capturn
 
@@ -75,43 +60,24 @@ Better take a look at:
    :CUSTOM_ID: lisp
    :END:
 
-1. [[https://github.com/hypernumbers/learn_elisp_the_hard_way/tree/master/contents][Learn
-   Emacs Lips the Hard Way]]
-2. [[https://caiorss.github.io/Emacs-Elisp-Programming/Elisp_Programming.html#sec-4-2][Emacs
-   Lisp caiorss]]
-3. [[https://www.cs.utexas.edu/~novak/schemevscl.html][Elisp versus
-   Scheme Lisp keywords]]
+1. [[https://github.com/hypernumbers/learn_elisp_the_hard_way/tree/master/contents][Learn Emacs Lips the Hard Way]]
+2. [[https://caiorss.github.io/Emacs-Elisp-Programming/Elisp_Programming.html#sec-4-2][Emacs Lisp caiorss]]
+3. [[https://www.cs.utexas.edu/~novak/schemevscl.html][Elisp versus Scheme Lisp keywords]]
 4. [[file:Learn%20Elisp%20the%20hard%20way][https://github.com/hypernumbers/learn\_elisp\_the\_hard\_way/tree/master/contents]]
 
-** Helm
-   :PROPERTIES:
-   :CUSTOM_ID: helm
-   :END:
-
-1. [[https://tuhdo.github.io/helm-intro.html][A Package in a league of
-   its own]]
-2. [[https://github.com/emacs-helm/helm/wiki][helm-wiki]]
-3. [[http://thescratchcastle.com/posts/emacs-and-helm.html][bloc post]]
-4. [[file:allows%20to%20edit%20occurrences%20in%20many%20files%20too][helm-swoop]]
-
-** python
+** Python
    :PROPERTIES:
    :CUSTOM_ID: python
    :END:
 
-1. [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][lsp-mode]]
-2. [[https://www.reddit.com/r/emacs/comments/4oyvcn/redbaron_for_emacs_refactor_your_python_method/][red
-   baron]]
-3. [[https://github.com/palantir/python-language-server][python lsp
-   server imple111mentation]]
+- Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
+[[https://avilpage.com/2015/05/automatically-pep8-your-python-code.html][- Anleitung für pep mode hook]]
 
-Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
+*** LSP and Python
 
-*** Newer Python lsp Links
-    :PROPERTIES:
-    :CUSTOM_ID: newer-python-lsp-links
-    :END:
-
+- [[https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/][https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/]]
+- [[https://www.reddit.com/r/emacs/comments/4oyvcn/redbaron_for_emacs_refactor_your_python_method/][ed baron]]
+- [[https://github.com/palantir/python-language-server][Palantir Python lsp server imple111mentation]]
 - https://github.com/rememberYou/.emacs.d/blob/master/config.org#python
 - add python from scratch link here
 - https://www.youtube.com/watch?v=74zOY-vgkyw
@@ -119,40 +85,7 @@ Elpy issues: https://github.com/jorgenschaefer/elpy/issues/842
 - https://github.com/seblemaguer/dotfiles -> has one too
 - Medium Post on LSP: https://alpha2phi.medium.com/emacs-lsp-and-dap-7c1786282324
 
-*** Autopep
-    :PROPERTIES:
-    :CUSTOM_ID: autopep
-    :END:
 
-1. [[https://avilpage.com/2015/05/automatically-pep8-your-python-code.html][Anleitung
-   für pep mode hook]]
-
-* Code Navigation
-  :PROPERTIES:
-  :CUSTOM_ID: code-navigation
-  :END:
-
-** [[https://www.coverfire.com/archives/2004/06/24/emacs-source-code-navigation/][etags
-primer]]
-   :PROPERTIES:
-   :CUSTOM_ID: etags-primer
-   :END:
-
--  =find . -name '*.[ch]' | xargs etags=
--  M-. (that's Meta-Period) and type the name of the function
--  M-* to navigate to last point
-
--  Use helm to navigate to tags: M-x helm-etags-select
-
--  Use projectile-regenerate-tags to generate tags before.
-
-* Fill column indication
-  :PROPERTIES:
-  :CUSTOM_ID: fill-column-indication
-  :END:
-
--  start using fci-mode
--  (setq fci-rule-column 100)
 
 ** Java IDE
    :PROPERTIES:
@@ -163,6 +96,9 @@ http://www.goldsborough.me/emacs,/java/2016/02/24/22-54-16-setting\_up\_emacs\_f
 http://www.skybert.net/emacs/java/
 https://github.com/skybert/my-little-friends/blob/master/emacs/.emacs.d/tkj-java-meghanada.el
 https://github.com/skybert/my-little-friends/blob/master/emacs/.emacs.d/tkj-java-meghanada.el
+
+
+
 
 ** Web Development
    :PROPERTIES:
@@ -224,14 +160,14 @@ templates
 Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 /s creates spna
 
-** Vue Mode
+*** Vue Mode
    :PROPERTIES:
    :CUSTOM_ID: vue-mode
    :END:
 
 -  To be described - Using lsp is quite cool
 
-** Web Development further links:
+*** Web Development further links:
    :PROPERTIES:
    :CUSTOM_ID: web-development-further-links
    :END:
@@ -240,25 +176,54 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 -  https://blog.onionstudio.com.tw/emacs-%E5%AF%AB-vue-js/
 -  https://emacs-lsp.github.io/lsp-ui/
 
-* Misc
+
+
+
+
+* Other Topics
+
+** Helm
+   :PROPERTIES:
+   :CUSTOM_ID: helm
+   :END:
+
+1. [[https://tuhdo.github.io/helm-intro.html][A Package in a league of
+   its own]]
+2. [[https://github.com/emacs-helm/helm/wiki][helm-wiki]]
+3. [[http://thescratchcastle.com/posts/emacs-and-helm.html][bloc post]]
+4. [[file:allows%20to%20edit%20occurrences%20in%20many%20files%20too][helm-swoop]]
+
+** LSP und DAP
+   :PROPERTIES:
+   :CUSTOM_ID: lsp-und-dap
+   :END:
+
+- Emacs LSP Main Page https://emacs-lsp.github.io/lsp-mode/
+- Emacs from scratch Video https://www.youtube.com/watch?v=E-NAM9U5JYE
+- https://emacs-lsp.github.io/lsp-mode/page/languages/
+
+- Dap https://emacs-lsp.github.io/dap-mode/page/configuration/
+
+
+** Fill column indication
   :PROPERTIES:
-  :CUSTOM_ID: misc
+  :CUSTOM_ID: fill-column-indication
   :END:
 
-** Misc Links
-   :PROPERTIES:
-   :CUSTOM_ID: misc-links
-   :END:
+-  start using fci-mode
+-  (setq fci-rule-column 100)
+** Code Navigation usig Etags
 
--  https://github.com/redguardtoo/emacs.d/tree/master/lisp
+** Etags Navigation
 
-** TODOS
-   :PROPERTIES:
-   :CUSTOM_ID: todos
-   :END:
+[[https://www.coverfire.com/archives/2004/06/24/emacs-source-code-navigation/][etags primer]]
 
-Lern use-package and stream the configurations:
-https://github.com/jwiegley/use-package
+-  =find . -name '*.[ch]' | xargs etags=
+-  M-. (that's Meta-Period) and type the name of the function
+-  M-* to navigate to last point
+-  Use helm to navigate to tags: M-x helm-etags-select
+-  Use projectile-regenerate-tags to generate tags before.
+
 
 ** .dir-locals
    :PROPERTIES:
@@ -274,7 +239,7 @@ https://github.com/jwiegley/use-package
 #+END_EXAMPLE
 
 
-** Links
+*** Links
 
 - https://emacs.stackexchange.com/questions/24907/how-to-use-dir-locals-el-with-projectile
 - https://emacs.stackexchange.com/questions/13080/reloading-directory-local-variables
@@ -283,15 +248,4 @@ https://github.com/jwiegley/use-package
 - https://emacs.stackexchange.com/questions/63417/adding-directory-local-variable-for-projectile-test-command-is-not-working
 
 
-** LSP und DAP
-   :PROPERTIES:
-   :CUSTOM_ID: lsp-und-dap
-   :END:
-
-*** Emacs from scratch Video https://www.youtube.com/watch?v=E-NAM9U5JYE
-
-- https://emacs-lsp.github.io/lsp-mode/page/languages/
-
-
-*** Links
--  https://emacs-lsp.github.io/dap-mode/page/configuration/
+** Lern use-package and stream the configurations: https://github.com/jwiegley/use-package
