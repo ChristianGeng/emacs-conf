@@ -730,6 +730,52 @@
 
    ))
 
+
+;; https://github.com/Chobbes/org-chef
+(use-package org-chef
+  :ensure t)
+
+(message (concat (number-to-string(length org-capture-templates)) " org capture templates before putting on top" ))
+
+(print org-capture-templates)
+
+(add-to-list 'org-capture-templates
+     '("or" "RECIPE    (r) Cooking Recipe (Manual Entry)" entry
+      (file "cookbook.org")
+      "* %^{Recipe title: }
+      :PROPERTIES:
+:source-url:
+:servings:
+:prep-time:
+:cook-time:
+:ready-in:
+ :END:
+** Ingredienats:
+ %?
+** Directions:
+
+" :empty-lines 1) t
+     )
+
+(message (concat (number-to-string(length org-capture-templates)) " org capture templates after putting on top" ))
+
+;; (add-to-list 'org-capture-templates
+;;      '("oR" "RECIPE    (R) Cooking Recipe (from URL)"
+;;       (file "cookbook.org")
+;;       "%(org-chef-get-recipe-from-url)") t
+;;      )
+
+
+;; '(("c" "Cookbook" entry (file "~/org/cookbook.org")
+;;          "%(org-chef-get-recipe-from-url)"
+;;          :empty-lines 1)
+
+;; (org-chef-get-recipe-from-url "https://www.chefkoch.de/rezepte/18711004787789/Risotto-mit-gruenem-Spargel-und-Parmesan.html")
+
+(message (concat (number-to-string(length org-capture-templates)) " org capture templates after putting on top" ))
+
+
+
 ;; Add ID automatically on capture
 (add-hook 'org-capture-prepare-finalize-hook 'org-id-store-link)
 
