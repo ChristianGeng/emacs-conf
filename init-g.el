@@ -36,6 +36,18 @@
 (add-to-list 'load-path "~/.emacs.d/el")
 (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
 
+(setq user-emacs-directory "~/.emacs.d/")
+(message user-emacs-directory)
+
+;; Functions (load all files in defuns-dir)
+(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+(dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
+  (when (file-regular-p file)
+    (load (file-name-sans-extension file))))
+;; (load-library "cglispfuncs")
+
+
+
 ;;  (require 'title-time)
 
 ;; (require 'setup-daimler-proxy)
@@ -47,8 +59,6 @@
 ;; emacs -q -l ~/path/to/other/.emacs.d/init.el
 ;; (setq user-emacs-directory
 ;;      (file-name-directory (or load-file-name (buffer-file-name))))
-(setq user-emacs-directory "~/.emacs.d/")
-(message user-emacs-directory)
 
 (setq plantuml-jar-path "/home/audeering.local/cgeng/bin/plantuml.jar")
 
@@ -188,13 +198,6 @@
 
 ;; Map files to modes
 (require 'mode-mappings)
-
-;; Functions (load all files in defuns-dir)
-(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-(dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
-  (when (file-regular-p file)
-    (load (file-name-sans-extension file))))
-;; (load-library "cglispfuncs")
 
 
 ;; (require 'expand-region)

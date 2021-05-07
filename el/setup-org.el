@@ -8,38 +8,24 @@
 ;;; https://orgmode.org/manual/Agenda-commands.html
 ;;; Code:
 
-:; (require 'ox-taskjuggler)
+;; (require 'ox-taskjuggler)
 ;; (require 'org-tempo)
 ;; (require 'org-tempo)
 ;; (require 'ox-rst)
 ;; (setq org-element-use-cache nil)
 
-
-;;(setq org-directory "/D/myfiles/org/")
-(setq org-directory "~/org/")
-(setq org-default-notes-file (concat org-directory "/ref.org"))
-;; Targets that contribute to the agenda view
-;; (setq org-agenda-files (quote org-directory))
-;; '(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
-
-;; Abbreviations
-(add-to-list 'org-link-abbrev-alist '("local"   ."~/"))
-(add-to-list 'org-link-abbrev-alist '("val"     . "TBA"))
-
-
-;; (setq org-default-notes-file (concat org-directory "/ref.org"))
-;;'(org-agenda-files (quote ("~/.emacs.d/agenda.org")))
-;; Den Standard File mit den Bookmarks immer aufmachen
-;; (find-file (concat (org-directory "/ref.org")))
+;; start debugging
+;; (setq debug-on-error t)
 
 ;; Org-mode
+(load "org-linux")
 (load "org-general")
 (load "org-todo-states")
 (load "org-capture-templates")
 (load "org-agenda-custom")
 (load "org-abbreviations")
 (load "org-hyperlinks")
-;;(load "org-linux")
+
 
 ;; Default programs
 ;; https://dontomp.wordpress.com/2015/01/31/in-org-mode-have-the-default-program-openoffice-word-or-whatever-open-docx-file-links/
@@ -61,7 +47,7 @@
 ;; (require 'org)
 
 
-(defconst org-linewidth 100)
+(defconst org-linewidth 120)
 (add-hook 'org-mode-hook 'auto-fill-mode)
 (add-hook 'org-mode-hook
           (lambda ()
@@ -111,9 +97,7 @@
 
 ;; )
 
-
-
-
+;; https://github.com/Chobbes/org-chef
 (use-package org-chef
   :ensure t)
 
