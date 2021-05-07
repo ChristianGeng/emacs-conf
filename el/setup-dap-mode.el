@@ -64,7 +64,7 @@
 ;; How to create a configuration yourself:
 ;; C-x e is not the best way to go
 ;; betters: Create a file debug.el in the directory
-;; 
+;;
 ;; This is the template in the video:
 ;; https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-IDE-01.org
 ;; the variables here have to be read from vs code!
@@ -76,7 +76,7 @@
 ;;         :program "${workspaceFolder}/src/server/index.ts"
 ;;         :outFiles ["${workspaceFolder}/public/src/server/**/*.js"]
 ;;         :name "Debug Server"))
-;; 
+;;
 ;; npm run build
 ;; = tsc -p .
 ;; dap-breakpoint-log-message - ohne breakpoint: Dann Expression angeben
@@ -112,7 +112,7 @@
 
 (use-package dap-mode
   :custom
-  ;; (dap-auto-configure-features '(sessions locals tooltip)) -> alternativ
+  (dap-auto-configure-features '(sessions locals tooltip breakpoints expression controls)) ;; -> alternativ
   ;; (lsp-enable-dap-auto-configure nil)  ->  do not start any of locals breakpoints expression controls tooltip by default
   :commands dap-debug
   :config
@@ -127,4 +127,3 @@
 
 (provide 'setup-dap-mode)
 ;;; setup-dap-mode.el ends here
-

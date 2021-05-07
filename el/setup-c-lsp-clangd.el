@@ -31,18 +31,31 @@
 ;; sudo apt-get install clangd-10
 ;; https://clangd.llvm.org/installation.html
 ;; sudo apt-get install bear
+;;
+;; C++  in  spacemacs probably   also  helpful:
+;; https://skebanga.github.io/cpp-dev-in-spacemacs/
+;;
+;; setup tools for dap-cpp:
+;; dap-cpptools-setup /home/audeering.local/cgeng/.emacs.d/.extension/vscode/cpptools
+;; dap-gdb-lldb-setup -> /home/audeering.local/cgeng/.emacs.d/.extension/vscode/webfreak.debug
+;;
+;; 
+
 
 ;; commentary
 
 ;;; Code:
 
-(message "Setting up clag lsp")
+(message "Setting up clang lsp")
 
 ;; (add-hook 'c-mode-hook 'lsp)
 ;; (add-hook 'c++-mode-hook 'lsp)
 
 
-(add-hook 'c-mode-hook 'lsp)
+(add-hook 'c-mode-hook 'lsp-deferred)
+(add-hook 'c++-mode-hook 'lsp-deferred)
+
+(require 'dap-gdb-lldb)
 
 ;; (use-package c-mode
 ;;   :ensure t

@@ -78,6 +78,9 @@
 ;; Problem:
 ;; lsp Exception has occured OSError No such device or address /dev/tty
 
+;; vscode extensions installed by emacs functions end up in
+;; /home/audeering.local/cgeng/.emacs.d/.extension/vscode/
+
 ;;; Code:
 
 (message "setup python lsp this time!")
