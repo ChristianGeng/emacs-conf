@@ -13,9 +13,12 @@
 (custom-set-variables
  '(org-directory "~/Dropbox/org")
  '(org-default-notes-file (joindirs org-directory "ref.org"))
- '(org-agenda-files (list org-directory)))
+ '(org-agenda-files (list org-directory))
+ )
 
-(find-file org-default-notes-file)
+;;
+;;  '(org-agenda-files (joindirs org-directory "agenda.org"))
+;; (find-file org-default-notes-file)
 
 (add-to-list 'org-link-abbrev-alist '("local"   ."~/"))
 (add-to-list 'org-link-abbrev-alist '("val"     . "TBA"))

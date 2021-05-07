@@ -26,6 +26,9 @@
 (load "org-abbreviations")
 (load "org-hyperlinks")
 
+;; fin: fin.org und fin tag
+;; Purchase: peo.org
+
 
 ;; Default programs
 ;; https://dontomp.wordpress.com/2015/01/31/in-org-mode-have-the-default-program-openoffice-word-or-whatever-open-docx-file-links/
@@ -101,6 +104,24 @@
 (use-package org-chef
   :ensure t)
 
+;;_-----------------------------
+;;      ("or" "(r) Cooking Recipe" entry
+;;       (file "cookbook.org")
+;;       "* %^{Recipe title: }
+;;       :PROPERTIES:
+;; :source-url:
+;; :servings:
+;; :prep-time:
+;; :cook-time:
+;; :ready-in:
+;;  :END:
+;; Ingredienats:
+;;  %?
+;; Directions:
+
+;; " :empty-lines 1)
+;; -----------------------
+
 
 ;; org capture templates, I now maintain them through the customization interface
 ;; (setq org-capture-templates
@@ -108,7 +129,27 @@
 ;;          "%(org-chef-get-recipe-from-url)"
 ;;          :empty-lines 1)))
 
+
+;; (setq chef-template
+;; ("c" "Cookbook" entry (file "~/org/cookbook.org")
+;;          "%(org-chef-get-recipe-from-url)"
+;;          :empty-lines 1))
+
+
+
+;; (print chef-template)
+;; (print org-capture-templates)
+;; (add-to-list 'org-capture-templates
+
+;;              )
+
+;; (add-to-list 'load-path "~/.emacs.d/el/desktopaid-1.0.5/")
+
+
+
 ;;
+
+
 ;; (setq org-capture-templates
 ;;       (quote (("t" "todo" entry (file (concat org-directory "/gtd.org"))
 ;;                "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
