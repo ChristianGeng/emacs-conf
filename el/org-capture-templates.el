@@ -735,7 +735,7 @@
 (use-package org-chef
   :ensure t)
 
-(message (concat (number-to-string(length org-capture-templates)) " org capture templates before putting on top" ))
+(message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
 
 (print org-capture-templates)
 
@@ -757,22 +757,14 @@
 " :empty-lines 1) t
      )
 
-(message (concat (number-to-string(length org-capture-templates)) " org capture templates after putting on top" ))
 
-;; (add-to-list 'org-capture-templates
-;;      '("oR" "RECIPE    (R) Cooking Recipe (from URL)"
-;;       (file "cookbook.org")
-;;       "%(org-chef-get-recipe-from-url)") t
-;;      )
+(add-to-list 'org-capture-templates
+     '("oR" "RECIPE    (R) Cooking Recipe (from URL)" entry
+      (file "cookbook.org")
+      "%(org-chef-get-recipe-from-url)") t
+     )
 
-
-;; '(("c" "Cookbook" entry (file "~/org/cookbook.org")
-;;          "%(org-chef-get-recipe-from-url)"
-;;          :empty-lines 1)
-
-;; (org-chef-get-recipe-from-url "https://www.chefkoch.de/rezepte/18711004787789/Risotto-mit-gruenem-Spargel-und-Parmesan.html")
-
-(message (concat (number-to-string(length org-capture-templates)) " org capture templates after putting on top" ))
+(message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
 
 
 
