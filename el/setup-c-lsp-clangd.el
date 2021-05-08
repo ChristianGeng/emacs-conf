@@ -26,7 +26,7 @@
 
 ;;; Commentary:
 
-;; 
+;;
 ;; https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
 ;; sudo apt-get install clangd-10
 ;; https://clangd.llvm.org/installation.html
@@ -39,7 +39,7 @@
 ;; dap-cpptools-setup /home/audeering.local/cgeng/.emacs.d/.extension/vscode/cpptools
 ;; dap-gdb-lldb-setup -> /home/audeering.local/cgeng/.emacs.d/.extension/vscode/webfreak.debug
 ;;
-;; 
+;;
 
 
 ;; commentary

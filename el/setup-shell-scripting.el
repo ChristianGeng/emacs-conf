@@ -31,11 +31,9 @@
 ;;; Code:
 
 (add-hook 'Shell-script-mode-hook
-          (lambda ()  (yas-minor-mode 1))
           (paren-activate)
           )
 
 (provide 'setup-shell-scripting)
 
 ;;; setup-shell-scripting.el ends here
-

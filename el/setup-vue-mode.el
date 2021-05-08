@@ -32,14 +32,11 @@
 
 
 (defun local-vue-hook ()
-  (yas-reload-all)
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
   (emmet-mode)
   )
 
 (add-hook 'vue-mode-hook
           (lambda ()
-            ;;            (local-set-key (kbd "C-TAB") 'elpy-company-backend)
             (local-vue-hook)
             ()
             )
@@ -47,12 +44,12 @@
 
 (add-to-list 'auto-mode-alist '("\\.vue\\'" . vue-mode))
 
-;; cant add checker ... 
+;; cant add checker ...
 ;; (add-hook 'vue-mode-hook (flycheck-select-checker 'javascript-eslint))
-;; (setq mmm-vue-html-mode-exit-hook (lambda () 
+;; (setq mmm-vue-html-mode-exit-hook (lambda ()
 ;;                                 (message "Run when leaving vue-html mode")
 ;;                                 (emmet-mode -1)))
-;; (setq mmm-vue-html-mode-enter-hook (lambda () 
+;; (setq mmm-vue-html-mode-enter-hook (lambda ()
 ;;                                 (message "Run when entering vue-html mode")
 ;;                                 (emmet-mode 1)))
 

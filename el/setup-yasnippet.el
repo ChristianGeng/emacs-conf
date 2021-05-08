@@ -1,22 +1,102 @@
 ;; (require 'yasnippet)
 
-
-(message "before yasnippet settup el!")
-
 (use-package yasnippet
   :if (not noninteractive)
   :diminish yas-minor-mode
-  :commands (yas-global-mode yas-minor-mode)
+  :hook ((text-mode
+          ;; prog-mode
+          conf-mode
+          ruby-mode
+          jdee-mode
+          lsp-mode
+          java-mode
+          Shell-script-mode
+          web-mode
+          groovy-mode
+          python-mode
+          vue-html-mode
+          vue-mode
+          snippet-mode) . yas-minor-mode-on)
+  ;; :commands (yas-global-mode yas-minor-mode)
   :config
+  ;; (yas-global-mode)
+  (yas-reload-all)
+  ()
   (progn
     (setq yas-indent-line nil)
-    (setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"
-        ))
-  )
+    ;; (setq yas-snippet-dirs
+    ;;       (list
+    ;;        (joindirs user-emacs-directory "snippets")
+    ;;        (joindirs user-emacs-directory "yasmate" "snippets")))
+    ;; Wrap around region
+    (setq yas-wrap-around-region t)
+    )
+  :bind
+  (:map yas-minor-mode-map
+        ("<tab>" . nil)
+        ("TAB" . nil)
+        )
 )
 
+(defvar yasmate-snippet-root (expand-file-name "snippets/yasmate" user-emacs-directory))
 
+(defun yasmate-snippets-initialize ()
+  (let ((snip-dir  (expand-file-name "yasmate/snippets" user-emacs-directory)))
+    (when (boundp 'yas-snippet-dirs)
+      (add-to-list 'yas-snippet-dirs snip-dir t))
+    (yas-load-directory snip-dir)))
+
+(yasmate-snippets-initialize)
+;; (add-to-list 'yas-snippet-dirs (expand-file-name "yasmate/snippets" user-emacs-directory) t)
+
+(message (concat (number-to-string(length yas-snippet-dirs)) " nsnippet drectories" ))
+(yas-snippet-dirs);;
+(printlist yas-snippet-dirs)
+;; from buster
+;;;###autoload
+;; (defun buster-snippets-initialize ()
+;;   (let ((snip-dir (expand-file-name "snippets" buster-snippets-root)))
+;;     (when (boundp 'yas-snippet-dirs)
+;;       (add-to-list 'yas-snippet-dirs snip-dir t))
+;;     (yas-load-directory snip-dir)))
+
+;; ;;;###autoload
+;; (eval-after-load "yasnippet"
+;;   '(buster-snippets-initialize))
+
+
+;; (append-)
+
+;; (setq yas-snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/yasmate/snippets"))
+;; ;; (yas-global-mode 1)
+
+;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))(provide 'setup-groovy)
+;; ;;; setup-groovy ends here
+
+
+
+
+
+;;(add-to-list (list (yas-snippet-dirs)) "asdas")
+;;(concat 'yas-snippet-dirs '("asdas"))
+
+;; (setq yas-snippet-dirs (append yas-snippet-dirs '("other dir")))
+;; ;;                    '((joindirs user-emacs-directory "yasmate" "snippets"))))
+
+;;
+
+;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
+;; (setq yas-snippets-dirs (list (concat user-emacs-directory "snippets")))
+
+;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
+;; (setq yas-snippetsg-dirs (list (concat user-emacs-directory "snippets")))
+
+
+;; (directory-files (joindirs user-emacs-directory "yasmate" "snippets"))
+
+;; unbind the tab for the snippets
+;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
+;; (define-key yas-minor-mode-map (kbd "TAB") nil)
 
 
 ;; (setq yas-snippet-dirs
@@ -24,67 +104,8 @@
 ;;         "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
 ;;         "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
 ;;         ))
-
-;;(require 'setup-yasnippet)
-(message "AFTER yasnippet settup el!")
-
-
-
+;;
 ;; Python devel und yasnippet: http://longhorizon.org/blog/2013/03/31/improving-python-development-in-emacs-with-yasnippet/
 
-;;(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
-
-;; Use only own snippets, do not use bundled ones
-;;
-(setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
-(setq yas-snippets-dirs (list (concat user-emacs-directory "snippets")))
-
-;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
-;; (setq yas-snippetsg-dirs (list (concat user-emacs-directory "snippets")))
-
-;; (concat user-emacs-directory "yasnippets")
-
-
-;; (setq yas-snippet-dirs (list
-;;                          (concat user-emacs-directory  "elpa/elpy-20161229.1103/snippets/python-mode/")
-;;                          (concat  user-emacs-directory "elpa/yasnippet-20181211.2219/snippets/")
-;;                          ))
-
-;;(yas-reload-all)
-(yas-global-mode 1)
-(setq yas-global-mode 1)
-
-;; Include snippets for Buster.js
-;;(require 'buster-snippets)
-
-;; Jump to end of snippet definition
-;; (define-key yas-keymap (kbd "<return>") 'yas-exit-all-snippets)
-
-;; Inter-field navigation
-;; (defun yas-goto-end-of-active-field ()
-;;   (interactive)
-;;   (let* ((snippet (car (yas-snippets-at-point)))
-;;         (position (yas-field-end (yas-snippet-active-field snippet))))
-;;     (if (= (point) position)
-;;         (move-end-of-line)
-;;       (goto-char position))))
-
-;; (defun yas-goto-start-of-active-field ()
-;;   (interactive)
-;;   (let* ((snippet (car (yas-snippets-at-point)))
-;;         (position (yas-field-start (yas-snippet-active-field snippet))))
-;;     (if (= (point) position)
-;;         (move-beginning-of-line)
-;;       (goto-char position))))
-
-;; (define-key yas-keymap (kbd "C-e") 'yas-goto-end-of-active-field)
-;; (define-key yas-keymap (kbd "C-a") 'yas-goto-start-of-active-field)
-
-;; No dropdowns please, yas
-;;(setq yas-prompt-functions '(yas-ido-prompt yas-completing-prompt))
-
-
-;; Wrap around region
-(setq yas-wrap-around-region t)
 
 (provide 'setup-yasnippet)

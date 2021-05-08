@@ -145,12 +145,13 @@
 
 ;; Setup lsp mode prior to setup-java
 ;; setup for lsp and dap
-;;(require 'setup-auto-complete)
+;; (require 'setup-auto-complete)
 (require 'setup-lsp)
 ;; (require 'setup-java)
 ;; (require 'setup-python)
 (require 'setup-python-lsp-emacs-from-scratch)
 (require 'setup-c-lsp-clangd)
+;; (require 'setup-c++)
 
 ;; (require 'setup-python-lsp-remember-you)
 (require 'setup-dap-mode)
@@ -270,7 +271,6 @@
 
 ;; Diminish modeline clutter
 (require 'diminish)
-(diminish 'yas-minor-mode)
 ;; (diminish 'eldoc-mode)
 ;; (diminish 'paredit-mode)
 
@@ -342,10 +342,11 @@
 
 ;;(require 'pasc-mode)
 
+(require 'setup-yasnippet)
+
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
 (require 'setup-rtags)
-(require 'setup-c++)
 (require 'setup-treemacs)
 (require 'setup-angular)
 (require 'setup-shell-scripting)

@@ -43,7 +43,6 @@
   (setq web-mode-markup-indent-offset 4) ;;; better use for vue course!
   (setq web-mode-css-indent-offset 4)
   (setq web-mode-code-indent-offset 4)
-  (yas-minor-mode)
   )
 
 
