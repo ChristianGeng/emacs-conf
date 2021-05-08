@@ -145,7 +145,7 @@
 
 ;; Setup lsp mode prior to setup-java
 ;; setup for lsp and dap
-;; (require 'setup-auto-complete)
+(require 'setup-auto-complete)
 (require 'setup-lsp)
 ;; (require 'setup-java)
 ;; (require 'setup-python)
