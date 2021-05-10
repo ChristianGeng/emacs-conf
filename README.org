@@ -1,5 +1,6 @@
 #+title: README
 
+*  Purpose / General  Links
 
 My adapation of https://github.com/chaoflow/.emacs.d
 
@@ -28,6 +29,11 @@ Better take a look at other sources for configuration files:
 -  http://ergoemacs.org/emacs/emacs\_find\_replace.html
 
 * Languages / Modes
+
+
+** C/C++
+-  Cmake  IDE Package   https://github.com/atilaneves/cmake-ide
+-  https://skebanga.github.io/cpp-dev-in-spacemacs/
 
 ** Org mode
 
@@ -180,7 +186,20 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 
 
 
+** LSP und DAP
+   :PROPERTIES:
+   :CUSTOM_ID: lsp-und-dap
+   :END:
+
+- Emacs LSP Main Page https://emacs-lsp.github.io/lsp-mode/
+- Emacs from scratch Video https://www.youtube.com/watch?v=E-NAM9U5JYE
+- https://emacs-lsp.github.io/lsp-mode/page/languages/
+- Dap https://emacs-lsp.github.io/dap-mode/page/configuration/
+- Emacs-LSP Discussions at gitter https://gitter.im/emacs-lsp/lsp-mode?at=5df680feac14cc652c8c0e22
+
+
 * Other Topics
+
 
 ** Helm
    :PROPERTIES:
@@ -192,18 +211,6 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 2. [[https://github.com/emacs-helm/helm/wiki][helm-wiki]]
 3. [[http://thescratchcastle.com/posts/emacs-and-helm.html][bloc post]]
 4. [[file:allows%20to%20edit%20occurrences%20in%20many%20files%20too][helm-swoop]]
-
-** LSP und DAP
-   :PROPERTIES:
-   :CUSTOM_ID: lsp-und-dap
-   :END:
-
-- Emacs LSP Main Page https://emacs-lsp.github.io/lsp-mode/
-- Emacs from scratch Video https://www.youtube.com/watch?v=E-NAM9U5JYE
-- https://emacs-lsp.github.io/lsp-mode/page/languages/
-
-- Dap https://emacs-lsp.github.io/dap-mode/page/configuration/
-
 
 ** Fill column indication
   :PROPERTIES:
