@@ -203,6 +203,12 @@
   (pyvenv-tracking-mode 1)
   )  ; Automatically use pyvenv-workon via dir-locals
 
+;; This could be the content of .dir-locals.el
+;; ((python-mode . ((pyvenv-workon . "feldm")
+;;                  (subdirs . nil))))
+
+
+
 (provide 'setup-python-lsp-emacs-from-scratch)
 
 ;;; setup-python-lsp.el ends here
