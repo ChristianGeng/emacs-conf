@@ -88,7 +88,7 @@
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode)
-  (python-mode . lsp-deferred)
+;;  (python-mode . lsp-deferred)
   )
 
 ;; lsp-keymap-prefix prefix does not work in current setup

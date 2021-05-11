@@ -71,7 +71,7 @@
 
 ;;; dap-debug-last: letzte debug conf audrufen
 
-;;; dap-repl: repl when under breakpoint 
+;;; dap-repl: repl when under breakpoint
 
 ;; M-x flyckeck-list-errors
 
@@ -88,6 +88,35 @@
 ;;; emacs-from-scratch:
 ;;; pip install --user "python-language-server[all]"
 ;;; whenever python file is opened, activate lsp-mode
+
+
+;;; pyright
+;;
+;; (use-package python-mode
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-pyright)
+;;                          (lsp-deferred)
+;;                          )
+;;                      )
+;;   :custom
+;;   ;; NOTE: Set these if Python 3 is called "python3" on your system!
+;;   ;; (python-shell-interpreter "python3")
+;;   ;; (dap-python-executable "python3")
+;;   (dap-python-debugger 'debugpy)
+;;   :config
+;;   (require 'dap-python))
+
+
+;;
+;; (use-package lsp-pyright
+;;   :if (executable-find "pyright")
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-pyright)
+;;                          (lsp))))
+
+
+;;; pyls / palantir
 (use-package python-mode
   :ensure t
   :hook (python-mode . lsp-deferred)
@@ -97,9 +126,59 @@
   ;; (dap-python-executable "python3")
   (dap-python-debugger 'debugpy)
   :config
-  (require 'dap-python))
+  (require 'dap-python)
+  (lsp-register-custom-settings
+   '(("pyls.plugins.pyls_mypy.enabled" t t)
+     ("pyls.plugins.pyls_mypy.live_mode" nil t)
+     ("pyls.plugins.pyls_black.enabled" t t)
+     ("pyls.plugins.pyls_isort.enabled" t t)
+     ;; Disable these as they're duplicated by flake8
+     ("pyls.plugins.pycodestyle.enabled" nil t)
+     ("pyls.plugins.mccabe.enabled" nil t)
+     ("pyls.plugins.pyflakes.enabled" nil t)))
+  )
+
+
+;;; lsp-python-ms
+;; Use ‘M-x customize-variable RET flycheck-checker-error-threshold’ to
+;; change the threshold or ‘C-u C-c ! x’ to re-enable the checker.
+
+;; (use-package python-mode
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-python-ms)
+;;                          (lsp-deferred)
+;;                          )
+;;                      )
+;;   :config (setq lsp-python-ms-auto-install-server t)
+;;   (lsp-register-custom-settings
+;;    '(
+;;      ("python.autoComplete.addBrackets" lsp-python-ms-completion-add-brackets t)
+;;      ("python.analysis.cachingLevel" lsp-python-ms-cache)
+;;      ("python.analysis.errors" lsp-python-ms-errors)
+;;      ("python.analysis.warnings" lsp-python-ms-warnings)
+;;      ("python.analysis.information" lsp-python-ms-information)
+;;      ("python.analysis.disabled" lsp-python-ms-disabled)
+;;      ("python.analysis.autoSearchPaths" (lambda () (<= (length lsp-python-ms-extra-paths) 0)) t)
+;;      ("python.autoComplete.extraPaths" lsp-python-ms-extra-paths)
+;;      ))
+;; )
+
+
+;; shows how to customoize:
+;; https://www.mattduck.com/lsp-python-getting-started.html
+;; (use-package lsp-mode
+;;   :config
+
+;;   :hook
+;;   ((python-mode . lsp)))
+
+
 
 (require 'dap-python)
+
+
+;; (lsp-client-settings)
 
 
 (use-package company
@@ -119,11 +198,11 @@
 
 (use-package pyvenv
   :config
-  (pyvenv-mode 1))
+  (pyvenv-mode 1)
+  (setq pyvenv-workon "py36")  ; Default venv
+  (pyvenv-tracking-mode 1)
+  )  ; Automatically use pyvenv-workon via dir-locals
 
 (provide 'setup-python-lsp-emacs-from-scratch)
 
 ;;; setup-python-lsp.el ends here
-
-
-

@@ -150,6 +150,7 @@
 ;; (require 'setup-java)
 ;; (require 'setup-python)
 (require 'setup-python-lsp-emacs-from-scratch)
+;; (require 'setup-python-pyright)
 (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 
