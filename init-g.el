@@ -365,6 +365,11 @@
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
+;; https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404
+;; ->  make  all  envs  visible in  also org mode
+(setq shell-file-name "bash")
+(setq shell-command-switch "-ic")
+
 
 ;; fix missing alt-key in WSL
 (setq x-alt-keysym 'meta)
