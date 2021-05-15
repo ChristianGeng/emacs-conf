@@ -23,7 +23,7 @@
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
-(setq-default TeX-master 
+(setq-default TeX-master
 
 (add-hook 'LaTeX-mode-hook 'visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
@@ -405,9 +405,9 @@
 
 
 ;; (setq GNU (not (string-match "XEmacs\\|Lucid" (emacs-version))))
-;; (if GNU 
+;; (if GNU
 ;; (
-;; ;; GNU EMACS	  
+;; ;; GNU EMACS
 
 ;; ) ;; GNU END
 ;; (
@@ -435,7 +435,7 @@
         t))
 
 
-(or 
+(or
  (call-if-fbound 'iswitchb-mode 1)
  (call-if-fbound 'iswitchb-default-keybindings)
 ) ; the old way
@@ -476,8 +476,8 @@
   version-control t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Use Okular as the pdf viewer. Build okular 
-;; command, so that Okular jumps to the current line 
+;; Use Okular as the pdf viewer. Build okular
+;; command, so that Okular jumps to the current line
 ;; in the viewer.
  (setq TeX-view-program-selection
   '((output-pdf "PDF Viewer")))
@@ -488,28 +488,7 @@
 
  ;; '(TeX-view-program-selection (cond ((eq system-type (quote windows-nt)) (quote (((output-dvi style-pstricks) "dvips and start") (output-dvi "Yap") (output-pdf "start") (output-html "start")))) (t (\` (((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi") (output-pdf (\, (if (executable-find "evince") "Evince" "xpdf"))) (output-html "xdg-open"))))))
 
-
-
-
-;;;;;;;;;;;;;  make  PATH variable inside emacs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;   (defun set-exec-path-from-shell-PATH ()
-;     (let ((path-from-shell (replace-regexp-in-string
-;                          "[ \t\n]*$"
-;                          ""
-;                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-
-
-;    (setenv "PATH" path-from-shell)
-;    (setq eshell-path-env path-from-shell) ; for eshell users
-;    (setq exec-path (split-string path-from-shell path-separator))))
-
-;   (when window-system (set-exec-path-from-shell-PATH))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;;; Text zwischen Braces setzen: 
+;;; Text zwischen Braces setzen:
 (defun cg-insert-braces ()
   (interactive)
   (if (region-active-p)
@@ -526,14 +505,14 @@
 (defun cg-hello-world ()
   "Hallo Welt schreiben"
   (interactive)
-  (message "Hello, World") 
+  (message "Hello, World")
 )
 
 (defun cg-hello-world-print ()
   (interactive)
   ;;; Einen einfügen an der momentanen Stelle
   (insert "Hello, World")
-  
+
   )
 
 ;;(defun cg-insert-file-name ()
@@ -571,7 +550,7 @@
   (if (region-active-p)
       (progn
         (save-excursion
-          (goto-char (region-beginning))    
+          (goto-char (region-beginning))
           (insert "\\ipa{" ))
         (save-excursion
           (goto-char (region-end))
@@ -601,4 +580,3 @@
 
 ;;(set-frame-parameter (selected-frame) 'alpha '(100 100))
 ;;(add-to-list 'default-frame-alist '(alpha 100 100))
-

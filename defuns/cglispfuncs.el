@@ -41,9 +41,6 @@
            (expand-file-name (car dirs) root)
            (cdr dirs))))
 
-
-
-
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root."
   (interactive)
