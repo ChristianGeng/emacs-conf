@@ -147,7 +147,11 @@
 ;; setup for lsp and dap
 (require 'setup-auto-complete)
 (require 'setup-lsp)
-(require 'setup-java)
+;; (require 'setup-java)
+;; deactivate  jdee for  loading java files
+  (setq auto-mode-alist
+        (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
+
 ;; (require 'setup-python)
 (require 'setup-python-lsp-emacs-from-scratch)
 ;; (require 'setup-python-pyright)

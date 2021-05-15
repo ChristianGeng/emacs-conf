@@ -50,11 +50,12 @@
 ;; (require 'org)
 
 
-(defconst org-linewidth 120)
-(add-hook 'org-mode-hook 'auto-fill-mode)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (set-fill-column org-linewidth)))
+;; if you want to enable autofill  mode:
+;; (defconst org-linewidth 120)
+;; (add-hook 'org-mode-hook 'auto-fill-mode)
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (set-fill-column org-linewidth)))
 
 (defun myorg-update-parent-cookie ()
   (when (equal major-mode 'org-mode)
