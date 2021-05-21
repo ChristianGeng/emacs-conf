@@ -124,6 +124,10 @@
 ;;             (define-key yas/keymap [tab] 'yas/next-field)))
 
 
+(add-hook 'org-mode-hook
+          (lambda ()
+            (company-mode -1)))
+
 ;; Make windmove work in Org mode:
 (add-hook 'org-shiftup-final-hook 'windmove-up)
 (add-hook 'org-shiftleft-final-hook 'windmove-left)
