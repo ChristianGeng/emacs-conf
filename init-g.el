@@ -326,11 +326,13 @@
 (require 'openwith)
 (setq openwith-associations '(
                               ("\\.mp4\\'"  "vlc" (file))
-                              ("\\.png\\'"  "okular" (file))
                               ("\\.docx\\'" "lowriter" (file))
                               ("\\.odt\\'"  "lowriter" (file))
                               ("\\.pptx\\'"  "loimpress" (file))
                               ))
+;; unset associations altogether
+;; (setq openwith-associations '())
+
 (openwith-mode)
 (display-battery-mode)
 (setq require-final-newline t)
