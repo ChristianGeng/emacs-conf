@@ -134,7 +134,6 @@
 ;;     )
 
 (require 'setup-dired)
-(require 'setup-projectile)
 (require 'setup-wttrin)
 
 
@@ -152,14 +151,17 @@
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
 
-;; (require 'setup-python)
-(require 'setup-python-lsp-emacs-from-scratch)
+;;   not  lsp
+(require 'setup-python)
+;; (require 'setup-python-lsp-emacs-from-scratch)
 ;; (require 'setup-python-pyright)
 (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 
 ;; (require 'setup-python-lsp-remember-you)
 (require 'setup-dap-mode)
+
+(require 'setup-projectile)
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))
