@@ -53,7 +53,33 @@
    '("schemas.xml" "/usr/share/emacs/25.2/etc/schema/schemas.xml" "~/.emacs.d/schemas.xml"))
  '(rustic-ansi-faces
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
- '(safe-local-variable-values '((testvar\  . "hello")))
+ '(safe-local-variable-values
+   '((eval progn
+           (make-local-variable 'process-environment)
+           (setq process-environment
+                 (copy-sequence process-environment))
+           (setenv "PYTHONPATH" "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/:/home/audeering.local/cgeng/projects/speaker/code/speaker-sdk/examples/")
+           (setenv "WORKON_HOME"
+                   (expand-file-name "~/.venvs")))
+     (eval progn
+           (make-local-variable 'process-environment)
+           (setq process-environment
+                 (copy-sequence process-environment))
+           (setenv "PYTHONPATH" "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/")
+           (setenv "WORKON_HOME"
+                   (expand-file-name "~/.venvs")))
+     (eval progn
+           (make-local-variable 'process-environment)
+           (setq process-environment
+                 (copy-sequence process-environment))
+           (setenv "PYTHONPATH" "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/"))
+     (setq projectile-switch-project-action 'venv-projectile-auto-workon)
+     (eval progn
+           (make-local-variable 'process-environment)
+           (setq process-environment
+                 (copy-seque process-environment))
+           (setenv "PYTHONPATH" "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/"))
+     (setenv "PYTHONPATH" "myvalue")))
  '(sql-connection-alist
    '(("dataupload local container mysql"
       (sql-product 'mysql)

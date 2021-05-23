@@ -14,6 +14,10 @@
 ;; (setq jdee-server-dir "/home/christian/jars/jdee-server/target/jdee-bundle-1.1-SNAPSHOT.jar")
 ;;(setq jdee-server-dir "/home/christian/jars/jdee-server/target/")
 ;;(setq jdee-server-dir "/home/christian/jars/jdee-server/target/")
+;;
+;; lsp configuration:
+;; https://github.com/emacs-lsp/lsp-java/issues/217
+
 ;;; Code:
 
 (setq jdee-server-dir (concat  (getenv "HOME")  "/jars/"))

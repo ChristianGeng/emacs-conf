@@ -100,10 +100,10 @@
   :commands (lsp lsp-deferred)
   :hook (lsp-mode . efs/lsp-mode-setup)
   :init
-  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  ;; (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   :config
   (lsp-enable-which-key-integration t)
-  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  ;; (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   )
 
 
