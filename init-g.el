@@ -152,9 +152,10 @@
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
 
 ;;   not  lsp
-(require 'setup-python)
+;; (require 'setup-python)
 ;; (require 'setup-python-lsp-emacs-from-scratch)
-;; (require 'setup-python-pyright)
+;;(require 'setup-python-pyright)
+(require 'setup-python-lsp-pyright)
 (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 
@@ -378,6 +379,21 @@
 (setq shell-file-name "bash")
 (setq shell-command-switch "-ic")
 
+
+;; - '(safe-local-variable-values '((testvar\  . "hello")))
+;; + '(safe-local-variable-values
+;; +   '((pyvenv-activate . "~/.venvs/py37/")
+;; +     (testvar\  . "hello")))
+;;   '(sql-connection-alist
+;;     '(("dataupload local container mysql"
+
+;; (put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
+
+;; projectile-project-test-cmd :
+
+(put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
+(put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
+(put 'py-pythonpath  'safe-local-variable (lambda (_) t))
 
 ;; fix missing alt-key in WSL
 (setq x-alt-keysym 'meta)

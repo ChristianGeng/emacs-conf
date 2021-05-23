@@ -10,20 +10,25 @@
 
 ;; This file is not part of GNU Emacs
 
-;; This program is free software: you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
-
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
+;; Which language server should I use?
+;; Alternatives according to https://emacs-lsp.github.io/lsp-mode/page/languages/
+;; - Python (Jedi Language Server)
+;; - Python (Palantir)
+;; - Python (Pyright)
+;; - Python (Microsoft)
+;; Ausserdem: pip install python-lsp-server - soll der Nachfolger von Palantir werden
+;;
+;; see https://www.reddit.com/r/emacs/comments/ih3q5x/lsp_for_python_sure_but_which_lsp_server/
+;; One clear Statement:
+;;
+;; pyright > mspyls > pyls.
+;;
+;;
+;; This link https://github.com/emacs-lsp/lsp-mode/issues/1863 states that  "Pylance is built on top of Pyright"
+;; This is the announcement for pylance (in diese Richtung will MSoft, nicht OpenSource):
+;; https://devblogs.microsoft.com/python/announcing-pylance-fast-feature-rich-language-support-for-python-in-visual-studio-code/
+;; Same link as above:
+;; Pylance = Pyright + IntelliCode AI models (not open-source)
 
 ;;; emacs from scratch video transcript:
 ;;; https://github.com/daviwil/emacs-from-scratch/blob/dd9320769f3041ac1edca139496f14abe147d010/Emacs.org#python
@@ -79,11 +84,14 @@
 ;; lsp Exception has occured OSError No such device or address /dev/tty
 
 ;; vscode extensions installed by emacs functions end up in
-;; /home/audeering.local/cgeng/.emacs.d/.extension/vscode/
+;; ~/.emacs.d/.extension/vscode/
+
+;; https://emacs-lsp.github.io/lsp-mode/
+;;
 
 ;;; Code:
 
-(message "setup python lsp this time!")
+(message "setup python lsp using palantir - following emacs from scratch")
 
 ;;; emacs-from-scratch:
 ;;; pip install --user "python-language-server[all]"
@@ -91,7 +99,8 @@
 
 
 ;;; pyright
-;;
+;;; https://github.com/emacs-lsp/lsp-mode/issues/1863:
+;; entweder über vs code installieren oder selbst bauen
 ;; (use-package python-mode
 ;;   :ensure t
 ;;   :hook (python-mode . (lambda ()
@@ -116,7 +125,9 @@
 ;;                          (lsp))))
 
 
-;;; pyls / palantir
+
+;; pyls / PALANTIR
+;; https://www.mattduck.com/lsp-python-getting-started.html
 ;; Default for vscode  linting:
 ;; https://code.visualstudio.com/docs/python/linting
 (use-package python-mode
@@ -164,13 +175,21 @@
 
 ;; (python-shell-interpreter "python3")#
 
+
+;; MICROSOFT lsp-python-ms
 ;; for formatting: https://github.com/emacs-lsp/lsp-python-ms/issues/131
 ;;; lsp-python-ms
 ;; Use ‘M-x customize-variable RET flycheck-checker-error-threshold’ to
 ;; change the threshold or ‘C-u C-c ! x’ to re-enable the checker.
-
+;; M-x install-package lsp-python-ms
 ;; (use-package python-mode
 ;;   :ensure t
+
+;;
+
+;; -*- mode: compilation; default-directory: "~/.emacs.d/el/" -*-
+;; Comint started at Sat May 22 17:27:35
+;; Comint finished at Sat May 22 17:27:38
 ;;   :hook (python-mode . (lambda ()
 ;;                          (require 'lsp-python-ms)
 ;;                          (lsp-deferred)
@@ -192,7 +211,7 @@
 
 
 ;; shows how to customoize:
-;; https://www.mattduck.com/lsp-python-getting-started.html
+;;
 ;; (use-package lsp-mode
 ;;   :config
 

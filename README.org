@@ -1,6 +1,6 @@
 #+title: README
 
-*  Purpose / General  Links
+* Purpose / General  Links
 
 My adapation of https://github.com/chaoflow/.emacs.d
 
@@ -199,7 +199,6 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 
 * Other Topics
 
-
 ** Helm
    :PROPERTIES:
    :CUSTOM_ID: helm
@@ -236,12 +235,30 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
    :CUSTOM_ID: dir-locals
    :END:
 
-#+BEGIN_EXAMPLE
-    ((nil .
-          (
-    ;;     (compilation-read-command . nil)
-           (projectile-project-test-cmd . "pytest --color=no")
-           )))
+#+BEGIN_EXAMPLE elisp
+(
+ (nil . (
+         (projectile-project-test-cmd . "pytest --color=yes app/  --ignore app/tests/  --cov=app/study --cov=app/report  --cov=app/core")
+         ;; (compilation-read-command . nil)
+         (py-pythonpath . "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/")
+         ;; (setq venv-dirlookup-names '(".projectile" ".venv" "pyenv" ".virtual"))
+         ;; Automatically activating a virtualenv when using projectile
+         ;; (setq projectile-switch-project-action 'venv-projectile-auto-workon)
+         (eval . (progn
+          (make-local-variable 'process-environment)
+          (setq process-environment (copy-sequence process-environment))
+          (setenv "PYTHONPATH" "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/:/home/audeering.local/cgeng/projects/speaker/code/speaker-sdk/examples/")
+          (setenv "WORKON_HOME" (expand-file-name "~/.venvs"))
+          ))
+         )
+  )
+ (python-mode . (
+                 (pyvenv-activate . "~/.venvs/py37")
+                 (lsp-pyright-venv-path . "~/.venvs/")
+                 (subdirs . nil))
+              )
+
+)
 #+END_EXAMPLE
 
 
@@ -252,6 +269,6 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 - https://emacs.stackexchange.com/questions/21955/calling-functions-in-dir-locals-in-emacs - cmake beispiele
 - https://emacs.stackexchange.com/questions/61493/confused-regarding-dir-locals-el-and-projectile/61594#61594
 - https://emacs.stackexchange.com/questions/63417/adding-directory-local-variable-for-projectile-test-command-is-not-working
-
+- https://gist.github.com/sivakov512/99f288960475ca6c32c8c65483012c71 - uses .dir-locals to run python manage.py runserver
 
 ** Lern use-package and stream the configurations: https://github.com/jwiegley/use-package
