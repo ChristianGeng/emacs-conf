@@ -70,6 +70,7 @@
                ("jvm languages" (or
                              (mode . groovy-mode)
                              (mode . shell-mode)
+                             (mode . java-mode)
                              ))
                ("web" (or
                        (mode . javascript-mode)
