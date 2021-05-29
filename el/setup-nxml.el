@@ -3,7 +3,7 @@
 ;; https://www.emacswiki.org/emacs/NxmlModeSchemas
 ;; emacs variable rng-schema-locating-files
 ;; 
-
+;; https://lgfang.github.io/mynotes/emacs/emacs-xml.html#sec-8-1
 
 (defun local-nxml-hook ()
   (setq indent-tabs-mode t)
@@ -23,9 +23,6 @@
   )
 
 (add-hook 'nxml-mode-hook '(lambda () (local-nxml-hook)))
-
-
-  (push "~/.emacs.d/schemas.xml" rng-schema-locating-files-default)
 
 (push (cons (concat "\\." (regexp-opt '("svg" "x3d") t)
                       "\\'") 'nxml-mode) auto-mode-alist)

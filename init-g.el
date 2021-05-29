@@ -184,6 +184,8 @@
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
 (require 'setup-org) ;; organizer todo notes etc
+;; (require 'setup-org-slim) ;; organizer todo notes etc
+
 (require 'setup-plantuml) ;; organizer todo notes etc
 
 (require 'setup-latex)
