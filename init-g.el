@@ -46,12 +46,8 @@
     (load (file-name-sans-extension file))))
 ;; (load-library "cglispfuncs")
 
-
-
 ;;  (require 'title-time)
-
 ;; (require 'setup-daimler-proxy)
-
 ;; ;; No splash screen please ... jeez
 (setq inhibit-startup-message t)
 
@@ -76,16 +72,21 @@
       (expand-file-name "site-lisp" user-emacs-directory))
 ;; Settings for currently logged in user
 
-(setq user-settings-dir
-      (concat user-emacs-directory "users/" user-login-name))
-(add-to-list 'load-path user-settings-dir)
-
 ;; keep automatic customizations separately
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
-;; Keep emacs Custom-settings in separate file
-;;(setq custom-file (expand-file-name "custom.el" user-settings-dir))
-;;(load custom-file 'noerror)
+
+;; create user customization directory for specific username/hostname combination
+(defvar user-settings-dir)
+(setq user-settings-dir
+      (joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
+
+(mkdir user-settings-dir t)
+(add-to-list 'load-path user-settings-dir)
+
+;; load all settings from user machine combination
+(when (file-exists-p user-settings-dir)
+    (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
 
 ;; Write backup files to own directory
 (setq backup-directory-alist
@@ -304,15 +305,7 @@
 ;; electric-pair-mode
 ;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
 ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
-;; (electric-pair-mode 1)
-
-;;(message user-settings-dir)
-
-;; Conclude init by setting up specifics for the current user
-;;(when (file-exists-p user-settings-dir)
-  ;; (if (file-exists-p (concat user-settings-dir "/init.el"))
-  ;;     (load (concat user-settings-dir "/init"))
-  ;;   (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$"))))
+(electric-pair-mode 1)
 
 (when (fboundp 'cycle-themes)
   (cycle-themes))
