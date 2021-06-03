@@ -16,7 +16,6 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-
 ;; das hier scheint für die package liste zu tun
 ;; (defcustom dse/package-menu/package-column-width 10
 ;;   "Column width of package name in list-packages menu."
@@ -31,7 +30,6 @@
 ;;     (setq tabulated-list-format (vconcat tlf))))
 
 ;; (add-hook 'package-menu-mode-hook #'dse/package-menu/fix-column-widths)
-
 
 ;;; https://github.com/flycheck/flycheck/issues/1101
 
@@ -50,6 +48,41 @@
  ;;                                             0 t)])))
 
 ;;; Modify Error List Display to be at the bottom rather than a full buffer on the side
+
+;; DEFAULT
+;; [("File" 6)
+;;  ("Line" 5 flycheck-error-list-entry-< :right-align t)
+;;  ("Col" 3 nil :right-align t)
+;;  ("Level" 8 flycheck-error-list-entry-level-<)
+;;  ("ID" 6 t)
+;;  (#("Message (Checker)" 0 7
+;;     (face flycheck-error-list-error-message)
+;;     9 16
+;;     (face flycheck-error-list-checker-name))
+;;   0 t)]
+
+;; Diese hier sind zu schmal:
+;; File **
+;; Line
+;; Col
+;; Level **
+;; ID **
+;; Message
+
+;; Das hier waren meine Adaptionen, die halbwegs tun
+(defconst flycheck-error-list-format
+`[("File" 30)
+ ("Line" 5 flycheck-error-list-entry-< :right-align t)
+ ("Col" 3 nil :right-align t)
+ ("Level" 30 flycheck-error-list-entry-level-<)
+ ("ID" 30 t)
+ (#("Message (Checker)" 0 7
+    (face flycheck-error-list-error-message)
+    9 16
+    (face flycheck-error-list-checker-name))
+  0 t)]
+ "Table format for the error list.")
+
 ;;; see https://www.flycheck.org/en/latest/user/error-list.html
 (add-to-list 'display-buffer-alist
              `(,(rx bos "*Flycheck errors*" eos)
