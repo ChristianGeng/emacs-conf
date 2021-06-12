@@ -136,6 +136,7 @@
 
 (require 'setup-dired)
 (require 'setup-wttrin)
+(require 'setup-projectile)
 
 
 ;; Setup extensions
@@ -146,24 +147,24 @@
 ;; Setup lsp mode prior to setup-java
 ;; setup for lsp and dap
 (require 'setup-auto-complete)
+
 (require 'setup-lsp)
 ;; (require 'setup-java)
 ;; deactivate  jdee for  loading java files
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
-
+(require 'setup-dap-mode)
 ;;   not  lsp
 ;; (require 'setup-python)
 ;; (require 'setup-python-lsp-emacs-from-scratch)
 ;;(require 'setup-python-pyright)
 (require 'setup-python-lsp-pyright)
+(require 'setup-typescript)
 (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 
 ;; (require 'setup-python-lsp-remember-you)
-(require 'setup-dap-mode)
 
-(require 'setup-projectile)
 
 (eval-after-load 'whitespace '(require 'setup-whitespace))
 (eval-after-load 'tramp '(require 'setup-tramp))

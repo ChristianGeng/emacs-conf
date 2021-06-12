@@ -84,6 +84,18 @@
 
 (message "Entering LSP Setup!")
 
+
+;; npm install -g pyright
+;; For Golang, let’s install gopls.
+;; GO111MODULE=on go get golang.org/x/tools/gopls@latest
+;;
+;; Rust
+;; For Rust, let’s use rust_analyzer. The easiest way to install is to download the binary, copy to a folder, and add the folder to environment PATH.
+;; npm install -g typescript-language-server
+;; npm install -g typescript
+
+
+
 ;; setup hook: top line breadcrumbs
 (defun efs/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
@@ -98,7 +110,13 @@
 ;; so back to default WindowsKey-l
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook (lsp-mode . efs/lsp-mode-setup)
+  :hook (
+         (lsp-mode . efs/lsp-mode-setup)
+         (python-mode . lsp-deferred)
+         (go-mode . lsp-deferred)
+         (rust-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         )
   :init
   ;; (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   :config
@@ -106,8 +124,9 @@
   ;; (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   )
 
-
 (use-package helm-lsp)
+;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+
 
 (use-package company
   :after lsp-mode
@@ -148,38 +167,15 @@
 ;;    lsp-treemacs-references - Show a tree view for the references of the symbol under the cursor
 ;;    lsp-treemacs-error-list - Show a tree view for the diagnostic messages in the project
 (use-package lsp-treemacs
+  :commands
+  (lsp-treemacs-symbols)
+  (lsp-treemacs-errors-list)
   :after lsp)
-
 
 ;; This fixes a bug:
 ;; Error running timer ‘lsp--on-idle’: (error "The connected server(s) does not support method textDocument/documentLink
 (setq lsp-enable-links nil)
 
 
-;; TypeScript
-;;
-;; This is a basic configuration for the TypeScript language so that .ts files activate
-;; typescript-mode when opened. We’re also adding a hook to typescript-mode-hook to call
-;; lsp-deferred so that we activate lsp-mode to get LSP features every time we edit
-;; TypeScript code.
-;; Important note! For lsp-mode to work with TypeScript (and JavaScript) you will need to
-;; install a language server on your machine. If you have Node.js installed, the easiest way
-;; to do that is by running the following command:
-;;
-;; >> npm install -g typescript-language-server typescript
-;;
-;; This will install the typescript-language-server and the TypeScript compiler package.
-
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 2)
-  )
-
-
-
 ;;; setup-lsp.el ends here
-
-
 (provide 'setup-lsp)

@@ -116,14 +116,21 @@
   ;; (lsp-enable-dap-auto-configure nil)  ->  do not start any of locals breakpoints expression controls tooltip by default
   :commands dap-debug
   :config
+  (require 'dap-node)
   (dap-ui-mode 1)
   (dap-tooltip-mode 1)
-  (require 'dap-node)
-  (dap-node-setup)
+  (dap-node-setup) ;; Automatically installs Node debug adapter if needed
   (require 'dap-hydra)
   ;; (require 'dap-gdb-lldb)  -> makes it break!
   ;; (dap-gdb-lldb-setup)
-  )  ;; dap-node-setup setups the debug adapter
+  ;; Bind `C-c l d` to `dap-hydra` for easy access
+  (general-define-key
+   :keymaps 'lsp-mode-map
+   :prefix lsp-keymap-prefix
+   "d" '(dap-hydra t :wk "debugger"))
+  )
+
+;; dap-node-setup setups the debug adapter
 
 (provide 'setup-dap-mode)
 ;;; setup-dap-mode.el ends here
