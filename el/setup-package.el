@@ -67,6 +67,14 @@
 
 
 
+;; alternatives: frosted melpa mirror:
+;; see https://github.com/d12frosted/elpa-mirror
+;; these can be used when the defaults are down.
+(defvar gnu '("gnu" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/"))
+(defvar melpa '("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/"))
+(defvar org '("org" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/"))
+
+
 (defvar marmalade '("marmalade" . "https://marmalade-repo.org/packages/"))
 (defvar gnu '("gnu" . "https://elpa.gnu.org/packages/"))
 ;; Milkbox ist nicht mehr erreichbar  - 2020-09-02
@@ -74,7 +82,6 @@
 ;;(defvar melpa '("melpa" . "http://stable.melpa.org/packages/"))
 (defvar melpa '("melpa" . "http://unstable.melpa.org/packages/"))
 (defvar org '("org" . "https://orgmode.org/elpa/"))
-
 
 ;;(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 
