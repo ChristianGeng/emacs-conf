@@ -64,9 +64,9 @@ Invoke HideShow mode with M-x hs-minor-mode.
 weiterer Link (dwim do what I mean):
 https://stackoverflow.com/questions/2399612/why-is-there-no-code-folding-in-emacs
 
-## shell interaction 
+## shell interaction
 
-Clear the shell output when run full: 
+Clear the shell output when run full:
 
     M-x comint-clear-buffer
 
@@ -148,7 +148,7 @@ D to delete them.
 # Edit multiple files / Refactoring
 
 
-##  Using grep 
+##  Using grep
 https://emacs.stackexchange.com/questions/7595/how-do-i-refactor-across-a-project-in-emacs-change-method-name-everywhere
 
 * The approach using [helm-ag](https://github.com/syohex/emacs-helm-ag) requires the silver searcher. helm-swoop will also come in handy
@@ -163,7 +163,7 @@ https://emacs.stackexchange.com/questions/7595/how-do-i-refactor-across-a-projec
 ## Using helm grep projectile, shamelessly from [here](https://tech.toryanderson.com/posts/helm-grep-search-replace/)
 
 
-With this you can readily search an entire project directory for some text, and then make whole-scale changes to any or all files containing that text. 
+With this you can readily search an entire project directory for some text, and then make whole-scale changes to any or all files containing that text.
 I assume you already have helm-projectile installed and you use it; if not, you’re missing out!
 
     First, install wgrep and helm-wgrep, for which I use use-package and my emacs.el init file:
@@ -219,3 +219,7 @@ https://emacs.stackexchange.com/questions/737/how-do-i-find-text-across-many-ope
 # dir local variables
 
 https://endlessparentheses.com/a-quick-guide-to-directory-local-variables.html
+
+# Open buffer in default browser
+
+M-x browse-url-of-buffer
