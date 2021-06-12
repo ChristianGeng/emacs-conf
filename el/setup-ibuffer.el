@@ -78,7 +78,9 @@
                        (mode . vue-mode)
                        (mode . js-mode)
                        (mode . js2-mode)
-                             ))
+                       (mode . ng2-ts-mode)
+                       (name . "*ts-ls*")
+                       ))
                ("dired" (mode . dired-mode))
                ("emacs/lisp" (or
                          (name . "^\\*scratch\\*$")
