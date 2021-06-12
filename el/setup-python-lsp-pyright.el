@@ -51,18 +51,72 @@
 ;; pyrightconfig
 ;; Pyright LS uses a file called pyrightconfig.json to include settings
 ;; This is documented at https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+;; This also statest that pyright settings can also be specified in a [tool.pyright] section of a "pyproject.toml" file.
+;; some of these settings are also
 ;; https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/
-
+;;
+;; https://github.com/emacs-lsp/lsp-pyright
+;; Who to devise local adaptions to PYTHONPATH under Emacs lsp pyright?
+;; there is a custom variable:
+;; python.analysis.extraPaths via lsp-pyright-extra-paths
+;;
 ;; PYTHONPATH
 ;; Setting py-pythonpath as a .dir-local seems not to work
 ;; https://github.com/porterjamesj/virtualenvwrapper.el/issues/56
-
+;; What works though is the customization of lsp-pyright-extra-paths
+;; All variables that are accessible through Emacs as defcustom are here:
+;; https://github.com/emacs-lsp/lsp-pyright
 
 ;; Projectile tests
 ;; Tests : /home/audeering.local/cgeng/.venvs/py37/bin/pytest --ds=app.settings --color=no app/  --ignore app/tests/  --cov=app/study --cov=app/report  --cov=app/core
 
 ;; https://github.com/microsoft/pyright/issues/1359
 ;; Django Stubs: https://pypi.org/project/django-stubs/
+
+;; flycheck
+;; using pyright in emacs lsp as well as in vscode gives identical errors except
+;; false errors in emacs that are flagged as "lsp-flycheck-info-unnecessary"
+;; https://github.com/emacs-lsp/lsp-mode/issues/2255
+
+;; Formatting providers in vscode
+;; https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0
+;; https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0
+;; file->preferences->type "python formatting provider"
+;; This gets put into ~/cgeng/.config/Code/User/settings.json
+;; "python.formatting.provider": "black"
+;; file->preferences->type "format on save"
+
+;; configure black
+;; https://dev.to/adamlombard/vscode-setting-line-lengths-in-the-black-python-code-formatter-1g62
+;; file->preferences->type "python formatting black args"
+;; --line-length 119
+;; 119 characters
+
+;; what is pylint: .pylintrc
+
+;; Overview about formatting, organizing imports and style checkers
+;; https://zhauniarovich.com/post/2020/2020-04-starting-new-python-project/
+;; https://www.reddit.com/r/Python/comments/8oqy03/blog_a_comparison_of_autopep8_black_and_yapf_code/
+
+;; Checkers:
+;; pyright
+;; python-flake8
+;; python-pylint
+;; python-pycompile
+;; python-pyright
+;; python-mypy
+;;
+
+;; https://flake8.pycqa.org/en/latest/
+
+;; pip install  --upgrade pylint
+;; pip install  --upgrade flake8
+
+;; Vergleich der standard-Autoformatters:
+;; https://www.kevinpeters.net/auto-formatters-for-python
+
+;; Emacs LSP-Ansatz:
+;; jede Sprache macht es selbst: https://alpha2phi.medium.com/emacs-lsp-and-dap-7c1786282324
 
 ;;; Code:
 
@@ -97,8 +151,14 @@
   :config
   (require 'dap-python)
   ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-)
+  )
 
+
+  (setq lsp-enable-file-watchers nil)
+  (setq lsp-file-watch-threshold 2000)
+
+  (setq lsp-pyright-auto-import-completions t)
+  (setq lsp-pyright-auto-search-paths t)
 
 (require 'dap-python)
 
@@ -127,4 +187,4 @@
 
 (provide 'setup-python-lsp-pyright)
 
-;;; setup-python-lsp-pyright.el ends here
+;;; setup-python-lsp-pyright ends here
