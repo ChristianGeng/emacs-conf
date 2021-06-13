@@ -160,6 +160,7 @@
 ;;(require 'setup-python-pyright)
 (require 'setup-python-lsp-pyright)
 (require 'setup-typescript)
+(require 'setup-angular)
 (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 
@@ -271,7 +272,6 @@
 ;; This currently breaks dired icons. Why?
 ;; (require 'setup-scala)
 (require 'setup-treemacs)
-(require 'setup-angular)
 (require 'setup-groovy)
 ;; (require 'setup-eclim)
 
