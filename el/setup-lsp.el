@@ -161,6 +161,11 @@
 ;; lsp-treemacs
 ;; lsp-treemacs gibt zusätzlich Symbole in die Sideline
 
+;; (setq lsp-ui-doc-enable t
+;;       lsp-ui-peek-enable t
+;;       lsp-ui-sideline-enable t
+;;       lsp-ui-imenu-enable t
+;;       lsp-ui-flycheck-enable t)
 
 
 ;;    lsp-treemacs-symbols - Show a tree view of the symbols in the current file
