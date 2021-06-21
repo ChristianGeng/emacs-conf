@@ -116,7 +116,17 @@
 ;; https://www.kevinpeters.net/auto-formatters-for-python
 
 ;; Emacs LSP-Ansatz:
-;; jede Sprache macht es selbst: https://alpha2phi.medium.com/emacs-lsp-and-dap-7c1786282324
+;; jede Sprache macht es selbst, also kein allgemeines setup für lsp und dap:
+;; https://alpha2phi.medium.com/emacs-lsp-and-dap-7c1786282324
+
+;; Format Imports Isort -
+;; formatting using black and isort
+;; https://cereblanco.medium.com/setup-black-and-isort-in-vscode-514804590bf9
+
+;; autoflake will also remove unused imports using pyflakes (which is what flake8 uses to check for extra imports
+;;  flycheck-pyflakes  20170330.2311 available  melpa      Support pyflakes in flyc
+;; pip install autoflake
+;; importmagix
 
 ;;; Code:
 
