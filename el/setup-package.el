@@ -70,9 +70,9 @@
 ;; alternatives: frosted melpa mirror:
 ;; see https://github.com/d12frosted/elpa-mirror
 ;; these can be used when the defaults are down.
-(defvar gnu '("gnu" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/"))
-(defvar melpa '("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/"))
-(defvar org '("org" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/"))
+;;(defvar gnu '("gnu" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/"))
+;;(defvar melpa '("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/"))
+;;(defvar org '("org" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/"))
 
 
 (defvar marmalade '("marmalade" . "https://marmalade-repo.org/packages/"))
