@@ -38,8 +38,9 @@
 ;; setup tools for dap-cpp:
 ;; dap-cpptools-setup /home/audeering.local/cgeng/.emacs.d/.extension/vscode/cpptools
 ;; dap-gdb-lldb-setup -> /home/audeering.local/cgeng/.emacs.d/.extension/vscode/webfreak.debug
+;; To install the adapter do M-x dap-cpptools-setup
 ;;
-;;
+;; https://github.com/emacs-lsp/dap-mode/blob/master/dap-cpptools.el
 
 
 ;; commentary
@@ -56,6 +57,9 @@
 (add-hook 'c++-mode-hook 'lsp-deferred)
 
 (require 'dap-gdb-lldb)
+
+
+;; (require 'dap-cpptools)
 
 ;; (use-package c-mode
 ;;   :ensure t
@@ -80,6 +84,10 @@
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (require 'dap-cpptools)
   (yas-global-mode))
+
+
+;; dap-utils-extension-path
+
 
 (provide 'setup-c-lsp-clangd)
 
