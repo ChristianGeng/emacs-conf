@@ -27,8 +27,12 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-;; obsolete in emacs27
-(package-initialize)
+;; code obsolete in emacs27
+(if (version< emacs-version "27.1")
+    (package-initialize)
+)
+
+
 ;; Setup packages
 
 ;; Switch between windows with Shift+{left,up,down,right}
@@ -358,9 +362,6 @@
 (require 'setup-treemacs)
 (require 'setup-angular)
 (require 'setup-shell-scripting)
-
-;; obsolete in emacs27
-(package-initialize)
 
 (put 'erase-buffer 'disabled nil)
 
