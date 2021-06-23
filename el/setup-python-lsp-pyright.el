@@ -126,9 +126,27 @@
 ;; autoflake will also remove unused imports using pyflakes (which is what flake8 uses to check for extra imports
 ;;  flycheck-pyflakes  20170330.2311 available  melpa      Support pyflakes in flyc
 ;; pip install autoflake
-;; importmagix
+;; importmagic
+;;
+;; yapf stanza example for setup.cfg
+;;
+;;
+;; [yapf]
+;; based_on_style = pep8
+;; spaces_before_comment = 4
+;; split_before_logical_operator = true
+;; line-length = 119
+
+;; lisp function to auto-remove unused imports:
+;; https://gist.github.com/kracekumar/77d29c7410199fd2cda4
+
+;; linting
+;; https://code.visualstudio.com/docs/python/linting
+;; https://github.com/emacs-lsp/lsp-mode/issues/1327
 
 ;;; Code:
+
+
 
 (message "Lsp for Python: pyright version")
 
