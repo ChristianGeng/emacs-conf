@@ -28,13 +28,15 @@
 (set-selection-coding-system 'utf-8)
 
 ;; obsolete in emacs27
-;; (package-initialize)
+(package-initialize)
 ;; Setup packages
 
 ;; Switch between windows with Shift+{left,up,down,right}
 
 (add-to-list 'load-path "~/.emacs.d/el")
 (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
+;;(add-to-list 'load-path "~/.emacs.d/elpa/s-20210603.736/")
+
 
 (setq user-emacs-directory "~/.emacs.d/")
 (message user-emacs-directory)
@@ -358,7 +360,7 @@
 (require 'setup-shell-scripting)
 
 ;; obsolete in emacs27
-;; (package-initialize)
+(package-initialize)
 
 (put 'erase-buffer 'disabled nil)
 
