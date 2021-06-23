@@ -120,7 +120,7 @@
   :init
   ;; (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   :config
-  (lsp-enable-which-key-integration t)
+  ;; (lsp-enable-which-key-integration t)
   ;; (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   )
 
