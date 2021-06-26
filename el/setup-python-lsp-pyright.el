@@ -144,6 +144,36 @@
 ;; https://code.visualstudio.com/docs/python/linting
 ;; https://github.com/emacs-lsp/lsp-mode/issues/1327
 
+;; https://github.com/emacs-lsp/dap-mode/issues/202 DAP Breakpoints
+;;
+;; Launcher Example(s)
+;;
+;; Endpoint to get a breakpoint into views when using manage.py
+;; (dap-debug
+;;  (list :type "python"
+;;        :args "runserver --noreload"
+;;        :cwd "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/"
+;;        :module nil
+;;        :console "integratedTerminal"
+;;        :program "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/manage.py"
+;;        :request "launch"
+;;        :name "Python: Django manage"
+;;        :django t))
+;;
+;; env vars do not work:
+;; https://github.com/emacs-lsp/dap-mode/issues/202
+;; (dap-debug
+;;  (list :type "python"
+;;        :args "-s"
+;;        :cwd "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/study/tests/"
+;;        :environment-variables '(("FOO" . "BAR"))
+;;        :module nil
+;;        :console "integratedTerminal"
+;;        :program "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/test.py"
+;;        :request "launch"
+;;        :name "Python: Django run unit test file"
+;;        :django t))
+
 ;;; Code:
 
 
