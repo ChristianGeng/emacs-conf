@@ -9,12 +9,13 @@ import pytest
 class TestLicenseInContext(unittest.TestCase):
 
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
+        super().setUpClass()
         pass
 
     def test_your_code(self):
         pass
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         pass
