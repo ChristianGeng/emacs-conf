@@ -174,6 +174,12 @@
 ;;        :name "Python: Django run unit test file"
 ;;        :django t))
 
+;; usefuly python hooks:
+;; https://enzuru.medium.com/helpful-emacs-python-mode-hooks-especially-for-type-hinting-c4b70b9b2216
+;; https://github.com/enzuru/.emacs.d
+
+;; https://stackoverflow.com/questions/44094494/can-pycharm-suggest-or-autocomplete-or-insert-type-hints/44102211#44102211
+
 ;;; Code:
 
 
@@ -195,7 +201,7 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp-deferred)
-                         (yapf-mode)
+                         ;; (yapf-mode)
                          (lsp-treemacs)
                          )
                      )
