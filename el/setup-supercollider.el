@@ -38,6 +38,7 @@
 (message "Add SuperCollider")
 ;;; setup-supercollider.el ends here
 
+;; this needs to be cloned to the el directory using git@github.com:supercollider/scel.git
 (add-to-list 'load-path "~/.emacs.d/el/scel/el/")
 (require 'sclang)
 
