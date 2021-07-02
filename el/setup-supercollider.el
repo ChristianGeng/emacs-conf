@@ -39,6 +39,7 @@
 ;;; setup-supercollider.el ends here
 
 ;; this needs to be cloned to the el directory using git clone git@github.com:supercollider/scel.git
+;; in addition you need to run cmake . in the scel directory
 (add-to-list 'load-path "~/.emacs.d/el/scel/el/")
 (require 'sclang)
 
