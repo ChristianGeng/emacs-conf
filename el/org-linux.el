@@ -12,9 +12,13 @@
 ;; https://stackoverflow.com/questions/36873628/how-to-add-org-files-under-org-directory-to-agenda
 (custom-set-variables
  '(org-directory "~/Dropbox/org")
- '(org-default-notes-file (joindirs org-directory "ref.org"))
- '(org-agenda-files (list org-directory))
+ '(org-default-notes-file (joindirs org-directory "agenda.org"))
+;; just use one file for now - so uncommenting '(org-agenda-files (list org-directory))
  )
+
+;; '(org-agenda-files (list org-directory))
+;;  '(org-default-notes-file (joindirs org-directory "ref.org"))
+;;  '(org-directory "~/Dropbox/org")
 
 ;;
 ;;  '(org-agenda-files (joindirs org-directory "agenda.org"))

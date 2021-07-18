@@ -17,13 +17,20 @@
 ;; start debugging
 ;; (setq debug-on-error t)
 
+
+
+
 ;; Org-mode
 (load "org-linux")
 (load "org-general")
-(load "org-todo-states")
-(load "org-capture-templates")
-(load "org-agenda-custom")
-(load "org-abbreviations")
+;; (load "org-todo-states")
+;; (load "org-capture-templates")
+(load "org-capture-templates-slim")
+
+;;(load "org-agenda-custom")
+
+;; (load "org-abbreviations")
+
 (load "org-hyperlinks")
 
 ;; fin: fin.org und fin tag
