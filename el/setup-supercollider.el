@@ -43,8 +43,13 @@
 (add-to-list 'load-path "~/.emacs.d/el/scel/el/")
 (require 'sclang)
 
+;; (sclang-start)
+;;(sclang-server-boot)
+
 ;; (setenv "PATH" (concat (getenv "PATH") ":/Applications/SuperCollider:/Applications/SuperCollider/SuperCollider.app/Contents/MacOS"))
 ;; (setq exec-path (append exec-path '("/Applications/SuperCollider"  "/Applications/SuperCollider/SuperCollider.app/Contents/MacOS" )))
+
+;; /usr/share/SuperCollider/SCClassLibrary/
 
 (provide 'setup-supercollider)
 ;;; setup-groovy ends here
