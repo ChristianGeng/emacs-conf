@@ -23,9 +23,12 @@
 ;; Org-mode
 (load "org-linux")
 (load "org-general")
-;; (load "org-todo-states")
+(load "org-todo-states")
 ;; (load "org-capture-templates")
 (load "org-capture-templates-slim")
+
+
+(setq cfw:org-agenda-schedule-args '(:scheduled :sexp :closed :deadline :todo :timestamp))
 
 ;;(load "org-agenda-custom")
 

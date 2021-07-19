@@ -100,23 +100,16 @@
 
 
 
-;; die brauche ich nachher:
+;; Note: capture op and oL have to match the browser extension's values
 (setq org-capture-templates `(
-	("p" "Protocol" entry (file+headline , (joindirs org-directory "protocol.org") "Inbox")
-        "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	("L" "Protocol Link" entry (file+headline ,(joindirs org-directory "protocol.org") "Inbox")
-        "* %? [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")
+   ("e" "Events")
+   ("t" "Tasks")
+   ("o" "Org-Protocol")
+   ("op" "Protocol" entry (file+headline , (joindirs org-directory "protocol.org") "Inbox")
+    "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+   ("oL" "Protocol Link" entry (file+headline ,(joindirs org-directory "protocol.org") "Inbox")
+    "* %? [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")
 ))
-
-
-;; (setq org-capture-templates
-;;       '(
-;;    ;; Templates for the TASKS keyword sequence
-;;    ("t" "Tasks")
-;;    ("o" "Org-Protocol")
-;;    )
-;; )
-
 
 (message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
 
@@ -128,34 +121,86 @@
 (use-package org-chef
   :ensure t)
 
-;; (add-to-list 'org-capture-templates
-;;      '("or" "RECIPE    (r) Cooking Recipe (Manual Entry)" entry
-;;       (file "cookbook.org")
-;;       "* %^{Recipe title: }
-;;       :PROPERTIES:
-;; :source-url:
-;; :servings:
-;; :prep-time:
-;; :cook-time:
-;; :ready-in:
-;;  :END:
-;; ** Ingredienats:
-;;  %?
-;; ** Directions:
+(message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
 
-;; " :empty-lines 1) t
-;;      )
-;; (add-to-list 'org-capture-templates
-;;              '("o" "Org-Protocol")
-;; )
 
-;; (add-to-list 'org-capture-templates
-;;      '("oR" "RECIPE    (R) Cooking Recipe (from URL)" entry
-;;       (file "cookbook.org")
-;;       "%(org-chef-get-recipe-from-url)") t
-;;      )
+(add-to-list 'org-capture-templates
+     '("or" "RECIPE    (r) Cooking Recipe (Manual Entry)" entry
+      (file "cookbook.org")
+      "* %^{Recipe title: }
+      :PROPERTIES:
+:source-url:
+:servings:
+:prep-time:
+:cook-time:
+:ready-in:
+ :END:
+** Ingredienats:
+ %?
+** Directions:
+
+" :empty-lines 1) t
+     )
+
+
+(add-to-list 'org-capture-templates
+     '("oR" "RECIPE    (R) Cooking Recipe (from URL)" entry
+      (file "cookbook.org")
+      "%(org-chef-get-recipe-from-url)") t
+     )
+
+
+
+(add-to-list 'org-capture-templates
+   ;; TODO     (t) Todo template
+   '("tt" "TODO      (t) Todo" entry (file org-default-notes-file)
+    "* TODO %?
+  :PROPERTIES:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"TODO\"       from \"\"           %U
+  :END:" :empty-lines 1) t
+  )
+
+(add-to-list 'org-capture-templates
+   ;; DONE     (d) Done template
+   '("td" "DONE      (d) Done" entry (file org-default-notes-file)
+    "* DONE %?
+  CLOSED: %U
+  :PROPERTIES:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"DONE\"       from \"\"           %U
+  :END:" :empty-lines 1) t
+  )
+
+(add-to-list 'org-capture-templates
+   ;; MEETING  (m) Meeting template
+   '("em" "MEETING   (m) Meeting" entry (file org-default-notes-file)
+    "* MEETING %?
+  CLOSED: %^U
+  :PROPERTIES:
+  :Attend:   [[peo:Christian Geng][Christian Geng]]
+  :Location:
+  :Via:
+  :Note:
+  :END:
+  :LOGBOOK:
+  - State \"MEETING\"    from \"\"           %U
+  :END:
+  %^T--%^T" :empty-lines 1) t
+  )
+
+
+
+
 
 (message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
+
 
 
 

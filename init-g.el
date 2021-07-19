@@ -363,6 +363,12 @@
 (require 'setup-angular)
 (require 'setup-shell-scripting)
 
+(require 'calfw)
+(require 'calfw-gcal)
+(require 'calfw-org)
+(require 'calfw-gcal)
+(require 'calfw-ical)
+
 (put 'erase-buffer 'disabled nil)
 
 ;; fix misalignment in popus:
