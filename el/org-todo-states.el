@@ -10,7 +10,9 @@
          ;; ASSIGNED means someone else has full, autonomous responsibility for it
          ;; CANCELLED means it's no longer necessary to finish
          ;; DONE means it's complete
-         (sequence "TODO(t@/!)" "WAITING(w@/!)" "DELEGATED(e@/!)" "|" "ASSIGNED(.@/!)" "CANCELLED(x@/!)" "DONE(d@/!)")
+         ;; (sequence "TODO(t@/!)" "WAITING(w@/!)" "DELEGATED(e@/!)" "|" "ASSIGNED(.@/!)" "CANCELLED(x@/!)" "DONE(d@/!)")
+         ;; mir gefällt die obige Sequenz nicht
+         (sequence "TODO(t@/!)" "WAITING(w@/!)" "DOING(d@/!)" "PAUSED(p@/!)" "|" "CANCELLED(x@/!)" "DONE(d@/!)")
 
          ;; Sequence for POSSESSIONS
          ;; PURCHASE means to buy; it's functionally the wishlist
