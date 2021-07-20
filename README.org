@@ -87,7 +87,7 @@ Better take a look at other sources for configuration files:
 - add python from scratch link here
 - https://www.youtube.com/watch?v=74zOY-vgkyw
 - lsp languages https://emacs-lsp.github.io/lsp-mode/page/languages/
-- https://github.com/seblemaguer/dotfiles -> has one too
+- https://github.com/seblemaguer/dotfiles -> has one too, no longer coli uni-saarland
 - Medium Post on LSP: https://alpha2phi.medium.com/emacs-lsp-and-dap-7c1786282324
 
 
