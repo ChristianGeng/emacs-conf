@@ -30,6 +30,25 @@
 
 ;;; Code:
 
+;;;###autoload
+(defun toggle-menubar ()
+"Toggle menubar visibility.
+If toolbar is invisible, turn it on.  Otherwise turn it off."
+  (interactive)
+  (if (eq menu-bar-mode t)
+      (menu-bar-mode -1)
+          (menu-bar-mode t)
+
+))
+
+(defun toggle-toolbar ()
+  "Toggle toolbar visibility.
+If toolbar is invisible, turn it on.  Otherwise turn it off."
+  (interactive)
+  (if (eq tool-bar-mode t)
+      (tool-bar-mode -1)
+          (tool-bar-mode t)
+))
 
 (defun joindirs (root &rest dirs)
   "Joins a series of directories together, like Python's os.path.join,
