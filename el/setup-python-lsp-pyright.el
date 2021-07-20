@@ -180,7 +180,37 @@
 
 ;; https://stackoverflow.com/questions/44094494/can-pycharm-suggest-or-autocomplete-or-insert-type-hints/44102211#44102211
 
+
+;; Coverage in Emacs
+;; roll your own:
+;; https://blog.laurentcharignon.com/post/universal-code-coverage/
+;;
+;; On Elpa:
+;; pycoverage https://github.com/mattharrison/pycoverage.el
+;;
+;;  cov                            20210330.44    available    melpa    Show coverage stats in the fringe.
+;;  coverage                       20191113.1958  available    melpa    Code coverage line highlighting
+;;  coverlay                       20190414.940   available    melpa    Test coverage overlays
+;;
+;; not on elpa:
+;; in flychecker (m))
+;; https://github.com/wbolster/emacs-python-coverage/blob/master/python-coverage.el
+
 ;;; Code:
+
+
+
+(require 'linum)
+(require 'pycoverage)
+
+
+(defun my-coverage ()
+  (interactive)
+  (when (derived-mode-p 'python-mode)
+    (progn
+      (linum-mode)
+      (pycoverage-mode))))
+
 
 
 

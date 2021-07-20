@@ -106,14 +106,23 @@
 ;; https://github.com/emacs-lsp/dap-mode/issues/110
 ;;
 
+
+;; stopping to debug
+;;
+;; https://github.com/emacs-lsp/dap-mode/issues/281
+
+
 ;;; Code:
 
 (message "Setting up Dap Mode!")
 
 (use-package dap-mode
+  :tags '("IDE" "PROGRAMMING" "LSP")
   :custom
-  (dap-auto-configure-features '(sessions locals tooltip breakpoints expression controls)) ;; -> alternativ
+  ;; (dap-auto-configure-features '(sessions locals tooltip breakpoints expression controls)) ;; -> alternativ
   ;; (lsp-enable-dap-auto-configure nil)  ->  do not start any of locals breakpoints expression controls tooltip by default
+  ;; Reduce the features to the repl and the local variable information
+  (setq dap-auto-configure-features '(locals repl))
   :commands dap-debug
   :config
   (require 'dap-node)
@@ -121,14 +130,25 @@
   (dap-tooltip-mode 1)
   (dap-node-setup) ;; Automatically installs Node debug adapter if needed
   (require 'dap-hydra)
+    ;; Redefine the height of the repl buffer
+  (setq dap-ui-buffer-configurations
+        `((,dap-ui--locals-buffer . ((side . right) (slot . 1) (window-width . 0.30)))
+          (,dap-ui--expressions-buffer . ((side . right) (slot . 2) (window-width . 0.20)))
+          (,dap-ui--sessions-buffer . ((side . right) (slot . 3) (window-width . 0.23)))
+          (,dap-ui--breakpoints-buffer . ((side . left) (slot . 2) (window-width . ,treemacs-width)))
+          (,dap-ui--debug-window-buffer . ((side . bottom) (slot . 3) (window-width . 0.20)))
+          (,dap-ui--repl-buffer . ((side . bottom) (slot . 1) (window-height . 0.20)))))
   ;; (require 'dap-gdb-lldb)  -> makes it break!
   ;; (dap-gdb-lldb-setup)
   ;; Bind `C-c l d` to `dap-hydra` for easy access
-  (general-define-key
-   :keymaps 'lsp-mode-map
-   :prefix lsp-keymap-prefix
-   "d" '(dap-hydra t :wk "debugger"))
+  ;; (general-define-key
+  ;;  :keymaps 'lsp-mode-map
+  ;;  :prefix lsp-keymap-prefix
+  ;;  "d" '(dap-hydra t :wk "debugger"))
   )
+
+
+
 
 ;; dap-node-setup setups the debug adapter
 
