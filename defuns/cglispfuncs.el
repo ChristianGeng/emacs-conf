@@ -31,6 +31,22 @@
 ;;; Code:
 
 
+;; http://ergoemacs.org/emacs/elisp_read_file_content.html
+(defun read-lines (filePath)
+  "Return a list of lines of a file at filePath."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (split-string (buffer-string) "\n" t)))
+
+
+;; create a shell with name in specific directory,
+;; see https://stackoverflow.com/questions/4880058/open-shell-in-emacs-with-a-given-working-directory
+(defun shell-dir (name dir)
+  (interactive "sShell name: \nDDirectory: ")
+  (let ((default-directory dir))
+    (shell name)))
+
+
 (defun joindirs (root &rest dirs)
   "Joins a series of directories together, like Python's os.path.join,
   (dotemacs-joindirs \"/tmp\" \"a\" \"b\" \"c\") => /tmp/a/b/c"
@@ -116,6 +132,13 @@ Directory defaults to the value of `my-archive-dir'."
   "Print each element of LIST on a line of its own."
   (while list
     (print (car list))
+    (setq list (cdr list))))
+
+
+(defun messagelist (list)
+  "Print each element of LIST on a line of its own."
+  (while list
+    (message (car list))
     (setq list (cdr list))))
 
 
