@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: for-sequence
+# key: for
+# --
+
+NITER=10
+
+for i in $(seq 1 $NITER); do
+    echo $i;
+done
