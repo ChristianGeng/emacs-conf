@@ -150,6 +150,11 @@
 ;; ob-sh was remamed to ob-shell in org 8.2
 ;; https://emacs.stackexchange.com/questions/37692/how-to-fix-symbols-function-definition-is-void-org-babel-get-header
 
+;; template expansion:
+(require 'org-tempo)
+
+;; david willson uses org-structure-template-alist
+
 (require 'ob-async)
 (setq org-confirm-babel-evaluate nil)
 
