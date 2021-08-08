@@ -1,9 +1,57 @@
+:PROPERTIES:
+:ID:       19b31c0e-fc4c-406c-be79-3742680f8601
+:END:
+#+title: Emacs From Scratch Configuration
+#+PROPERTY: header-args:emacs-lisp :tangle ./init-g.el :mkdirp yes
+
+# M-x org-babel-tangle
+
+* Eearly Init - not needed?
+
+https://www.masteringemacs.org/article/whats-new-in-emacs-27-1
+
+However, if your init file changes the values of
+
+- package-load-list
+- or 'package-user-dir', or sets
+- package-enable-at-startup to nil then
+
+
+- You can move that code to the early init file (see above), so those
+  settings apply before Emacs tries to activate the packages.
+- You can use the new 'package-quickstart' so activation of packages
+  does not need to pay attention to 'package-load-list' or
+  'package-user-dir' any more.
+
+
+
+* Init File
+:PROPERTIES:
+:ID:       214b3d62-1d24-46f8-a373-e3a9e665602d
+:END:
+
+** Coding System
+:PROPERTIES:
+:ID:       97c85ba1-ae76-4450-99a5-3ba469d4e46d
+:END:
+
+#+begin_src emacs-lisp
+
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-;; Setup packages
+#+end_src
+
+** Package and Load Process / Function Paths
+:PROPERTIES:
+:ID:       d201ac7f-645f-471b-9546-afef19448207
+:END:
+
+#+begin_src emacs-lisp
+
+    ;; Setup packages
     ;; code obsolete in emacs27
     (if (version< emacs-version "27.1")
         (package-initialize)
@@ -76,7 +124,16 @@
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
 
-;; Allow pasting selection outside of Emacs
+#+end_src
+
+
+** Defaults
+:PROPERTIES:
+:ID:       8e48bca6-9fb1-4ce2-8234-784594027423
+:END:
+
+#+begin_src emacs-lisp
+  ;; Allow pasting selection outside of Emacs
   (setq x-select-enable-clipboard t)
   (setq x-select-enable-primary t)
 
@@ -209,6 +266,16 @@
   (global-hl-line-mode 1)
 
 (setq  realgud-safe-mode nil)
+
+#+end_src
+
+
+** Programming
+:PROPERTIES:
+:ID:       10eecafe-1a33-4d5d-a162-6fc25c6f4791
+:END:
+
+#+begin_src emacs-lisp
 
 (require 'realgud)
 
@@ -473,6 +540,18 @@
 (setq x-alt-keysym 'meta)
 (put 'set-goal-column 'disabled nil)
 
+#+end_src
+
+
+
+** Misc
+:PROPERTIES:
+:ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
+:END:
+
+*** Defuns
+
+#+begin_src emacs-lisp
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
   (interactive)
@@ -481,6 +560,10 @@
         (setq file (concat "/sudo:localhost:" (buffer-file-name)))
         (find-file file))
     (message "Current buffer does not have an associated file.")))
+#+end_src
+
+*** Imenu auto
+#+begin_src emacs-lisp
 
 ;; add Imenu whenever possible.
 ;; see https://www.emacswiki.org/emacs/ImenuMode for documentation
@@ -488,6 +571,15 @@
   (condition-case nil (imenu-add-to-menubar "Index") (error nil)))
  (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
+#+end_src
+
+
+*** Visible Bell off
+
+:PROPERTIES:
+:ID:       6d9c48b7-0c81-4a42-a7f0-dfe149934fb2
+:END:
+#+begin_src emacs-lisp
 (setq visible-bell t)
 ;; ring-bell function not doing what its supposed to?
 ;; see https://www.emacswiki.org/emacs/AlarmBell
@@ -495,12 +587,50 @@
 ;;   "do not ring the bell when cursor has gone too far outside."
 ;;   (message "Went outside but not ringing the bell.")
 ;;     )
+#+end_src
 
+*** Mac Specific
+:PROPERTIES:
+:ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
+:END:
+#+begin_src emacs-lisp
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
 ;; Setup environment variables from the user's shell.
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
 
-;;  value=155
-(setq value 155)
+#+end_src
+
+
+* Applications Config Example
+
+** Some App
+:PROPERTIES:
+:ID:       216fa964-a617-4a95-b3f4-3bd82856d8b1
+:END:
+
+This is an example of configuring another non-Emacs application using org-mode.  Not only do we write out the configuration at =.config/some-app/config=, we also compute the value that gets stored in this configuration from the Emacs Lisp block above it.
+
+#+NAME: the-value
+#+begin_src emacs-lisp :tangle no
+
+  (+ 55 100)
+
+#+end_src
+
+*NOTE*: Set the =:tangle= parameter below to =.config/some-app/config= for this to work!
+
+#+begin_src emacs-lisp :tangle no :noweb yes
+
+  ;;  value=<<the-value()>>
+  (setq value <<the-value()>>)
+
+#+end_src
+
+#+begin_src emacs-lisp :noweb yes
+
+  ;;  value=<<the-value()>>
+  (setq value <<the-value()>>)
+
+#+end_src
