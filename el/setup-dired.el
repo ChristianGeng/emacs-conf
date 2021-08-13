@@ -177,7 +177,6 @@ Version 2019-11-04 2021-02-16"
 
 (define-key dired-mode-map (kbd "<C-return>") 'xah-open-in-external-app)
 
-
-
+(put 'dired-find-alternate-file 'disabled nil)
 
 (provide 'setup-dired)

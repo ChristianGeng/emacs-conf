@@ -44,6 +44,19 @@ However, if your init file changes the values of
 
 #+end_src
 
+
+** Emacs Server
+:PROPERTIES:
+:ID:       91011ca1-3a58-4d79-ba3a-21b27eb355b7
+:END:
+
+#+begin_src emacs-lisp
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+#+end_src
+
+
 ** Package and Load Process / Function Paths
 :PROPERTIES:
 :ID:       d201ac7f-645f-471b-9546-afef19448207
@@ -328,6 +341,7 @@ However, if your init file changes the values of
 
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
+
 (require 'setup-org) ;; organizer todo notes etc
 
 (require 'setup-plantuml) ;; organizer todo notes etc
@@ -434,11 +448,6 @@ However, if your init file changes the values of
 ;; Email, baby
 ;; (require 'setup-mule)
 
-;; Emacs server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -510,9 +519,6 @@ However, if your init file changes the values of
 ;; fix misalignment in popus:
 (setq popup-use-optimized-column-computation nil)
 
-(put 'dired-find-alternate-file 'disabled nil)
-
-
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
 ;; https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404
@@ -550,6 +556,9 @@ However, if your init file changes the values of
 :END:
 
 *** Defuns
+:PROPERTIES:
+:ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
+:END:
 
 #+begin_src emacs-lisp
 (defun edit-current-file-as-root ()
@@ -563,6 +572,9 @@ However, if your init file changes the values of
 #+end_src
 
 *** Imenu auto
+:PROPERTIES:
+:ID:       820994eb-2700-428a-a80b-d5e0ede6299d
+:END:
 #+begin_src emacs-lisp
 
 ;; add Imenu whenever possible.
@@ -575,6 +587,9 @@ However, if your init file changes the values of
 
 
 *** Visible Bell off
+:PROPERTIES:
+:ID:       4b5650ad-478a-4c5e-8120-c56375abf02a
+:END:
 
 :PROPERTIES:
 :ID:       6d9c48b7-0c81-4a42-a7f0-dfe149934fb2

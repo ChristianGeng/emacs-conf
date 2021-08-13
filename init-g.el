@@ -3,6 +3,10 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 ;; Setup packages
     ;; code obsolete in emacs27
     (if (version< emacs-version "27.1")
@@ -261,6 +265,7 @@
 
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
+
 (require 'setup-org) ;; organizer todo notes etc
 
 (require 'setup-plantuml) ;; organizer todo notes etc
@@ -367,11 +372,6 @@
 ;; Email, baby
 ;; (require 'setup-mule)
 
-;; Emacs server
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -442,9 +442,6 @@
 
 ;; fix misalignment in popus:
 (setq popup-use-optimized-column-computation nil)
-
-(put 'dired-find-alternate-file 'disabled nil)
-
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
