@@ -613,7 +613,7 @@ However, if your init file changes the values of
   (pyvenv-tracking-mode 1)
   )  ; Automatically use pyvenv-workon via dir-locals
 
-(provide 'setup-python-lsp-pyright)
+(provide 'setup-python)
 
 ;;; setup-python-lsp-pyright ends here
 

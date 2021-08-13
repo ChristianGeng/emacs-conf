@@ -237,10 +237,13 @@
 (require 'setup-dap-mode)
 
 ;;   not  lsp
-;; (require 'setup-python)
+;; (require 'setup-python-elpy-jedi)   ;; was the old setup-python.el
 ;; (require 'setup-python-lsp-emacs-from-scratch)
 ;;(require 'setup-python-pyright)
-(require 'setup-python-lsp-pyright)
+;; (require 'setup-python-lsp-pyright)
+
+;; now: Alays write into setup-python and require so
+(require 'setup-python)
 
 (require 'setup-typescript)
 (require 'setup-angular)
