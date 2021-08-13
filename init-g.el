@@ -235,11 +235,13 @@
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
 (require 'setup-dap-mode)
+
 ;;   not  lsp
 ;; (require 'setup-python)
 ;; (require 'setup-python-lsp-emacs-from-scratch)
 ;;(require 'setup-python-pyright)
 (require 'setup-python-lsp-pyright)
+
 (require 'setup-typescript)
 (require 'setup-angular)
 (require 'setup-c-lsp-clangd)
@@ -428,7 +430,7 @@
 (require 'setup-editorconfig)
 (require 'setup-rtags)
 (require 'setup-treemacs)
-(require 'setup-angular)
+
 (require 'setup-shell-scripting)
 
 (require 'calfw)
