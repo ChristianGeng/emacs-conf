@@ -236,12 +236,11 @@
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
 (require 'setup-dap-mode)
 
-;;   not  lsp
+;; not  lsp
 ;; (require 'setup-python-elpy-jedi)   ;; was the old setup-python.el
 ;; (require 'setup-python-lsp-emacs-from-scratch)
-;;(require 'setup-python-pyright)
+;; (require 'setup-python-pyright)
 ;; (require 'setup-python-lsp-pyright)
-
 ;; now: Alays write into setup-python and require so
 (require 'setup-python)
 

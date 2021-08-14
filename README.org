@@ -15,17 +15,18 @@ Better take a look at other sources for configuration files:
 - https://github.com/magnars/.emacs.d/
 - https://github.com/cjohansen/.emacs.d
 - https://github.com/technomancy/emacs-starter-kit from which I take inspiration or shamelessly copy.
--  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top][Emacs Manual]]
--  [[https://www.emacswiki.org/emacs/ImenuMode#toc3][imenu and icycles]]
--  [[http://avilpage.com/2015/05/automatically-pep8-your-python-code.html][Emacs Mode Hook for autopep]]
--  http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org67e2b1b
-   -> moved https://github.com/seblemaguer/dotfiles
--  https://github.com/daviwil/emacs-from-scratch - emacs from Scratch Series
--  https://github.com/Schnouki
--  https://github.com/tmtxt/.emacs.d/tree/master/config
--  https://www.masteringemacs.org
--  https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
--  http://ergoemacs.org/emacs/emacs\_find\_replace.html
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top][Emacs Manual]]
+- [[https://www.emacswiki.org/emacs/ImenuMode#toc3][imenu and icycles]]
+- [[http://avilpage.com/2015/05/automatically-pep8-your-python-code.html][Emacs Mode Hook for autopep]]
+- http://www.coli.uni-saarland.de/~slemaguer/emacs/main.html#org67e2b1b
+  -> moved https://github.com/seblemaguer/dotfiles
+- https://github.com/daviwil/emacs-from-scratch - emacs from Scratch Series
+- https://github.com/Schnouki
+- https://github.com/tmtxt/.emacs.d/tree/master/config
+- https://www.masteringemacs.org
+- https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
+- http://ergoemacs.org/emacs/emacs\_find\_replace.html
+- https://github.com/enzuru/.emacs.d
 
 * Languages / Modes
 
