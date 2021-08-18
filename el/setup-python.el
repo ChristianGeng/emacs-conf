@@ -2,6 +2,46 @@
 ;;
 ;;; Code:
 
+(message "Lsp Python begins here")
+
+(defun python-yapf-format-buffer ()
+   (interactive)
+   (when (and (executable-find "yapf") buffer-file-name)
+     (call-process "yapf" nil nil nil "-i" buffer-file-name)))
+
+;; add hook example
+;; (add-hook 'python-mode-hook
+;;           (lambda ()
+;;             (add-hook 'after-save-hook #'lsp-python-ms-format-buffer t t)))
+
+;; does not work as custom variable
+;; (defcustom python-autoflake-path
+;;   (replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
+;;   )
+
+(defvar python-autoflake-path
+(replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
+)
+
+(defun python-remove-unused-imports()
+  "Use Autoflake to remove unused function"
+  "autoflake --remove-all-unused-imports -i unused_imports.py"
+  (interactive)
+  (shell-command
+   (format "%s --remove-all-unused-imports -i %s"
+       python-autoflake-path
+           (shell-quote-argument (buffer-file-name))))
+  (revert-buffer t t t))
+
+(defun python-remove-unused-variables()
+"Use Autoflake to remove unused function"
+"autoflake --remove-all-unused-imports -i unused_imports.py"
+(interactive)
+(shell-command
+ (format "%s --remove-unused-variables -i %s"
+     python-autoflake-path
+         (shell-quote-argument (buffer-file-name))))
+(revert-buffer t t t))
 
 (require 'linum)
 (require 'pycoverage)
@@ -13,18 +53,6 @@
     (progn
       (linum-mode)
       (pycoverage-mode))))
-
-
-(message "Lsp for Python: pyright version")
-
-;; (defun lsp-python-ms-format-buffer ()
-;;   (interactive)
-;;   (when (and (executable-find "yapf") buffer-file-name)
-;;     (call-process "yapf" nil nil nil "-i" buffer-file-name)))
-
-;; (add-hook 'python-mode-hook
-;;           (lambda ()
-;;             (add-hook 'after-save-hook #'lsp-python-ms-format-buffer t t)))
 
 
 (use-package python-mode
@@ -53,7 +81,11 @@
   (setq lsp-file-watch-threshold 2000)
 
   (setq lsp-pyright-auto-import-completions t)
+  ;;  Determines whether pyright automatically adds common search paths.
+  ;; i.e: Paths like "src" if there are no execution environments defined in the
+  ;; config file.
   (setq lsp-pyright-auto-search-paths t)
+  (setq lsp-pyright-log-level "trace")
 
 (require 'dap-python)
 

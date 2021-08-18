@@ -171,11 +171,13 @@
 ;;    lsp-treemacs-symbols - Show a tree view of the symbols in the current file
 ;;    lsp-treemacs-references - Show a tree view for the references of the symbol under the cursor
 ;;    lsp-treemacs-error-list - Show a tree view for the diagnostic messages in the project
-(use-package lsp-treemacs
-  :commands
-  (lsp-treemacs-symbols)
-  (lsp-treemacs-errors-list)
-  :after lsp)
+
+
+(use-package lsp-treemacs)
+  ;; :commands
+  ;;   (lsp-treemacs-symbols)
+  ;; (lsp-treemacs-errors-list)
+  ;; :after lsp)
 
 ;; This fixes a bug:
 ;; Error running timer ‘lsp--on-idle’: (error "The connected server(s) does not support method textDocument/documentLink

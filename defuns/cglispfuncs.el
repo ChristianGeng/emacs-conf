@@ -161,7 +161,6 @@ Directory defaults to the value of `my-archive-dir'."
     (setq list (cdr list))))
 
 
-
 ;; insert current date, use calendar, see for more details:
 ;; https://www.emacswiki.org/emacs/InsertingTodaysDate
 (defun insdate-insert-current-date (&optional omit-day-of-week-p)
@@ -171,6 +170,7 @@ Directory defaults to the value of `my-archive-dir'."
   (interactive "P*")
   (insert (calendar-date-string (calendar-current-date) nil
                                 omit-day-of-week-p)))
+
 
  (defun timestamp ()
    (interactive)

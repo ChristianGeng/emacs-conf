@@ -45,16 +45,6 @@ However, if your init file changes the values of
 #+end_src
 
 
-** Emacs Server
-:PROPERTIES:
-:ID:       91011ca1-3a58-4d79-ba3a-21b27eb355b7
-:END:
-
-#+begin_src emacs-lisp
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-#+end_src
 
 
 ** Package and Load Process / Function Paths
@@ -498,7 +488,7 @@ npm run build:serverProd
 #+begin_src emacs-lisp :tangle no
 ;; Nutzung der VSCode Version:
 ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-(setq lsp-pyright-server-cmd `("node" "~/pyright/client/server/server.bundle.js" "--stdio"))
+;; (setq lsp-pyright-server-cmd `("node" "~/pyright/client/server/server.bundle.js" "--stdio"))
 #+end_src
 
 Activating venvs:
@@ -526,6 +516,8 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 - All variables that are accessible through Emacs as defcustom are here:
   https://github.com/emacs-lsp/lsp-pyright
 
+code/data_collection/aisoundlab/audb_covid_19/1.0.0/
+
 
 #+begin_src bash :tangle no
 
@@ -542,98 +534,213 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 #+end_src
 
 *****
-***** Pyright Usage and configuration
+***** Tangle and Reload
 
-**** Conf file Pyright
+#+begin_src emacs-lisp :tangle no :noweb yes
+  (org-babel-tangle)
+  (load-file "~/.emacs.d/init.el")
+#+end_src
+
+#+RESULTS:
+: t
+
+
+
+**** Writing setup-python.el file  the  conf
 :PROPERTIES:
 :ID:       e1a1988b-a70a-435c-98e3-d95c61522659
 :END:
+
+***** Header
+:PROPERTIES:
+:ID:       6644930c-c376-4981-ae63-fc57ab4f5122
+:END:
+
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
-;;; setup-python.el --- summary -*- lexical-binding: t -*-
-;;
-;;; Code:
+  ;;; setup-python.el --- summary -*- lexical-binding: t -*-
+  ;;
+  ;;; Code:
+
+  (message "Lsp Python begins here")
+#+end_src
+
+***** Format buffer using yapf
+:PROPERTIES:
+:ID:       674e2989-94c8-4dbe-976a-64ad936aa62c
+:END:
+
+see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+
+  (defun python-yapf-format-buffer ()
+     (interactive)
+     (when (and (executable-find "yapf") buffer-file-name)
+       (call-process "yapf" nil nil nil "-i" buffer-file-name)))
+
+  ;; add hook example
+  ;; (add-hook 'python-mode-hook
+  ;;           (lambda ()
+  ;;             (add-hook 'after-save-hook #'lsp-python-ms-format-buffer t t)))
 
 
-(require 'linum)
-(require 'pycoverage)
+#+end_src
 
+***** Remove unused imports using autoflake
+:PROPERTIES:
+:ID:       5a5a162d-6b68-405d-9c47-02775e75271e
+:END:
 
-(defun my-coverage ()
-  (interactive)
-  (when (derived-mode-p 'python-mode)
-    (progn
-      (linum-mode)
-      (pycoverage-mode))))
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+  ;; does not work as custom variable
+  ;; (defcustom python-autoflake-path
+  ;;   (replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
+  ;;   )
 
-
-(message "Lsp for Python: pyright version")
-
-;; (defun lsp-python-ms-format-buffer ()
-;;   (interactive)
-;;   (when (and (executable-find "yapf") buffer-file-name)
-;;     (call-process "yapf" nil nil nil "-i" buffer-file-name)))
-
-;; (add-hook 'python-mode-hook
-;;           (lambda ()
-;;             (add-hook 'after-save-hook #'lsp-python-ms-format-buffer t t)))
-
-
-(use-package python-mode
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp-deferred)
-                         ;; (yapf-mode)
-                         (lsp-treemacs)
-                         )
-                     )
-  :custom
-  ;; NOTE: Set these if Python 3 is called "python3" on your system!
-  ;; (python-shell-interpreter "python3")
-  ;; (dap-python-executable "python3")
-  ;; should be .dir-local:
-  ;; (lsp-pyright-venv-path "~/.venvs/py37")
-  (dap-python-debugger 'debugpy)
-  :config
-  (require 'dap-python)
-  ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
+  (defvar python-autoflake-path
+  (replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
   )
 
+  (defun python-remove-unused-imports()
+    "Use Autoflake to remove unused function"
+    "autoflake --remove-all-unused-imports -i unused_imports.py"
+    (interactive)
+    (shell-command
+     (format "%s --remove-all-unused-imports -i %s"
+         python-autoflake-path
+             (shell-quote-argument (buffer-file-name))))
+    (revert-buffer t t t))
+#+end_src
 
-  (setq lsp-enable-file-watchers nil)
-  (setq lsp-file-watch-threshold 2000)
+#+RESULTS:
+: python-remove-unused-imports
 
-  (setq lsp-pyright-auto-import-completions t)
-  (setq lsp-pyright-auto-search-paths t)
+***** Remove unused variables using autoflake
+:PROPERTIES:
+:ID:       9259bd8f-9cce-4f06-b262-d9f487959596
+:END:
 
-(require 'dap-python)
+- this goes by using the --remove-unused-variables flag
 
-;; (lsp-client-settings)
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
 
-(use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode)
-  ;; :bind (:map company-active-map
-  ;;        ("<tab>" . company-complete-selection))
-  ;;       (:map lsp-mode-map
-  ;;        ("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+    (defun python-remove-unused-variables()
+    "Use Autoflake to remove unused function"
+    "autoflake --remove-all-unused-imports -i unused_imports.py"
+    (interactive)
+    (shell-command
+     (format "%s --remove-unused-variables -i %s"
+         python-autoflake-path
+             (shell-quote-argument (buffer-file-name))))
+    (revert-buffer t t t))
 
-(use-package pyvenv
-  :config
-  (pyvenv-mode 1)
-  ;; (setq pyvenv-workon "py37")  ; Default venv
-  (pyvenv-tracking-mode 1)
-  )  ; Automatically use pyvenv-workon via dir-locals
+#+end_src
 
-(provide 'setup-python)
+#+RESULTS:
+: python-remove-unused-imports
 
-;;; setup-python-lsp-python ends here
+***** Configure black formatter
+:PROPERTIES:
+:ID:       a7799b15-ad9f-4ab0-b55a-5ea7c6ef14e7
+:END:
+
+- blacken-buffer will format the buffer
+- customizations are better kept in pyproject.toml, so the line length commneted out
+- setup.cfg is interpreted by black
+-
+
+#+begin_src emacs-lisp
+  (use-package use-package-ensure-system-package :ensure t)
+  (use-package blacken
+      :ensure t
+      :ensure-system-package (black . "pip3 install black")
+      ;; :custom
+      ;; (blacken-line-length 119)
+      )
+
+#+end_src
+
+
+***** Main Conf Block
+:PROPERTIES:
+:ID:       028eb1d6-f3c4-40e1-8943-34a15fd269a9
+:END:
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+
+  (require 'linum)
+  (require 'pycoverage)
+
+
+  (defun my-coverage ()
+    (interactive)
+    (when (derived-mode-p 'python-mode)
+      (progn
+        (linum-mode)
+        (pycoverage-mode))))
+
+
+  (use-package python-mode
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (lsp-deferred)
+                           ;; (yapf-mode)
+                           (lsp-treemacs)
+                           )
+                       )
+    :custom
+    ;; NOTE: Set these if Python 3 is called "python3" on your system!
+    ;; (python-shell-interpreter "python3")
+    ;; (dap-python-executable "python3")
+    ;; should be .dir-local:
+    ;; (lsp-pyright-venv-path "~/.venvs/py37")
+    (dap-python-debugger 'debugpy)
+    :config
+    (require 'dap-python)
+    ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
+    )
+
+
+    (setq lsp-enable-file-watchers nil)
+    (setq lsp-file-watch-threshold 2000)
+
+    (setq lsp-pyright-auto-import-completions t)
+    ;;  Determines whether pyright automatically adds common search paths.
+    ;; i.e: Paths like "src" if there are no execution environments defined in the
+    ;; config file.
+    (setq lsp-pyright-auto-search-paths t)
+    (setq lsp-pyright-log-level "trace")
+
+  (require 'dap-python)
+
+  ;; (lsp-client-settings)
+
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    ;; :bind (:map company-active-map
+    ;;        ("<tab>" . company-complete-selection))
+    ;;       (:map lsp-mode-map
+    ;;        ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
+
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+
+  (use-package pyvenv
+    :config
+    (pyvenv-mode 1)
+    ;; (setq pyvenv-workon "py37")  ; Default venv
+    (pyvenv-tracking-mode 1)
+    )  ; Automatically use pyvenv-workon via dir-locals
+
+  (provide 'setup-python)
+
+  ;;; setup-python-lsp-python ends here
 
 #+end_src
 
@@ -647,9 +754,6 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
   ;; now: Alays write into setup-python and require so
   (require 'setup-python)
 #+end_src
-
-
-
 
 *** LSP Other Languages
 :PROPERTIES:
@@ -863,11 +967,40 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
-;; https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404
+#+end_src
+
+**** Shell prompt
+
+
+***** Recommendations
+:PROPERTIES:
+:ID:       ad5cc4be-3a56-4208-90e3-173b17837c02
+:END:
+
+https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404
+
+#+begin_src emacs-lisp :tangle no
 ;; ->  make  all  envs  visible in  also org mode
 (setq shell-file-name "bash")
 (setq shell-command-switch "-ic")
+#+end_src
 
+- The solution is to leave the shell-command-switch variable at its default value, which is just -c.
+https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group-error-when-running-bash-script
+
+#+begin_src emacs-lisp
+(setq shell-file-name "bash")
+(setq shell-command-switch "-c")
+#+end_src
+
+
+
+**** safe local variables
+:PROPERTIES:
+:ID:       7a719b5d-aa8c-4110-9859-5aea715e044b
+:END:
+
+#+begin_src emacs-lisp
 
 ;; - '(safe-local-variable-values '((testvar\  . "hello")))
 ;; + '(safe-local-variable-values
@@ -884,12 +1017,21 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 (put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
 (put 'py-pythonpath  'safe-local-variable (lambda (_) t))
 
-;; fix missing alt-key in WSL
-(setq x-alt-keysym 'meta)
-(put 'set-goal-column 'disabled nil)
 
 #+end_src
 
+
+**** fix missing alt-key in WSL
+:PROPERTIES:
+:ID:       52d2df23-c894-4ce0-b82b-1023c29e4483
+:END:
+
+WSL for Windows specific code
+
+#+begin_src emacs-lisp
+(setq x-alt-keysym 'meta)
+(put 'set-goal-column 'disabled nil)
+#+end_src
 
 
 ** Misc
@@ -958,6 +1100,18 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 ;; (when is-mac (require 'mac))
 
 #+end_src
+
+** Emacs Server
+:PROPERTIES:
+:ID:       91011ca1-3a58-4d79-ba3a-21b27eb355b7
+:END:
+
+#+begin_src emacs-lisp
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+#+end_src
+
 
 
 * Applications Config Example

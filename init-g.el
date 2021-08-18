@@ -3,10 +3,6 @@
 (set-language-environment 'utf-8)
 (set-selection-coding-system 'utf-8)
 
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
 ;; Setup packages
     ;; code obsolete in emacs27
     (if (version< emacs-version "27.1")
@@ -236,6 +232,14 @@
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
 (require 'setup-dap-mode)
 
+(use-package use-package-ensure-system-package :ensure t)
+(use-package blacken
+    :ensure t
+    :ensure-system-package (black . "pip3 install black")
+    ;; :custom
+    ;; (blacken-line-length 119)
+    )
+
 ;; not  lsp
 ;; (require 'setup-python-elpy-jedi)   ;; was the old setup-python.el
 ;; (require 'setup-python-lsp-emacs-from-scratch)
@@ -449,11 +453,8 @@
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
-;; https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404
-;; ->  make  all  envs  visible in  also org mode
 (setq shell-file-name "bash")
-(setq shell-command-switch "-ic")
-
+(setq shell-command-switch "-c")
 
 ;; - '(safe-local-variable-values '((testvar\  . "hello")))
 ;; + '(safe-local-variable-values
@@ -470,7 +471,6 @@
 (put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
 (put 'py-pythonpath  'safe-local-variable (lambda (_) t))
 
-;; fix missing alt-key in WSL
 (setq x-alt-keysym 'meta)
 (put 'set-goal-column 'disabled nil)
 
@@ -502,6 +502,10 @@
 ;; Setup environment variables from the user's shell.
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
+
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 ;;  value=155
 (setq value 155)

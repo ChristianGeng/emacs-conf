@@ -248,7 +248,7 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
          (eval . (progn
           (make-local-variable 'process-environment)
           (setq process-environment (copy-sequence process-environment))
-          (setenv "PYTHONPATH" "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/:/home/audeering.local/cgeng/projects/speaker/code/speaker-sdk/examples/")
+          (setenv "PYTHONPATH" "/home/cgeng/code/app/:/home/cgeng/some_dir/")
           (setenv "WORKON_HOME" (expand-file-name "~/.venvs"))
           ))
          )
