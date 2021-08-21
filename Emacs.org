@@ -1128,6 +1128,109 @@ WSL for Windows specific code
 ;;     )
 #+end_src
 
+*** Auth Source
+
+- https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
+- https://www.youtube.com/watch?v=nZ_T7Q49B8Y
+
+
+(add-to-list 'auth-sources (joindirs org-directory "Notes.org.gpg")) ;; not parseable by authinfo
+(find-file (joindirs org-directory "Notes.org.gpg"))
+
+
+
+ (defun delete-nth (index seq)
+   "Delete the INDEX th element of SEQ.
+ Return result sequence, SEQ __is__ modified."
+   (if (equal index 0)
+       (progn
+         (setcar seq (car (cdr seq)))
+         (setcdr seq (cdr (cdr seq))))
+     (setcdr (nthcdr (1- index) seq) (nthcdr (1+ index) seq))))
+
+(delete-nth 0 auth-sources)
+
+(add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg")) ;; not parseable
+  (mapc 'message auth-sources)
+
+(find-file (joindirs org-directory ".authinfo.gpg"))
+(find-file (joindirs org-directory "Notes.org.gpg")) ;; no need to add to auth sources as not parseable
+(auth-source-search :site "kaufland.de")
+(auth-source-search :site "real.de")
+
+
+#+begin_src emacs-lisp :tangle no :noweb yes
+  (mapc 'message auth-sources)
+#+end_src
+
+#+RESULTS:
+| ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
+
+(auth-source-search :site  "arts-outdoors")
+(auth-source-search :site  "arts-outdoors")
+
+https://www.arts-outdoors.de
+
+(auth-source-search :host "real.de")
+(auth-source-search :machine "mailprovider.com")
+
+(find-file (joindirs org-directory ".authinfo.gpg"))
+(auth-source-forget-all-cached)
+(find-file "~/.authinfo.gpg")
+(mapc 'message auth-sources)
+
+**** Generate Key
+
+#+begin_example shell
+gpg --full-generate-key
+#+end_example
+
+- use rsa
+- size: 4096
+- never expires
+- Real Name
+- Email
+- PassPhrase
+
+#+begin_src shell :tangle no :noweb yes :results output raw
+  gpg --list-keys
+  # these should be in
+  ls -t ~/.gnupg/
+#+end_src
+
+#+RESULTS:
+/home/christian/.gnupg/pubring.kbx
+----------------------------------
+pub   rsa4096 2021-08-21 [SC]
+      B6791609BBC1CD7C000F17E75921C10409567BCA
+uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
+sub   rsa4096 2021-08-21 [E]
+
+trustdb.gpg
+openpgp-revocs.d
+pubring.kbx
+private-keys-v1.d
+pubring.kbx~
+
+#+begin_src shell :tangle no :noweb yes :results output raw
+# Check if gpg-agent is already running
+grep gpg-agent
+# If it's not running, you can start it up with this command:
+gpg-connect-agent /bye
+#+end_src
+
+#+RESULTS:
+22957
+
+
+
+(defun efs/lookup-password (&rest keys)
+  (let ((result (apply #'auth-source-search keys)))
+    (if result
+        (funcall (plist-get (car result) :secret))
+        nil)))
+
+
 *** Mac Specific
 :PROPERTIES:
 :ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
