@@ -564,6 +564,46 @@ code/data_collection/aisoundlab/audb_covid_19/1.0.0/
   (message "Lsp Python begins here")
 #+end_src
 
+
+***** Function to restart Worksüace
+:PROPERTIES:
+:ID:       41f1d2b5-4526-4261-aaaf-00525bd8034c
+:END:
+
+see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+    (defun lsp-workspace-restart-deep ()
+    (interactive
+    (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
+    (lsp-workspace-restart))
+    )
+
+  ;;   ;;;###autoload
+  ;; (defun toggle-menubar ()
+  ;; "Toggle menubar visibility.
+  ;; If toolbar is invisible, turn it on.  Otherwise turn it off."
+  ;;   (interactive)
+  ;;   (if (eq menu-bar-mode t)
+  ;;       (menu-bar-mode -1)
+  ;;           (menu-bar-mode t)
+
+  ;; ))
+
+
+
+#+end_src
+
+#+RESULTS:
+: lsp-workspace-restart-deep
+
+(load-file "~/.emacs.d/init.el")
+
+#+RESULTS:
+: lsp-workspace-restart-deep
+
+
+
 ***** Format buffer using yapf
 :PROPERTIES:
 :ID:       674e2989-94c8-4dbe-976a-64ad936aa62c

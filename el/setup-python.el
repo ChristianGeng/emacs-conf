@@ -4,6 +4,23 @@
 
 (message "Lsp Python begins here")
 
+(defun lsp-workspace-restart-deep ()
+  (interactive)
+  (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
+  (lsp-workspace-restart)
+  )
+
+;;   ;;;###autoload
+;; (defun toggle-menubar ()
+;; "Toggle menubar visibility.
+;; If toolbar is invisible, turn it on.  Otherwise turn it off."
+;;   (interactive)
+;;   (if (eq menu-bar-mode t)
+;;       (menu-bar-mode -1)
+;;           (menu-bar-mode t)
+
+;; ))
+
 (defun python-yapf-format-buffer ()
    (interactive)
    (when (and (executable-find "yapf") buffer-file-name)
