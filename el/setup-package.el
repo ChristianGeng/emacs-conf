@@ -101,7 +101,7 @@
                ;; (pkgname . [(maj-ver min-ver) nil "description"])
 		  ) package--builtins)))
 
-(package-initialize)
+;; (package-initialize)
 
 (unless (and (file-exists-p (concat package-user-dir "/archives/marmalade"))
              (file-exists-p  (concat package-user-dir "/archives/gnu"))

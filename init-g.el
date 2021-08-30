@@ -6,7 +6,8 @@
 ;; Setup packages
     ;; code obsolete in emacs27
     (if (version< emacs-version "27.1")
-        (package-initialize)
+        ;;(package-initialize)
+        (message "version lt 27.1 needs to run initialize manually")
       )
 
 
