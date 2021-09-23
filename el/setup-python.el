@@ -5,9 +5,9 @@
 (message "Lsp Python begins here")
 
 (defun lsp-workspace-restart-deep ()
-  (interactive)
+  (interactive
   (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
-  (lsp-workspace-restart)
+  (lsp-workspace-restart))
   )
 
 ;;   ;;;###autoload
@@ -76,6 +76,8 @@
   :ensure t
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
+                         (require 'highlight-indent-guides)
+                         ;;(highlight-indent-guides-mode)
                          (lsp-deferred)
                          ;; (yapf-mode)
                          (lsp-treemacs)
