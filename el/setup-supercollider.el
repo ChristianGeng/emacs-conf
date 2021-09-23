@@ -42,7 +42,7 @@
 ;; in addition you need to run cmake . in the scel directory
 (add-to-list 'load-path "~/.emacs.d/el/scel/el/")
 (require 'sclang)
-
+(require 'w3m)
 ;; (sclang-start)
 ;;(sclang-server-boot)
 
@@ -52,4 +52,4 @@
 ;; /usr/share/SuperCollider/SCClassLibrary/
 
 (provide 'setup-supercollider)
-;;; setup-groovy ends here
+;;; setup-supercollider ends here
