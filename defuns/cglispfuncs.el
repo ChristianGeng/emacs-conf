@@ -30,6 +30,14 @@
 
 ;;; Code:
 
+
+(defun my-directory-files (d)
+  "Get List of files in directory"
+  (let* ((path (file-name-as-directory (expand-file-name d)))
+         (command (concat "ls -A1d " path "*")))
+    (split-string (shell-command-to-string command) "\n" t)))
+
+
 ;;;###autoload
 (defun toggle-menubar ()
 "Toggle menubar visibility.
