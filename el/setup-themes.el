@@ -1,6 +1,10 @@
 
 ;; (load-theme 'fantom)
-(load-theme 'moe-light)
+;; jetbrains-darcula
+; doom-1337
+
+;;(load-theme 'moe-light) - unfortunatel colors, got it from the supercollider guy
+(load-theme 'doom-1337)
 (defcustom cycle-themes '(material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic solarized moe-light)
   "List of themes through which one can switch easily by calling
 `cycle-themes' repeatedly. The first element is loaded at startup."
