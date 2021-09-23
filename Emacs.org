@@ -725,6 +725,8 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
     :ensure t
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
+                           (require 'highlight-indent-guides)
+                           ;;(highlight-indent-guides-mode)
                            (lsp-deferred)
                            ;; (yapf-mode)
                            (lsp-treemacs)
@@ -795,217 +797,249 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
   (require 'setup-python)
 #+end_src
 
+*** R
+:PROPERTIES:
+:ID:       f6b47430-8927-472c-99f9-dd3a7ce2cc4a
+:END:
+
+https://github.com/sejdemyr/.emacs.d/blob/master/init.el
+
+#+begin_src emacs-lisp  :tangle ./el/setup-ess.el :mkdirp yes
+
+  ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
+  ;;
+  ;;; Code:
+
+  (message "Lsp Python begins here")
+
+        ;;; emacs speaks statistics
+      (use-package ess
+        :ensure t
+        :init
+        (require 'ess-site)
+        )
+
+  (provide 'setup-ess)
+;;; setup-python-lsp-python ends here
+
+
+#+end_src
+
+
 *** LSP Other Languages
 :PROPERTIES:
 :ID:       3fff27c7-73a4-4dfa-833a-86903c2d8d0b
 :END:
 
+
+
 #+begin_src emacs-lisp
 
-(require 'setup-typescript)
-(require 'setup-angular)
-(require 'setup-c-lsp-clangd)
-;; (require 'setup-c++)
-;; (require 'setup-python-lsp-remember-you)
+  (require 'setup-ess)
+  (require 'setup-typescript)
+  (require 'setup-angular)
+  (require 'setup-c-lsp-clangd)
+  ;; (require 'setup-c++)
+  ;; (require 'setup-python-lsp-remember-you)
 
-(eval-after-load 'whitespace '(require 'setup-whitespace))
-(eval-after-load 'tramp '(require 'setup-tramp))
-;; (require 'setup-perspective)
-;; (require 'setup-ffip)
-;; (require 'setup-paredit)
+  (eval-after-load 'whitespace '(require 'setup-whitespace))
+  (eval-after-load 'tramp '(require 'setup-tramp))
+  ;; (require 'setup-perspective)
+  ;; (require 'setup-ffip)
+  ;; (require 'setup-paredit)
 
-(require 'mmm-auto)
-(mmm-add-mode-ext-class 'html-mode "\\.php\\'" 'html-php)
+  (require 'mmm-auto)
+  (mmm-add-mode-ext-class 'html-mode "\\.php\\'" 'html-php)
 
-(require 'setup-js2-mode)
-(require 'setup-web-mode)
-(require 'mmm-auto)
-(require 'setup-web-mode)
-(require 'setup-vue-mode)
+  (require 'setup-js2-mode)
+  (require 'setup-web-mode)
+  (require 'mmm-auto)
+  (require 'setup-web-mode)
+  (require 'setup-vue-mode)
 
-;; (require 'setup-speedbar)
+  ;; (require 'setup-speedbar)
 
-;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
-(eval-after-load 'lisp-mode '(require 'setup-lisp))
+  ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
+  (eval-after-load 'lisp-mode '(require 'setup-lisp))
 
-(require 'setup-org) ;; organizer todo notes etc
+  (require 'setup-org) ;; organizer todo notes etc
 
-(require 'setup-plantuml) ;; organizer todo notes etc
+  (require 'setup-plantuml) ;; organizer todo notes etc
 
-(require 'setup-latex)
+  (require 'setup-latex)
 
-(require 'setup-calendar)
-;;(require 'setup-bash)
-(require 'setup-octave)
-;; (require 'mc)
+  (require 'setup-calendar)
+  ;;(require 'setup-bash)
+  (require 'setup-octave)
+  ;; (require 'mc)
 
-;;(require 'setup-web-mode)
-(require 'setup-jabber)
-(require 'setup-chat-tracking)
-;; (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
- (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
-;; (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
-;;(require 'setup-pandoc)
+  ;;(require 'setup-web-mode)
+  (require 'setup-jabber)
+  (require 'setup-chat-tracking)
+  ;; (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
+   (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
+  ;; (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
+  ;;(require 'setup-pandoc)
 
-;; Load slime-js when asked for
-;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
-;; (autoload 'slime-js-jack-in-node "setup-slime-js" nil t)
+  ;; Load slime-js when asked for
+  ;; (autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
+  ;; (autoload 'slime-js-jack-in-node "setup-slime-js" nil t)
 
-;; Map files to modes
-(require 'mode-mappings)
-
-
-;; (require 'expand-region)
-;; (require 'mark-more-like-this)
-;; (require 'inline-string-rectangle)
-;;(require 'multiple-cursors)
-;; (require 'delsel)
-;; (require 'jump-char)
-;; (require 'eproject)
-;; (require 'wgrep)
-;; (require 'smart-forward)
-;; (require 'change-inner)
-;; (require 'multifiles)
+  ;; Map files to modes
+  (require 'mode-mappings)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ansi Farben in compilation buffers:                                                                  ;;
-;; Also hook:                                                                                           ;;
-;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode                       ;;
-;; Als Function:                                                                                        ;;
-;; https://stackoverflow.com/questions/23378271/how-do-i-display-ansi-color-codes-in-emacs-for-any-mode ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun display-ansi-colors ()
-  (interactive)
-  (let ((inhibit-read-only t))
-    (ansi-color-apply-on-region (point-min) (point-max))))
-
-(require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  (toggle-read-only)
-  (ansi-color-apply-on-region compilation-filter-start (point))
-  (toggle-read-only))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-;; gehen alle nicht;
-; (add-hook 'sbt-mode-hook 'display-ansi-colors)
-;; (add-hook 'sbt-mode-hook 'ansi-color-for-comint-mode-on)
-;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-;; (add-hook 'async-bytecomp-package-mode-hook 'colorize-compilation-buffer)
-
-;; Fill column indicator
-;; (require 'fill-column-indicator)
-
-;; Browse kill ring
-(require 'browse-kill-ring)
-(setq browse-kill-ring-quit-action 'save-and-restore)
-
-;; Smart M-x is smart - der ido fuer M-x
-(require 'smex)
-(smex-initialize)
-
-;; Setup key bindings
-(require 'key-bindings)
-(require 'setup-helm)
-(require 'setup-ibuffer)
-(require 'setup-doom-modeline)
-
-;; (require 'setup-eclim)
-;; This currently breaks dired icons. Why?
-;; (require 'setup-scala)
-(require 'setup-treemacs)
-(require 'setup-groovy)
-;; (require 'setup-eclim)
+  ;; (require 'expand-region)
+  ;; (require 'mark-more-like-this)
+  ;; (require 'inline-string-rectangle)
+  ;;(require 'multiple-cursors)
+  ;; (require 'delsel)
+  ;; (require 'jump-char)
+  ;; (require 'eproject)
+  ;; (require 'wgrep)
+  ;; (require 'smart-forward)
+  ;; (require 'change-inner)
+  ;; (require 'multifiles)
 
 
-;; Misc
-;; (require 'appearance)
-;; (require 'my-misc)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Ansi Farben in compilation buffers:                                                                  ;;
+  ;; Also hook:                                                                                           ;;
+  ;; https://stackoverflow.com/questions/13397737/ansi-coloring-in-compilation-mode                       ;;
+  ;; Als Function:                                                                                        ;;
+  ;; https://stackoverflow.com/questions/23378271/how-do-i-display-ansi-color-codes-in-emacs-for-any-mode ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun display-ansi-colors ()
+    (interactive)
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region (point-min) (point-max))))
 
-;; Diminish modeline clutter
-(require 'diminish)
-;; (diminish 'eldoc-mode)
-;; (diminish 'paredit-mode)
+  (require 'ansi-color)
+  (defun colorize-compilation-buffer ()
+    (toggle-read-only)
+    (ansi-color-apply-on-region compilation-filter-start (point))
+    (toggle-read-only))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+  ;; gehen alle nicht;
+  ; (add-hook 'sbt-mode-hook 'display-ansi-colors)
+  ;; (add-hook 'sbt-mode-hook 'ansi-color-for-comint-mode-on)
+  ;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+  ;; (add-hook 'async-bytecomp-package-mode-hook 'colorize-compilation-buffer)
 
-;; Elisp go-to-definition with M-. and back again with M-,
-;; (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
-;; (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
-;; (eval-after-load 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))
+  ;; Fill column indicator
+  ;; (require 'fill-column-indicator)
 
-;; Email, baby
-;; (require 'setup-mule)
+  ;; Browse kill ring
+  (require 'browse-kill-ring)
+  (setq browse-kill-ring-quit-action 'save-and-restore)
 
-;; Run at full power please
-(put 'downcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
+  ;; Smart M-x is smart - der ido fuer M-x
+  (require 'smex)
+  (smex-initialize)
 
-;; electric-pair-mode
-;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
-;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
-(electric-pair-mode 1)
+  ;; Setup key bindings
+  (require 'key-bindings)
+  (require 'setup-helm)
+  (require 'setup-ibuffer)
+  (require 'setup-doom-modeline)
 
-(when (fboundp 'cycle-themes)
-  (cycle-themes))
+  ;; (require 'setup-eclim)
+  ;; This currently breaks dired icons. Why?
+  ;; (require 'setup-scala)
+  (require 'setup-treemacs)
+  (require 'setup-groovy)
+  ;; (require 'setup-eclim)
 
-(put 'scroll-left 'disabled nil)
+
+  ;; Misc
+  ;; (require 'appearance)
+  ;; (require 'my-misc)
+
+  ;; Diminish modeline clutter
+  (require 'diminish)
+  ;; (diminish 'eldoc-mode)
+  ;; (diminish 'paredit-mode)
+
+  ;; Elisp go-to-definition with M-. and back again with M-,
+  ;; (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
+  ;; (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
+  ;; (eval-after-load 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))
+
+  ;; Email, baby
+  ;; (require 'setup-mule)
+
+  ;; Run at full power please
+  (put 'downcase-region 'disabled nil)
+  (put 'narrow-to-region 'disabled nil)
+
+  ;; electric-pair-mode
+  ;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
+  ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
+  (electric-pair-mode 1)
+
+  (when (fboundp 'cycle-themes)
+    (cycle-themes))
+
+  (put 'scroll-left 'disabled nil)
 
 
-  (setq abbrev-file-name             ;; tell emacs where to read abbrev
-        "~/.emacs.d/abbrev_defs")    ;; definitions from...
+    (setq abbrev-file-name             ;; tell emacs where to read abbrev
+          "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
-;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
-;;./elpa/openwith-20120531.1436/openwith.el:1
+  ;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
+  ;;./elpa/openwith-20120531.1436/openwith.el:1
 
-;; ("\\.pdf\\'"  "okular" (file))
+  ;; ("\\.pdf\\'"  "okular" (file))
 
-(require 'openwith)
-(setq openwith-associations '(
-                              ("\\.mp4\\'"  "vlc" (file))
-                              ("\\.docx\\'" "lowriter" (file))
-                              ("\\.odt\\'"  "lowriter" (file))
-                              ("\\.pptx\\'"  "loimpress" (file))
-                              ))
-;; unset associations altogether
-;; (setq openwith-associations '())
+  (require 'openwith)
+  (setq openwith-associations '(
+                                ("\\.mp4\\'"  "vlc" (file))
+                                ("\\.docx\\'" "lowriter" (file))
+                                ("\\.odt\\'"  "lowriter" (file))
+                                ("\\.pptx\\'"  "loimpress" (file))
+                                ))
+  ;; unset associations altogether
+  ;; (setq openwith-associations '())
 
-(openwith-mode)
-(display-battery-mode)
-(setq require-final-newline t)
+  (openwith-mode)
+  (display-battery-mode)
+  (setq require-final-newline t)
 
-(require 'setup-nxml)
-;; (require 'setup-pdf-tools)
-(require 'setup-json-mode)
-(require 'setup-magit)
-;; (require 'setup-tags)
+  (require 'setup-nxml)
+  ;; (require 'setup-pdf-tools)
+  (require 'setup-json-mode)
+  (require 'setup-magit)
+  ;; (require 'setup-tags)
 
-(require 'setup-flycheck-mode)
-;; company mode autocompletion
-;;(add-hook 'after-init-hook 'global-company-mode)
+  (require 'setup-flycheck-mode)
+  ;; company mode autocompletion
+  ;;(add-hook 'after-init-hook 'global-company-mode)
 
-;;(require 'pasc-mode)
+  ;;(require 'pasc-mode)
 
-(require 'setup-yasnippet)
+  (require 'setup-yasnippet)
 
-(require 'setup-supercollider)
-(require 'setup-yaml-mode)
-(require 'setup-editorconfig)
-(require 'setup-rtags)
-(require 'setup-treemacs)
+  (require 'setup-supercollider)
+  (require 'setup-yaml-mode)
+  (require 'setup-editorconfig)
+  (require 'setup-rtags)
+  (require 'setup-treemacs)
 
-(require 'setup-shell-scripting)
+  (require 'setup-shell-scripting)
 
-(require 'calfw)
-(require 'calfw-gcal)
-(require 'calfw-org)
-(require 'calfw-gcal)
-(require 'calfw-ical)
-(require 'setup-user-menu)
+  (require 'calfw)
+  (require 'calfw-gcal)
+  (require 'calfw-org)
+  (require 'calfw-gcal)
+  (require 'calfw-ical)
+  (require 'setup-user-menu)
 
-(put 'erase-buffer 'disabled nil)
+  (put 'erase-buffer 'disabled nil)
 
-;; fix misalignment in popus:
-(setq popup-use-optimized-column-computation nil)
+  ;; fix misalignment in popus:
+  (setq popup-use-optimized-column-computation nil)
 
-(add-hook 'makefile-mode-hook 'makefile-executor-mode)
+  (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
 #+end_src
 
@@ -1242,6 +1276,29 @@ gpg-connect-agent /bye
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
 
+#+end_src
+
+*** Org ascidoc
+:PROPERTIES:
+:ID:       59738c74-4023-4a75-8180-a424222ba95e
+:END:
+
+Repo is here: git clone git@github.com:yashi/org-asciidoc.git
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/el/org-asciidoc")
+  (require 'ox-asciidoc)
+#+end_src
+
+#+RESULTS:
+: ox-asciidoc
+
+*** Always load .local_configs as shell script
+:PROPERTIES:
+:ID:       7bdb08dc-a901-4bab-912b-50271f3f6f76
+:END:
+#+begin_src emacs-lisp
+ (add-to-list 'auto-mode-alist '(".local_configs" . shell-script-mode))
 #+end_src
 
 ** Emacs Server

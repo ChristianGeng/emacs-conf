@@ -6,8 +6,7 @@
 ;; Setup packages
     ;; code obsolete in emacs27
     (if (version< emacs-version "27.1")
-        ;;(package-initialize)
-        (message "version lt 27.1 needs to run initialize manually")
+        (package-initialize)
       )
 
 
@@ -249,6 +248,7 @@
 ;; now: Alays write into setup-python and require so
 (require 'setup-python)
 
+(require 'setup-ess)
 (require 'setup-typescript)
 (require 'setup-angular)
 (require 'setup-c-lsp-clangd)
@@ -503,6 +503,11 @@
 ;; Setup environment variables from the user's shell.
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
+
+(add-to-list 'load-path "~/.emacs.d/el/org-asciidoc")
+(require 'ox-asciidoc)
+
+(add-to-list 'auto-mode-alist '(".local_configs" . shell-script-mode))
 
 (require 'server)
 (unless (server-running-p)
