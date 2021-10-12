@@ -71,12 +71,15 @@
       (linum-mode)
       (pycoverage-mode))))
 
+(defconst python-linewidth 120)
 
 (use-package python-mode
   :ensure t
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (require 'highlight-indent-guides)
+                         (auto-fill-mode)
+                         (set-fill-column python-linewidth)
                          ;;(highlight-indent-guides-mode)
                          (lsp-deferred)
                          ;; (yapf-mode)

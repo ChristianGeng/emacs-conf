@@ -306,6 +306,11 @@ However, if your init file changes the values of
 :ID:       b204e436-4dff-486d-8eac-8b32772d7574
 :END:
 
+-  often it is necessary to delete this file
+
+  ~/.emacs.d/.lsp-session-v1
+
+
 #+begin_src emacs-lisp
 (require 'setup-lsp)
 ;; (require 'setup-java)
@@ -315,6 +320,9 @@ However, if your init file changes the values of
 (require 'setup-dap-mode)
 
 #+end_src
+
+
+
 
 *** LSP Python
 :PROPERTIES:
@@ -450,6 +458,8 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 
 
 
+
+
 ***** Type Hinting
 ;; https://stackoverflow.com/questions/44094494/can-pycharm-suggest-or-autocomplete-or-insert-type-hints/44102211#44102211
 
@@ -519,7 +529,24 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 code/data_collection/aisoundlab/audb_covid_19/1.0.0/
 
 
-#+begin_src bash :tangle no
+***** pyrightconfig.json example
+
+Not sure whehter emacs interprets this at all
+
+#+begin_src json :tangle no
+{
+    "exclude": ["**/node_modules", "**/__pycache__"],
+    "ignore": ["**/node_modules", "**/__pycache__"],
+    "include": ["flextensor", "tvm","1.0.0"],
+    "pythonPlatform": "Linux",
+    "pythonVersion": "3.7",
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": false,
+    "stubPath": "typings",
+    "typeCheckingMode": "basic",
+    "venvPath": "/home/audeering.local/cgeng/.venvs",
+    "venv": "py37"
+}
 
 #+end_src
 
@@ -720,12 +747,15 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
         (linum-mode)
         (pycoverage-mode))))
 
+  (defconst python-linewidth 120)
 
   (use-package python-mode
     :ensure t
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
                            (require 'highlight-indent-guides)
+                           (auto-fill-mode)
+                           (set-fill-column python-linewidth)
                            ;;(highlight-indent-guides-mode)
                            (lsp-deferred)
                            ;; (yapf-mode)
@@ -802,6 +832,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 :ID:       f6b47430-8927-472c-99f9-dd3a7ce2cc4a
 :END:
 
+https://confunguido.github.io/blog/20190317_emacs_for_R.html
 https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
 #+begin_src emacs-lisp  :tangle ./el/setup-ess.el :mkdirp yes
