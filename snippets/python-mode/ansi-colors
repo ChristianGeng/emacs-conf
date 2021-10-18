@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: ansicolors
+# key: ansicolors
+# --
+
+# Some ANSI colors
+# see e.g. https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
+c = (
+    "\033[0m",     # End of color, use to reset to black
+    "\u001b[30m",  # Black
+    "\033[35m",    # Magenta
+    "\033[36m",    # Cyan
+    "\u001b[31m",  # Red
+    "\u001b[32m",  # green
+    "\u001b[33m",  # yellow
+    "\u001b[34m",  # blue
+)
