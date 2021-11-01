@@ -329,6 +329,14 @@ However, if your init file changes the values of
 :ID:       e06bb550-ccf7-4c8a-ba4d-c3d8343b4204
 :END:
 
+**** pyenv
+
+https://github.com/pythonic-emacs/pyenv-mode
+https://github.com/pyenv/pyenv
+
+(pyenv-mode)
+then run pyenv-mode-set
+
 **** DAP Launching
 
 #+begin_src emacs-lisp :tangle no
