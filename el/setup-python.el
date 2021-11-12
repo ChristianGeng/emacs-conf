@@ -60,6 +60,16 @@
          (shell-quote-argument (buffer-file-name))))
 (revert-buffer t t t))
 
+(require 'auto-complete-rst)
+(auto-complete-rst-init)
+
+;; specify other sources to use in rst-mode
+(setq auto-complete-rst-other-sources
+    '(ac-source-filename
+      ac-source-abbrev
+      ac-source-dictionary
+      ac-source-yasnippet))
+
 (require 'linum)
 (require 'pycoverage)
 
@@ -81,6 +91,7 @@
                          (auto-fill-mode)
                          (set-fill-column python-linewidth)
                          ;;(highlight-indent-guides-mode)
+
                          (lsp-deferred)
                          ;; (yapf-mode)
                          (lsp-treemacs)

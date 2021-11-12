@@ -504,6 +504,34 @@
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
 
+(require 'adoc-mode)
+ (add-to-list 'auto-mode-alist '("\.adoc$" . adoc-mode))
+;;  (add-to-list adoc-mode '("\\.adoc\\'" . adoc-mode))
+  (autoload 'adoc-mode "adoc-mode" nil t)
+
+(defun rcd-command-output-from-input (program input &rest args)
+  "Returns output from PROGRAM INPUT with optional ARGS"
+  (let* ((output (with-temp-buffer
+                   (insert input)
+                   (apply #'call-process-region nil nil program t t nil args)
+                   (buffer-string))))
+    output))
+
+(defun rcd-asciidoctor (string &rest args)
+  (interactive)
+  "Returns plain text from Markdown by using pandoc"
+  (apply 'rcd-command-output-from-input "asciidoctor" string "-" args))
+
+(defun rcd-asciidoctor-preview ()
+  "Preview asciidoctor"
+  (interactive)
+  (let* ((output (rcd-asciidoctor (buffer-string)))
+         (file (concat (or (getenv "TMPDIR") "/tmp/") "asciidoctor.html")))
+    (with-temp-file file (insert output))
+    (browse-url file)))
+
+;; (global-set-key (kbd "C-c a") 'rcd-asciidoctor-preview)
+
 (add-to-list 'load-path "~/.emacs.d/el/org-asciidoc")
 (require 'ox-asciidoc)
 

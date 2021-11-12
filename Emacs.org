@@ -6,6 +6,18 @@ PROPERTIES:
 
 # M-x org-babel-tangle
 
+* Tangle and Reload init file
+
+#+begin_src emacs-lisp :tangle no :noweb yes
+  (org-babel-tangle)
+  (load-file "~/.emacs.d/init.el")
+#+end_src
+
+#+RESULTS:
+: t
+
+
+
 * Eearly Init - not needed?
 
 https://www.masteringemacs.org/article/whats-new-in-emacs-27-1
@@ -561,16 +573,6 @@ Not sure whehter emacs interprets this at all
 #+end_src
 
 *****
-***** Tangle and Reload
-
-#+begin_src emacs-lisp :tangle no :noweb yes
-  (org-babel-tangle)
-  (load-file "~/.emacs.d/init.el")
-#+end_src
-
-#+RESULTS:
-: t
-
 
 
 **** Writing setup-python.el file  the  conf
@@ -653,7 +655,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 
 #+end_src
 
-***** Remove unused imports using autoflake
+***** Function to remove unused imports using autoflake
 :PROPERTIES:
 :ID:       5a5a162d-6b68-405d-9c47-02775e75271e
 :END:
@@ -682,7 +684,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+RESULTS:
 : python-remove-unused-imports
 
-***** Remove unused variables using autoflake
+***** Function to remove unused variables using autoflake
 :PROPERTIES:
 :ID:       9259bd8f-9cce-4f06-b262-d9f487959596
 :END:
@@ -715,7 +717,6 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 - blacken-buffer will format the buffer
 - customizations are better kept in pyproject.toml, so the line length commneted out
 - setup.cfg is interpreted by black
--
 
 #+begin_src emacs-lisp
   (use-package use-package-ensure-system-package :ensure t)
@@ -727,6 +728,26 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
       )
 
 #+end_src
+
+***** Rst autocomplete
+:PROPERTIES:
+:ID:       59d7132f-71a6-45b0-88b8-a2f15e3952f2
+:END:
+
+https://github.com/tkf/auto-complete-rst
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+  (require 'auto-complete-rst)
+  (auto-complete-rst-init)
+
+  ;; specify other sources to use in rst-mode
+  (setq auto-complete-rst-other-sources
+      '(ac-source-filename
+        ac-source-abbrev
+        ac-source-dictionary
+        ac-source-yasnippet))
+#+end_src
+
 
 
 ***** Main Conf Block
@@ -757,6 +778,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
                            (auto-fill-mode)
                            (set-fill-column python-linewidth)
                            ;;(highlight-indent-guides-mode)
+
                            (lsp-deferred)
                            ;; (yapf-mode)
                            (lsp-treemacs)
@@ -1309,11 +1331,69 @@ gpg-connect-agent /bye
 
 #+end_src
 
+
+*** Ascidoctor
+
+Link collection here:
+
+https://www.emacswiki.org/emacs/AsciiDoc
+
+**** Adoc Snippets
+
+git@github.com:nicorikken/adoc-mode-yasnippet.git
+
+see in snippets
+
+**** open adoc files
+:PROPERTIES:
+:ID:       8ebfb281-87fd-49f7-b513-19a4c3b0b492
+:END:
+
+#+begin_src emacs-lisp
+   (require 'adoc-mode)
+  (add-to-list 'auto-mode-alist '("\.adoc$" . adoc-mode))
+ ;;  (add-to-list adoc-mode '("\\.adoc\\'" . adoc-mode))
+   (autoload 'adoc-mode "adoc-mode" nil t)
+#+end_src
+
+#+RESULTS:
+
+**** adoc mode preview
+:PROPERTIES:
+:ID:       8f6ef9ec-ffa0-4e07-90c0-37f08216106a
+:END:
+
+#+begin_src emacs-lisp
+  (defun rcd-command-output-from-input (program input &rest args)
+    "Returns output from PROGRAM INPUT with optional ARGS"
+    (let* ((output (with-temp-buffer
+                     (insert input)
+                     (apply #'call-process-region nil nil program t t nil args)
+                     (buffer-string))))
+      output))
+
+  (defun rcd-asciidoctor (string &rest args)
+    (interactive)
+    "Returns plain text from Markdown by using pandoc"
+    (apply 'rcd-command-output-from-input "asciidoctor" string "-" args))
+
+  (defun rcd-asciidoctor-preview ()
+    "Preview asciidoctor"
+    (interactive)
+    (let* ((output (rcd-asciidoctor (buffer-string)))
+           (file (concat (or (getenv "TMPDIR") "/tmp/") "asciidoctor.html")))
+      (with-temp-file file (insert output))
+      (browse-url file)))
+
+  ;; (global-set-key (kbd "C-c a") 'rcd-asciidoctor-preview)
+#+end_src
+
 *** Org ascidoc
 :PROPERTIES:
 :ID:       59738c74-4023-4a75-8180-a424222ba95e
 :END:
 
+Org ascidoc exporter
 Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 
 #+begin_src emacs-lisp
