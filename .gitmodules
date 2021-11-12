@@ -1,0 +1,3 @@
+[submodule "el/org-asciidoc"]
+	path = el/org-asciidoc
+	url = git@github.com:yashi/org-asciidoc.git
