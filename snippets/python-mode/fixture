@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: fixture
+# key: fixture
+# --
+
+@pytest.fixture(scope=$0, autouse=True)
