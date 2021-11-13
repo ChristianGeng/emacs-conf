@@ -9,10 +9,11 @@
         (package-initialize)
       )
 
-
+    (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
     (add-to-list 'load-path "~/.emacs.d/el")
     (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
     ;;(add-to-list 'load-path "~/.emacs.d/elpa/s-20210603.736/")
+
 
 
     (setq user-emacs-directory "~/.emacs.d/")

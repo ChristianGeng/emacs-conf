@@ -55,66 +55,15 @@
 (yas-snippet-dirs)
 (printlist yas-snippet-dirs)
 
+(require 'seq)
+(seq-contains yas-snippet-dirs "/home/christian/.emacs.d/snippets")
+(seq-contains yas-snippet-dirs "~/.emacs.d/snippets")
+(seq-contains yas-snippet-dirs (expand-file-name "doom-snippets" user-emacs-directory))
 
-;; (defun doom-snippets-initialize ()
-;;   (let ((snip-dir  (expand-file-name "snippets/doom-snippets" user-emacs-directory)))
-;;     (when (boundp 'yas-snippet-dirs)
-;;       (add-to-list 'yas-snippet-dirs snip-dir t))
-;;     (yas-load-directory snip-dir)))
-
-;; (doom-snippets-initialize)
-
-;; not loadable, why???
-;; (use-package doom-snippets
-;;   :load-path (joindirs user-emacs-directory "snippets" "doom-snippets")
-;;   :after yasnippet)
-
-;; from buster
-;;;###autoload
-;; (defun buster-snippets-initialize ()
-;;   (let ((snip-dir (expand-file-name "snippets" buster-snippets-root)))
-;;     (when (boundp 'yas-snippet-dirs)
-;;       (add-to-list 'yas-snippet-dirs snip-dir t))
-;;     (yas-load-directory snip-dir)))
-
-;; ;;;###autoload
-;; (eval-after-load "yasnippet"
-;;   '(buster-snippets-initialize))
-
-
-;; (append-)
-
-;; (setq yas-snippet-dirs '("~/.emacs.d/snippets" "~/.emacs.d/yasmate/snippets"))
-;; ;; (yas-global-mode 1)
-
-;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))(provide 'setup-groovy)
-;; ;;; setup-groovy ends here
-
-
-
-
-
-;;(add-to-list (list (yas-snippet-dirs)) "asdas")
-;;(concat 'yas-snippet-dirs '("asdas"))
-
-;; (setq yas-snippet-dirs (append yas-snippet-dirs '("other dir")))
-;; ;;                    '((joindirs user-emacs-directory "yasmate" "snippets"))))
-
-;;
-
-;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
-;; (setq yas-snippets-dirs (list (concat user-emacs-directory "snippets")))
-
-;; (setq yas-snippet-dirs (list (concat user-emacs-directory "snippets")))
-;; (setq yas-snippetsg-dirs (list (concat user-emacs-directory "snippets")))
-
-
-;; (directory-files (joindirs user-emacs-directory "yasmate" "snippets"))
 
 ;; unbind the tab for the snippets
 ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
 ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-
 
 ;; (setq yas-snippet-dirs
 ;;       '("~/.emacs.d/snippets"                 ;; personal snippets
@@ -124,6 +73,11 @@
 ;;
 ;; Python devel und yasnippet: http://longhorizon.org/blog/2013/03/31/improving-python-development-in-emacs-with-yasnippet/
 
+(load-file (expand-file-name  "doom-snippets/doom-snippets.el" user-emacs-directory))
+
+(use-package doom-snippets
+  :load-path (expand-file-name "doom-snippets" user-emacs-directory)
+  :after yasnippet)
 
 
 (provide 'setup-yasnippet)

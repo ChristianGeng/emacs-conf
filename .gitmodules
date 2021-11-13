@@ -4,6 +4,6 @@
 [submodule "snippets/adoc-mode"]
 	path = snippets/adoc-mode
 	url = git@github.com:nicorikken/adoc-mode-yasnippet.git
-[submodule "snippets/doom-snippets"]
-	path = snippets/doom-snippets
-	url = git@github.com:hlissner/doom-snippets.git
+[submodule "doom-snippets"]
+	path = doom-snippets
+	url = https://github.com/hlissner/doom-snippets.git
