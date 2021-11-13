@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: SphinxCodeBlock
+# key: SphinxCodeBlock
+# --
+
+.. code-block:: python
+
+    def mult(a, b):
+        return a * b

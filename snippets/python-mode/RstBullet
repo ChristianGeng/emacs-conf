@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: RstBullet
+# key: RstBullet
+# --
+
+* $1

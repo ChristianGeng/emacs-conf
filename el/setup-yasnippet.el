@@ -7,6 +7,8 @@
           ;; prog-mode
           conf-mode
           ruby-mode
+          sphinx-doc-mode
+          rst-minor-mode
           jdee-mode
           lsp-mode
           java-mode
@@ -50,8 +52,23 @@
 ;; (add-to-list 'yas-snippet-dirs (expand-file-name "yasmate/snippets" user-emacs-directory) t)
 
 (message (concat (number-to-string(length yas-snippet-dirs)) " nsnippet drectories" ))
-(yas-snippet-dirs);;
+(yas-snippet-dirs)
 (printlist yas-snippet-dirs)
+
+
+;; (defun doom-snippets-initialize ()
+;;   (let ((snip-dir  (expand-file-name "snippets/doom-snippets" user-emacs-directory)))
+;;     (when (boundp 'yas-snippet-dirs)
+;;       (add-to-list 'yas-snippet-dirs snip-dir t))
+;;     (yas-load-directory snip-dir)))
+
+;; (doom-snippets-initialize)
+
+;; not loadable, why???
+;; (use-package doom-snippets
+;;   :load-path (joindirs user-emacs-directory "snippets" "doom-snippets")
+;;   :after yasnippet)
+
 ;; from buster
 ;;;###autoload
 ;; (defun buster-snippets-initialize ()
@@ -106,6 +123,7 @@
 ;;         ))
 ;;
 ;; Python devel und yasnippet: http://longhorizon.org/blog/2013/03/31/improving-python-development-in-emacs-with-yasnippet/
+
 
 
 (provide 'setup-yasnippet)

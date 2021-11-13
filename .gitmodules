@@ -1,0 +1,9 @@
+[submodule "el/org-asciidoc"]
+	path = el/org-asciidoc
+	url = git@github.com:yashi/org-asciidoc.git
+[submodule "snippets/adoc-mode"]
+	path = snippets/adoc-mode
+	url = git@github.com:nicorikken/adoc-mode-yasnippet.git
+[submodule "snippets/doom-snippets"]
+	path = snippets/doom-snippets
+	url = git@github.com:hlissner/doom-snippets.git
