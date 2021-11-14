@@ -215,6 +215,8 @@
 
 ;; Override some modes which derive from the above
 (dolist (mode '(term-mode-hook
+                ag-mode-hook
+                magit-mode-hook
                 shell-mode-hook
                 ibuffer-mode
                 eshell-mode-hook))
@@ -406,9 +408,6 @@
 ;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
 ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 (electric-pair-mode 1)
-
-(when (fboundp 'cycle-themes)
-  (cycle-themes))
 
 (put 'scroll-left 'disabled nil)
 

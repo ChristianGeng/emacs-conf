@@ -5,6 +5,7 @@
 
 ;;(load-theme 'moe-light) - unfortunatel colors, got it from the supercollider guy
 (load-theme 'doom-1337)
+;; (load-theme 'wombat)
 (defcustom cycle-themes '(material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic solarized moe-light)
   "List of themes through which one can switch easily by calling
 `cycle-themes' repeatedly. The first element is loaded at startup."
@@ -39,5 +40,11 @@
 ;; (dolist (feature '(magit org-faces whitespace flyspell))
 ;;   (unless (featurep feature)
 ;;     (eval-after-load feature '(reload-current-theme))))
+
+
+;; cycle theme once at startup.
+;; (when (fboundp 'cycle-themes)
+;;  (cycle-themes))
+
 
 (provide 'setup-themes)

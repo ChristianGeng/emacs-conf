@@ -296,12 +296,16 @@ However, if your init file changes the values of
 
 ;; Override some modes which derive from the above
 (dolist (mode '(term-mode-hook
+                ag-mode-hook
+                magit-mode-hook
                 shell-mode-hook
                 ibuffer-mode
                 eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
+
+#+RESULTS:
 
 
 
@@ -1073,9 +1077,6 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
   (electric-pair-mode 1)
 
-  (when (fboundp 'cycle-themes)
-    (cycle-themes))
-
   (put 'scroll-left 'disabled nil)
 
 
@@ -1204,12 +1205,12 @@ WSL for Windows specific code
 #+end_src
 
 
-** Misc
+* Misc
 :PROPERTIES:
 :ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
 :END:
 
-*** Defuns
+** Defuns
 :PROPERTIES:
 :ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
 :END:
@@ -1225,7 +1226,7 @@ WSL for Windows specific code
     (message "Current buffer does not have an associated file.")))
 #+end_src
 
-*** Imenu auto
+** Imenu auto
 :PROPERTIES:
 :ID:       820994eb-2700-428a-a80b-d5e0ede6299d
 :END:
@@ -1240,7 +1241,7 @@ WSL for Windows specific code
 #+end_src
 
 
-*** Visible Bell off
+** Visible Bell off
 :PROPERTIES:
 :ID:       4b5650ad-478a-4c5e-8120-c56375abf02a
 :END:
@@ -1258,7 +1259,7 @@ WSL for Windows specific code
 ;;     )
 #+end_src
 
-*** Auth Source
+** Auth Source
 
 - https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
 - https://www.youtube.com/watch?v=nZ_T7Q49B8Y
@@ -1309,7 +1310,7 @@ https://www.arts-outdoors.de
 (find-file "~/.authinfo.gpg")
 (mapc 'message auth-sources)
 
-**** Generate Key
+*** Generate Key
 
 #+begin_example shell
 gpg --full-generate-key
@@ -1361,7 +1362,7 @@ gpg-connect-agent /bye
         nil)))
 
 
-*** Mac Specific
+** Mac Specific
 :PROPERTIES:
 :ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
 :END:
@@ -1374,7 +1375,7 @@ gpg-connect-agent /bye
 
 #+end_src
 
-*** calibredb
+** calibredb
 :PROPERTIES:
 :ID:       632883c3-8739-4a79-bab9-87bc587dc8af
 :END:
@@ -1396,19 +1397,19 @@ gpg-connect-agent /bye
 
 
 
-*** Ascidoctor
+** Ascidoctor
 
 Link collection here:
 
 https://www.emacswiki.org/emacs/AsciiDoc
 
-**** Adoc Snippets
+*** Adoc Snippets
 
 git@github.com:nicorikken/adoc-mode-yasnippet.git
 
 see in snippets
 
-**** open adoc files
+*** open adoc files
 :PROPERTIES:
 :ID:       8ebfb281-87fd-49f7-b513-19a4c3b0b492
 :END:
@@ -1422,7 +1423,7 @@ see in snippets
 
 #+RESULTS:
 
-**** adoc mode preview
+*** adoc mode preview
 :PROPERTIES:
 :ID:       8f6ef9ec-ffa0-4e07-90c0-37f08216106a
 :END:
@@ -1452,7 +1453,7 @@ see in snippets
   ;; (global-set-key (kbd "C-c a") 'rcd-asciidoctor-preview)
 #+end_src
 
-*** Org ascidoc
+** Org ascidoc
 :PROPERTIES:
 :ID:       59738c74-4023-4a75-8180-a424222ba95e
 :END:
@@ -1468,7 +1469,7 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 #+RESULTS:
 : ox-asciidoc
 
-*** Always load .local_configs as shell script
+** Always load .local_configs as shell script
 :PROPERTIES:
 :ID:       7bdb08dc-a901-4bab-912b-50271f3f6f76
 :END:
