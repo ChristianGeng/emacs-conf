@@ -244,6 +244,10 @@
 ;; setup for lsp and dap
 (require 'setup-auto-complete)
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode)
+)
+
 (require 'setup-lsp)
 ;; (require 'setup-java)
 ;; deactivate  jdee for  loading java files

@@ -352,6 +352,23 @@ However, if your init file changes the values of
 
 #+end_src
 
+*** Rainbow Delim
+:PROPERTIES:
+:ID:       5d59fc74-cea3-415b-ab72-a88eadd97d17
+:END:
+
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode)
+  )
+#+end_src
+
+;; Rainbow Delimiters
+;;(setup (:pkg rainbow-delimiters)
+;;  (:hook-into prog-mode))
+
+
+
 *** LSP
 :PROPERTIES:
 :ID:       b204e436-4dff-486d-8eac-8b32772d7574
