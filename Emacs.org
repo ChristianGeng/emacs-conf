@@ -143,7 +143,7 @@ However, if your init file changes the values of
 #+end_src
 
 
-** Defaults
+** Defaults: Coding System
 :PROPERTIES:
 :ID:       8e48bca6-9fb1-4ce2-8234-784594027423
 :END:
@@ -282,6 +282,23 @@ However, if your init file changes the values of
   (global-hl-line-mode 1)
 
 (setq  realgud-safe-mode nil)
+
+#+end_src
+
+*** Show Line Numbers per Default, with some Exceptions
+:PROPERTIES:
+:ID:       fa826301-f5ae-4c2a-9280-84422f397ff0
+:END:
+
+#+begin_src emacs-lisp
+
+(global-display-line-numbers-mode t)
+
+;; Override some modes which derive from the above
+(dolist (mode '(term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+(add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
 
@@ -1339,6 +1356,27 @@ gpg-connect-agent /bye
 ;; (when is-mac (require 'mac))
 
 #+end_src
+
+*** calibredb
+:PROPERTIES:
+:ID:       632883c3-8739-4a79-bab9-87bc587dc8af
+:END:
+
+
+#+begin_src emacs-lisp
+
+(require 'calibredb)
+(setq calibredb-root-dir "/D/Calibre_Science/")
+(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+
+    ;;(setq calibredb-root-dir "~/OneDrive/Doc/Calibre")
+    ;;(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+
+#+end_src
+
+#+RESULTS:
+: /D/Calibre_Science/metadata.db
+
 
 
 *** Ascidoctor

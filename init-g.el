@@ -211,6 +211,14 @@
 
 (setq  realgud-safe-mode nil)
 
+(global-display-line-numbers-mode t)
+
+;; Override some modes which derive from the above
+(dolist (mode '(term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 (require 'realgud)
 
 (require 'setup-dired)
@@ -504,6 +512,13 @@
 ;; Setup environment variables from the user's shell.
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
+
+(require 'calibredb)
+(setq calibredb-root-dir "/D/Calibre_Science/")
+(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+
+    ;;(setq calibredb-root-dir "~/OneDrive/Doc/Calibre")
+    ;;(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
 
 (require 'adoc-mode)
  (add-to-list 'auto-mode-alist '("\.adoc$" . adoc-mode))
