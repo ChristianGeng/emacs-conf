@@ -143,7 +143,7 @@ However, if your init file changes the values of
 #+end_src
 
 
-** Defaults: Coding System
+** Defaults
 :PROPERTIES:
 :ID:       8e48bca6-9fb1-4ce2-8234-784594027423
 :END:
@@ -285,7 +285,7 @@ However, if your init file changes the values of
 
 #+end_src
 
-*** Show Line Numbers per Default, with some Exceptions
+** Show Line Numbers per Default, with some Exceptions
 :PROPERTIES:
 :ID:       fa826301-f5ae-4c2a-9280-84422f397ff0
 :END:
@@ -297,11 +297,28 @@ However, if your init file changes the values of
 ;; Override some modes which derive from the above
 (dolist (mode '(term-mode-hook
                 shell-mode-hook
+                ibuffer-mode
                 eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
 
+
+
+** Interface more minimalsitic(menubar etc.))
+:PROPERTIES:
+:ID:       53c1899a-035a-44f3-9460-d07523a3a1b3
+:END:
+
+#+begin_src emacs-lisp
+
+  (scroll-bar-mode -1)        ; Disable visible scrollbar
+  (tool-bar-mode -1)          ; Disable the toolbar
+;;  (tooltip-mode -1)           ; Disable tooltips
+  (set-fringe-mode 10)       ; Give some breathing room
+
+(menu-bar-mode -1)            ; Disable the menu bar
+#+end_src
 
 ** Programming
 :PROPERTIES:

@@ -216,8 +216,16 @@
 ;; Override some modes which derive from the above
 (dolist (mode '(term-mode-hook
                 shell-mode-hook
+                ibuffer-mode
                 eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(scroll-bar-mode -1)        ; Disable visible scrollbar
+  (tool-bar-mode -1)          ; Disable the toolbar
+;;  (tooltip-mode -1)           ; Disable tooltips
+  (set-fringe-mode 10)       ; Give some breathing room
+
+(menu-bar-mode -1)            ; Disable the menu bar
 
 (require 'realgud)
 
