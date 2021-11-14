@@ -48,7 +48,7 @@ However, if your init file changes the values of
 #+begin_src emacs-lisp
 ;; The default is 800 kilobytes.  Measured in bytes.
 ;; (setq gc-cons-threshold (* 50 1000 1000))
-(setq gc-cons-threshold (* 150 1000 1000))
+(setq gc-cons-threshold (* 350 1000 1000))
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
@@ -319,6 +319,7 @@ However, if your init file changes the values of
                 ag-mode-hook
                 magit-mode-hook
                 shell-mode-hook
+                helm-mode
                 ibuffer-mode
                 eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -326,6 +327,23 @@ However, if your init file changes the values of
 #+end_src
 
 #+RESULTS:
+
+
+*** Set frame transparency, maximize windows.
+:PROPERTIES:
+:ID:       3e5a576d-bc05-4eb0-bc22-19964267f72f
+:END:
+
+#+begin_src emacs-lisp
+  (set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+  (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+  (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+
+#+RESULTS:
+: ((fullscreen . maximized) (alpha 90 . 90) (vertical-scroll-bars) (left-fringe . 10) (right-fringe . 10))
+
 
 
 
