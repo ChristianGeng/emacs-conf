@@ -103,9 +103,11 @@
 
 ;; (package-initialize)
 
-(unless (and (file-exists-p (concat package-user-dir "/archives/marmalade"))
+(unless (and (file-exists-p (concat package-user-dir "/archives/elpa"))
              (file-exists-p  (concat package-user-dir "/archives/gnu"))
-             (file-exists-p (concat package-user-dir "/archives/melpa")))
+             (file-exists-p (concat package-user-dir "/archives/melpa"))
+             (file-exists-p (concat package-user-dir "/archives/org"))
+             )
   (package-refresh-contents))
 
 ;; (defun packages-install (&rest packages)

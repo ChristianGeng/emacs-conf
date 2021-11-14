@@ -16,8 +16,6 @@ PROPERTIES:
 #+RESULTS:
 : t
 
-
-
 * Eearly Init - not needed?
 
 https://www.masteringemacs.org/article/whats-new-in-emacs-27-1
@@ -42,6 +40,29 @@ However, if your init file changes the values of
 :ID:       214b3d62-1d24-46f8-a373-e3a9e665602d
 :END:
 
+** Configure Startup
+:PROPERTIES:
+:ID:       8ae12a93-e115-4db2-a5fb-430354f6b6af
+:END:
+
+#+begin_src emacs-lisp
+;; The default is 800 kilobytes.  Measured in bytes.
+;; (setq gc-cons-threshold (* 50 1000 1000))
+(setq gc-cons-threshold (* 150 1000 1000))
+
+;; Profile emacs startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "*** Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+
+#+end_src
+
+
+
 ** Coding System
 :PROPERTIES:
 :ID:       97c85ba1-ae76-4450-99a5-3ba469d4e46d
@@ -55,7 +76,6 @@ However, if your init file changes the values of
 (set-selection-coding-system 'utf-8)
 
 #+end_src
-
 
 
 
