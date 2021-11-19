@@ -45,7 +45,10 @@
  '(rustic-ansi-faces
    ["#FDF6E3" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#556b72"])
  '(safe-local-variable-values
-   '((eval progn
+   '((py-pythonpath . "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/")
+     (py-pythonpath . "/home/audeering.local/cgeng/code/myfiles/python-code-experiments")
+     (projectile-project-test-cmd . "pytest --color=yes app/  --ignore app/tests/  --cov=app/study --cov=app/report  --cov=app/core")
+     (eval progn
            (make-local-variable 'process-environment)
            (setq process-environment
                  (copy-sequence process-environment))

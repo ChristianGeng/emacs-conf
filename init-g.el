@@ -1,6 +1,6 @@
 ;; The default is 800 kilobytes.  Measured in bytes.
 ;; (setq gc-cons-threshold (* 50 1000 1000))
-(setq gc-cons-threshold (* 350 1000 1000))
+;; (setq gc-cons-threshold (* 350 1000 1000))
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
@@ -230,14 +230,16 @@
 (dolist (mode '(term-mode-hook
                 ag-mode-hook
                 magit-mode-hook
+                dired-mode-hook
+                comint-mode-hook
                 shell-mode-hook
-                helm-mode
-                ibuffer-mode
+                helm-mode-hook
+                ibuffer-mode-hook
                 eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(99 . 99))
+(add-to-list 'default-frame-alist '(alpha . (99 . 99)))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
