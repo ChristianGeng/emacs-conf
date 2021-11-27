@@ -31,6 +31,18 @@
 ;;; Code:
 
 
+(defun cg/generate-openssl-password ()
+  "Automatically generate a 15 character password using OpenSSL for the Account capture template."
+  (replace-regexp-in-string "\n\\'" ""
+                            (shell-command-to-string "openssl rand -base64 15")))
+
+(defun cg/insert-openssl-password ()
+  "Insert an OpenSSL password from `cg/generate-openssl-password' as a string."
+  (interactive)
+  (insert (cg/generate-openssl-password)))
+
+
+
 (defun my-directory-files (d)
   "Get List of files in directory"
   (let* ((path (file-name-as-directory (expand-file-name d)))
