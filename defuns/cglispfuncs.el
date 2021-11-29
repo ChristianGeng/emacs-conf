@@ -412,7 +412,7 @@ Directory defaults to the value of `my-archive-dir'."
 ;; shamelessly adopted from here
 ;; https://emacsredux.com/blog/2013/03/27/copy-filename-to-the-clipboard/
 ;; this uses the absolute path
-(defun cg-copy-current-filename-to-clipboard ()
+(defun cg/copy-current-filename-to-clipboard ()
   "Copy the current buffer file name to the clipboard."
   (interactive)
   (let ((filename (if (equal major-mode 'dired-mode)
@@ -422,9 +422,21 @@ Directory defaults to the value of `my-archive-dir'."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-;; Creating a menu item, under the menu by the id “[menu-bar mymenu]”
 
-(defun cg-remove-newlines-in-region ()
+(defun cg/fpath ()
+  "Gets the name of the file the current buffer is based on."
+  (interactive)
+  (insert (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+
+
+;; https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Components.html
+(defun cg/basename ()
+  "Gets the name of the file the current buffer is based on."
+  (interactive)
+  (insert (file-name-nondirectory(buffer-file-name (window-buffer (minibuffer-selected-window))))))
+
+
+(defun cg/remove-newlines-in-region ()
   "Remove all newlines in the region."
   (interactive)
   (save-restriction

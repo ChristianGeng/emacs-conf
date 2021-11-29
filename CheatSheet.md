@@ -198,7 +198,7 @@ C-q tab   # insert tab
 C-q C-j   # insert newline
 
 
-* cg-remove-newlines-in-region
+* cg/remove-newlines-in-region
 *  visual-line-mode
 * https://www.emacswiki.org/emacs/FillParagraph
 
