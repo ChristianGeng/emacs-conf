@@ -244,7 +244,7 @@
 (use-package pyvenv
   :config
   (pyvenv-mode 1)
-  (setq pyvenv-workon "py37")  ; Default venv
+  ;; (setq pyvenv-workon "py37")  ; Default venv
   (pyvenv-tracking-mode 1)
   )  ; Automatically use pyvenv-workon via dir-locals
 

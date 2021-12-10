@@ -254,7 +254,7 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
          )
   )
  (python-mode . (
-                 (pyvenv-activate . "~/.venvs/py37")
+                 ;; (pyvenv-activate . "~/.venvs/py37")
                  (lsp-pyright-venv-path . "~/.venvs/")
                  (subdirs . nil))
               )
