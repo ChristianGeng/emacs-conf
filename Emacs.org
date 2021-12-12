@@ -364,6 +364,71 @@ However, if your init file changes the values of
 (menu-bar-mode -1)            ; Disable the menu bar
 #+end_src
 
+** Keyboard Interaction
+
+#+begin_src emacs-lisp
+  ;; Smart M-x is smart - der ido fuer M-x
+  (require 'smex)
+  (smex-initialize)
+
+  ;; Setup key bindings
+  (require 'key-bindings)
+  (require 'setup-helm)
+
+  ;; Diminish modeline clutter
+  (require 'diminish)
+
+  #+end_src
+
+
+*** Evil
+
+https://github.com/noctuid/evil-guide
+https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
+
+
+#+begin_src emacs-lisp
+
+  ;; do ot apply yet
+  (
+   defun cg/evil-hook ()
+    (dolist (mode '(custom-mode
+                    eshell-mode
+                    python-mode
+              )
+                  )
+      )
+    )
+
+    (use-package evil
+      :init
+      (setq evil-want-integration t)  ;; seems to be always good
+      (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
+      (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
+      (setq evil-want-C-i-jump nil)
+      :hook
+      :config
+      ;; evil: green: normal mode;
+      (evil-mode 1)
+      ;; drop back to normal mode using C-g
+      (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+      ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
+      (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+      )
+#+end_src
+
+#+RESULTS:
+
+**** Vim bindings
+
+Norma model
+- j: next line
+- k: previos line
+- S-v to visual mode
+- u undo thing
+- dd delete line
+
+
 ** Programming
 :PROPERTIES:
 :ID:       10eecafe-1a33-4d5d-a162-6fc25c6f4791
@@ -1090,13 +1155,6 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   (require 'browse-kill-ring)
   (setq browse-kill-ring-quit-action 'save-and-restore)
 
-  ;; Smart M-x is smart - der ido fuer M-x
-  (require 'smex)
-  (smex-initialize)
-
-  ;; Setup key bindings
-  (require 'key-bindings)
-  (require 'setup-helm)
   (require 'setup-ibuffer)
   (require 'setup-doom-modeline)
 
@@ -1107,13 +1165,9 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   (require 'setup-groovy)
   ;; (require 'setup-eclim)
 
-
   ;; Misc
   ;; (require 'appearance)
-  ;; (require 'my-misc)
 
-  ;; Diminish modeline clutter
-  (require 'diminish)
   ;; (diminish 'eldoc-mode)
   ;; (diminish 'paredit-mode)
 
@@ -1267,7 +1321,7 @@ WSL for Windows specific code
 :ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
 :END:
 
-** Defuns
+** Local Defuns
 :PROPERTIES:
 :ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
 :END:

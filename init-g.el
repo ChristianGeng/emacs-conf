@@ -250,6 +250,44 @@
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
+;; Smart M-x is smart - der ido fuer M-x
+(require 'smex)
+(smex-initialize)
+
+;; Setup key bindings
+(require 'key-bindings)
+(require 'setup-helm)
+
+;; Diminish modeline clutter
+(require 'diminish)
+
+;; do ot apply yet
+(
+ defun cg/evil-hook ()
+  (dolist (mode '(custom-mode
+                  eshell-mode
+                  python-mode
+            )
+                )
+    )
+  )
+
+  (use-package evil
+    :init
+    (setq evil-want-integration t)  ;; seems to be always good
+    (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
+    (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
+    (setq evil-want-C-i-jump nil)
+    :hook
+    :config
+    ;; evil: green: normal mode;
+    (evil-mode 1)
+    ;; drop back to normal mode using C-g
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+    )
+
 (require 'realgud)
 
 (require 'setup-dired)
@@ -390,13 +428,6 @@
 (require 'browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-;; Smart M-x is smart - der ido fuer M-x
-(require 'smex)
-(smex-initialize)
-
-;; Setup key bindings
-(require 'key-bindings)
-(require 'setup-helm)
 (require 'setup-ibuffer)
 (require 'setup-doom-modeline)
 
@@ -407,13 +438,9 @@
 (require 'setup-groovy)
 ;; (require 'setup-eclim)
 
-
 ;; Misc
 ;; (require 'appearance)
-;; (require 'my-misc)
 
-;; Diminish modeline clutter
-(require 'diminish)
 ;; (diminish 'eldoc-mode)
 ;; (diminish 'paredit-mode)
 
