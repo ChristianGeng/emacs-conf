@@ -86,79 +86,77 @@ However, if your init file changes the values of
 
 #+begin_src emacs-lisp
 
-    ;; Setup packages
-    ;; code obsolete in emacs27
-    (if (version< emacs-version "27.1")
-        (package-initialize)
-      )
+      ;; Setup packages
+      ;; code obsolete in emacs27
+      (if (version< emacs-version "27.1")
+          (package-initialize)
+        )
 
-    (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
-    (add-to-list 'load-path "~/.emacs.d/el")
-    (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
-    ;;(add-to-list 'load-path "~/.emacs.d/elpa/s-20210603.736/")
-
+      (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
+      (add-to-list 'load-path "~/.emacs.d/el")
+      ;;(add-to-list 'load-path "~/.emacs.d/elpa/s-20210603.736/")
 
 
-    (setq user-emacs-directory "~/.emacs.d/")
-    (message user-emacs-directory)
 
-    ;; Functions (load all files in defuns-dir)
-    ;;(add-to-list 'load-path user-emacs-directory)
-    (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-    (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
-      (when (file-regular-p file)
-        (load (file-name-sans-extension file))))
-    ;; (load-library "cglispfuncs")
+      (setq user-emacs-directory "~/.emacs.d/")
+      (message user-emacs-directory)
 
-    ;;  (require 'title-time)
-    ;; (require 'setup-daimler-proxy)
-    ;; ;; No splash screen please ... jeez
-    (setq inhibit-startup-message t)
+      ;; Functions (load all files in defuns-dir)
+      ;;(add-to-list 'load-path user-emacs-directory)
+      (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+      (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
+        (when (file-regular-p file)
+          (load (file-name-sans-extension file))))
 
-    ;; Settings for currently logged in user
-    ;; keep automatic customizations separately
-    (setq custom-file "~/.emacs.d/custom.el")
-    (load custom-file 'noerror)
+      ;;  (require 'title-time)
+      ;; (require 'setup-daimler-proxy)
+      ;; ;; No splash screen please ... jeez
+      (setq inhibit-startup-message t)
 
-  ;; create user customization directory for specific username/hostname combination
-  (defvar user-settings-dir)
-  (setq user-settings-dir
-        (joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
+      ;; Settings for currently logged in user
+      ;; keep automatic customizations separately
+      (setq custom-file "~/.emacs.d/custom.el")
+      (load custom-file 'noerror)
 
-  (mkdir user-settings-dir t)
-  (add-to-list 'load-path user-settings-dir)
+    ;; create user customization directory for specific username/hostname combination
+    (defvar user-settings-dir)
+    (setq user-settings-dir
+          (joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
 
-  ;; load all settings from user machine combination
-  (when (file-exists-p user-settings-dir)
-      (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
+    (mkdir user-settings-dir t)
+    (add-to-list 'load-path user-settings-dir)
 
-  ;; Write backup files to own directory
-  (setq backup-directory-alist
-        `(("." . ,(expand-file-name "backups" user-emacs-directory))))
+    ;; load all settings from user machine combination
+    (when (file-exists-p user-settings-dir)
+        (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
 
-  ;; Make backups of files, even when they're in version control
-  (setq vc-make-backup-files t)
+    ;; Write backup files to own directory
+    (setq backup-directory-alist
+          `(("." . ,(expand-file-name "backups" user-emacs-directory))))
 
-  ;; Save point position between sessions
-  (require 'saveplace)
-  (setq-default save-place t)
-  (setq save-place-file (expand-file-name ".places" user-emacs-directory))
+    ;; Make backups of files, even when they're in version control
+    (setq vc-make-backup-files t)
 
-;; Setup elnode before packages to stop it from starting a server
-;;(require 'setup-elnode)
-;; Setup packages
-(require 'setup-package)
-;; Set path to dependencies
-(setq site-lisp-dir
-       (expand-file-name "site-lisp" user-emacs-directory))
+    ;; Save point position between sessions
+    (require 'saveplace)
+    (setq-default save-place t)
+    (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
-;; Set up load path and
-(add-to-list 'load-path site-lisp-dir)
+  ;; Setup elnode before packages to stop it from starting a server
+  ;;(require 'setup-elnode)
+  ;; Setup packages
+  (require 'setup-package)
+  ;; Set path to dependencies
+  (setq site-lisp-dir
+         (expand-file-name "site-lisp" user-emacs-directory))
 
-;; Add external projects to load path
-(dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
+  ;; Set up load path and
+  (add-to-list 'load-path site-lisp-dir)
+
+  ;; Add external projects to load path
+  (dolist (project (directory-files site-lisp-dir t "\\w+"))
+    (when (file-directory-p project)
+      (add-to-list 'load-path project)))
 
 #+end_src
 
@@ -365,6 +363,9 @@ However, if your init file changes the values of
 #+end_src
 
 ** Keyboard Interaction
+:PROPERTIES:
+:ID:       7659bb1b-d161-4195-9d35-657b64674762
+:END:
 
 #+begin_src emacs-lisp
   ;; Smart M-x is smart - der ido fuer M-x
@@ -382,6 +383,9 @@ However, if your init file changes the values of
 
 
 *** Evil
+:PROPERTIES:
+:ID:       a33db7a9-3505-420b-80f8-fe89b83495b7
+:END:
 
 https://github.com/noctuid/evil-guide
 https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
@@ -427,8 +431,26 @@ Norma model
 - S-v to visual mode
 - u undo thing
 - dd delete line
+evil-emacs-state
+evil-insert-state
+evil-normal-state
+evil-visual-state
 
+ddddiiiiiiiiabcde
+y - yank (copy) marked text
+d - delete marked text
+yy - yank (copy) a line
+2yy - yank (copy) 2 lines
+dd - delete (cut) a line
 
+D - delete (cut) to the end of the line
+yiw - yank (copy) word under the cursor
+Cheatsheets, Editing:
+https://vim.rtorr.com/
+https://devhints.io/vim
+https://vim.fandom.com/wiki/Moving_lines_up_or_down
+
+/home/audeering.local/cgeng/code/data_collection/aisoundlab/portal/src/app/app-init.ts
 ** Programming
 :PROPERTIES:
 :ID:       10eecafe-1a33-4d5d-a162-6fc25c6f4791
@@ -442,8 +464,6 @@ Norma model
 #+begin_src emacs-lisp
 (require 'realgud)
 
-(require 'setup-dired)
-(require 'setup-wttrin)
 (require 'setup-projectile)
 
 ;; Setup extensions
@@ -1370,6 +1390,26 @@ WSL for Windows specific code
 ;;     )
 #+end_src
 
+** Ansible Vault Mode
+
+
+#+begin_src emacs-lisp
+
+(setq ansible-vault-password-file "~/.ansible/vault_pass.txt")
+(add-to-list 'auto-mode-alist '("/encrypted$" . yaml-mode))
+
+(defun ansible-vault-mode-maybe ()
+  (when (ansible-vault--is-encrypted-vault-file)
+    (ansible-vault-mode 1)))
+
+ (use-package ansible-vault
+  :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
+
+#+end_src
+
+#+RESULTS:
+
+
 ** Auth Source
 
 - https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
@@ -1599,6 +1639,13 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
   (server-start))
 #+end_src
 
+
+** dired
+
+
+#+begin_src emacs-lisp
+(require 'setup-dired)
+#+end_src
 
 
 * Applications Config Example

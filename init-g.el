@@ -24,7 +24,6 @@
 
     (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
     (add-to-list 'load-path "~/.emacs.d/el")
-    (add-to-list 'load-path "~/.emacs.d/el-get/dired+")
     ;;(add-to-list 'load-path "~/.emacs.d/elpa/s-20210603.736/")
 
 
@@ -38,7 +37,6 @@
     (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
       (when (file-regular-p file)
         (load (file-name-sans-extension file))))
-    ;; (load-library "cglispfuncs")
 
     ;;  (require 'title-time)
     ;; (require 'setup-daimler-proxy)
@@ -290,8 +288,6 @@
 
 (require 'realgud)
 
-(require 'setup-dired)
-(require 'setup-wttrin)
 (require 'setup-projectile)
 
 ;; Setup extensions
@@ -566,6 +562,16 @@
 ;;   (message "Went outside but not ringing the bell.")
 ;;     )
 
+(setq ansible-vault-password-file "~/.ansible/vault_pass.txt")
+(add-to-list 'auto-mode-alist '("/encrypted$" . yaml-mode))
+
+(defun ansible-vault-mode-maybe ()
+  (when (ansible-vault--is-encrypted-vault-file)
+    (ansible-vault-mode 1)))
+
+ (use-package ansible-vault
+  :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
+
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
 ;; Setup environment variables from the user's shell.
@@ -615,6 +621,8 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
+(require 'setup-dired)
 
 ;;  value=155
 (setq value 155)
