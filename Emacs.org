@@ -419,6 +419,16 @@ https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
       ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
       (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
       )
+
+;;  (evil-set-initial-state 'messages-buffer-mode 'normal)
+;;  (evil-set-initial-state 'dashboard-mode 'normal))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+
 #+end_src
 
 #+RESULTS:
