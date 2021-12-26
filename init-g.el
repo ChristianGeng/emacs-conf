@@ -276,7 +276,7 @@
       (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
       (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
       (setq evil-want-C-i-jump nil)
-      :hook
+      ;; :hook
       :config
       ;; evil: green: normal mode;
       (evil-mode 1)

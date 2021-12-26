@@ -393,40 +393,40 @@ https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
 
 #+begin_src emacs-lisp
 
-  ;; do ot apply yet
-  (
-   defun cg/evil-hook ()
-    (dolist (mode '(custom-mode
-                    eshell-mode
-                    python-mode
-              )
-                  )
-      )
-    )
-
-    (use-package evil
-      :init
-      (setq evil-want-integration t)  ;; seems to be always good
-      (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
-      (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
-      (setq evil-want-C-i-jump nil)
-      :hook
-      :config
-      ;; evil: green: normal mode;
-      (evil-mode 1)
-      ;; drop back to normal mode using C-g
-      (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-      ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
-      (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+    ;; do ot apply yet
+    (
+     defun cg/evil-hook ()
+      (dolist (mode '(custom-mode
+                      eshell-mode
+                      python-mode
+                )
+                    )
+        )
       )
 
-;;  (evil-set-initial-state 'messages-buffer-mode 'normal)
-;;  (evil-set-initial-state 'dashboard-mode 'normal))
+      (use-package evil
+        :init
+        (setq evil-want-integration t)  ;; seems to be always good
+        (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
+        (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
+        (setq evil-want-C-i-jump nil)
+        ;; :hook
+        :config
+        ;; evil: green: normal mode;
+        (evil-mode 1)
+        ;; drop back to normal mode using C-g
+        (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+        ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
+        (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+        )
 
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
+  ;;  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  ;;  (evil-set-initial-state 'dashboard-mode 'normal))
+
+  (use-package evil-collection
+    :after evil
+    :config
+    (evil-collection-init))
 
 
 #+end_src
@@ -1488,9 +1488,26 @@ gpg --full-generate-key
   gpg --list-keys
   # these should be in
   ls -t ~/.gnupg/
-#+end_src
+  ls -t ~/.gnupg/private-keys-v1.d -la
+  #+end_src
 
 #+RESULTS:
+/home/christian/.gnupg/pubring.kbx
+----------------------------------
+pub   rsa4096 2021-08-21 [SC]
+      B6791609BBC1CD7C000F17E75921C10409567BCA
+uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
+sub   rsa4096 2021-08-21 [E]
+
+random_seed
+trustdb.gpg
+openpgp-revocs.d
+pubring.kbx
+private-keys-v1.d
+pubring.kbx~
+total 8
+-rw------- 1 christian christian 2056 Aug 21 13:00 3F10E5FB10073217E078BDB9F1043D5B7DD785EF.key
+-rw------- 1 christian christian 2056 Aug 21 13:00 676E806C8E7D02199000B22A4B86BFDBEAF035A6.key
 /home/christian/.gnupg/pubring.kbx
 ----------------------------------
 pub   rsa4096 2021-08-21 [SC]
@@ -1521,6 +1538,36 @@ gpg-connect-agent /bye
     (if result
         (funcall (plist-get (car result) :secret))
         nil)))
+
+
+*** Migrate key to other machine
+
+Identify your private key:
+
+gpg --list-secret-keys user@email.com
+
+#+begin_example
+pub   rsa4096 2021-08-21 [SC]
+      <KEY ID DES SCHLÜSSELS>
+uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
+sub   rsa4096 2021-08-21 [E]
+#+end_example
+
+Export key
+
+gpg --export-secret-keys <KEY ID DES SCHLÜSSELS> > private.key
+
+Copy Key to other machine (e.g. using scp)
+
+import
+
+gpg --import private.key
+
+Enigmail / GnuPG v2
+Note that you probably also have gpg2 on your system which is backwards-compatible with gpg, but seems to manage a separate list of keys. When using Thunderbird with Enigmail, note that it uses version 2 and may be unable to see your private key after importing. To fix that, run
+
+COPY
+gpg2 --import private.key
 
 
 ** Mac Specific
