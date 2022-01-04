@@ -7,3 +7,6 @@
 [submodule "doom-snippets"]
 	path = doom-snippets
 	url = https://github.com/hlissner/doom-snippets.git
+[submodule "el/scel"]
+	path = el/scel
+	url = git@github.com:supercollider/scel.git

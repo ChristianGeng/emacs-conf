@@ -17,52 +17,56 @@
 (set-selection-coding-system 'utf-8)
 
 ;; Setup packages
-    ;; code obsolete in emacs27
-    (if (version< emacs-version "27.1")
-        (package-initialize)
-      )
+  ;; code obsolete in emacs27
+  (if (version< emacs-version "27.1")
+      (package-initialize)
+    )
 
-    (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
-    (add-to-list 'load-path "~/.emacs.d/el")
-    ;;(add-to-list 'load-path "~/.emacs.d/elpa/s-20210603.736/")
+  (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
+(setq doom-snippets-enable-short-helpers nil)
+  (add-to-list 'load-path "~/.emacs.d/el")
+;; (add-to-list 'load-path "~/.emacs.d/elpa/s-20210616.619/")
+;; (require 's)
+
+ (use-package s :ensure t)
 
 
 
-    (setq user-emacs-directory "~/.emacs.d/")
-    (message user-emacs-directory)
+  (setq user-emacs-directory "~/.emacs.d/")
+  (message user-emacs-directory)
 
-    ;; Functions (load all files in defuns-dir)
-    ;;(add-to-list 'load-path user-emacs-directory)
-    (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-    (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
-      (when (file-regular-p file)
-        (load (file-name-sans-extension file))))
+  ;; Functions (load all files in defuns-dir)
+  ;;(add-to-list 'load-path user-emacs-directory)
+  (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+  (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
+    (when (file-regular-p file)
+      (load (file-name-sans-extension file))))
 
-    ;;  (require 'title-time)
-    ;; (require 'setup-daimler-proxy)
-    ;; ;; No splash screen please ... jeez
-    (setq inhibit-startup-message t)
+  ;;  (require 'title-time)
+  ;; (require 'setup-daimler-proxy)
+  ;; ;; No splash screen please ... jeez
+  (setq inhibit-startup-message t)
 
-    ;; Settings for currently logged in user
-    ;; keep automatic customizations separately
-    (setq custom-file "~/.emacs.d/custom.el")
-    (load custom-file 'noerror)
+  ;; Settings for currently logged in user
+  ;; keep automatic customizations separately
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file 'noerror)
 
   ;; create user customization directory for specific username/hostname combination
   (defvar user-settings-dir)
   (setq user-settings-dir
-        (joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
+	(joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
 
   (mkdir user-settings-dir t)
   (add-to-list 'load-path user-settings-dir)
 
   ;; load all settings from user machine combination
   (when (file-exists-p user-settings-dir)
-      (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
+    (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
 
   ;; Write backup files to own directory
   (setq backup-directory-alist
-        `(("." . ,(expand-file-name "backups" user-emacs-directory))))
+	`(("." . ,(expand-file-name "backups" user-emacs-directory))))
 
   ;; Make backups of files, even when they're in version control
   (setq vc-make-backup-files t)
@@ -72,21 +76,21 @@
   (setq-default save-place t)
   (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
-;; Setup elnode before packages to stop it from starting a server
-;;(require 'setup-elnode)
-;; Setup packages
-(require 'setup-package)
-;; Set path to dependencies
-(setq site-lisp-dir
-       (expand-file-name "site-lisp" user-emacs-directory))
+  ;; Setup elnode before packages to stop it from starting a server
+  ;;(require 'setup-elnode)
+  ;; Setup packages
+  (require 'setup-package)
+  ;; Set path to dependencies
+  (setq site-lisp-dir
+	(expand-file-name "site-lisp" user-emacs-directory))
 
-;; Set up load path and
-(add-to-list 'load-path site-lisp-dir)
+  ;; Set up load path and
+  (add-to-list 'load-path site-lisp-dir)
 
-;; Add external projects to load path
-(dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
+  ;; Add external projects to load path
+  (dolist (project (directory-files site-lisp-dir t "\\w+"))
+    (when (file-directory-p project)
+      (add-to-list 'load-path project)))
 
 ;; Allow pasting selection outside of Emacs
   (setq x-select-enable-clipboard t)
@@ -293,6 +297,9 @@
   :after evil
   :config
   (evil-collection-init))
+
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (require 'realgud)
 

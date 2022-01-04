@@ -73,7 +73,10 @@
 ;;
 ;; Python devel und yasnippet: http://longhorizon.org/blog/2013/03/31/improving-python-development-in-emacs-with-yasnippet/
 
-(load-file (expand-file-name  "doom-snippets/doom-snippets.el" user-emacs-directory))
+;;(load-file (expand-file-name  "doom-snippets/doom-snippets.el" user-emacs-directory))
+;; (load-file (expand-file-name  "doom-snippets/doom-snippets-lib.el" user-emacs-directory))
+;;   (load-file "~/.emacs.d/doom-snippets/doom-snippets-lib.el")
+;;    (load-file "~/.emacs.d/doom-snippets/doom-snippets.el")
 
 (use-package doom-snippets
   :load-path (expand-file-name "doom-snippets" user-emacs-directory)

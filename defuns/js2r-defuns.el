@@ -1,5 +1,5 @@
 (require 'cl)
-(require 's)
+;; (require 's)
 (require 'dash)
 
 (defvar js2r-path-to-tests "/test/"

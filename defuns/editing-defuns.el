@@ -53,7 +53,7 @@ region-end is used."
 
 ;; automatically indenting yanked text if in programming-modes
 
-(require 'dash)
+;; (require 'dash)
 
 (defvar yank-indent-modes '(c-mode
                             lisp-mode

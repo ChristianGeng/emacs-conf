@@ -118,6 +118,7 @@
 
 (use-package dap-mode
   ;; :tags '("IDE" "PROGRAMMING" "LSP")
+  :ensure t
   :custom
   ;; (dap-auto-configure-features '(sessions locals tooltip breakpoints expression controls)) ;; -> alternativ
   ;; (lsp-enable-dap-auto-configure nil)  ->  do not start any of locals breakpoints expression controls tooltip by default

@@ -179,4 +179,7 @@ Version 2019-11-04 2021-02-16"
 
 (put 'dired-find-alternate-file 'disabled nil)
 
+;; dired+: initially show all the detail - bound to S+(
+(setq diredp-hide-details-initially-flag nil)
+
 (provide 'setup-dired)

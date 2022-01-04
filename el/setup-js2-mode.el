@@ -91,24 +91,24 @@
 (use-package js-import
   :ensure t)
 
-(use-package company-tern
-  :ensure t
-  :after (company tern xref-js2)
-  :hook
-  (js2-mode . tern-mode)
-  (js2-mode . company-mode)
+;; (use-package company-tern
+;;   :ensure t
+;;   :after (company tern xref-js2)
+;;   :hook
+;;   (js2-mode . tern-mode)
+;;   (js2-mode . company-mode)
 
-  :config
-  (add-to-list 'company-backends 'company-tern)
+;;   :config
+;;   ;; (add-to-list 'company-backends 'company-tern)
 
-  ;; Disable completion keybindings, as we use xref-js2 instead
-  (define-key tern-mode-keymap (kbd "M-.") nil)
-  (define-key tern-mode-keymap (kbd "M-,") nil)
+;;   ;; Disable completion keybindings, as we use xref-js2 instead
+;;   (define-key tern-mode-keymap (kbd "M-.") nil)
+;;   (define-key tern-mode-keymap (kbd "M-,") nil)
 
-  (setq company-tern-property-marker " <p>"
-        company-tern-property-marker nil
-        company-tern-meta-as-single-line t
-        company-tooltip-align-annotations t))
+;;   (setq company-tern-property-marker " <p>"
+;;         company-tern-property-marker nil
+;;         company-tern-meta-as-single-line t
+;;         company-tooltip-align-annotations t))
 
 
 ;; ;; https://emacs.cafe/emacs/javascript/setup/2017/04/23/emacs-setup-javascript.html
@@ -154,7 +154,7 @@
 ;; (add-hook 'js2-mode-hook (lambda ()
 ;;                            (tern-mode)
 ;;                            (company-mode)))
-                           
+
 ;; ;; Disable completion keybindings, as we use xref-js2 instead
 ;; (define-key tern-mode-keymap (kbd "M-.") nil)
 ;; (define-key tern-mode-keymap (kbd "M-,") nil)

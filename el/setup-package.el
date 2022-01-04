@@ -77,6 +77,8 @@
 
 (defvar marmalade '("marmalade" . "https://marmalade-repo.org/packages/"))
 (defvar gnu '("gnu" . "https://elpa.gnu.org/packages/"))
+;; ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+(defvar nongnu '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
 ;; Milkbox ist nicht mehr erreichbar  - 2020-09-02
 ;;(defvar melpa '("melpa" . "http://melpa.milkbox.net/packages/"))
 ;;(defvar melpa '("melpa" . "http://stable.melpa.org/packages/"))
@@ -91,6 +93,7 @@
 ;; (add-to-list 'package-archives marmalade)
 (add-to-list 'package-archives melpa t)
 (add-to-list 'package-archives org t)
+(add-to-list 'package-archives nongnu t)
 
 ;; Add packages defined elsewhere as builtin packages, so they will
 ;; not be pulled in a second time
@@ -106,7 +109,8 @@
 (unless (and (file-exists-p (concat package-user-dir "/archives/elpa"))
              (file-exists-p  (concat package-user-dir "/archives/gnu"))
              (file-exists-p (concat package-user-dir "/archives/melpa"))
-            ; (file-exists-p (concat package-user-dir "/archives/org"))
+             (file-exists-p (concat package-user-dir "/archives/nongnu"))
+             (file-exists-p (concat package-user-dir "/archives/org"))
              )
   (package-refresh-contents))
 
