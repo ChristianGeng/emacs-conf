@@ -1727,6 +1727,13 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 #+end_src
 
 
+* Get Temperature
+
+Shell Script to get get temperatures
+
+# temperatures=$(cat /sys/class/thermal/thermal_zone*/temp  | tr '\n' '/')
+
+
 * Applications Config Example
 
 ** Some App
