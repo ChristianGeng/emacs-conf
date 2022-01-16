@@ -853,6 +853,18 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 : lsp-workspace-restart-deep
 
 
+***** Attempt to configure brunnette
+
+
+blacken-executable
+(setq blacken-executable "brunette")
+(setq blacken-executable "/home/audeering.local/cgeng/.venvs/py37-data/bin/brunette")
+
+(defvar python-autoflake-path
+
+(concat pyvenv-virtual-env-path-directories "brunette")
+
+)
 
 ***** Format buffer using yapf
 :PROPERTIES:
@@ -875,6 +887,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 
 
 #+end_src
+
 
 ***** Function to remove unused imports using autoflake
 :PROPERTIES:
@@ -950,6 +963,23 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 
 #+end_src
 
+
+***** Aggregate Function to clean up
+
+
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+  (defun python-cleanup-this-file ()
+    "All cleaning actions run in chain..."
+    (interactive)
+  (blacken-buffer)
+  (python-remove-unused-imports)
+  (py-isort-buffer)
+  (python-remove-unused-imports)
+  )
+#+end_src
+
+
 ***** Rst autocomplete
 :PROPERTIES:
 :ID:       59d7132f-71a6-45b0-88b8-a2f15e3952f2
@@ -996,6 +1026,9 @@ https://github.com/tkf/auto-complete-rst
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
                            (require 'highlight-indent-guides)
+                           (require 'sphinx-doc)
+                           (sphinx-doc-mode t)
+                           (highlight-indent-guides-mode -1)
                            (auto-fill-mode)
                            (set-fill-column python-linewidth)
                            ;;(highlight-indent-guides-mode)
@@ -1553,6 +1586,15 @@ gpg-connect-agent /bye
 #+RESULTS:
 22957
 
+*** Migrate key to other maschine
+
+ gpg --list-secret-keys christian.c.geng@gmail.com
+
+ gpg --export-secret-keys YOUR_ID_HERE > private.key
+ gpg --import private.key
+
+
+*** Lookup key
 
 
 (defun efs/lookup-password (&rest keys)
