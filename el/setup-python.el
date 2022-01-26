@@ -103,7 +103,7 @@
                          (auto-fill-mode)
                          (set-fill-column python-linewidth)
                          ;;(highlight-indent-guides-mode)
-
+                         (importmagic-mode)
                          (lsp-deferred)
                          ;; (yapf-mode)
                          (lsp-treemacs)
