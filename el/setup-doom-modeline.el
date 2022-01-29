@@ -98,4 +98,24 @@
 ;; Function to stylize the irc buffer names.
 (setq doom-modeline-irc-stylize 'identity)
 
+;; (setq doom-modeline-evil-state-icon nil)
+(setq doom-modeline-unicode-fallback nil)
+
+
+;; Evil Specific Stuff
+
+;; disables all icons, not what I want
+;; (setq doom-modeline-icon t)
+;; seem to only affect evil
+;; (setq doom-modeline-modal-icon t)
+(setq doom-modeline-modal-icon nil)
+;; would be good to get better faces!
+;; this does not exist
+;; (setq doom-modeline-evil-state-icon nil)
+;; Links
+;; https://github.com/seagle0128/doom-modeline/issues/348
+;; https://github.com/seagle0128/doom-modeline/issues/8
+;; does not work for me:
+;; https://github.com/seagle0128/doom-modeline/issues/254
+
 (provide 'setup-doom-modeline)

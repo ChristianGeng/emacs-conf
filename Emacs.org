@@ -173,139 +173,135 @@ However, if your init file changes the values of
 :END:
 
 #+begin_src emacs-lisp
-  ;; Allow pasting selection outside of Emacs
-  (setq x-select-enable-clipboard t)
-  (setq x-select-enable-primary t)
+    ;; Allow pasting selection outside of Emacs
+    (setq x-select-enable-clipboard t)
+    (setq x-select-enable-primary t)
 
-  ;; Auto refresh buffers
-  (global-auto-revert-mode 1)
+    ;; Auto refresh buffers
+    (global-auto-revert-mode 1)
 
-  ;; Also auto refresh dired, but be quiet about it
-  (setq global-auto-revert-non-file-buffers t)
-  (setq auto-revert-verbose nil)
+    ;; Also auto refresh dired, but be quiet about it
+    (setq global-auto-revert-non-file-buffers t)
+    (setq auto-revert-verbose nil)
 
-  ;; Show keystrokes in progress
-  (setq echo-keystrokes 0.1)
+    ;; Show keystrokes in progress
+    (setq echo-keystrokes 0.1)
 
-  ;; Move files to trash when deleting
-  (setq delete-by-moving-to-trash t)
+    ;; Move files to trash when deleting
+    (setq delete-by-moving-to-trash t)
 
-  ;; Real emacs knights don't use shift to mark things
-  (setq shift-select-mode nil)
+    ;; Real emacs knights don't use shift to mark things
+    (setq shift-select-mode nil)
 
-  ;; Transparently open compressed files
-  (auto-compression-mode t)
+    ;; Transparently open compressed files
+    (auto-compression-mode t)
 
-  ;; Enable syntax highlighting for older Emacsen that have it off
-  (global-font-lock-mode t)
+    ;; Enable syntax highlighting for older Emacsen that have it off
+    (global-font-lock-mode t)
 
-  ;; Answering just 'y' or 'n' will do
-  (defalias 'yes-or-no-p 'y-or-n-p)
+    ;; Answering just 'y' or 'n' will do
+    (defalias 'yes-or-no-p 'y-or-n-p)
 
-  ;; UTF-8 please
-  (setq locale-coding-system 'utf-8) ; pretty
-  (set-terminal-coding-system 'utf-8) ; pretty
-  (set-keyboard-coding-system 'utf-8) ; pretty
-  (set-selection-coding-system 'utf-8) ; please
-  (prefer-coding-system 'utf-8) ; with sugar on top
+    ;; UTF-8 please
+    (setq locale-coding-system 'utf-8) ; pretty
+    (set-terminal-coding-system 'utf-8) ; pretty
+    (set-keyboard-coding-system 'utf-8) ; pretty
+    (set-selection-coding-system 'utf-8) ; please
+    (prefer-coding-system 'utf-8) ; with sugar on top
 
-  ;; Frame titles which are short and informative
-  (setq frame-title-format '("%b - Emacs"))
+    ;; Frame titles which are short and informative
+    (setq frame-title-format '("%b - Emacs"))
 
-  ;; Show active region
-  (transient-mark-mode 1)
-  (make-variable-buffer-local 'transient-mark-mode)
-  (put 'transient-mark-mode 'permanent-local t)
-  (setq-default transient-mark-mode t)
+    ;; Show active region
+    (transient-mark-mode 1)
+    (make-variable-buffer-local 'transient-mark-mode)
+    (put 'transient-mark-mode 'permanent-local t)
+    (setq-default transient-mark-mode t)
 
-  ;; Remove text in active region if inserting text
-  (delete-selection-mode 1)
+    ;; Remove text in active region if inserting text
+    (delete-selection-mode 1)
 
-  ;; ;; Don't highlight matches with jump-char - it's distracting
-  ;; (setq jump-char-lazy-highlight-face nil)
+    ;; ;; Don't highlight matches with jump-char - it's distracting
+    ;; (setq jump-char-lazy-highlight-face nil)
 
-  ;; Always display line and column numbers
-  (setq line-number-mode t)
-  (setq column-number-mode t)
+    ;; Always display line and column numbers
+    (setq line-number-mode t)
+    (setq column-number-mode t)
 
-  ;; Lines should be 80 characters wide, not 72
-  (setq fill-column 80)
+    ;; Lines should be 80 characters wide, not 72
+    (setq fill-column 80)
 
-  ;; Save a list of recent files visited. (open recent file with C-x f)
-  (recentf-mode 1)
-  (setq recentf-max-saved-items 100) ;; just 20 is too recent
+    ;; Save a list of recent files visited. (open recent file with C-x f)
+    (recentf-mode 1)
+    (setq recentf-max-saved-items 100) ;; just 20 is too recent
 
-  ;; Highlight matching parentheses when the point is on them.
-  (show-paren-mode 1)
+    ;; Highlight matching parentheses when the point is on them.
+    (show-paren-mode 1)
 
-  ;; Undo/redo window configuration with C-c <left>/<right>
-  (winner-mode 1)
+    ;; Undo/redo window configuration with C-c <left>/<right>
+    (winner-mode 1)
 
-  ;; Never insert tabs
-  (setq-default indent-tabs-mode nil)
+    ;; Never insert tabs
+    (setq-default indent-tabs-mode nil)
 
-  ;; Show me empty lines after buffer end
-  (setq-default indicate-empty-lines t)
+    ;; Show me empty lines after buffer end
+    (setq-default indicate-empty-lines t)
 
-  ;; Easily navigate sillycased words
-  (global-subword-mode 1)
+    ;; Easily navigate sillycased words
+    (global-subword-mode 1)
 
-  ;; ;; Don't break lines for me, please
-  ;; (setq-default truncate-lines t)
+    ;; ;; Don't break lines for me, please
+    ;; (setq-default truncate-lines t)
 
-  ;; Keep cursor away from edges when scrolling up/down
-  (require 'smooth-scrolling)
-  ;; (setq scroll-step 1)
-  ;; (setq scroll-conservatively 10000)
-  (setq auto-window-vscroll nil)
+    ;; Keep cursor away from edges when scrolling up/down
+    (require 'smooth-scrolling)
+    ;; (setq scroll-step 1)
+    ;; (setq scroll-conservatively 10000)
+    (setq auto-window-vscroll nil)
 
-  ;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
-  (setq org-replace-disputed-keys t)
+    ;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
+    (setq org-replace-disputed-keys t)
 
-  ;; Fontify org-mode code blocks
-  (setq org-src-fontify-natively t)
+    ;; Fontify org-mode code blocks
+    (setq org-src-fontify-natively t)
 
-  ;; Represent undo-history as an actual tree (visualize with C-x u)
-  (setq undo-tree-mode-lighter "")
-  (require 'undo-tree)
-  (global-undo-tree-mode)
 
-  ;; ;; Sentences do not need double spaces to end. Period.
-  ;; (set-default 'sentence-end-double-space nil)
+    ;; ;; Sentences do not need double spaces to end. Period.
+    ;; (set-default 'sentence-end-double-space nil)
 
-  ;; Add parts of each file's directory to the buffer name if not unique
-  (require 'uniquify)
-  (setq uniquify-buffer-name-style 'forward)
+    ;; Add parts of each file's directory to the buffer name if not unique
+    (require 'uniquify)
+    (setq uniquify-buffer-name-style 'forward)
 
-  ;; A saner ediff
-  (setq ediff-diff-options "-w")
-  (setq ediff-split-window-function 'split-window-horizontally)
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+    ;; A saner ediff
+    (setq ediff-diff-options "-w")
+    (setq ediff-split-window-function 'split-window-horizontally)
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
-  ;; Nic says eval-expression-print-level needs to be set to nil (turned off) so
-  ;; that you can always see what's happening.
-  (setq eval-expression-print-level nil)
+    ;; Nic says eval-expression-print-level needs to be set to nil (turned off) so
+    ;; that you can always see what's happening.
+    (setq eval-expression-print-level nil)
 
-  ;; When popping the mark, continue popping until the cursor actually moves
-  ;; Also, if the last command was a copy - skip past all the expand-region cruft.
-  (defadvice pop-to-mark-command (around ensure-new-position activate)
-    (let ((p (point)))
-      (when (eq last-command 'save-region-or-current-line)
-        ad-do-it
-        ad-do-it
-        ad-do-it)
-      (dotimes (i 10)
-        (when (= p (point)) ad-do-it))))
+    ;; When popping the mark, continue popping until the cursor actually moves
+    ;; Also, if the last command was a copy - skip past all the expand-region cruft.
+    (defadvice pop-to-mark-command (around ensure-new-position activate)
+      (let ((p (point)))
+        (when (eq last-command 'save-region-or-current-line)
+          ad-do-it
+          ad-do-it
+          ad-do-it)
+        (dotimes (i 10)
+          (when (= p (point)) ad-do-it))))
 
-  ;; don't try to raise windows when switching to a buffer, because this
-  ;; fails in any sane tiling window manager
-  (setq ido-default-file-method 'selected-window
-        ido-default-buffer-method 'selected-window)
+    ;; don't try to raise windows when switching to a buffer, because this
+    ;; fails in any sane tiling window manager
+    (setq ido-default-file-method 'selected-window
+          ido-default-buffer-method 'selected-window)
 
-  ;; highlight the current line in all buffers
-  (global-hl-line-mode 1)
+    ;; highlight the current line in all buffers
+    (global-hl-line-mode 1)
 
-(setq  realgud-safe-mode nil)
+  (setq  realgud-safe-mode nil)
 
 #+end_src
 
@@ -316,19 +312,21 @@ However, if your init file changes the values of
 
 #+begin_src emacs-lisp
 
-  (global-display-line-numbers-mode t)
+      (global-display-line-numbers-mode t)
 
-  ;; Override some modes which derive from the above
-  (dolist (mode '(term-mode-hook
-                  ag-mode-hook
-                  magit-mode-hook
-                  dired-mode-hook
-                  comint-mode-hook
-                  shell-mode-hook
-                  helm-mode-hook
-                  ibuffer-mode-hook
-                  eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+      ;; Override some modes which derive from the above
+      (dolist (mode '(term-mode-hook
+                      ag-mode-hook
+                      magit-mode-hook
+                      dired-mode-hook
+                      comint-mode-hook
+                      shell-mode-hook
+                      helm-mode-hook
+                      ibuffer-mode-hook
+                      eshell-mode-hook))
+
+        (add-hook mode (lambda () (display-line-numbers-mode 0)))
+        )
 
 #+end_src
 
@@ -387,6 +385,20 @@ However, if your init file changes the values of
 
   #+end_src
 
+*** Undo system
+
+- C-r in evil/vim: undo/redo functionality
+- it will suggest to customize the evil undo system, see customization below
+- Evil has some fine tunings of the undo system: ~(setq evil-want-fine-undo t)~,
+  see [[https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims][here.]]
+
+#+begin_src emacs-lisp
+;; Represent undo-history as an actual tree (visualize with C-x u)
+(setq undo-tree-mode-lighter "")
+(require 'undo-tree)
+(global-undo-tree-mode)
+#+end_src
+
 
 *** Evil
 :PROPERTIES:
@@ -395,36 +407,41 @@ However, if your init file changes the values of
 
 https://github.com/noctuid/evil-guide
 https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
-
+https://www.linode.com/docs/guides/emacs-evil-mode/
 
 #+begin_src emacs-lisp
 
-    ;; do ot apply yet
-    (
-     defun cg/evil-hook ()
-      (dolist (mode '(custom-mode
-                      eshell-mode
-                      python-mode
-                )
-                    )
-        )
-      )
+  ;; do ot apply yet
+  (defun cg/evil-hook ()
+   (dolist (mode '(custom-mode
+                   eshell-mode
+                   shell-mode
+                   term-mode
+                   ibuffer-mode
+                   ag-mode
+                   dired-mode
+                   flycheck-mode
+                   ))
+     (add-to-list 'evil-emacs-state-modes mode)
+     ))
 
-      (use-package evil
-        :init
-        (setq evil-want-integration t)  ;; seems to be always good
-        (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
-        (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
-        (setq evil-want-C-i-jump nil)
-        ;; :hook
-        :config
-        ;; evil: green: normal mode;
-        (evil-mode 1)
-        ;; drop back to normal mode using C-g
-        (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-        ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
-        (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-        )
+  (use-package evil
+    :init
+    (setq evil-want-integration t)  ;; seems to be always good
+    (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
+    (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
+    (setq evil-want-C-i-jump nil)
+    (setq evil-undo-system 'undo-tree) ;; alternative is undo-fu
+    ;; :hook
+    :config
+    ;; evil: green: normal mode;
+    (evil-mode 1)
+    ;; drop back to normal mode using C-g
+    (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+    ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
+    (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+    :hook (evil-mode . cg/evil-hook)
+    )
 
   ;;  (evil-set-initial-state 'messages-buffer-mode 'normal)
   ;;  (evil-set-initial-state 'dashboard-mode 'normal))
@@ -439,6 +456,7 @@ https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
 
 #+RESULTS:
 
+
 **** Evil Nerd Commenter
 
 =M-;= does comment, but the behavior sometimes isn't exactly what you'd expect.
@@ -447,40 +465,270 @@ https://github.com/redguardtoo/evil-nerd-commenter
 
 #+begin_src emacs-lisp
 
-(use-package evil-nerd-commenter
-  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+  (use-package evil-nerd-commenter
+    :ensure t
+    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 #+end_src
-**** Vim bindings
+**** Usage and Vim bindings
 
+***** States
 
-Norma model
-- j: next line
-- k: previos line
-- S-v to visual mode
-- u undo thing
-- dd delete line
-evil-emacs-state
-evil-insert-state
+****** Normal State
+
 evil-normal-state
+CTRL-z: go to emacs state when in normal state
+White dot
+
+****** Emacs state
+CTRL-z: go back to normal state when in emacs state
+evil-emacs-state
+Blue dot
+
+****** Insert State
+
+evil-insert-state
+i insert here
+I Insert at the beginning of the line
+a cursor at end
+A go into insert mode at end of line
+o with newline
+O Delete Line and go into insert
+s substitute under cursor
+S Similar to O?
+etc.
+
+asdasdasddddddddddddddddddddasd
+sdasdasdasdasdasdasdasdasda
+asdasdasdasdasdasdasdadsasdsadas
+
+******* Paste in insert state
+
+see https://stackoverflow.com/questions/2861627/paste-in-insert-mode
+While in insert mode hit CTRL-R {register}
+
+Examples:
+
+CTRL-R * will insert in the contents of the clipboard
+CTRL-R " (the unnamed register) inserts the last delete or yank.
+To find this in vim's help type :h i_ctrl-r
+
+****** Visual state
+
 evil-visual-state
 
-ddddiiiiiiiiabcde
-y - yank (copy) marked text
-d - delete marked text
-yy - yank (copy) a line
-2yy - yank (copy) 2 lines
+C-v Visual Block
+S-v Visual Line
+v Visual State
+
+v$ - select until end of line
+v^ - select until beginning of line
+
+vip - select paragraph
+
+
+****** Replace State
+
+Enter Replace state from normal state typing R
+Overwrites text under cursor
+
+****** Evil Motion State
+
+M-x evil motion state
+golded dot
+
+****** Evil Operator-Pending
+
+M-x evil operator-state
+No clue what this does
+
+
+
+***** Normal mode and bindings
+
+****** Visual Mode
+
+- S-v: Switch to visual mode
+
+****** Navigating
+- ^: got to beginning of line
+- j: next line
+- k: previos line
+- b: back one word
+- w: forward one word
+- C-u up half a page -> not working for me: Why: bound to "universal arument" in emacs
+- C-d down half a page
+- ) to the first word of the next sentence
+- ( to the previous sentence
+- u undo thing
+- G to to last line
+- gg to to first line
+- 2w nagigate two words forward
+
+
+w - until the start of the next word, EXCLUDING its first character.
+e - to the end of the current word, INCLUDING the last character.
+$ - to the end of the line, INCLUDING the last character.
+0 - Got to the beginning of the line
+
+asssss asdas s asdasda dasd
+
+
+****** Indenting
+
+The == re-indents the line to suit its new position.
+For the visual-mode mappings, gv reselects the last visual block
+= re-indents that block.
+
+****** Moving Lines around
+
+ :m .+1 move line one up
+
+
+****** Deleting
+
+d   motion
+
+ d      - is the delete operator.
+ motion - is what the operator will operate on (listed below).
+
+
+- dd delete line
+- dw delete
+
+
+    w - until the start of the next word, EXCLUDING its first character.
+    e - to the end of the current word, INCLUDING the last character.
+    $ - to the end of the line, INCLUDING the last character.
+    ^ - to the beginning of the line
+    b - back to the beginning of the word
+    { - delete to beginning of paragraph
+    } - delete to end of paragraph
+
+
+d3w - delete three words in the future
+d5d - delete 5 lines
+2dd - delete 2 lines
+2dd - delete 2 lines
+
+y3w - copy the next three words
+
+das a hier is sowas wie ein modiefier des delete word commands:
+
+daw - delete a word and all whitespace around it. a stands for around
+diw - Delete just the word: das i ist für inside?
+dw - ???
+dap - delete around paragraph
+5dap - delete around 5 paragraphs
+di( - delete inside paremtheses
+di{ - delete inside curly bracces
+di" seems not to work!
+
+asdasd {a abn asdasd asd asdfgg } noch asdasd
+(asdasdasd )
+
 dd - delete (cut) a line
+dw - delete the word right of the cursor
+d$ - delete from cursor to the end of the line
+d^ - delete from cursor to beginning of line
+
+asssssssssssssssssssssssssssssssssssssssss
 
 D - delete (cut) to the end of the line
+****** Replace Modifier
+
+c is the change modifier
+
+caw - replace current word
+ciw - replace inside word
+c$  - change from cursor to end of line
+C   - same as c$
+
+Type  rx  to replace the character at the cursor with  x .
+
+asdasd (asd asdas asd)
+
+****** Cutting and pasting
+
+y - yank (copy) marked text
+d - delete marked text
+
+yy - yank (copy) a line
+2yy - yank (copy) 2 lines
 yiw - yank (copy) word under the cursor
-Cheatsheets, Editing:
-https://vim.rtorr.com/
-https://devhints.io/vim
-https://vim.fandom.com/wiki/Moving_lines_up_or_down
+
+yip - copy current paragraph
+
+****** Searching and Replacing
+
+https://vim.fandom.com/wiki/Search_and_replace#Basic_search_and_replace
+
+:s/foo/bar/g
+    Find each occurrence of 'foo' (in the current line only), and replace it with 'bar'.
+
+:%s/foo/bar/g
+    Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
+
+:%s/foo/bar/gc
+    Change each 'foo' to 'bar', but ask for confirmation first.
+
+
+n - next occ
+N - prev occ
+
+ Typing  /  followed by a phrase searches FORWARD for the phrase.
+ Typing  ?  followed by a phrase searches BACKWARD for the phrase.
+CTRL-O takes you back to older positions, CTRL-I to newer positions.
+
+To substitute new for the first old in a line type    :s/old/new
+To substitute new for all 'old's on a line type       :s/old/new/g
+To substitute phrases between two line #'s type       :#,#s/old/new/g
+To substitute all occurrences in the file type        :%s/old/new/g
+To ask for confirmation each time add 'c'             :%s/old/new/gc
+
+
+****** Closing Buffer
+
+ZQ
+
+****** More stuff in normal mode:
+
+- zz: put current line under cursor in the middle
+- zt: put current line under cursor at the top
+- zb: put current line to the bottom
+
+- { : Move by paragraph up
+- } : Move by paragraph down
+
+- % show matching ({[
+
+
+löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
+
+
+****** Commands
+
+:split - split horozontally
+:vsplit - split left/right
+:sort
+:tabnew - create a tab
+:tabnext
+
+***** Links
+
+- https://vim.rtorr.com/
+- https://devhints.io/vim
+- https://vim.fandom.com/wiki/Moving_lines_up_or_down
+- [[https://itsfoss.com/vifm-terminal-file-manger/][vifm Vim File Manager]]
 
 /home/audeering.local/cgeng/code/data_collection/aisoundlab/portal/src/app/app-init.ts
+
+
+
+
+
 ** Programming
+
 :PROPERTIES:
 :ID:       10eecafe-1a33-4d5d-a162-6fc25c6f4791
 :END:
@@ -640,6 +888,7 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 - --line-length 119
 - 119 characters
 
+
 ***** Pyright Code Checking
 
 
@@ -690,8 +939,19 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 
 
 
+***** ImportMagic
 
+https://github.com/anachronic/importmagic.el
+$ pip install importmagic epc
 
+#+begin_example emacs-lisp
+(use-package importmagic
+    :ensure t
+    ;; will add the hook into python usepackage configuration
+    ;;:config
+    ;;(add-hook 'python-mode-hook 'importmagic-mode)
+    )
+#+end_example
 
 ***** Type Hinting
 ;; https://stackoverflow.com/questions/44094494/can-pycharm-suggest-or-autocomplete-or-insert-type-hints/44102211#44102211
@@ -852,6 +1112,12 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 #+RESULTS:
 : lsp-workspace-restart-deep
 
+***** Configure Py3 Mode
+
+Py3 mode defined in ‘python-mode.el’:
+Major mode for Python shell process.
+
+Das muss der ~py-shell-mode~ sein
 
 
 ***** Format buffer using yapf
@@ -875,6 +1141,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 
 
 #+end_src
+
 
 ***** Function to remove unused imports using autoflake
 :PROPERTIES:
@@ -930,6 +1197,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+RESULTS:
 : python-remove-unused-imports
 
+
 ***** Configure black formatter
 :PROPERTIES:
 :ID:       a7799b15-ad9f-4ab0-b55a-5ea7c6ef14e7
@@ -942,13 +1210,43 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+begin_src emacs-lisp
   (use-package use-package-ensure-system-package :ensure t)
   (use-package blacken
-      :ensure t
-      :ensure-system-package (black . "pip3 install black")
+      ;; :ensure t
+      ;; :ensure-system-package (black . "pip3 install black")
       ;; :custom
       ;; (blacken-line-length 119)
       )
 
 #+end_src
+
+
+***** Attempt to configure brunnette
+
+
+blacken-executable
+(setq blacken-executable "brunette")
+(setq blacken-executable "/home/audeering.local/cgeng/.venvs/py37-data/bin/brunette")
+
+(defvar python-autoflake-path
+
+(concat pyvenv-virtual-env-path-directories "brunette")
+
+)
+
+***** Aggregate Function to clean up
+
+
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+  (defun python-cleanup-this-file ()
+    "All cleaning actions run in chain..."
+    (interactive)
+  (blacken-buffer)
+  (python-remove-unused-imports)
+  (py-isort-buffer)
+  (python-remove-unused-imports)
+  )
+#+end_src
+
 
 ***** Rst autocomplete
 :PROPERTIES:
@@ -996,10 +1294,13 @@ https://github.com/tkf/auto-complete-rst
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
                            (require 'highlight-indent-guides)
+                           (require 'sphinx-doc)
+                           (sphinx-doc-mode t)
+                           (highlight-indent-guides-mode -1)
                            (auto-fill-mode)
                            (set-fill-column python-linewidth)
                            ;;(highlight-indent-guides-mode)
-
+                           (importmagic-mode)
                            (lsp-deferred)
                            ;; (yapf-mode)
                            (lsp-treemacs)
@@ -1553,6 +1854,15 @@ gpg-connect-agent /bye
 #+RESULTS:
 22957
 
+*** Migrate key to other maschine
+
+ gpg --list-secret-keys christian.c.geng@gmail.com
+
+ gpg --export-secret-keys YOUR_ID_HERE > private.key
+ gpg --import private.key
+
+
+*** Lookup key
 
 
 (defun efs/lookup-password (&rest keys)
@@ -1682,6 +1992,9 @@ see in snippets
 
   ;; (global-set-key (kbd "C-c a") 'rcd-asciidoctor-preview)
 #+end_src
+
+#+RESULTS:
+: rcd-asciidoctor-preview
 
 ** Org ascidoc
 :PROPERTIES:

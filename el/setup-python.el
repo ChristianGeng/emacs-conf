@@ -60,6 +60,15 @@
          (shell-quote-argument (buffer-file-name))))
 (revert-buffer t t t))
 
+(defun python-cleanup-this-file ()
+  "All cleaning actions run in chain..."
+  (interactive)
+(blacken-buffer)
+(python-remove-unused-imports)
+(py-isort-buffer)
+(python-remove-unused-imports)
+)
+
 (require 'auto-complete-rst)
 (auto-complete-rst-init)
 
@@ -88,10 +97,13 @@
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (require 'highlight-indent-guides)
+                         (require 'sphinx-doc)
+                         (sphinx-doc-mode t)
+                         (highlight-indent-guides-mode -1)
                          (auto-fill-mode)
                          (set-fill-column python-linewidth)
                          ;;(highlight-indent-guides-mode)
-
+                         (importmagic-mode)
                          (lsp-deferred)
                          ;; (yapf-mode)
                          (lsp-treemacs)

@@ -184,10 +184,6 @@
   ;; Fontify org-mode code blocks
   (setq org-src-fontify-natively t)
 
-  ;; Represent undo-history as an actual tree (visualize with C-x u)
-  (setq undo-tree-mode-lighter "")
-  (require 'undo-tree)
-  (global-undo-tree-mode)
 
   ;; ;; Sentences do not need double spaces to end. Period.
   ;; (set-default 'sentence-end-double-space nil)
@@ -238,7 +234,9 @@
                 helm-mode-hook
                 ibuffer-mode-hook
                 eshell-mode-hook))
-(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+  (add-hook mode (lambda () (display-line-numbers-mode 0)))
+  )
 
 (set-frame-parameter (selected-frame) 'alpha '(99 . 99))
 (add-to-list 'default-frame-alist '(alpha . (99 . 99)))
@@ -263,32 +261,42 @@
 ;; Diminish modeline clutter
 (require 'diminish)
 
-;; do ot apply yet
-  (
-   defun cg/evil-hook ()
-    (dolist (mode '(custom-mode
-                    eshell-mode
-                    python-mode
-              )
-                  )
-      )
-    )
+;; Represent undo-history as an actual tree (visualize with C-x u)
+(setq undo-tree-mode-lighter "")
+(require 'undo-tree)
+(global-undo-tree-mode)
 
-    (use-package evil
-      :init
-      (setq evil-want-integration t)  ;; seems to be always good
-      (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
-      (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
-      (setq evil-want-C-i-jump nil)
-      ;; :hook
-      :config
-      ;; evil: green: normal mode;
-      (evil-mode 1)
-      ;; drop back to normal mode using C-g
-      (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
-      ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
-      (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-      )
+;; do ot apply yet
+(defun cg/evil-hook ()
+ (dolist (mode '(custom-mode
+                 eshell-mode
+                 shell-mode
+                 term-mode
+                 ibuffer-mode
+                 ag-mode
+                 dired-mode
+                 flycheck-mode
+                 ))
+   (add-to-list 'evil-emacs-state-modes mode)
+   ))
+
+(use-package evil
+  :init
+  (setq evil-want-integration t)  ;; seems to be always good
+  (setq evil-want-keybinding nil) ;; david wilson prefers not to use thes3
+  (setq evil-want-C-u-scroll nil) ;; do not override C-u prefix
+  (setq evil-want-C-i-jump nil)
+  (setq evil-undo-system 'undo-tree) ;; alternative is undo-fu
+  ;; :hook
+  :config
+  ;; evil: green: normal mode;
+  (evil-mode 1)
+  ;; drop back to normal mode using C-g
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  ;; in vim insert mode, C-h is now backspace. Normally in emacs it would enter help
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+  :hook (evil-mode . cg/evil-hook)
+  )
 
 ;;  (evil-set-initial-state 'messages-buffer-mode 'normal)
 ;;  (evil-set-initial-state 'dashboard-mode 'normal))
@@ -299,6 +307,7 @@
   (evil-collection-init))
 
 (use-package evil-nerd-commenter
+  :ensure t
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (require 'realgud)
@@ -327,8 +336,8 @@
 
 (use-package use-package-ensure-system-package :ensure t)
 (use-package blacken
-    :ensure t
-    :ensure-system-package (black . "pip3 install black")
+    ;; :ensure t
+    ;; :ensure-system-package (black . "pip3 install black")
     ;; :custom
     ;; (blacken-line-length 119)
     )
