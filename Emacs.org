@@ -1279,7 +1279,7 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
   (require 'setup-yasnippet)
 
-  (require 'setup-supercollider)
+  ;; (require 'setup-supercollider)
   (require 'setup-yaml-mode)
   (require 'setup-editorconfig)
   (require 'setup-rtags)
