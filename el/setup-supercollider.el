@@ -36,12 +36,56 @@
 ;;; Code:
 
 (message "Add SuperCollider")
+
+;; Doc has improved a lot and can be found her:
+;; https://github.com/supercollider/scel
+;; Innstall package via Quarks:
+;; This I did from the IDE
+;; Quarks.install("https://github.com/supercollider/scel");
+;; Also from he IDE:
+;; Quarks.folder.postln;
+;; /home/christian/.local/share/SuperCollider/downloaded-quarks
+;;
+;; This needs to be added to the load path like this:
+(add-to-list 'load-path "/home/christian/.local/share/SuperCollider/downloaded-quarks")
+(require 'sclang)
+
+;; Basic Interaction:
+;; In a buffer with a .scd extension
+;; sclang-start
+;;
+;; Evaluation:
+;;C-c for line
+;; and more importantly:
+;; C-d for region
+;; and function:
+;; C-M x
+;; Hello World:
+;; Get going:
+;; s = Server.local;
+;; s.boot;
+;; SynthDef("mysynth", { Out.ar(0, PinkNoise.ar(0.25)) }).play(s);
+;;
+;; Leavig:
+;;
+;; s.freeAll;
+;; finally:
+;; s.stop;
+;; s.quit;
+;; sclang-stop
+
+
+;; Quark Packages:
+;; https://github.com/supercollider-quarks/quarks
+;; https://github.com/supercollider-quarks/quarks/blob/master/directory.txt
+
+
 ;;; setup-supercollider.el ends here
 
 ;; this needs to be cloned to the el directory using git clone git@github.com:supercollider/scel.git
 ;; in addition you need to run cmake . in the scel directory
-(add-to-list 'load-path "~/.emacs.d/el/scel/el/")
-(require 'sclang)
+;; (add-to-list 'load-path "~/.emacs.d/el/scel/el/")
+;; (require 'sclang)
 (require 'w3m)
 ;; (sclang-start)
 ;;(sclang-server-boot)

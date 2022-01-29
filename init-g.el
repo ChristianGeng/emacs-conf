@@ -511,7 +511,7 @@
 
 (require 'setup-yasnippet)
 
-(require 'setup-supercollider)
+;; (require 'setup-supercollider)
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
 (require 'setup-rtags)
