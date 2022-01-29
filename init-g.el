@@ -336,8 +336,8 @@
 
 (use-package use-package-ensure-system-package :ensure t)
 (use-package blacken
-    :ensure t
-    :ensure-system-package (black . "pip3 install black")
+    ;; :ensure t
+    ;; :ensure-system-package (black . "pip3 install black")
     ;; :custom
     ;; (blacken-line-length 119)
     )

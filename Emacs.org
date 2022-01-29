@@ -488,11 +488,19 @@ Blue dot
 ****** Insert State
 
 evil-insert-state
-i
-a
-o
+i insert here
+I Insert at the beginning of the line
+a cursor at end
+A go into insert mode at end of line
+o with newline
+O Delete Line and go into insert
+s substitute under cursor
+S Similar to O?
 etc.
 
+asdasdasddddddddddddddddddddasd
+sdasdasdasdasdasdasdasdasda
+asdasdasdasdasdasdasdadsasdsadas
 
 ******* Paste in insert state
 
@@ -512,6 +520,11 @@ evil-visual-state
 C-v Visual Block
 S-v Visual Line
 v Visual State
+
+v$ - select until end of line
+v^ - select until beginning of line
+
+vip - select paragraph
 
 
 ****** Replace State
@@ -538,44 +551,113 @@ No clue what this does
 - S-v: Switch to visual mode
 
 ****** Navigating
+- ^: got to beginning of line
 - j: next line
 - k: previos line
 - b: back one word
 - w: forward one word
+- C-u up half a page -> not working for me: Why: bound to "universal arument" in emacs
+- C-d down half a page
 - ) to the first word of the next sentence
 - ( to the previous sentence
 - u undo thing
-- dd delete line
-ddddiiiiiiiiabcde
 - G to to last line
 - gg to to first line
+- 2w nagigate two words forward
+
 
 w - until the start of the next word, EXCLUDING its first character.
 e - to the end of the current word, INCLUDING the last character.
 $ - to the end of the line, INCLUDING the last character.
 0 - Got to the beginning of the line
 
+asssss asdas s asdasda dasd
 
-****** Cutting and pasing
+
+****** Indenting
+
+The == re-indents the line to suit its new position.
+For the visual-mode mappings, gv reselects the last visual block
+= re-indents that block.
+
+****** Moving Lines around
+
+ :m .+1 move line one up
+
+
+****** Deleting
+
+d   motion
+
+ d      - is the delete operator.
+ motion - is what the operator will operate on (listed below).
+
+
+- dd delete line
+- dw delete
+
+
+    w - until the start of the next word, EXCLUDING its first character.
+    e - to the end of the current word, INCLUDING the last character.
+    $ - to the end of the line, INCLUDING the last character.
+    ^ - to the beginning of the line
+    b - back to the beginning of the word
+    { - delete to beginning of paragraph
+    } - delete to end of paragraph
+
+
+d3w - delete three words in the future
+d5d - delete 5 lines
+2dd - delete 2 lines
+2dd - delete 2 lines
+
+y3w - copy the next three words
+
+das a hier is sowas wie ein modiefier des delete word commands:
+
+daw - delete a word and all whitespace around it. a stands for around
+diw - Delete just the word: das i ist für inside?
+dw - ???
+dap - delete around paragraph
+5dap - delete around 5 paragraphs
+di( - delete inside paremtheses
+di{ - delete inside curly bracces
+di" seems not to work!
+
+asdasd {a abn asdasd asd asdfgg } noch asdasd
+(asdasdasd )
+
+dd - delete (cut) a line
+dw - delete the word right of the cursor
+d$ - delete from cursor to the end of the line
+d^ - delete from cursor to beginning of line
+
+asssssssssssssssssssssssssssssssssssssssss
+
+D - delete (cut) to the end of the line
+****** Replace Modifier
+
+c is the change modifier
+
+caw - replace current word
+ciw - replace inside word
+c$  - change from cursor to end of line
+C   - same as c$
+
+Type  rx  to replace the character at the cursor with  x .
+
+asdasd (asd asdas asd)
+
+****** Cutting and pasting
 
 y - yank (copy) marked text
 d - delete marked text
 
 yy - yank (copy) a line
 2yy - yank (copy) 2 lines
-dd - delete (cut) a line
-dw - delete the word right of the cursror
-d$ - delte from cursor to the end of the line
-d^ - delete from cursor to beginning of line
-
-D - delete (cut) to the end of the line
 yiw - yank (copy) word under the cursor
 
-
-****** Split Windows horizontally
-
-:split
-
+yip - copy current paragraph
 
 ****** Searching and Replacing
 
@@ -589,6 +671,48 @@ https://vim.fandom.com/wiki/Search_and_replace#Basic_search_and_replace
 
 :%s/foo/bar/gc
     Change each 'foo' to 'bar', but ask for confirmation first.
+
+
+n - next occ
+N - prev occ
+
+ Typing  /  followed by a phrase searches FORWARD for the phrase.
+ Typing  ?  followed by a phrase searches BACKWARD for the phrase.
+CTRL-O takes you back to older positions, CTRL-I to newer positions.
+
+To substitute new for the first old in a line type    :s/old/new
+To substitute new for all 'old's on a line type       :s/old/new/g
+To substitute phrases between two line #'s type       :#,#s/old/new/g
+To substitute all occurrences in the file type        :%s/old/new/g
+To ask for confirmation each time add 'c'             :%s/old/new/gc
+
+
+****** Closing Buffer
+
+ZQ
+
+****** More stuff in normal mode:
+
+- zz: put current line under cursor in the middle
+- zt: put current line under cursor at the top
+- zb: put current line to the bottom
+
+- { : Move by paragraph up
+- } : Move by paragraph down
+
+- % show matching ({[
+
+
+löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
+
+
+****** Commands
+
+:split - split horozontally
+:vsplit - split left/right
+:sort
+:tabnew - create a tab
+:tabnext
 
 ***** Links
 
@@ -1086,8 +1210,8 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+begin_src emacs-lisp
   (use-package use-package-ensure-system-package :ensure t)
   (use-package blacken
-      :ensure t
-      :ensure-system-package (black . "pip3 install black")
+      ;; :ensure t
+      ;; :ensure-system-package (black . "pip3 install black")
       ;; :custom
       ;; (blacken-line-length 119)
       )
