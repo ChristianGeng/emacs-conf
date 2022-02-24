@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: nocoverage
+# key: nocoverage
+# --
+  # pragma: no cover
