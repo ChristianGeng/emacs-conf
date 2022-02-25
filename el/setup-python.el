@@ -21,6 +21,10 @@
 
 ;; ))
 
+(use-package python-pytest
+  :ensure t
+ )
+
 (defun python-yapf-format-buffer ()
    (interactive)
    (when (and (executable-find "yapf") buffer-file-name)

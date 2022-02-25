@@ -580,6 +580,7 @@ The == re-indents the line to suit its new position.
 For the visual-mode mappings, gv reselects the last visual block
 = re-indents that block.
 
+
 ****** Moving Lines around
 
  :m .+1 move line one up
@@ -687,6 +688,29 @@ To substitute all occurrences in the file type        :%s/old/new/g
 To ask for confirmation each time add 'c'             :%s/old/new/gc
 
 
+****** Upercasing and lower casing
+
+
+See the following methods:
+
+ ~    : Changes the case of current character
+ guu  : Change current line from upper to lower.
+ gUU  : Change current LINE from lower to upper.
+ guw  : Change to end of current WORD from upper to lower.
+ guaw : Change all of current WORD to lower.
+ gUw  : Change to end of current WORD from lower to upper.
+ gUaw : Change all of current WORD to upper.
+ g~~  : Invert case to entire line
+ g~w  : Invert case to current WORD
+ guG  : Change to lowercase until the end of document.
+ gU)  : Change until end of sentence to upper case
+ gu}  : Change to end of paragraph to lower case
+ gU5j : Change 5 lines below to upper case
+ gu3k : Change 3 lines above to lower case
+
+
+source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text=2%20Answers&text=Visual%20select%20the%20text%2C%20then,gu%20for%20lowercase.
+
 ****** Closing Buffer
 
 ZQ
@@ -708,11 +732,28 @@ löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ****** Commands
 
+******* Working with buffers
+
+:bd - delete buffer
+
+
+******* Working with windows
+
 :split - split horozontally
 :vsplit - split left/right
-:sort
+:sort - sort lines
+******* Working with Tabs
+
+Ctrl+WT (that's a capital T) to move any open window to its own tab.
 :tabnew - create a tab
 :tabnext
+
+******* Open files
+
+:e ~/.bashrc - edit this file
+:r /path/to/file - inserts file into current buffer
+
+https://blog.confirm.ch/mastering-vim-opening-files/
 
 ***** Links
 
@@ -768,6 +809,30 @@ löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 ;; Rainbow Delimiters
 ;;(setup (:pkg rainbow-delimiters)
 ;;  (:hook-into prog-mode))
+
+
+
+*** Notebooks
+
+
+(require 'ein)
+(require 'ein-notebook)
+(require 'ein-subpackages)
+
+OR
+
+https://github.com/nnicandro/emacs-jupyter#kernelnotebook-server
+
+M-x jupyter-kernel-list-servers
+M-x jupyter-connect-server-repl
+
+
+(dired "/jpy:localhost#8890:/")
+(dired "http:localhost#8890:")
+
+(dired "/jpy:localhost#8890:/")
+
+
 
 
 
@@ -871,22 +936,6 @@ pip install  --upgrade pylint
 pip install  --upgrade flake8
 
 
-***** Code Formatting
-
-****** Formatting providers in vscode
-
-https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0
-
--  file->preferences->type "python formatting provider"
--  This gets put into ~/cgeng/.config/Code/User/settings.json
- "python.formatting.provider": "black"
-- file->preferences->type "format on save"
-
--  configure black
--  https://dev.to/adamlombard/vscode-setting-line-lengths-in-the-black-python-code-formatter-1g62
- file->preferences->type "python formatting black args"
-- --line-length 119
-- 119 characters
 
 
 ***** Pyright Code Checking
@@ -944,13 +993,14 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 https://github.com/anachronic/importmagic.el
 $ pip install importmagic epc
 
-#+begin_example emacs-lisp
-(use-package importmagic
-    :ensure t
+#+begin_example emacs-lisp :tangle no
+
+;;(use-package importmagic
+ ;;   :ensure t
     ;; will add the hook into python usepackage configuration
     ;;:config
     ;;(add-hook 'python-mode-hook 'importmagic-mode)
-    )
+   ;; )
 #+end_example
 
 ***** Type Hinting
@@ -968,7 +1018,7 @@ $ pip install importmagic epc
 ;;  coverlay                       20190414.940   available    melpa    Test coverage overlays
 #+end_example
 
-**** Pyright
+**** About Pyright
 
 ***** Build Pyright
 
@@ -1075,7 +1125,7 @@ Not sure whehter emacs interprets this at all
 #+end_src
 
 
-***** Function to restart Worksüace
+***** Function to restart Workspace
 :PROPERTIES:
 :ID:       41f1d2b5-4526-4261-aaaf-00525bd8034c
 :END:
@@ -1112,6 +1162,30 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 #+RESULTS:
 : lsp-workspace-restart-deep
 
+
+***** Run tests using python-pytest
+
+https://github.com/wbolster/emacs-python-pytest
+
+
+    python-pytest
+    python-pytest-file
+    python-pytest-file-dwim
+    python-pytest-files
+    python-pytest-function
+    python-pytest-function-dwim
+    python-pytest-last-failed
+    python-pytest-repeat
+
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+  (use-package python-pytest
+    :ensure t
+   )
+#+end_src
+
+(setq python-pytest-confirm t)
+
 ***** Configure Py3 Mode
 
 Py3 mode defined in ‘python-mode.el’:
@@ -1124,6 +1198,8 @@ Das muss der ~py-shell-mode~ sein
 :PROPERTIES:
 :ID:       674e2989-94c8-4dbe-976a-64ad936aa62c
 :END:
+
+Not really neceessary as yapf-mode, yapfify etc. exist
 
 see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 
@@ -1198,13 +1274,21 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 : python-remove-unused-imports
 
 
-***** Configure black formatter
+***** Configure black formatter for brunette
 :PROPERTIES:
 :ID:       a7799b15-ad9f-4ab0-b55a-5ea7c6ef14e7
 :END:
 
+# blacken-executable
+# (setq blacken-executable "brunette")
+# (setq blacken-executable "/home/audeering.local/cgeng/.venvs/py37-data/bin/brunette")
+
+# (defvar python-autoflake-path
+# (concat pyvenv-virtual-env-path-directories "brunette")
+# )
+
 - blacken-buffer will format the buffer
-- customizations are better kept in pyproject.toml, so the line length commneted out
+- customizations are better kept in pyproject.toml when using black itself,
 - setup.cfg is interpreted by black
 
 #+begin_src emacs-lisp
@@ -1212,28 +1296,30 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
   (use-package blacken
       ;; :ensure t
       ;; :ensure-system-package (black . "pip3 install black")
-      ;; :custom
+      :custom
+      (blacken-executable "brunette")
       ;; (blacken-line-length 119)
       )
 
 #+end_src
+****** Links
 
+******* Formatting providers in vscode
 
-***** Attempt to configure brunnette
+https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0
 
+-  file->preferences->type "python formatting provider"
+-  This gets put into ~/cgeng/.config/Code/User/settings.json
+ "python.formatting.provider": "black"
+- file->preferences->type "format on save"
 
-blacken-executable
-(setq blacken-executable "brunette")
-(setq blacken-executable "/home/audeering.local/cgeng/.venvs/py37-data/bin/brunette")
-
-(defvar python-autoflake-path
-
-(concat pyvenv-virtual-env-path-directories "brunette")
-
-)
+-  configure black
+-  https://dev.to/adamlombard/vscode-setting-line-lengths-in-the-black-python-code-formatter-1g62
+ file->preferences->type "python formatting black args"
+- --line-length 119
+- 119 characters
 
 ***** Aggregate Function to clean up
-
 
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
@@ -1300,7 +1386,7 @@ https://github.com/tkf/auto-complete-rst
                            (auto-fill-mode)
                            (set-fill-column python-linewidth)
                            ;;(highlight-indent-guides-mode)
-                           (importmagic-mode)
+                           ;; (importmagic-mode)
                            (lsp-deferred)
                            ;; (yapf-mode)
                            (lsp-treemacs)
@@ -2046,6 +2132,13 @@ Shell Script to get get temperatures
 
 # temperatures=$(cat /sys/class/thermal/thermal_zone*/temp  | tr '\n' '/')
 
+
+* Web Server
+
+#+begin_src emacs-lisp
+(use-package simple-httpd
+  :ensure t)
+#+end_src
 
 * Applications Config Example
 

@@ -338,7 +338,8 @@
 (use-package blacken
     ;; :ensure t
     ;; :ensure-system-package (black . "pip3 install black")
-    ;; :custom
+    :custom
+    (blacken-executable "brunette")
     ;; (blacken-line-length 119)
     )
 
@@ -647,6 +648,9 @@
   (server-start))
 
 (require 'setup-dired)
+
+(use-package simple-httpd
+  :ensure t)
 
 ;;  value=155
 (setq value 155)
