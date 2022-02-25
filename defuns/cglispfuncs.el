@@ -422,6 +422,19 @@ Directory defaults to the value of `my-archive-dir'."
       (kill-new filename)
       (message "Copied buffer file name '%s' to the clipboard." filename))))
 
+ ;; (buffer-file-name)
+
+
+(defun cg/copy-file-only-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
+  (interactive)
+  (let ((filename (if (equal major-mode 'dired-mode)
+                      default-directory
+                    (buffer-name))))
+    (when filename
+      (kill-new filename))
+    (message filename)))
+
 
 (defun cg/fpath ()
   "Gets the name of the file the current buffer is based on."
