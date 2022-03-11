@@ -563,7 +563,7 @@ No clue what this does
 - u undo thing
 - G to to last line
 - gg to to first line
-- 2w nagigate two words forward
+- 2w  navigate two words forward
 
 
 w - until the start of the next word, EXCLUDING its first character.
@@ -1373,7 +1373,7 @@ https://github.com/tkf/auto-complete-rst
         (linum-mode)
         (pycoverage-mode))))
 
-  (defconst python-linewidth 120)
+  (defconst python-linewidth 89)
 
   (use-package python-mode
     :ensure t

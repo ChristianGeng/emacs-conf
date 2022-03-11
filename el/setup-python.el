@@ -94,7 +94,7 @@
       (linum-mode)
       (pycoverage-mode))))
 
-(defconst python-linewidth 120)
+(defconst python-linewidth 89)
 
 (use-package python-mode
   :ensure t
