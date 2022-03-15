@@ -21,6 +21,10 @@
 
 ;; ))
 
+(use-package python-pytest
+  :ensure t
+ )
+
 (defun python-yapf-format-buffer ()
    (interactive)
    (when (and (executable-find "yapf") buffer-file-name)
@@ -90,7 +94,7 @@
       (linum-mode)
       (pycoverage-mode))))
 
-(defconst python-linewidth 120)
+(defconst python-linewidth 89)
 
 (use-package python-mode
   :ensure t
@@ -103,7 +107,7 @@
                          (auto-fill-mode)
                          (set-fill-column python-linewidth)
                          ;;(highlight-indent-guides-mode)
-                         (importmagic-mode)
+                         ;; (importmagic-mode)
                          (lsp-deferred)
                          ;; (yapf-mode)
                          (lsp-treemacs)
