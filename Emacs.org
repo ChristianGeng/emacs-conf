@@ -399,6 +399,17 @@ However, if your init file changes the values of
 (global-undo-tree-mode)
 #+end_src
 
+**** Undo tree create "*.~undo-tree~" files
+
+Apparently the default has changed recently, so we need to
+set the history for the time being, see [[https://www.reddit.com/r/emacs/comments/tejte0/undotree_bug_undotree_files_scattering_everywhere/][this reddit post.]]
+
+
+#+begin_src emacs-lisp
+(setq undo-tree-auto-save-history nil)
+#+end_src
+
+The post also suggests that [[https://gitlab.com/ideasman42/emacs-undo-fu-session][emacs-undo-fu-session]] might be interesting.
 
 *** Evil
 :PROPERTIES:
@@ -1666,7 +1677,7 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
   (require 'setup-yasnippet)
 
-  ;; (require 'setup-supercollider)
+  (require 'setup-supercollider)
   (require 'setup-yaml-mode)
   (require 'setup-editorconfig)
   (require 'setup-rtags)

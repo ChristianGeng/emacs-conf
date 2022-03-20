@@ -266,6 +266,8 @@
 (require 'undo-tree)
 (global-undo-tree-mode)
 
+(setq undo-tree-auto-save-history nil)
+
 ;; do ot apply yet
 (defun cg/evil-hook ()
  (dolist (mode '(custom-mode
@@ -521,7 +523,7 @@
 
 (require 'setup-yasnippet)
 
-;; (require 'setup-supercollider)
+(require 'setup-supercollider)
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
 (require 'setup-rtags)
