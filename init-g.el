@@ -262,7 +262,9 @@
 (require 'diminish)
 
 ;; Represent undo-history as an actual tree (visualize with C-x u)
-(setq undo-tree-mode-lighter "")
+;; (setq undo-tree-mode-lighter "")
+;;(setq undo-tree-mode-lighter "Undo-Tree")
+;;(setq evil-want-fine-undo t)
 (require 'undo-tree)
 (global-undo-tree-mode)
 

@@ -393,11 +393,18 @@ However, if your init file changes the values of
   see [[https://emacs.stackexchange.com/questions/3358/how-can-i-get-undo-behavior-in-evil-similar-to-vims][here.]]
 
 #+begin_src emacs-lisp
-;; Represent undo-history as an actual tree (visualize with C-x u)
-(setq undo-tree-mode-lighter "")
-(require 'undo-tree)
-(global-undo-tree-mode)
+  ;; Represent undo-history as an actual tree (visualize with C-x u)
+  ;; (setq undo-tree-mode-lighter "")
+  ;;(setq undo-tree-mode-lighter "Undo-Tree") defaul
+
+  ;;(setq evil-want-fine-undo t)
+  (require 'undo-tree)
+  (global-undo-tree-mode)
 #+end_src
+
+
+
+
 
 **** Undo tree create "*.~undo-tree~" files
 
@@ -419,6 +426,8 @@ The post also suggests that [[https://gitlab.com/ideasman42/emacs-undo-fu-sessio
 https://github.com/noctuid/evil-guide
 https://nathantypanski.com/blog/2014-08-03-a-vim-like-emacs-config.html
 https://www.linode.com/docs/guides/emacs-evil-mode/
+
+[[https://github.com/emacs-evil/evil-magit][Evil-magit]] is not part of the  [[https://github.com/emacs-evil/evil-collection][Evil Collection]].
 
 #+begin_src emacs-lisp
 
