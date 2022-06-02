@@ -10,3 +10,6 @@
 [submodule "el/scel"]
 	path = el/scel
 	url = git@github.com:supercollider/scel.git
+[submodule "el/orgmode-mediawiki"]
+	path = el/orgmode-mediawiki
+	url = https://github.com/tomalexander/orgmode-mediawiki.git
