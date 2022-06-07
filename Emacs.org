@@ -868,7 +868,7 @@ M-x jupyter-connect-server-repl
 
 #+begin_src emacs-lisp
 (require 'setup-lsp)
-;; (require 'setup-java)
+;; 0(require 'setup-java)
 ;; deactivate  jdee for  loading java files
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
@@ -958,20 +958,15 @@ pip install  --upgrade flake8
 
 
 
-***** Pyright Code Checking
-
-
+***** Pyright Code Checking Information
 ****** Django Problem
 ;; https://github.com/microsoft/pyright/issues/1359
 ;; Django Stubs: https://pypi.org/project/django-stubs/
-
 
 ;; flycheck
 ;; using pyright in emacs lsp as well as in vscode gives identical errors except
 ;; false errors in emacs that are flagged as "lsp-flycheck-info-unnecessary"
 ;; https://github.com/emacs-lsp/lsp-mode/issues/2255
-
-
 
 ;; Vergleich der standard-Autoformatters:
 ;; https://www.kevinpeters.net/auto-formatters-for-python
@@ -1009,6 +1004,8 @@ pip install  --upgrade flake8
 
 
 ***** ImportMagic
+
+Importmagic does not work!
 
 https://github.com/anachronic/importmagic.el
 $ pip install importmagic epc
@@ -1126,7 +1123,7 @@ Not sure whehter emacs interprets this at all
 *****
 
 
-**** Writing setup-python.el file  the  conf
+**** Writing setup-python.el file the conf
 :PROPERTIES:
 :ID:       e1a1988b-a70a-435c-98e3-d95c61522659
 :END:
@@ -1183,7 +1180,7 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 : lsp-workspace-restart-deep
 
 
-***** Run tests using python-pytest
+***** python-pytest
 
 https://github.com/wbolster/emacs-python-pytest
 
@@ -1375,14 +1372,9 @@ https://github.com/tkf/auto-complete-rst
 
 
 
-***** Main Conf Block
-:PROPERTIES:
-:ID:       028eb1d6-f3c4-40e1-8943-34a15fd269a9
-:END:
+***** coverage
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
-
-  (require 'linum)
   (require 'pycoverage)
 
 
@@ -1392,67 +1384,97 @@ https://github.com/tkf/auto-complete-rst
       (progn
         (linum-mode)
         (pycoverage-mode))))
+#+end_src
 
+
+***** defconst line width
+
+#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
   (defconst python-linewidth 89)
+#+end_src
+
+***** Pyright-specific
+
+
+Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED in orde to get this working!
+
+:PROPERTIES:
+:ID:       028eb1d6-f3c4-40e1-8943-34a15fd269a9
+:END:
+
+#+begin_src emacs-lisp :tangle no :mkdirp yes
 
   (use-package python-mode
-    :ensure t
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-pyright)
-                           (require 'highlight-indent-guides)
-                           (require 'sphinx-doc)
-                           (sphinx-doc-mode t)
-                           (highlight-indent-guides-mode -1)
-                           (auto-fill-mode)
-                           (set-fill-column python-linewidth)
-                           ;;(highlight-indent-guides-mode)
-                           ;; (importmagic-mode)
-                           (lsp-deferred)
-                           ;; (yapf-mode)
-                           (lsp-treemacs)
+  :ensure t
+  )
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
+
+      (use-package python-mode
+        :ensure t
+        :hook (python-mode . (lambda ()
+                               (require 'lsp-pyright)
+                               (require 'highlight-indent-guides)
+                               (require 'sphinx-doc)
+                               (sphinx-doc-mode t)
+                               (highlight-indent-guides-mode -1)
+                               (auto-fill-mode)
+                               (set-fill-column python-linewidth)
+                               ;;(highlight-indent-guides-mode)
+                               ;; (importmagic-mode)
+                               (lsp-deferred)
+                               ;; (yapf-mode)
+                               (lsp-treemacs)
+                               )
                            )
-                       )
-    :custom
-    ;; NOTE: Set these if Python 3 is called "python3" on your system!
-    ;; (python-shell-interpreter "python3")
-    ;; (dap-python-executable "python3")
-    ;; should be .dir-local:
-    ;; (lsp-pyright-venv-path "~/.venvs/py37")
-    (dap-python-debugger 'debugpy)
-    :config
-    (require 'dap-python)
-    ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-    )
+        :custom
+        ;; NOTE: Set these if Python 3 is called "python3" on your system!
+        ;; (python-shell-interpreter "python3")
+        ;; (dap-python-executable "python3")
+        ;; should be .dir-local:
+        ;; (lsp-pyright-venv-path "~/.venvs/py37")
+        (dap-python-debugger 'debugpy)
+        :config
+        (require 'dap-python)
+        ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
+        )
 
 
-    (setq lsp-enable-file-watchers nil)
-    (setq lsp-file-watch-threshold 2000)
+        (setq lsp-enable-file-watchers nil)
+        (setq lsp-file-watch-threshold 2000)
 
-    (setq lsp-pyright-auto-import-completions t)
-    ;;  Determines whether pyright automatically adds common search paths.
-    ;; i.e: Paths like "src" if there are no execution environments defined in the
-    ;; config file.
-    (setq lsp-pyright-auto-search-paths t)
-    (setq lsp-pyright-log-level "trace")
+        (setq lsp-pyright-auto-import-completions t)
+        ;;  Determines whether pyright automatically adds common search paths.
+        ;; i.e: Paths like "src" if there are no execution environments defined in the
+        ;; config file.
+        (setq lsp-pyright-auto-search-paths t)
+        (setq lsp-pyright-log-level "trace")
 
-  (require 'dap-python)
+      (require 'dap-python)
 
-  ;; (lsp-client-settings)
+      ;; (lsp-client-settings)
 
-  (use-package company
-    :after lsp-mode
-    :hook (lsp-mode . company-mode)
-    ;; :bind (:map company-active-map
-    ;;        ("<tab>" . company-complete-selection))
-    ;;       (:map lsp-mode-map
-    ;;        ("<tab>" . company-indent-or-complete-common))
-    :custom
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0))
+      (use-package company
+        :after lsp-mode
+        :hook (lsp-mode . company-mode)
+        ;; :bind (:map company-active-map
+        ;;        ("<tab>" . company-complete-selection))
+        ;;       (:map lsp-mode-map
+        ;;        ("<tab>" . company-indent-or-complete-common))
+        :custom
+        (company-minimum-prefix-length 1)
+        (company-idle-delay 0.0))
 
-  (use-package company-box
-    :hook (company-mode . company-box-mode))
+      (use-package company-box
+        :hook (company-mode . company-box-mode))
 
+#+end_src
+
+
+***** Virtual Environments
+#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
   (use-package pyvenv
     :config
     (pyvenv-mode 1)
@@ -1460,7 +1482,12 @@ https://github.com/tkf/auto-complete-rst
     (pyvenv-tracking-mode 1)
     )  ; Automatically use pyvenv-workon via dir-locals
 
-  (provide 'setup-python)
+#+end_src
+
+***** Footer
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+    (provide 'setup-python)
 
   ;;; setup-python-lsp-python ends here
 
@@ -1966,6 +1993,7 @@ gpg-connect-agent /bye
 
  gpg --export-secret-keys YOUR_ID_HERE > private.key
  gpg --import private.key
+
 
 
 *** Lookup key

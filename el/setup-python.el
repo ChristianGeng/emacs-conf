@@ -83,7 +83,6 @@
       ac-source-dictionary
       ac-source-yasnippet))
 
-(require 'linum)
 (require 'pycoverage)
 
 
