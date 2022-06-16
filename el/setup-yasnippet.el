@@ -58,7 +58,7 @@
 (require 'seq)
 (seq-contains yas-snippet-dirs "/home/christian/.emacs.d/snippets")
 (seq-contains yas-snippet-dirs "~/.emacs.d/snippets")
-(seq-contains yas-snippet-dirs (expand-file-name "doom-snippets" user-emacs-directory))
+;; (seq-contains yas-snippet-dirs (expand-file-name "doom-snippets" user-emacs-directory))
 
 
 ;; unbind the tab for the snippets
@@ -78,9 +78,9 @@
 ;;   (load-file "~/.emacs.d/doom-snippets/doom-snippets-lib.el")
 ;;    (load-file "~/.emacs.d/doom-snippets/doom-snippets.el")
 
-(use-package doom-snippets
-  :load-path (expand-file-name "doom-snippets" user-emacs-directory)
-  :after yasnippet)
+;; (use-package doom-snippets
+;;   :load-path (expand-file-name "doom-snippets" user-emacs-directory)
+;;   :after yasnippet)
 
 
 (provide 'setup-yasnippet)

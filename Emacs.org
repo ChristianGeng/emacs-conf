@@ -46,18 +46,18 @@ However, if your init file changes the values of
 :END:
 
 #+begin_src emacs-lisp
-;; The default is 800 kilobytes.  Measured in bytes.
-;; (setq gc-cons-threshold (* 50 1000 1000))
-;; (setq gc-cons-threshold (* 350 1000 1000))
+  ;; The default is 800 kilobytes.  Measured in bytes.
+  ;; (setq gc-cons-threshold (* 50 1000 1000))
+  ;; (setq gc-cons-threshold (* 350 1000 1000))
 
-;; Profile emacs startup
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "*** Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+  ;; Profile emacs startup
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (message "*** Emacs loaded in %s with %d garbage collections."
+                       (format "%.2f seconds"
+                               (float-time
+                                (time-subtract after-init-time before-init-time)))
+                       gcs-done)))
 
 #+end_src
 
@@ -86,81 +86,81 @@ However, if your init file changes the values of
 
 #+begin_src emacs-lisp
 
-    ;; Setup packages
-    ;; code obsolete in emacs27
-    (if (version< emacs-version "27.1")
-	(package-initialize)
-      )
+  ;; Setup packages
+  ;; code obsolete in emacs27
+  (if (version< emacs-version "27.1")
+      (package-initialize)
+    )
 
-    (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
   (setq doom-snippets-enable-short-helpers nil)
-    (add-to-list 'load-path "~/.emacs.d/el")
+  (add-to-list 'load-path "~/.emacs.d/el")
   ;; (add-to-list 'load-path "~/.emacs.d/elpa/s-20210616.619/")
   ;; (require 's)
 
-   (use-package s :ensure t)
+  (use-package s :ensure t)
 
 
 
-    (setq user-emacs-directory "~/.emacs.d/")
-    (message user-emacs-directory)
+  (setq user-emacs-directory "~/.emacs.d/")
+  (message user-emacs-directory)
 
-    ;; Functions (load all files in defuns-dir)
-    ;;(add-to-list 'load-path user-emacs-directory)
-    (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-    (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
-      (when (file-regular-p file)
-	(load (file-name-sans-extension file))))
+  ;; Functions (load all files in defuns-dir)
+  ;;(add-to-list 'load-path user-emacs-directory)
+  (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+  (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
+    (when (file-regular-p file)
+      (load (file-name-sans-extension file))))
 
-    ;;  (require 'title-time)
-    ;; (require 'setup-daimler-proxy)
-    ;; ;; No splash screen please ... jeez
-    (setq inhibit-startup-message t)
+  ;;  (require 'title-time)
+  ;; (require 'setup-daimler-proxy)
+  ;; ;; No splash screen please ... jeez
+  (setq inhibit-startup-message t)
 
-    ;; Settings for currently logged in user
-    ;; keep automatic customizations separately
-    (setq custom-file "~/.emacs.d/custom.el")
-    (load custom-file 'noerror)
+  ;; Settings for currently logged in user
+  ;; keep automatic customizations separately
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file 'noerror)
 
-    ;; create user customization directory for specific username/hostname combination
-    (defvar user-settings-dir)
-    (setq user-settings-dir
-	  (joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
+  ;; create user customization directory for specific username/hostname combination
+  (defvar user-settings-dir)
+  (setq user-settings-dir
+        (joindirs user-emacs-directory "users" (concat user-login-name "-" (system-name) )))
 
-    (mkdir user-settings-dir t)
-    (add-to-list 'load-path user-settings-dir)
+  (mkdir user-settings-dir t)
+  (add-to-list 'load-path user-settings-dir)
 
-    ;; load all settings from user machine combination
-    (when (file-exists-p user-settings-dir)
-      (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
+  ;; load all settings from user machine combination
+  (when (file-exists-p user-settings-dir)
+    (mapc 'load (directory-files user-settings-dir nil "^[^.#].*el$")))
 
-    ;; Write backup files to own directory
-    (setq backup-directory-alist
-	  `(("." . ,(expand-file-name "backups" user-emacs-directory))))
+  ;; Write backup files to own directory
+  (setq backup-directory-alist
+        `(("." . ,(expand-file-name "backups" user-emacs-directory))))
 
-    ;; Make backups of files, even when they're in version control
-    (setq vc-make-backup-files t)
+  ;; Make backups of files, even when they're in version control
+  (setq vc-make-backup-files t)
 
-    ;; Save point position between sessions
-    (require 'saveplace)
-    (setq-default save-place t)
-    (setq save-place-file (expand-file-name ".places" user-emacs-directory))
+  ;; Save point position between sessions
+  (require 'saveplace)
+  (setq-default save-place t)
+  (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
-    ;; Setup elnode before packages to stop it from starting a server
-    ;;(require 'setup-elnode)
-    ;; Setup packages
-    (require 'setup-package)
-    ;; Set path to dependencies
-    (setq site-lisp-dir
-	  (expand-file-name "site-lisp" user-emacs-directory))
+  ;; Setup elnode before packages to stop it from starting a server
+  ;;(require 'setup-elnode)
+  ;; Setup packages
+  (require 'setup-package)
+  ;; Set path to dependencies
+  (setq site-lisp-dir
+        (expand-file-name "site-lisp" user-emacs-directory))
 
-    ;; Set up load path and
-    (add-to-list 'load-path site-lisp-dir)
+  ;; Set up load path and
+  (add-to-list 'load-path site-lisp-dir)
 
-    ;; Add external projects to load path
-    (dolist (project (directory-files site-lisp-dir t "\\w+"))
-      (when (file-directory-p project)
-	(add-to-list 'load-path project)))
+  ;; Add external projects to load path
+  (dolist (project (directory-files site-lisp-dir t "\\w+"))
+    (when (file-directory-p project)
+      (add-to-list 'load-path project)))
 
 #+end_src
 
@@ -173,133 +173,133 @@ However, if your init file changes the values of
 :END:
 
 #+begin_src emacs-lisp
-    ;; Allow pasting selection outside of Emacs
-    (setq x-select-enable-clipboard t)
-    (setq x-select-enable-primary t)
+  ;; Allow pasting selection outside of Emacs
+  (setq x-select-enable-clipboard t)
+  (setq x-select-enable-primary t)
 
-    ;; Auto refresh buffers
-    (global-auto-revert-mode 1)
+  ;; Auto refresh buffers
+  (global-auto-revert-mode 1)
 
-    ;; Also auto refresh dired, but be quiet about it
-    (setq global-auto-revert-non-file-buffers t)
-    (setq auto-revert-verbose nil)
+  ;; Also auto refresh dired, but be quiet about it
+  (setq global-auto-revert-non-file-buffers t)
+  (setq auto-revert-verbose nil)
 
-    ;; Show keystrokes in progress
-    (setq echo-keystrokes 0.1)
+  ;; Show keystrokes in progress
+  (setq echo-keystrokes 0.1)
 
-    ;; Move files to trash when deleting
-    (setq delete-by-moving-to-trash t)
+  ;; Move files to trash when deleting
+  (setq delete-by-moving-to-trash t)
 
-    ;; Real emacs knights don't use shift to mark things
-    (setq shift-select-mode nil)
+  ;; Real emacs knights don't use shift to mark things
+  (setq shift-select-mode nil)
 
-    ;; Transparently open compressed files
-    (auto-compression-mode t)
+  ;; Transparently open compressed files
+  (auto-compression-mode t)
 
-    ;; Enable syntax highlighting for older Emacsen that have it off
-    (global-font-lock-mode t)
+  ;; Enable syntax highlighting for older Emacsen that have it off
+  (global-font-lock-mode t)
 
-    ;; Answering just 'y' or 'n' will do
-    (defalias 'yes-or-no-p 'y-or-n-p)
+  ;; Answering just 'y' or 'n' will do
+  (defalias 'yes-or-no-p 'y-or-n-p)
 
-    ;; UTF-8 please
-    (setq locale-coding-system 'utf-8) ; pretty
-    (set-terminal-coding-system 'utf-8) ; pretty
-    (set-keyboard-coding-system 'utf-8) ; pretty
-    (set-selection-coding-system 'utf-8) ; please
-    (prefer-coding-system 'utf-8) ; with sugar on top
+  ;; UTF-8 please
+  (setq locale-coding-system 'utf-8) ; pretty
+  (set-terminal-coding-system 'utf-8) ; pretty
+  (set-keyboard-coding-system 'utf-8) ; pretty
+  (set-selection-coding-system 'utf-8) ; please
+  (prefer-coding-system 'utf-8) ; with sugar on top
 
-    ;; Frame titles which are short and informative
-    (setq frame-title-format '("%b - Emacs"))
+  ;; Frame titles which are short and informative
+  (setq frame-title-format '("%b - Emacs"))
 
-    ;; Show active region
-    (transient-mark-mode 1)
-    (make-variable-buffer-local 'transient-mark-mode)
-    (put 'transient-mark-mode 'permanent-local t)
-    (setq-default transient-mark-mode t)
+  ;; Show active region
+  (transient-mark-mode 1)
+  (make-variable-buffer-local 'transient-mark-mode)
+  (put 'transient-mark-mode 'permanent-local t)
+  (setq-default transient-mark-mode t)
 
-    ;; Remove text in active region if inserting text
-    (delete-selection-mode 1)
+  ;; Remove text in active region if inserting text
+  (delete-selection-mode 1)
 
-    ;; ;; Don't highlight matches with jump-char - it's distracting
-    ;; (setq jump-char-lazy-highlight-face nil)
+  ;; ;; Don't highlight matches with jump-char - it's distracting
+  ;; (setq jump-char-lazy-highlight-face nil)
 
-    ;; Always display line and column numbers
-    (setq line-number-mode t)
-    (setq column-number-mode t)
+  ;; Always display line and column numbers
+  (setq line-number-mode t)
+  (setq column-number-mode t)
 
-    ;; Lines should be 80 characters wide, not 72
-    (setq fill-column 80)
+  ;; Lines should be 80 characters wide, not 72
+  (setq fill-column 80)
 
-    ;; Save a list of recent files visited. (open recent file with C-x f)
-    (recentf-mode 1)
-    (setq recentf-max-saved-items 100) ;; just 20 is too recent
+  ;; Save a list of recent files visited. (open recent file with C-x f)
+  (recentf-mode 1)
+  (setq recentf-max-saved-items 100) ;; just 20 is too recent
 
-    ;; Highlight matching parentheses when the point is on them.
-    (show-paren-mode 1)
+  ;; Highlight matching parentheses when the point is on them.
+  (show-paren-mode 1)
 
-    ;; Undo/redo window configuration with C-c <left>/<right>
-    (winner-mode 1)
+  ;; Undo/redo window configuration with C-c <left>/<right>
+  (winner-mode 1)
 
-    ;; Never insert tabs
-    (setq-default indent-tabs-mode nil)
+  ;; Never insert tabs
+  (setq-default indent-tabs-mode nil)
 
-    ;; Show me empty lines after buffer end
-    (setq-default indicate-empty-lines t)
+  ;; Show me empty lines after buffer end
+  (setq-default indicate-empty-lines t)
 
-    ;; Easily navigate sillycased words
-    (global-subword-mode 1)
+  ;; Easily navigate sillycased words
+  (global-subword-mode 1)
 
-    ;; ;; Don't break lines for me, please
-    ;; (setq-default truncate-lines t)
+  ;; ;; Don't break lines for me, please
+  ;; (setq-default truncate-lines t)
 
-    ;; Keep cursor away from edges when scrolling up/down
-    (require 'smooth-scrolling)
-    ;; (setq scroll-step 1)
-    ;; (setq scroll-conservatively 10000)
-    (setq auto-window-vscroll nil)
+  ;; Keep cursor away from edges when scrolling up/down
+  (require 'smooth-scrolling)
+  ;; (setq scroll-step 1)
+  ;; (setq scroll-conservatively 10000)
+  (setq auto-window-vscroll nil)
 
-    ;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
-    (setq org-replace-disputed-keys t)
+  ;; org-mode: Don't ruin S-arrow to switch windows please (use M-+ and M-- instead to toggle)
+  (setq org-replace-disputed-keys t)
 
-    ;; Fontify org-mode code blocks
-    (setq org-src-fontify-natively t)
+  ;; Fontify org-mode code blocks
+  (setq org-src-fontify-natively t)
 
 
-    ;; ;; Sentences do not need double spaces to end. Period.
-    ;; (set-default 'sentence-end-double-space nil)
+  ;; ;; Sentences do not need double spaces to end. Period.
+  ;; (set-default 'sentence-end-double-space nil)
 
-    ;; Add parts of each file's directory to the buffer name if not unique
-    (require 'uniquify)
-    (setq uniquify-buffer-name-style 'forward)
+  ;; Add parts of each file's directory to the buffer name if not unique
+  (require 'uniquify)
+  (setq uniquify-buffer-name-style 'forward)
 
-    ;; A saner ediff
-    (setq ediff-diff-options "-w")
-    (setq ediff-split-window-function 'split-window-horizontally)
-    (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+  ;; A saner ediff
+  (setq ediff-diff-options "-w")
+  (setq ediff-split-window-function 'split-window-horizontally)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
-    ;; Nic says eval-expression-print-level needs to be set to nil (turned off) so
-    ;; that you can always see what's happening.
-    (setq eval-expression-print-level nil)
+  ;; Nic says eval-expression-print-level needs to be set to nil (turned off) so
+  ;; that you can always see what's happening.
+  (setq eval-expression-print-level nil)
 
-    ;; When popping the mark, continue popping until the cursor actually moves
-    ;; Also, if the last command was a copy - skip past all the expand-region cruft.
-    (defadvice pop-to-mark-command (around ensure-new-position activate)
-      (let ((p (point)))
-        (when (eq last-command 'save-region-or-current-line)
-          ad-do-it
-          ad-do-it
-          ad-do-it)
-        (dotimes (i 10)
-          (when (= p (point)) ad-do-it))))
+  ;; When popping the mark, continue popping until the cursor actually moves
+  ;; Also, if the last command was a copy - skip past all the expand-region cruft.
+  (defadvice pop-to-mark-command (around ensure-new-position activate)
+    (let ((p (point)))
+      (when (eq last-command 'save-region-or-current-line)
+        ad-do-it
+        ad-do-it
+        ad-do-it)
+      (dotimes (i 10)
+        (when (= p (point)) ad-do-it))))
 
-    ;; don't try to raise windows when switching to a buffer, because this
-    ;; fails in any sane tiling window manager
-    (setq ido-default-file-method 'selected-window
-          ido-default-buffer-method 'selected-window)
+  ;; don't try to raise windows when switching to a buffer, because this
+  ;; fails in any sane tiling window manager
+  (setq ido-default-file-method 'selected-window
+        ido-default-buffer-method 'selected-window)
 
-    ;; highlight the current line in all buffers
-    (global-hl-line-mode 1)
+  ;; highlight the current line in all buffers
+  (global-hl-line-mode 1)
 
   (setq  realgud-safe-mode nil)
 
@@ -312,21 +312,21 @@ However, if your init file changes the values of
 
 #+begin_src emacs-lisp
 
-      (global-display-line-numbers-mode t)
+  (global-display-line-numbers-mode t)
 
-      ;; Override some modes which derive from the above
-      (dolist (mode '(term-mode-hook
-                      ag-mode-hook
-                      magit-mode-hook
-                      dired-mode-hook
-                      comint-mode-hook
-                      shell-mode-hook
-                      helm-mode-hook
-                      ibuffer-mode-hook
-                      eshell-mode-hook))
+  ;; Override some modes which derive from the above
+  (dolist (mode '(term-mode-hook
+                  ag-mode-hook
+                  magit-mode-hook
+                  dired-mode-hook
+                  comint-mode-hook
+                  shell-mode-hook
+                  helm-mode-hook
+                  ibuffer-mode-hook
+                  eshell-mode-hook))
 
-        (add-hook mode (lambda () (display-line-numbers-mode 0)))
-        )
+    (add-hook mode (lambda () (display-line-numbers-mode 0)))
+    )
 
 #+end_src
 
@@ -360,10 +360,10 @@ However, if your init file changes the values of
 
   (scroll-bar-mode -1)        ; Disable visible scrollbar
   (tool-bar-mode -1)          ; Disable the toolbar
-;;  (tooltip-mode -1)           ; Disable tooltips
+  ;;  (tooltip-mode -1)           ; Disable tooltips
   (set-fringe-mode 10)       ; Give some breathing room
 
-(menu-bar-mode -1)            ; Disable the menu bar
+  (menu-bar-mode -1)            ; Disable the menu bar
 #+end_src
 
 ** Keyboard Interaction
@@ -383,7 +383,7 @@ However, if your init file changes the values of
   ;; Diminish modeline clutter
   (require 'diminish)
 
-  #+end_src
+#+end_src
 
 *** Undo system
 
@@ -413,7 +413,7 @@ set the history for the time being, see [[https://www.reddit.com/r/emacs/comment
 
 
 #+begin_src emacs-lisp
-(setq undo-tree-auto-save-history nil)
+  (setq undo-tree-auto-save-history nil)
 #+end_src
 
 The post also suggests that [[https://gitlab.com/ideasman42/emacs-undo-fu-session][emacs-undo-fu-session]] might be interesting.
@@ -433,17 +433,17 @@ https://www.linode.com/docs/guides/emacs-evil-mode/
 
   ;; do ot apply yet
   (defun cg/evil-hook ()
-   (dolist (mode '(custom-mode
-                   eshell-mode
-                   shell-mode
-                   term-mode
-                   ibuffer-mode
-                   ag-mode
-                   dired-mode
-                   flycheck-mode
-                   ))
-     (add-to-list 'evil-emacs-state-modes mode)
-     ))
+    (dolist (mode '(custom-mode
+                    eshell-mode
+                    shell-mode
+                    term-mode
+                    ibuffer-mode
+                    ag-mode
+                    dired-mode
+                    flycheck-mode
+                    ))
+      (add-to-list 'evil-emacs-state-modes mode)
+      ))
 
   (use-package evil
     :init
@@ -603,28 +603,28 @@ For the visual-mode mappings, gv reselects the last visual block
 
 ****** Moving Lines around
 
- :m .+1 move line one up
+:m .+1 move line one up
 
 
 ****** Deleting
 
 d   motion
 
- d      - is the delete operator.
- motion - is what the operator will operate on (listed below).
+d      - is the delete operator.
+motion - is what the operator will operate on (listed below).
 
 
 - dd delete line
 - dw delete
 
 
-    w - until the start of the next word, EXCLUDING its first character.
-    e - to the end of the current word, INCLUDING the last character.
-    $ - to the end of the line, INCLUDING the last character.
-    ^ - to the beginning of the line
-    b - back to the beginning of the word
-    { - delete to beginning of paragraph
-    } - delete to end of paragraph
+w - until the start of the next word, EXCLUDING its first character.
+e - to the end of the current word, INCLUDING the last character.
+$ - to the end of the line, INCLUDING the last character.
+^ - to the beginning of the line
+b - back to the beginning of the word
+{ - delete to beginning of paragraph
+} - delete to end of paragraph
 
 
 d3w - delete three words in the future
@@ -685,20 +685,20 @@ yip - copy current paragraph
 https://vim.fandom.com/wiki/Search_and_replace#Basic_search_and_replace
 
 :s/foo/bar/g
-    Find each occurrence of 'foo' (in the current line only), and replace it with 'bar'.
+Find each occurrence of 'foo' (in the current line only), and replace it with 'bar'.
 
 :%s/foo/bar/g
-    Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
+Find each occurrence of 'foo' (in all lines), and replace it with 'bar'.
 
 :%s/foo/bar/gc
-    Change each 'foo' to 'bar', but ask for confirmation first.
+Change each 'foo' to 'bar', but ask for confirmation first.
 
 
 n - next occ
 N - prev occ
 
- Typing  /  followed by a phrase searches FORWARD for the phrase.
- Typing  ?  followed by a phrase searches BACKWARD for the phrase.
+Typing  /  followed by a phrase searches FORWARD for the phrase.
+Typing  ?  followed by a phrase searches BACKWARD for the phrase.
 CTRL-O takes you back to older positions, CTRL-I to newer positions.
 
 To substitute new for the first old in a line type    :s/old/new
@@ -713,20 +713,20 @@ To ask for confirmation each time add 'c'             :%s/old/new/gc
 
 See the following methods:
 
- ~    : Changes the case of current character
- guu  : Change current line from upper to lower.
- gUU  : Change current LINE from lower to upper.
- guw  : Change to end of current WORD from upper to lower.
- guaw : Change all of current WORD to lower.
- gUw  : Change to end of current WORD from lower to upper.
- gUaw : Change all of current WORD to upper.
- g~~  : Invert case to entire line
- g~w  : Invert case to current WORD
- guG  : Change to lowercase until the end of document.
- gU)  : Change until end of sentence to upper case
- gu}  : Change to end of paragraph to lower case
- gU5j : Change 5 lines below to upper case
- gu3k : Change 3 lines above to lower case
+~    : Changes the case of current character
+guu  : Change current line from upper to lower.
+gUU  : Change current LINE from lower to upper.
+guw  : Change to end of current WORD from upper to lower.
+guaw : Change all of current WORD to lower.
+gUw  : Change to end of current WORD from lower to upper.
+gUaw : Change all of current WORD to upper.
+g~~  : Invert case to entire line
+g~w  : Invert case to current WORD
+guG  : Change to lowercase until the end of document.
+gU)  : Change until end of sentence to upper case
+gu}  : Change to end of paragraph to lower case
+gU5j : Change 5 lines below to upper case
+gu3k : Change 3 lines above to lower case
 
 
 source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text=2%20Answers&text=Visual%20select%20the%20text%2C%20then,gu%20for%20lowercase.
@@ -800,18 +800,18 @@ https://blog.confirm.ch/mastering-vim-opening-files/
 :END:
 
 #+begin_src emacs-lisp
-(require 'realgud)
+  (require 'realgud)
 
-(require 'setup-projectile)
+  (require 'setup-projectile)
 
-;; Setup extensions
- (require 'setup-themes)
-;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-;; (eval-after-load 'dired '(require 'setup-python))
+  ;; Setup extensions
+  (require 'setup-themes)
+  ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
+  ;; (eval-after-load 'dired '(require 'setup-python))
 
-;; Setup lsp mode prior to setup-java
-;; setup for lsp and dap
-(require 'setup-auto-complete)
+  ;; Setup lsp mode prior to setup-java
+  ;; setup for lsp and dap
+  (require 'setup-auto-complete)
 
 #+end_src
 
@@ -823,7 +823,7 @@ https://blog.confirm.ch/mastering-vim-opening-files/
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode)
-  )
+    )
 #+end_src
 
 ;; Rainbow Delimiters
@@ -867,12 +867,12 @@ M-x jupyter-connect-server-repl
 
 
 #+begin_src emacs-lisp
-(require 'setup-lsp)
-;; 0(require 'setup-java)
-;; deactivate  jdee for  loading java files
+  (require 'setup-lsp)
+  ;; 0(require 'setup-java)
+  ;; deactivate  jdee for  loading java files
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
-(require 'setup-dap-mode)
+  (require 'setup-dap-mode)
 
 #+end_src
 
@@ -1042,23 +1042,23 @@ $ pip install importmagic epc
 Pylance = Pyright + IntelliCode AI models (not open-source)
 
 #+begin_src bash :tangle no
-https://github.com/emacs-lsp/lsp-mode/issues/1863:
-entweder über vs code installieren oder selbst bauen
-git clone https://github.com/microsoft/pyright
-cd pyright
-npm i
-npm run build:serverProd
-;; das sorgt dafür dass pyright bei mir im Pfad ist
-;; which pyright
-;; momentan befindet sich das hier: /home/audeering.local/cgeng/.nvm/versions/node/v12.22.1/bin/pyright
+  https://github.com/emacs-lsp/lsp-mode/issues/1863:
+  entweder über vs code installieren oder selbst bauen
+  git clone https://github.com/microsoft/pyright
+  cd pyright
+  npm i
+  npm run build:serverProd
+     ;; das sorgt dafür dass pyright bei mir im Pfad ist
+     ;; which pyright
+     ;; momentan befindet sich das hier: /home/audeering.local/cgeng/.nvm/versions/node/v12.22.1/bin/pyright
 #+end_src
 
 ***** Use VS Code Version
 
 #+begin_src emacs-lisp :tangle no
-;; Nutzung der VSCode Version:
-;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-;; (setq lsp-pyright-server-cmd `("node" "~/pyright/client/server/server.bundle.js" "--stdio"))
+  ;; Nutzung der VSCode Version:
+  ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
+  ;; (setq lsp-pyright-server-cmd `("node" "~/pyright/client/server/server.bundle.js" "--stdio"))
 #+end_src
 
 Activating venvs:
@@ -1066,7 +1066,7 @@ After changing the virtual env, the lsp workspace has to be restarted:
 see https://github.com/emacs-lsp/lsp-pyright/issues/7
 
 #+begin_src emacs-lisp :tangle no
-(lsp-restart-workspace)
+  (lsp-restart-workspace)
 #+end_src
 
 ***** Configuration
@@ -1075,7 +1075,7 @@ see https://github.com/emacs-lsp/lsp-pyright/issues/7
 This is documented at https://github.com/microsoft/pyright/blob/main/docs/configuration.md
 - This also statest that pyright settings can also be specified in a [tool.pyright] section of a "pyproject.toml" file.
 - some of these settings are also
- https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/
+  https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/
 -  https://github.com/emacs-lsp/lsp-pyright
 - hoe to devise local adaptions to PYTHONPATH under Emacs lsp pyright?
 - there is a custom variable:
@@ -1094,19 +1094,19 @@ code/data_collection/aisoundlab/audb_covid_19/1.0.0/
 Not sure whehter emacs interprets this at all
 
 #+begin_src json :tangle no
-{
-    "exclude": ["**/node_modules", "**/__pycache__"],
-    "ignore": ["**/node_modules", "**/__pycache__"],
-    "include": ["flextensor", "tvm","1.0.0"],
-    "pythonPlatform": "Linux",
-    "pythonVersion": "3.7",
-    "reportMissingImports": true,
-    "reportMissingTypeStubs": false,
-    "stubPath": "typings",
-    "typeCheckingMode": "basic",
-    "venvPath": "/home/audeering.local/cgeng/.venvs",
-    "venv": "py37"
-}
+  {
+      "exclude": ["**/node_modules", "**/__pycache__"],
+      "ignore": ["**/node_modules", "**/__pycache__"],
+      "include": ["flextensor", "tvm","1.0.0"],
+      "pythonPlatform": "Linux",
+      "pythonVersion": "3.7",
+      "reportMissingImports": true,
+      "reportMissingTypeStubs": false,
+      "stubPath": "typings",
+      "typeCheckingMode": "basic",
+      "venvPath": "/home/audeering.local/cgeng/.venvs",
+      "venv": "py37"
+  }
 
 #+end_src
 
@@ -1150,10 +1150,10 @@ Not sure whehter emacs interprets this at all
 see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
-    (defun lsp-workspace-restart-deep ()
+  (defun lsp-workspace-restart-deep ()
     (interactive
-    (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
-    (lsp-workspace-restart))
+     (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
+     (lsp-workspace-restart))
     )
 
   ;;   ;;;###autoload
@@ -1185,20 +1185,20 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 https://github.com/wbolster/emacs-python-pytest
 
 
-    python-pytest
-    python-pytest-file
-    python-pytest-file-dwim
-    python-pytest-files
-    python-pytest-function
-    python-pytest-function-dwim
-    python-pytest-last-failed
-    python-pytest-repeat
+python-pytest
+python-pytest-file
+python-pytest-file-dwim
+python-pytest-files
+python-pytest-function
+python-pytest-function-dwim
+python-pytest-last-failed
+python-pytest-repeat
 
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (use-package python-pytest
     :ensure t
-   )
+    )
 #+end_src
 
 (setq python-pytest-confirm t)
@@ -1223,9 +1223,9 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
 
   (defun python-yapf-format-buffer ()
-     (interactive)
-     (when (and (executable-find "yapf") buffer-file-name)
-       (call-process "yapf" nil nil nil "-i" buffer-file-name)))
+    (interactive)
+    (when (and (executable-find "yapf") buffer-file-name)
+      (call-process "yapf" nil nil nil "-i" buffer-file-name)))
 
   ;; add hook example
   ;; (add-hook 'python-mode-hook
@@ -1248,8 +1248,8 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
   ;;   )
 
   (defvar python-autoflake-path
-  (replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
-  )
+    (replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
+    )
 
   (defun python-remove-unused-imports()
     "Use Autoflake to remove unused function"
@@ -1257,7 +1257,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
     (interactive)
     (shell-command
      (format "%s --remove-all-unused-imports -i %s"
-         python-autoflake-path
+             python-autoflake-path
              (shell-quote-argument (buffer-file-name))))
     (revert-buffer t t t))
 #+end_src
@@ -1275,13 +1275,13 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
 
 
-    (defun python-remove-unused-variables()
+  (defun python-remove-unused-variables()
     "Use Autoflake to remove unused function"
     "autoflake --remove-all-unused-imports -i unused_imports.py"
     (interactive)
     (shell-command
      (format "%s --remove-unused-variables -i %s"
-         python-autoflake-path
+             python-autoflake-path
              (shell-quote-argument (buffer-file-name))))
     (revert-buffer t t t))
 
@@ -1311,12 +1311,12 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+begin_src emacs-lisp
   (use-package use-package-ensure-system-package :ensure t)
   (use-package blacken
-      ;; :ensure t
-      ;; :ensure-system-package (black . "pip3 install black")
-      :custom
-      (blacken-executable "brunette")
-      ;; (blacken-line-length 119)
-      )
+    ;; :ensure t
+    ;; :ensure-system-package (black . "pip3 install black")
+    :custom
+    (blacken-executable "brunette")
+    ;; (blacken-line-length 119)
+    )
 
 #+end_src
 ****** Links
@@ -1327,12 +1327,12 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 
 -  file->preferences->type "python formatting provider"
 -  This gets put into ~/cgeng/.config/Code/User/settings.json
- "python.formatting.provider": "black"
+  "python.formatting.provider": "black"
 - file->preferences->type "format on save"
 
 -  configure black
 -  https://dev.to/adamlombard/vscode-setting-line-lengths-in-the-black-python-code-formatter-1g62
- file->preferences->type "python formatting black args"
+  file->preferences->type "python formatting black args"
 - --line-length 119
 - 119 characters
 
@@ -1343,11 +1343,11 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
   (defun python-cleanup-this-file ()
     "All cleaning actions run in chain..."
     (interactive)
-  (blacken-buffer)
-  (python-remove-unused-imports)
-  (py-isort-buffer)
-  (python-remove-unused-imports)
-  )
+    (blacken-buffer)
+    (python-remove-unused-imports)
+    (py-isort-buffer)
+    (python-remove-unused-imports)
+    )
 #+end_src
 
 
@@ -1364,10 +1364,10 @@ https://github.com/tkf/auto-complete-rst
 
   ;; specify other sources to use in rst-mode
   (setq auto-complete-rst-other-sources
-      '(ac-source-filename
-        ac-source-abbrev
-        ac-source-dictionary
-        ac-source-yasnippet))
+        '(ac-source-filename
+          ac-source-abbrev
+          ac-source-dictionary
+          ac-source-yasnippet))
 #+end_src
 
 
@@ -1405,70 +1405,70 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
 #+begin_src emacs-lisp :tangle no :mkdirp yes
 
   (use-package python-mode
-  :ensure t
-  )
+    :ensure t
+    )
 
 #+end_src
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
 
-      (use-package python-mode
-        :ensure t
-        :hook (python-mode . (lambda ()
-                               (require 'lsp-pyright)
-                               (require 'highlight-indent-guides)
-                               (require 'sphinx-doc)
-                               (sphinx-doc-mode t)
-                               (highlight-indent-guides-mode -1)
-                               (auto-fill-mode)
-                               (set-fill-column python-linewidth)
-                               ;;(highlight-indent-guides-mode)
-                               ;; (importmagic-mode)
-                               (lsp-deferred)
-                               ;; (yapf-mode)
-                               (lsp-treemacs)
-                               )
+  (use-package python-mode
+    :ensure t
+    :hook (python-mode . (lambda ()
+                           (require 'lsp-pyright)
+                           (require 'highlight-indent-guides)
+                           (require 'sphinx-doc)
+                           (sphinx-doc-mode t)
+                           (highlight-indent-guides-mode -1)
+                           (auto-fill-mode)
+                           (set-fill-column python-linewidth)
+                           ;;(highlight-indent-guides-mode)
+                           ;; (importmagic-mode)
+                           (lsp-deferred)
+                           ;; (yapf-mode)
+                           (lsp-treemacs)
                            )
-        :custom
-        ;; NOTE: Set these if Python 3 is called "python3" on your system!
-        ;; (python-shell-interpreter "python3")
-        ;; (dap-python-executable "python3")
-        ;; should be .dir-local:
-        ;; (lsp-pyright-venv-path "~/.venvs/py37")
-        (dap-python-debugger 'debugpy)
-        :config
-        (require 'dap-python)
-        ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-        )
+                       )
+    :custom
+    ;; NOTE: Set these if Python 3 is called "python3" on your system!
+    ;; (python-shell-interpreter "python3")
+    ;; (dap-python-executable "python3")
+    ;; should be .dir-local:
+    ;; (lsp-pyright-venv-path "~/.venvs/py37")
+    (dap-python-debugger 'debugpy)
+    :config
+    (require 'dap-python)
+    ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
+    )
 
 
-        (setq lsp-enable-file-watchers nil)
-        (setq lsp-file-watch-threshold 2000)
+  (setq lsp-enable-file-watchers nil)
+  (setq lsp-file-watch-threshold 2000)
 
-        (setq lsp-pyright-auto-import-completions t)
-        ;;  Determines whether pyright automatically adds common search paths.
-        ;; i.e: Paths like "src" if there are no execution environments defined in the
-        ;; config file.
-        (setq lsp-pyright-auto-search-paths t)
-        (setq lsp-pyright-log-level "trace")
+  (setq lsp-pyright-auto-import-completions t)
+  ;;  Determines whether pyright automatically adds common search paths.
+  ;; i.e: Paths like "src" if there are no execution environments defined in the
+  ;; config file.
+  (setq lsp-pyright-auto-search-paths t)
+  (setq lsp-pyright-log-level "trace")
 
-      (require 'dap-python)
+  (require 'dap-python)
 
-      ;; (lsp-client-settings)
+  ;; (lsp-client-settings)
 
-      (use-package company
-        :after lsp-mode
-        :hook (lsp-mode . company-mode)
-        ;; :bind (:map company-active-map
-        ;;        ("<tab>" . company-complete-selection))
-        ;;       (:map lsp-mode-map
-        ;;        ("<tab>" . company-indent-or-complete-common))
-        :custom
-        (company-minimum-prefix-length 1)
-        (company-idle-delay 0.0))
+  (use-package company
+    :after lsp-mode
+    :hook (lsp-mode . company-mode)
+    ;; :bind (:map company-active-map
+    ;;        ("<tab>" . company-complete-selection))
+    ;;       (:map lsp-mode-map
+    ;;        ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
 
-      (use-package company-box
-        :hook (company-mode . company-box-mode))
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
 
 #+end_src
 
@@ -1487,7 +1487,7 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
 ***** Footer
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
-    (provide 'setup-python)
+  (provide 'setup-python)
 
   ;;; setup-python-lsp-python ends here
 
@@ -1514,32 +1514,30 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
 #+begin_src emacs-lisp  :tangle ./el/setup-ess.el :mkdirp yes
 
-  ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
+    ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
   ;;
-  ;;; Code:
+    ;;; Code:
 
   (message "Lsp Python begins here")
 
-        ;;; emacs speaks statistics
-      (use-package ess
-        :ensure t
-        :init
-        (require 'ess-site)
-        )
+          ;;; emacs speaks statistics
+  (use-package ess
+    :ensure t
+    :init
+    (require 'ess-site)
+    )
 
   (provide 'setup-ess)
-;;; setup-python-lsp-python ends here
+  ;;; setup-python-lsp-python ends here
 
 
 #+end_src
 
 
-*** LSP Other Languages
+*** Other LSP
 :PROPERTIES:
 :ID:       3fff27c7-73a4-4dfa-833a-86903c2d8d0b
 :END:
-
-
 
 #+begin_src emacs-lisp
 
@@ -1564,7 +1562,55 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   (require 'mmm-auto)
   (require 'setup-web-mode)
   (require 'setup-vue-mode)
+#+end_src
 
+
+* Single Other Mode Configurations
+
+#+begin_src emacs-lisp :tangle ./el/setup-json-mode.el :mkdirp yes
+      ;;; setup-json-mode.el --- summary -*- lexical-binding: t -*-
+
+    ;; Author: CGeng
+    ;; Maintainer: CGeng
+    ;; Version: version
+    ;; Package-Requires: (dependencies)
+
+    ;;; Commentary:
+
+    ;; commentary
+
+    ;;; Code:
+
+
+      ;;; name.el ends here
+    (add-hook 'json-mode-hook
+              (lambda ()
+                (make-local-variable 'js-indent-level)
+                (setq js-indent-level 4)
+                (flycheck-mode)
+                )
+              )
+
+
+    (defun beautify-json ()
+    "Make json formatting beautiful in selected region.
+        Formats json region to be better readable by a human."
+      (interactive)
+      (let ((b (if mark-active (min (point) (mark)) (point-min)))
+            (e (if mark-active (max (point) (mark)) (point-max))))
+        (shell-command-on-region b e
+                                 "python -m json.tool" (current-buffer) t)))
+
+
+    (provide 'setup-json-mode)
+    ;;; setup-json-mode.el ends here
+
+#+end_src
+
+* Collected Other Mode Configurations
+
+
+#+begin_src emacs-lisp
   ;; (require 'setup-speedbar)
 
   ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
@@ -1585,7 +1631,7 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   (require 'setup-jabber)
   (require 'setup-chat-tracking)
   ;; (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
-   (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
+  (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
   ;; (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
   ;;(require 'setup-pandoc)
 
@@ -1629,7 +1675,7 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
     (toggle-read-only))
   (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
   ;; gehen alle nicht;
-  ; (add-hook 'sbt-mode-hook 'display-ansi-colors)
+                                          ; (add-hook 'sbt-mode-hook 'display-ansi-colors)
   ;; (add-hook 'sbt-mode-hook 'ansi-color-for-comint-mode-on)
   ;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
   ;; (add-hook 'async-bytecomp-package-mode-hook 'colorize-compilation-buffer)
@@ -1677,8 +1723,8 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   (put 'scroll-left 'disabled nil)
 
 
-    (setq abbrev-file-name             ;; tell emacs where to read abbrev
-          "~/.emacs.d/abbrev_defs")    ;; definitions from...
+  (setq abbrev-file-name             ;; tell emacs where to read abbrev
+        "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
   ;;(add-to-list 'load-path "/path/to/downloaded/openwith.el")
   ;;./elpa/openwith-20120531.1436/openwith.el:1
@@ -1737,10 +1783,10 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
 #+end_src
 
-**** Shell prompt
+*** Shell prompt
 
 
-***** Recommendations
+**** Recommendations
 :PROPERTIES:
 :ID:       ad5cc4be-3a56-4208-90e3-173b17837c02
 :END:
@@ -1748,48 +1794,48 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 https://stackoverflow.com/questions/12224909/is-there-a-way-to-get-my-emacs-to-recognize-my-bash-aliases-and-custom-functions/12229404#12229404
 
 #+begin_src emacs-lisp :tangle no
-;; ->  make  all  envs  visible in  also org mode
-(setq shell-file-name "bash")
-(setq shell-command-switch "-ic")
+  ;; ->  make  all  envs  visible in  also org mode
+  (setq shell-file-name "bash")
+  (setq shell-command-switch "-ic")
 #+end_src
 
 - The solution is to leave the shell-command-switch variable at its default value, which is just -c.
 https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group-error-when-running-bash-script
 
 #+begin_src emacs-lisp
-(setq shell-file-name "bash")
-(setq shell-command-switch "-c")
+  (setq shell-file-name "bash")
+  (setq shell-command-switch "-c")
 #+end_src
 
 
 
-**** safe local variables
+*** safe local variables
 :PROPERTIES:
 :ID:       7a719b5d-aa8c-4110-9859-5aea715e044b
 :END:
 
 #+begin_src emacs-lisp
 
-;; - '(safe-local-variable-values '((testvar\  . "hello")))
-;; + '(safe-local-variable-values
-;; +   '((pyvenv-activate . "~/.venvs/py37/")
-;; +     (testvar\  . "hello")))
-;;   '(sql-connection-alist
-;;     '(("dataupload local container mysql"
+  ;; - '(safe-local-variable-values '((testvar\  . "hello")))
+  ;; + '(safe-local-variable-values
+  ;; +   '((pyvenv-activate . "~/.venvs/py37/")
+  ;; +     (testvar\  . "hello")))
+  ;;   '(sql-connection-alist
+  ;;     '(("dataupload local container mysql"
 
-;; (put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
+  ;; (put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
 
-;; projectile-project-test-cmd :
+  ;; projectile-project-test-cmd :
 
-(put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
-(put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
-(put 'py-pythonpath  'safe-local-variable (lambda (_) t))
+  (put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
+  (put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
+  (put 'py-pythonpath  'safe-local-variable (lambda (_) t))
 
 
 #+end_src
 
 
-**** fix missing alt-key in WSL
+*** fix missing alt-key in WSL
 :PROPERTIES:
 :ID:       52d2df23-c894-4ce0-b82b-1023c29e4483
 :END:
@@ -1797,8 +1843,8 @@ https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group
 WSL for Windows specific code
 
 #+begin_src emacs-lisp
-(setq x-alt-keysym 'meta)
-(put 'set-goal-column 'disabled nil)
+  (setq x-alt-keysym 'meta)
+  (put 'set-goal-column 'disabled nil)
 #+end_src
 
 
@@ -1813,14 +1859,14 @@ WSL for Windows specific code
 :END:
 
 #+begin_src emacs-lisp
-(defun edit-current-file-as-root ()
-  "Edit the file that is associated with the current buffer as root"
-  (interactive)
-  (if (buffer-file-name)
-      (progn
-        (setq file (concat "/sudo:localhost:" (buffer-file-name)))
-        (find-file file))
-    (message "Current buffer does not have an associated file.")))
+  (defun edit-current-file-as-root ()
+    "Edit the file that is associated with the current buffer as root"
+    (interactive)
+    (if (buffer-file-name)
+        (progn
+          (setq file (concat "/sudo:localhost:" (buffer-file-name)))
+          (find-file file))
+      (message "Current buffer does not have an associated file.")))
 #+end_src
 
 ** Imenu auto
@@ -1829,11 +1875,11 @@ WSL for Windows specific code
 :END:
 #+begin_src emacs-lisp
 
-;; add Imenu whenever possible.
-;; see https://www.emacswiki.org/emacs/ImenuMode for documentation
-(defun try-to-add-imenu ()
-  (condition-case nil (imenu-add-to-menubar "Index") (error nil)))
- (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+  ;; add Imenu whenever possible.
+  ;; see https://www.emacswiki.org/emacs/ImenuMode for documentation
+  (defun try-to-add-imenu ()
+    (condition-case nil (imenu-add-to-menubar "Index") (error nil)))
+  (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
 
 #+end_src
 
@@ -1847,13 +1893,13 @@ WSL for Windows specific code
 :ID:       6d9c48b7-0c81-4a42-a7f0-dfe149934fb2
 :END:
 #+begin_src emacs-lisp
-(setq visible-bell t)
-;; ring-bell function not doing what its supposed to?
-;; see https://www.emacswiki.org/emacs/AlarmBell
-;; (defun ring-bell-function()
-;;   "do not ring the bell when cursor has gone too far outside."
-;;   (message "Went outside but not ringing the bell.")
-;;     )
+  (setq visible-bell t)
+  ;; ring-bell function not doing what its supposed to?
+  ;; see https://www.emacswiki.org/emacs/AlarmBell
+  ;; (defun ring-bell-function()
+  ;;   "do not ring the bell when cursor has gone too far outside."
+  ;;   (message "Went outside but not ringing the bell.")
+  ;;     )
 #+end_src
 
 ** Ansible Vault Mode
@@ -1861,15 +1907,15 @@ WSL for Windows specific code
 
 #+begin_src emacs-lisp
 
-(setq ansible-vault-password-file "~/.ansible/vault_pass.txt")
-(add-to-list 'auto-mode-alist '("/encrypted$" . yaml-mode))
+  (setq ansible-vault-password-file "~/.ansible/vault_pass.txt")
+  (add-to-list 'auto-mode-alist '("/encrypted$" . yaml-mode))
 
-(defun ansible-vault-mode-maybe ()
-  (when (ansible-vault--is-encrypted-vault-file)
-    (ansible-vault-mode 1)))
+  (defun ansible-vault-mode-maybe ()
+    (when (ansible-vault--is-encrypted-vault-file)
+      (ansible-vault-mode 1)))
 
- (use-package ansible-vault
-  :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
+  (use-package ansible-vault
+    :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
 
 #+end_src
 
@@ -1887,19 +1933,19 @@ WSL for Windows specific code
 
 
 
- (defun delete-nth (index seq)
-   "Delete the INDEX th element of SEQ.
- Return result sequence, SEQ __is__ modified."
-   (if (equal index 0)
-       (progn
-         (setcar seq (car (cdr seq)))
-         (setcdr seq (cdr (cdr seq))))
-     (setcdr (nthcdr (1- index) seq) (nthcdr (1+ index) seq))))
+(defun delete-nth (index seq)
+"Delete the INDEX th element of SEQ.
+Return result sequence, SEQ __is__ modified."
+(if (equal index 0)
+(progn
+(setcar seq (car (cdr seq)))
+(setcdr seq (cdr (cdr seq))))
+(setcdr (nthcdr (1- index) seq) (nthcdr (1+ index) seq))))
 
 (delete-nth 0 auth-sources)
 
 (add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg")) ;; not parseable
-  (mapc 'message auth-sources)
+(mapc 'message auth-sources)
 
 (find-file (joindirs org-directory ".authinfo.gpg"))
 (find-file (joindirs org-directory "Notes.org.gpg")) ;; no need to add to auth sources as not parseable
@@ -1945,13 +1991,13 @@ gpg --full-generate-key
   # these should be in
   ls -t ~/.gnupg/
   ls -t ~/.gnupg/private-keys-v1.d -la
-  #+end_src
+#+end_src
 
 #+RESULTS:
 /home/christian/.gnupg/pubring.kbx
 ----------------------------------
 pub   rsa4096 2021-08-21 [SC]
-      B6791609BBC1CD7C000F17E75921C10409567BCA
+B6791609BBC1CD7C000F17E75921C10409567BCA
 uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
 sub   rsa4096 2021-08-21 [E]
 
@@ -1967,7 +2013,7 @@ total 8
 /home/christian/.gnupg/pubring.kbx
 ----------------------------------
 pub   rsa4096 2021-08-21 [SC]
-      B6791609BBC1CD7C000F17E75921C10409567BCA
+B6791609BBC1CD7C000F17E75921C10409567BCA
 uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
 sub   rsa4096 2021-08-21 [E]
 
@@ -1978,10 +2024,10 @@ private-keys-v1.d
 pubring.kbx~
 
 #+begin_src shell :tangle no :noweb yes :results output raw
-# Check if gpg-agent is already running
-grep gpg-agent
-# If it's not running, you can start it up with this command:
-gpg-connect-agent /bye
+  # Check if gpg-agent is already running
+  grep gpg-agent
+  # If it's not running, you can start it up with this command:
+  gpg-connect-agent /bye
 #+end_src
 
 #+RESULTS:
@@ -1989,10 +2035,10 @@ gpg-connect-agent /bye
 
 *** Migrate key to other maschine
 
- gpg --list-secret-keys christian.c.geng@gmail.com
+gpg --list-secret-keys christian.c.geng@gmail.com
 
- gpg --export-secret-keys YOUR_ID_HERE > private.key
- gpg --import private.key
+gpg --export-secret-keys YOUR_ID_HERE > private.key
+gpg --import private.key
 
 
 
@@ -2000,10 +2046,10 @@ gpg-connect-agent /bye
 
 
 (defun efs/lookup-password (&rest keys)
-  (let ((result (apply #'auth-source-search keys)))
-    (if result
-        (funcall (plist-get (car result) :secret))
-        nil)))
+(let ((result (apply #'auth-source-search keys)))
+(if result
+(funcall (plist-get (car result) :secret))
+nil)))
 
 
 *** Migrate key to other machine
@@ -2041,11 +2087,11 @@ gpg2 --import private.key
 :ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
 :END:
 #+begin_src emacs-lisp
-;; Are we on a mac?
-(setq is-mac (equal system-type 'darwin))
-;; Setup environment variables from the user's shell.
-(when is-mac (exec-path-from-shell-initialize))
-;; (when is-mac (require 'mac))
+  ;; Are we on a mac?
+  (setq is-mac (equal system-type 'darwin))
+  ;; Setup environment variables from the user's shell.
+  (when is-mac (exec-path-from-shell-initialize))
+  ;; (when is-mac (require 'mac))
 
 #+end_src
 
@@ -2057,12 +2103,12 @@ gpg2 --import private.key
 
 #+begin_src emacs-lisp
 
-(require 'calibredb)
-(setq calibredb-root-dir "/D/Calibre_Science/")
-(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+  (require 'calibredb)
+  (setq calibredb-root-dir "/D/Calibre_Science/")
+  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
 
-    ;;(setq calibredb-root-dir "~/OneDrive/Doc/Calibre")
-    ;;(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+  ;;(setq calibredb-root-dir "~/OneDrive/Doc/Calibre")
+  ;;(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
 
 #+end_src
 
@@ -2089,10 +2135,10 @@ see in snippets
 :END:
 
 #+begin_src emacs-lisp
-   (require 'adoc-mode)
+  (require 'adoc-mode)
   (add-to-list 'auto-mode-alist '("\.adoc$" . adoc-mode))
- ;;  (add-to-list adoc-mode '("\\.adoc\\'" . adoc-mode))
-   (autoload 'adoc-mode "adoc-mode" nil t)
+  ;;  (add-to-list adoc-mode '("\\.adoc\\'" . adoc-mode))
+  (autoload 'adoc-mode "adoc-mode" nil t)
 #+end_src
 
 #+RESULTS:
@@ -2151,7 +2197,7 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 :ID:       7bdb08dc-a901-4bab-912b-50271f3f6f76
 :END:
 #+begin_src emacs-lisp
- (add-to-list 'auto-mode-alist '(".local_configs" . shell-script-mode))
+  (add-to-list 'auto-mode-alist '(".local_configs" . shell-script-mode))
 #+end_src
 
 ** Emacs Server
@@ -2160,9 +2206,9 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 :END:
 
 #+begin_src emacs-lisp
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+  (require 'server)
+  (unless (server-running-p)
+    (server-start))
 #+end_src
 
 
@@ -2170,7 +2216,7 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 
 
 #+begin_src emacs-lisp
-(require 'setup-dired)
+  (require 'setup-dired)
 #+end_src
 
 
@@ -2184,8 +2230,8 @@ Shell Script to get get temperatures
 * Web Server
 
 #+begin_src emacs-lisp
-(use-package simple-httpd
-  :ensure t)
+  (use-package simple-httpd
+    :ensure t)
 #+end_src
 
 * Applications Config Example

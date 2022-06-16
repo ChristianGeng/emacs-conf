@@ -6,8 +6,8 @@
 
 (defun lsp-workspace-restart-deep ()
   (interactive
-  (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
-  (lsp-workspace-restart))
+   (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
+   (lsp-workspace-restart))
   )
 
 ;;   ;;;###autoload
@@ -23,12 +23,12 @@
 
 (use-package python-pytest
   :ensure t
- )
+  )
 
 (defun python-yapf-format-buffer ()
-   (interactive)
-   (when (and (executable-find "yapf") buffer-file-name)
-     (call-process "yapf" nil nil nil "-i" buffer-file-name)))
+  (interactive)
+  (when (and (executable-find "yapf") buffer-file-name)
+    (call-process "yapf" nil nil nil "-i" buffer-file-name)))
 
 ;; add hook example
 ;; (add-hook 'python-mode-hook
@@ -41,8 +41,8 @@
 ;;   )
 
 (defvar python-autoflake-path
-(replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
-)
+  (replace-regexp-in-string "\n$" "" (shell-command-to-string "which autoflake"))
+  )
 
 (defun python-remove-unused-imports()
   "Use Autoflake to remove unused function"
@@ -50,38 +50,38 @@
   (interactive)
   (shell-command
    (format "%s --remove-all-unused-imports -i %s"
-       python-autoflake-path
+           python-autoflake-path
            (shell-quote-argument (buffer-file-name))))
   (revert-buffer t t t))
 
 (defun python-remove-unused-variables()
-"Use Autoflake to remove unused function"
-"autoflake --remove-all-unused-imports -i unused_imports.py"
-(interactive)
-(shell-command
- (format "%s --remove-unused-variables -i %s"
-     python-autoflake-path
-         (shell-quote-argument (buffer-file-name))))
-(revert-buffer t t t))
+  "Use Autoflake to remove unused function"
+  "autoflake --remove-all-unused-imports -i unused_imports.py"
+  (interactive)
+  (shell-command
+   (format "%s --remove-unused-variables -i %s"
+           python-autoflake-path
+           (shell-quote-argument (buffer-file-name))))
+  (revert-buffer t t t))
 
 (defun python-cleanup-this-file ()
   "All cleaning actions run in chain..."
   (interactive)
-(blacken-buffer)
-(python-remove-unused-imports)
-(py-isort-buffer)
-(python-remove-unused-imports)
-)
+  (blacken-buffer)
+  (python-remove-unused-imports)
+  (py-isort-buffer)
+  (python-remove-unused-imports)
+  )
 
 (require 'auto-complete-rst)
 (auto-complete-rst-init)
 
 ;; specify other sources to use in rst-mode
 (setq auto-complete-rst-other-sources
-    '(ac-source-filename
-      ac-source-abbrev
-      ac-source-dictionary
-      ac-source-yasnippet))
+      '(ac-source-filename
+        ac-source-abbrev
+        ac-source-dictionary
+        ac-source-yasnippet))
 
 (require 'pycoverage)
 
@@ -125,15 +125,15 @@
   )
 
 
-  (setq lsp-enable-file-watchers nil)
-  (setq lsp-file-watch-threshold 2000)
+(setq lsp-enable-file-watchers nil)
+(setq lsp-file-watch-threshold 2000)
 
-  (setq lsp-pyright-auto-import-completions t)
-  ;;  Determines whether pyright automatically adds common search paths.
-  ;; i.e: Paths like "src" if there are no execution environments defined in the
-  ;; config file.
-  (setq lsp-pyright-auto-search-paths t)
-  (setq lsp-pyright-log-level "trace")
+(setq lsp-pyright-auto-import-completions t)
+;;  Determines whether pyright automatically adds common search paths.
+;; i.e: Paths like "src" if there are no execution environments defined in the
+;; config file.
+(setq lsp-pyright-auto-search-paths t)
+(setq lsp-pyright-log-level "trace")
 
 (require 'dap-python)
 
