@@ -400,3 +400,12 @@ using git for this instead."
           (concat (cdr (assoc "val" org-link-abbrev-alist)) "org/Archive/" date-time)))
     (copy-directory org-directory org-backup-directory)
     (message "%s" (concat org-directory " copied to " org-backup-directory "!"))))
+
+;; (defvar org-electric-pairs '((?/ . ?/) (?= . ?=)) "Electric pairs for org-mode.")
+(defvar org-electric-pairs '((?/ . ?/) (?= . ?=) (?~ . ?~)) "Electric pairs for org-mode.")
+
+  (defun org-add-electric-pairs ()
+    (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))
+    (setq-local electric-pair-text-pairs electric-pair-pairs))
+
+  (add-hook 'org-mode-hook 'org-add-electric-pairs)

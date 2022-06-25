@@ -366,7 +366,7 @@ However, if your init file changes the values of
   (menu-bar-mode -1)            ; Disable the menu bar
 #+end_src
 
-** Keyboard Interaction
+** Keyboard Interaction (and the Evil Chapter)
 :PROPERTIES:
 :ID:       7659bb1b-d161-4195-9d35-657b64674762
 :END:
@@ -603,8 +603,15 @@ For the visual-mode mappings, gv reselects the last visual block
 
 ****** Moving Lines around
 
-:m .+1 move line one up
+:m .-2 move line one up
+:m .+1 move line one down
 
+The same in vimscript that goes to .vimrc:
+
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+
+https://github.com/emacs-evil/evil-collection
 
 ****** Deleting
 
@@ -759,7 +766,7 @@ löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ******* Working with windows
 
-:split - split horozontally
+:split - split horizontally
 :vsplit - split left/right
 :sort - sort lines
 ******* Working with Tabs
@@ -856,7 +863,7 @@ M-x jupyter-connect-server-repl
 
 
 
-*** LSP
+*** LSP General
 :PROPERTIES:
 :ID:       b204e436-4dff-486d-8eac-8b32772d7574
 :END:
@@ -1504,44 +1511,13 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
   (require 'setup-python)
 #+end_src
 
-*** R
-:PROPERTIES:
-:ID:       f6b47430-8927-472c-99f9-dd3a7ce2cc4a
-:END:
-
-https://confunguido.github.io/blog/20190317_emacs_for_R.html
-https://github.com/sejdemyr/.emacs.d/blob/master/init.el
-
-#+begin_src emacs-lisp  :tangle ./el/setup-ess.el :mkdirp yes
-
-    ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
-  ;;
-    ;;; Code:
-
-  (message "Lsp Python begins here")
-
-          ;;; emacs speaks statistics
-  (use-package ess
-    :ensure t
-    :init
-    (require 'ess-site)
-    )
-
-  (provide 'setup-ess)
-  ;;; setup-python-lsp-python ends here
-
-
-#+end_src
-
-
-*** Other LSP
+*** Other LSP Languages
 :PROPERTIES:
 :ID:       3fff27c7-73a4-4dfa-833a-86903c2d8d0b
 :END:
 
 #+begin_src emacs-lisp
 
-  (require 'setup-ess)
   (require 'setup-typescript)
   (require 'setup-angular)
   (require 'setup-c-lsp-clangd)
@@ -1565,7 +1541,50 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 #+end_src
 
 
-* Single Other Mode Configurations
+** R using ess
+:PROPERTIES:
+:ID:       f6b47430-8927-472c-99f9-dd3a7ce2cc4a
+:END:
+
+https://confunguido.github.io/blog/20190317_emacs_for_R.html
+https://github.com/sejdemyr/.emacs.d/blob/master/init.el
+
+#+begin_src emacs-lisp
+(require 'setup-ess)
+#+end_src
+
+
+#+begin_src emacs-lisp  :tangle ./el/setup-ess.el :mkdirp yes
+
+    ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
+  ;;
+    ;;; Code:
+
+  (message "Setting up ESS.")
+
+;;; emacs speaks statistics
+  (use-package ess
+    :ensure t
+    :init
+    (require 'ess-site)
+    )
+
+  (provide 'setup-ess)
+  ;;; setup-ess ends here
+
+
+#+end_src
+
+
+** Electric Pair Mode
+
+#+begin_src emacs-lisp
+  ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
+  (electric-pair-mode 1)
+#+end_src
+
+** Single Other Mode Configurations
+*** Json Files
 
 #+begin_src emacs-lisp :tangle ./el/setup-json-mode.el :mkdirp yes
       ;;; setup-json-mode.el --- summary -*- lexical-binding: t -*-
@@ -1607,7 +1626,452 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
 #+end_src
 
-* Collected Other Mode Configurations
+*** Org-Mode
+
+**** Setting requiring main entry Point
+
+#+begin_src emacs-lisp
+  (require 'setup-org) ;; organizer todo notes etc
+#+end_src
+
+**** Setting up org-general
+***** Main Blob
+#+begin_src emacs-lisp  :tangle ./el/org-general.el :mkdirp yes
+;; Enable org-mode
+(require 'org)
+
+;; For encrypting files
+(require 'org-crypt)
+
+;; For template expansion
+;; https://www.reddit.com/r/orgmode/comments/7jedp0/easy_templates_expansion_not_working/
+(require 'org-tempo)
+
+;; Remove trailing whitespace
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+
+;; Enable intelligent text wrapping
+(add-hook 'org-mode-hook
+          (lambda ()
+            (visual-line-mode)
+            (adaptive-wrap-prefix-mode)))
+
+;; Prevent extra spaces from showing up after headings
+(setq org-cycle-separator-lines 0)
+
+;; Enable syntax-highlighting
+(setq org-src-fontify-natively t)
+
+;;;; Export Options
+
+;; Disable subscripts on export
+(setq org-export-with-sub-superscripts nil)
+
+;; Disable table of contents on export
+(setq org-export-with-toc nil)
+
+;; Export drawers
+;; (setq org-export-with-drawers t)
+
+;; Export to clipboard to paste in other programs
+(defun my/org-export-region-html ()
+  "Export region to HTML, and copy it to the clipboard."
+  (interactive)
+  (save-window-excursion
+    (let* ((buf (org-export-to-buffer 'html "*Formatted Copy*" nil t nil t))
+           (html (with-current-buffer buf (buffer-string))))
+      (with-current-buffer buf
+        (shell-command-on-region
+         (point-min)
+         (point-max)
+         "clip"))
+      (kill-buffer buf))))
+
+;; Shortcuts
+;; (global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cc" 'org-capture)
+(define-key org-mode-map "\C-cv" 'org-reveal)
+(define-key org-mode-map "\C-cn" 'org-next-link)
+(define-key org-mode-map "\C-cp" 'org-property-action)
+
+;; Property inheritance
+(setq org-use-property-inheritance nil)
+
+;; Tag inheritance
+(setq org-use-tag-inheritance nil)
+
+;; Use global IDs
+(require 'org-id)
+(setq org-id-link-to-org-use-id t)
+
+;; Update ID file .org-id-locations on startup
+(org-id-update-id-locations)
+
+;; Add ID properties to all headlines in the current file which do not already have one
+(defun my/org-add-ids-to-headlines-in-file ()
+  (interactive)
+  (org-map-entries 'org-id-get-create))
+
+;; Uncomment to enable writing IDs to all org entries before saving
+;; (add-hook 'org-mode-hook
+;;  (lambda ()
+;;    (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
+
+
+;; Org-refile
+
+;; Targets include this file and any file contributing to the agenda - up to 9 levels deep
+(setq org-refile-targets '((org-agenda-files :maxlevel . 9)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-allow-creating-parent-nodes t)
+
+;; Add previous heading to refile note automatically
+(defun my/org-refile-with-note-parent-link ()
+  "Wrapper for `org-refile' which automatically adds the previous
+parent org-link to the note in the form \"From [[id:hash][Heading]].\"
+
+Requires `org-log-refile' to be set to 'note."
+  (interactive)
+  ;; (if (equal current-prefix-arg '(4))
+  ;;    (org-refile)
+    (save-excursion
+      (let ((start-level (funcall outline-level)))
+        (if (<= start-level 1)
+            ;; Remember that org-make-link-string exists
+            (push (list (buffer-file-name)
+                        (file-name-nondirectory (buffer-file-name)))
+                  org-stored-links)
+          (progn
+            (outline-up-heading 1 t)
+            (call-interactively 'org-store-link)))))
+    (org-refile)
+    (with-simulated-input "RET RET"
+      (org-insert-link))
+    (insert ".")
+    (beginning-of-line nil)
+    (insert "From ")
+    (org-ctrl-c-ctrl-c))
+
+(define-key org-mode-map "\C-c\C-w" 'my/org-refile-with-note-parent-link)
+
+;; ;; Has not been implemented for org-agenda-mode-map
+;; (define-key org-agenda-mode-map "\C-c\C-w" 'my/org-refile-with-note-parent-link)
+
+(defun my/org-copy-outline-path ()
+  "Function to copy outline path of current org-item (agenda or file) to clipboard."
+  (interactive)
+  (let ((m (org-get-at-bol 'org-marker)))
+    (kill-new (replace-regexp-in-string "//" "/" (org-with-point-at m (org-display-outline-path t t "/" nil))))))
+
+(define-key org-mode-map "\C-co" 'my/org-copy-outline-path)
+
+;; Collapse plain lists
+(setq org-cycle-include-plain-lists 'integrate)
+
+;; Change and freeze time
+(defun my/freeze-time (&optional freeze-time-time)
+  "Freeze `current-time' at the current active or inactive timestamp. If point
+is not on a timestamp, the function prompts for one. If time is not specified,
+either by the timstamp under point or prompt, the time defaults to the
+current HH:MM of today at the selected date."
+  (interactive)
+  (let ((time
+         (cond
+          ((if (boundp 'freeze-time-time)
+               freeze-time-time))
+          ((if (org-at-timestamp-p 'lax) t)
+           (match-string 0))
+          (t
+           (org-read-date t nil nil "Input freeze time:")))))
+    (eval (macroexpand
+           `(defadvice current-time (around freeze activate)
+              (setq ad-return-value ',
+                    (append (org-read-date nil t time) '(0 0))))))
+    (set-face-background 'fringe "firebrick2")))
+
+(global-set-key "\C-cf" 'my/freeze-time)
+
+;; Release changed / frozen time
+(defun my/release-time ()
+  "Release the time frozen by `freeze-time'."
+  (interactive)
+  (if (advice--p (advice--symbol-function 'current-time))
+      (progn
+        (ad-remove-advice 'current-time 'around 'freeze)
+        (ad-activate 'current-time)
+        (set-face-background 'fringe nil))
+    (message "Time is not currently frozen")))
+
+(global-set-key "\C-cr" 'my/release-time)
+
+;; Change time-stamp increments to 1 minute
+(setq org-time-stamp-rounding-minutes '(0 1))
+
+;; Re-define org-switch-to-buffer-other-window to NOT use org-no-popups.
+;; Primarily for compatibility with shackle.
+(defun org-switch-to-buffer-other-window (args)
+  "Switch to buffer in a second window on the current frame.
+In particular, do not allow pop-up frames.
+Returns the newly created buffer.
+
+Redefined to allow pop-up windows."
+  ;;  (org-no-popups
+  ;;     (apply 'switch-to-buffer-other-window args)))
+  (switch-to-buffer-other-window args))
+
+;; Org-toggle-latex-fragment options
+
+;; Make text bigger
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+
+;; Semi-center equations by moving number to the right using [leqno]
+(setq org-format-latex-header "\\documentclass[reqno]{article}
+\\usepackage[usenames]{color}
+[PACKAGES]
+[DEFAULT-PACKAGES]
+\\pagestyle{empty}             % do not remove
+% The settings below are copied from fullpage.sty
+\\setlength{\\textwidth}{\\paperwidth}
+\\addtolength{\\textwidth}{-3cm}
+\\setlength{\\oddsidemargin}{1.5cm}
+\\addtolength{\\oddsidemargin}{-2.54cm}
+\\setlength{\\evensidemargin}{\\oddsidemargin}
+\\setlength{\\textheight}{\\paperheight}
+\\addtolength{\\textheight}{-\\headheight}
+\\addtolength{\\textheight}{-\\headsep}
+\\addtolength{\\textheight}{-\\footskip}
+\\addtolength{\\textheight}{-3cm}
+\\setlength{\\topmargin}{1.5cm}
+\\addtolength{\\topmargin}{-2.54cm}")
+
+;; Go to the next indented paragraph when currently in a bulleted list.
+(defun my/org-next-paragraph ()
+  (interactive)
+  (move-end-of-line nil)
+  (org-return)
+  (org-return)
+  (org-return)
+  (indent-for-tab-command nil)
+  (org-cycle nil)
+  (org-self-insert-command 1)
+  (beginning-of-visual-line 1)
+  (previous-line 1 1)
+  (delete-forward-char 1 nil)
+  (end-of-visual-line 1)
+  (org-delete-backward-char 1))
+
+(define-key org-mode-map "\C-ci" 'my/org-next-paragraph)
+
+;; Add note on property change
+(add-to-list 'org-log-note-headings
+             '(property . "Property %-12s from %-12S %t"))
+
+(defcustom my/org-property-ignored-properties
+  '("ID" "LAST_REPEAT" "Via" "ARCHIVE_TIME" "ARCHIVE_FILE" "ARCHIVE_OLPATH" "ARCHIVE_CATEGORY" "ARCHIVE_TODO" "Effort" "EFFORT" "NOTER_DOCUMENT" "NOTER_PAGE")
+  "List of properties to exclude from my/org-property-change-note."
+  :group 'org
+  :type 'list)
+
+(defun my/org-property-store-previous-val (property)
+  "Store previous property value prior to modifying it with `org-property-action'."
+  (setq my/org-property-previous-val
+        (org-entry-get nil property)))
+
+(advice-add #'org-read-property-value :before #'my/org-property-store-previous-val)
+
+(defun my/org-property-change-note (prop val)
+;;   "Add property changes to the logbook. Requires modifying `org-add-log-note'
+;; to include:
+
+;; ((eq org-log-note-purpose 'property)
+;;  (format \"\\\"%s\\\" property change from \\\"%s\\\"\"
+;;          (or org-log-note-state \"\")
+;;          (or org-log-note-previous-state \"\")))
+
+;; or replacing the entire cond block with:
+
+;; (cond
+;;  ((member org-log-note-purpose (mapcar 'car org-log-note-headings))
+;;   \"changing property\")
+;;  (t (error \"This should not happen\")))
+
+;; and byte compiling org.el."
+  (message (concat "Changing " prop " from " val))
+  (if (not 'my/org-property-previous-val)
+      (if (not (member prop my/org-property-ignored-properties))
+      (org-add-log-setup 'property prop my/org-property-previous-val))))
+
+;; In the interim, I've just re-defined the function
+(defun org-add-log-note (&optional _purpose)
+  "Pop up a window for taking a note, and add this note later."
+  (remove-hook 'post-command-hook 'org-add-log-note)
+  (setq org-log-note-window-configuration (current-window-configuration))
+  (delete-other-windows)
+  (move-marker org-log-note-return-to (point))
+  (pop-to-buffer-same-window (marker-buffer org-log-note-marker))
+  (goto-char org-log-note-marker)
+  (org-switch-to-buffer-other-window "*Org Note*")
+  (erase-buffer)
+  (if (memq org-log-note-how '(time state))
+      (org-store-log-note)
+    (let ((org-inhibit-startup t)) (org-mode))
+    (insert (format "# Insert note for %s.
+# Finish with C-c C-c, or cancel with C-c C-k.\n\n"
+                    (cond
+                     ((eq org-log-note-purpose 'clock-out) "stopped clock")
+                     ((eq org-log-note-purpose 'done)  "closed todo item")
+                     ((eq org-log-note-purpose 'state)
+                      (format "state change from \"%s\" to \"%s\""
+                              (or org-log-note-previous-state "")
+                              (or org-log-note-state "")))
+                     ((eq org-log-note-purpose 'reschedule)
+                      "rescheduling")
+                     ((eq org-log-note-purpose 'delschedule)
+                      "no longer scheduled")
+                     ((eq org-log-note-purpose 'redeadline)
+                      "changing deadline")
+                     ((eq org-log-note-purpose 'deldeadline)
+                      "removing deadline")
+                     ((eq org-log-note-purpose 'refile)
+                      "refiling")
+                     ((eq org-log-note-purpose 'note)
+                      "this entry")
+                     ((eq org-log-note-purpose 'property)
+                      (format "\"%s\" property change from \"%s\""
+                              (or org-log-note-state "")
+                              (or org-log-note-previous-state "")))
+                     (t (error "This should not happen")))))
+    (when org-log-note-extra (insert org-log-note-extra))
+    (setq-local org-finish-function 'org-store-log-note)
+    (run-hooks 'org-log-buffer-setup-hook)))
+
+(add-hook 'org-property-changed-functions 'my/org-property-change-note)
+
+(defun my/org-link-copy (&optional arg)
+  "Copy the entire org-link (link and description) at point and put it on the killring.
+With prefix C-u, just copy the org-link link."
+  (interactive "P")
+  (when (org-in-regexp org-bracket-link-regexp 1)
+    (if (null arg)
+        (let ((link (match-string-no-properties 0)))
+          (kill-new link)
+          (message "Copied link: %s" link))
+      (let ((link (org-link-unescape (match-string-no-properties 1))))
+        (kill-new link)
+        (message "Copied link: %s" link)))))
+
+(define-key org-mode-map "\C-ch" 'my/org-link-copy)
+
+;; Add ability to move forward by timestamp
+(setq my/org-timestamp-search-failed nil)
+
+;; Note: Need to advise org-context since exiting the logbook doesn't collapse it.
+(defun my/org-next-timestamp (&optional search-backward)
+  "Move forward to the next timestamp.
+If the timestamp is in hidden text, expose it."
+  (interactive "P")
+  (when (and my/org-timestamp-search-failed (eq this-command last-command))
+    (goto-char (point-min))
+    (message "Timestamp search wrapped back to beginning of buffer"))
+  (setq my/org-timestamp-search-failed nil)
+  (let* ((pos (point))
+         (ct (org-context))
+         (a (assq :timestamp ct))
+         (srch-fun (if search-backward 're-search-backward 're-search-forward)))
+    (cond (a (goto-char (nth (if search-backward 1 2) a)))
+          ((looking-at org-element--timestamp-regexp)
+           ;; Don't stay stuck at timestamp without an org-link face
+           (forward-char (if search-backward -1 1))))
+    (if (funcall srch-fun org-element--timestamp-regexp nil t)
+        (progn
+          (goto-char (match-beginning 0))
+          (when (org-invisible-p) (org-show-context)))
+      (goto-char pos)
+      (setq my/org-timestamp-search-failed t)
+      (message "No further timestamps found"))))
+
+(define-key org-mode-map "\C-ct" 'my/org-next-timestamp)
+
+(defun my/org-timestamp-convert-dirty-regexp-hack ()
+  "Convert all org-mode timestamps in buffer from the
+form <2019-01-04 08:00-10:00> to <2019-01-04 08:00>--<2019-01-04 10:00>"
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward "<\\([0-9- A-z]\\{15\\}\\)\\([0-9]\\{2\\}:[0-9]\\{2\\}\\)-\\([0-9]\\{2\\}:[0-9]\\{2\\}\\)>" nil t)
+    (replace-match "<\\1\\2>--<\\1\\3>" t nil)))
+
+;; Have dired store org-link when a file or files(s) are renamed
+(defun my/dired-rename-file (file newname ok-if-already-exists)
+  "Store org-link to the renamed file."
+  (push (list newname (file-name-nondirectory newname)) org-stored-links))
+
+(advice-add #'dired-rename-file :after #'my/dired-rename-file)
+
+;; Org-mode Priorities
+;; Default highest is 65 (A)
+;; Default default is 66 (B)
+;; Default lowest is 65 (C)
+;; Default should be "C" - two levels of priority should be enough
+(setq org-default-priority 67)
+
+;; Insert Capture Template At End of Current
+(defun my/org-capture-after-current ()
+  (interactive)
+  (org-insert-heading-after-current)
+  (kill-line -1)
+  (org-return)
+  (delete-forward-char 1)
+  ;; This doesn't work for some reason
+  ;; (let ((current-prefix-arg (digit-argument 0)))
+  ;;   (call-interactively #'org-capture)))
+  (execute-kbd-macro (read-kbd-macro "C-u 0 C-c c")))
+
+(defun my/org-backup-files ()
+  "Create backup of entire org-mode directory in the archive directory. I really need to start
+using git for this instead."
+  (interactive)
+  (let* ((date-time (format-time-string "%Y-%m-%d %H.%M.%S"))
+         (org-backup-directory
+          (concat (cdr (assoc "val" org-link-abbrev-alist)) "org/Archive/" date-time)))
+    (copy-directory org-directory org-backup-directory)
+    (message "%s" (concat org-directory " copied to " org-backup-directory "!"))))
+
+#+end_src
+
+
+
+
+***** Electric Pair Tweak
+
+see https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode-specific-pairs-for-electric-pair-mode
+
+#+begin_src emacs-lisp :tangle ./el/org-general.el :mkdirp yes :a
+;; (defvar org-electric-pairs '((?/ . ?/) (?= . ?=)) "Electric pairs for org-mode.")
+(defvar org-electric-pairs '((?/ . ?/) (?= . ?=) (?~ . ?~)) "Electric pairs for org-mode.")
+
+  (defun org-add-electric-pairs ()
+    (setq-local electric-pair-pairs (append electric-pair-pairs org-electric-pairs))
+    (setq-local electric-pair-text-pairs electric-pair-pairs))
+
+  (add-hook 'org-mode-hook 'org-add-electric-pairs)
+#+end_src
+
+
+#+begin_src emacs-lisp :tangle no :noweb yes
+  (org-babel-tangle)
+  (load-file "~/.emacs.d/init.el")
+#+end_src
+
+#+RESULTS:
+: t
+
+
+
+** Collected Other Mode Configurations
 
 
 #+begin_src emacs-lisp
@@ -1615,8 +2079,6 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
   ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
   (eval-after-load 'lisp-mode '(require 'setup-lisp))
-
-  (require 'setup-org) ;; organizer todo notes etc
 
   (require 'setup-plantuml) ;; organizer todo notes etc
 
@@ -1715,11 +2177,6 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
   (put 'downcase-region 'disabled nil)
   (put 'narrow-to-region 'disabled nil)
 
-  ;; electric-pair-mode
-  ;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
-  ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
-  (electric-pair-mode 1)
-
   (put 'scroll-left 'disabled nil)
 
 
@@ -1783,10 +2240,10 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 
 #+end_src
 
-*** Shell prompt
+**** Shell prompt
 
 
-**** Recommendations
+***** Recommendations
 :PROPERTIES:
 :ID:       ad5cc4be-3a56-4208-90e3-173b17837c02
 :END:
@@ -1809,7 +2266,7 @@ https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group
 
 
 
-*** safe local variables
+**** safe local variables
 :PROPERTIES:
 :ID:       7a719b5d-aa8c-4110-9859-5aea715e044b
 :END:
@@ -1835,7 +2292,7 @@ https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group
 #+end_src
 
 
-*** fix missing alt-key in WSL
+**** fix missing alt-key in WSL
 :PROPERTIES:
 :ID:       52d2df23-c894-4ce0-b82b-1023c29e4483
 :END:
@@ -1848,12 +2305,12 @@ WSL for Windows specific code
 #+end_src
 
 
-* Misc
+** Misc
 :PROPERTIES:
 :ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
 :END:
 
-** Local Defuns
+*** Local Defuns
 :PROPERTIES:
 :ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
 :END:
@@ -1869,7 +2326,7 @@ WSL for Windows specific code
       (message "Current buffer does not have an associated file.")))
 #+end_src
 
-** Imenu auto
+*** Imenu auto
 :PROPERTIES:
 :ID:       820994eb-2700-428a-a80b-d5e0ede6299d
 :END:
@@ -1884,7 +2341,7 @@ WSL for Windows specific code
 #+end_src
 
 
-** Visible Bell off
+*** Visible Bell off
 :PROPERTIES:
 :ID:       4b5650ad-478a-4c5e-8120-c56375abf02a
 :END:
@@ -1902,7 +2359,7 @@ WSL for Windows specific code
   ;;     )
 #+end_src
 
-** Ansible Vault Mode
+*** Ansible Vault Mode
 
 
 #+begin_src emacs-lisp
@@ -1922,7 +2379,7 @@ WSL for Windows specific code
 #+RESULTS:
 
 
-** Auth Source
+*** Auth Source
 
 - https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
 - https://www.youtube.com/watch?v=nZ_T7Q49B8Y
@@ -1973,7 +2430,7 @@ https://www.arts-outdoors.de
 (find-file "~/.authinfo.gpg")
 (mapc 'message auth-sources)
 
-*** Generate Key
+**** Generate Key
 
 #+begin_example shell
 gpg --full-generate-key
@@ -2033,7 +2490,7 @@ pubring.kbx~
 #+RESULTS:
 22957
 
-*** Migrate key to other maschine
+**** Migrate key to other maschine
 
 gpg --list-secret-keys christian.c.geng@gmail.com
 
@@ -2042,7 +2499,7 @@ gpg --import private.key
 
 
 
-*** Lookup key
+**** Lookup key
 
 
 (defun efs/lookup-password (&rest keys)
@@ -2052,7 +2509,7 @@ gpg --import private.key
 nil)))
 
 
-*** Migrate key to other machine
+**** Migrate key to other machine
 
 Identify your private key:
 
@@ -2082,7 +2539,7 @@ COPY
 gpg2 --import private.key
 
 
-** Mac Specific
+*** Mac Specific
 :PROPERTIES:
 :ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
 :END:
@@ -2095,7 +2552,7 @@ gpg2 --import private.key
 
 #+end_src
 
-** calibredb
+*** calibredb
 :PROPERTIES:
 :ID:       632883c3-8739-4a79-bab9-87bc587dc8af
 :END:
@@ -2117,19 +2574,19 @@ gpg2 --import private.key
 
 
 
-** Ascidoctor
+*** Ascidoctor
 
 Link collection here:
 
 https://www.emacswiki.org/emacs/AsciiDoc
 
-*** Adoc Snippets
+**** Adoc Snippets
 
 git@github.com:nicorikken/adoc-mode-yasnippet.git
 
 see in snippets
 
-*** open adoc files
+**** open adoc files
 :PROPERTIES:
 :ID:       8ebfb281-87fd-49f7-b513-19a4c3b0b492
 :END:
@@ -2143,7 +2600,7 @@ see in snippets
 
 #+RESULTS:
 
-*** adoc mode preview
+**** adoc mode preview
 :PROPERTIES:
 :ID:       8f6ef9ec-ffa0-4e07-90c0-37f08216106a
 :END:
@@ -2176,7 +2633,7 @@ see in snippets
 #+RESULTS:
 : rcd-asciidoctor-preview
 
-** Org ascidoc
+*** Org ascidoc
 :PROPERTIES:
 :ID:       59738c74-4023-4a75-8180-a424222ba95e
 :END:
@@ -2192,7 +2649,7 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 #+RESULTS:
 : ox-asciidoc
 
-** Always load .local_configs as shell script
+*** Always load .local_configs as shell script
 :PROPERTIES:
 :ID:       7bdb08dc-a901-4bab-912b-50271f3f6f76
 :END:
@@ -2200,7 +2657,7 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
   (add-to-list 'auto-mode-alist '(".local_configs" . shell-script-mode))
 #+end_src
 
-** Emacs Server
+*** Emacs Server
 :PROPERTIES:
 :ID:       91011ca1-3a58-4d79-ba3a-21b27eb355b7
 :END:
@@ -2212,7 +2669,7 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 #+end_src
 
 
-** dired
+*** dired
 
 
 #+begin_src emacs-lisp
@@ -2220,23 +2677,24 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 #+end_src
 
 
-* Get Temperature
+** Get Temperature
 
 Shell Script to get get temperatures
 
 # temperatures=$(cat /sys/class/thermal/thermal_zone*/temp  | tr '\n' '/')
 
 
-* Web Server
+** Web Server
 
 #+begin_src emacs-lisp
   (use-package simple-httpd
     :ensure t)
 #+end_src
 
-* Applications Config Example
+* Misc
+** Applications Config Example
 
-** Some App
+*** Some App
 :PROPERTIES:
 :ID:       216fa964-a617-4a95-b3f4-3bd82856d8b1
 :END:

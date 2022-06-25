@@ -1,15 +1,15 @@
 ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
-;;
-  ;;; Code:
+  ;;
+    ;;; Code:
 
-(message "Lsp Python begins here")
+  (message "Setting up ESS.")
 
-        ;;; emacs speaks statistics
-(use-package ess
-  :ensure t
-  :init
-  (require 'ess-site)
-  )
+;;; emacs speaks statistics
+  (use-package ess
+    :ensure t
+    :init
+    (require 'ess-site)
+    )
 
-(provide 'setup-ess)
-;;; setup-python-lsp-python ends here
+  (provide 'setup-ess)
+  ;;; setup-ess ends here

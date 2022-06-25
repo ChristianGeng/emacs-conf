@@ -356,7 +356,6 @@
 ;; now: Alays write into setup-python and require so
 (require 'setup-python)
 
-(require 'setup-ess)
 (require 'setup-typescript)
 (require 'setup-angular)
 (require 'setup-c-lsp-clangd)
@@ -378,12 +377,17 @@
 (require 'setup-web-mode)
 (require 'setup-vue-mode)
 
+(require 'setup-ess)
+
+;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
+(electric-pair-mode 1)
+
+(require 'setup-org) ;; organizer todo notes etc
+
 ;; (require 'setup-speedbar)
 
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
 (eval-after-load 'lisp-mode '(require 'setup-lisp))
-
-(require 'setup-org) ;; organizer todo notes etc
 
 (require 'setup-plantuml) ;; organizer todo notes etc
 
@@ -481,11 +485,6 @@
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
-
-;; electric-pair-mode
-;; geht nur in emacs 24 turn on automatic bracket insertion by pairs. New in emacs 24
-;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
-(electric-pair-mode 1)
 
 (put 'scroll-left 'disabled nil)
 
