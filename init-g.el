@@ -356,17 +356,6 @@
 ;; now: Alays write into setup-python and require so
 (require 'setup-python)
 
-(add-hook 'sql-mode-hook 'lsp)
-;; (setq lsp-sqls-workspace-config-path nil)
-(setq lsp-sqls-connections
-    '(
-      ((driver . "sqlite3") (dataSourceName . "/home/audeering.local/cgeng/work/myfiles/bikerides/data/processed/db.sqlite3"))
-      ;; ((driver . "mysql") (dataSourceName . "yyoncho:local@tcp(localhost:3306)/foo"))
-      ;; ((driver . "mssql") (dataSourceName . "Server=localhost;Database=sammy;User Id=yyoncho;Password=hunter2;"))
-      ;; ((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5432 user=yyoncho password=local dbname=sammy sslmode=disable"))
-      )
-    )
-
 (require 'setup-typescript)
 (require 'setup-angular)
 (require 'setup-c-lsp-clangd)
@@ -392,6 +381,9 @@
 
 ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
 (electric-pair-mode 1)
+
+(setq sqlformat-command 'pgformatter)
+(setq sqlformat-args '("-s2" "-g"))
 
 (require 'setup-org) ;; organizer todo notes etc
 

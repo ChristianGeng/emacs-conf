@@ -1541,7 +1541,7 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
 
 https://github.com/lighttiger2505/sqls
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (add-hook 'sql-mode-hook 'lsp)
   (setq lsp-sqls-workspace-config-path nil)
   (setq lsp-sqls-connections
@@ -1637,6 +1637,13 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 ** Single Other Mode Configurations
 *** SQL code formatting
 
+#+begin_src emacs-lisp
+(setq sqlformat-command 'pgformatter)
+(setq sqlformat-args '("-s2" "-g"))
+#+end_src
+
+#+RESULTS:
+| -s2 | -g |
 
 *** Json Files
 
