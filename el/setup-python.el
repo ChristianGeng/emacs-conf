@@ -83,6 +83,8 @@
         ac-source-dictionary
         ac-source-yasnippet))
 
+(defconst python-linewidth 89)
+
 (require 'pycoverage)
 
 
@@ -93,7 +95,11 @@
       (linum-mode)
       (pycoverage-mode))))
 
-(defconst python-linewidth 89)
+;; (add-hook 'flycheck-mode-hook #'flycheck-virtualenv-setup)
+(defun flycheck-python-setup ()
+  (flycheck-mode)
+  )
+;; (add-hook 'python-mode-hook #'flycheck-python-setup)
 
 (use-package python-mode
   :ensure t
@@ -104,6 +110,7 @@
                          (sphinx-doc-mode t)
                          (highlight-indent-guides-mode -1)
                          (auto-fill-mode)
+                         (flycheck-python-setup)
                          (set-fill-column python-linewidth)
                          ;;(highlight-indent-guides-mode)
                          ;; (importmagic-mode)
