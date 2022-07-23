@@ -1,6 +1,4 @@
 PROPERTIES:
-:ID:       19b31c0e-fc4c-406c-be79-3742680f8601
-:END:
 #+title: Emacs From Scratch Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init-g.el :mkdirp yes
 
@@ -740,7 +738,7 @@ source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text
 
 ****** Closing Buffer
 
-ZQ
+ZQ - closes whole editor
 
 ****** More stuff in normal mode:
 
@@ -893,7 +891,6 @@ M-x jupyter-connect-server-repl
 :PROPERTIES:
 :ID:       e06bb550-ccf7-4c8a-ba4d-c3d8343b4204
 :END:
-
 **** pyenv
 
 https://github.com/pythonic-emacs/pyenv-mode
@@ -949,7 +946,7 @@ Usefuly Hooks Article: https://enzuru.medium.com/helpful-emacs-python-mode-hooks
 
 ***** Linting
 
-****** Linters
+****** Linters overview
 ;; pylint: .pylintrc
 
 - pyright
@@ -962,8 +959,9 @@ Usefuly Hooks Article: https://enzuru.medium.com/helpful-emacs-python-mode-hooks
 pip install  --upgrade pylint
 pip install  --upgrade flake8
 
+****** pylint
 
-
+https://liuluheng.github.io/wiki/public_html/Python/flycheck-pylint-emacs-with-python.html
 
 ***** Pyright Code Checking Information
 ****** Django Problem
@@ -1343,6 +1341,7 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 - --line-length 119
 - 119 characters
 
+
 ***** Aggregate Function to clean up
 
 
@@ -1379,6 +1378,12 @@ https://github.com/tkf/auto-complete-rst
 
 
 
+***** defconst line width
+
+#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
+  (defconst python-linewidth 89)
+#+end_src
+
 ***** coverage
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
@@ -1394,28 +1399,38 @@ https://github.com/tkf/auto-complete-rst
 #+end_src
 
 
-***** defconst line width
+***** Flyckeck Attempt to use Pylint
 
-#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
-  (defconst python-linewidth 89)
+https://www.flycheck.org/en/28/_downloads/flycheck.html#Configuring-checkers
+https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-python-3
+
+
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+
+
+  ;; (add-hook 'flycheck-mode-hook #'flycheck-virtualenv-setup)
+  (defun flycheck-python-setup ()
+    (flycheck-mode)
+    )
+  ;; (add-hook 'python-mode-hook #'flycheck-python-setup)
 #+end_src
 
-***** Pyright-specific
+
+#+begin_src emacs-lisp :tangle no :noweb yes
+  (org-babel-tangle)
+  (load-file "~/.emacs.d/init.el")
+#+end_src
+
+#+RESULTS:
+: t
+
+
+***** Pyright-specific code
 
 
 Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED in orde to get this working!
 
-:PROPERTIES:
-:ID:       028eb1d6-f3c4-40e1-8943-34a15fd269a9
-:END:
-
-#+begin_src emacs-lisp :tangle no :mkdirp yes
-
-  (use-package python-mode
-    :ensure t
-    )
-
-#+end_src
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
 
@@ -1428,6 +1443,7 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
                            (sphinx-doc-mode t)
                            (highlight-indent-guides-mode -1)
                            (auto-fill-mode)
+                           (flycheck-python-setup)
                            (set-fill-column python-linewidth)
                            ;;(highlight-indent-guides-mode)
                            ;; (importmagic-mode)
@@ -1511,7 +1527,42 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
   (require 'setup-python)
 #+end_src
 
+*** LSP SQL
+
+
+#+begin_src emacs-lisp :tangle no :noweb yes
+  (org-babel-tangle)
+  (load-file "~/.emacs.d/init.el")
+#+end_src
+
+#+RESULTS:
+: t
+
+
+https://github.com/lighttiger2505/sqls
+
+#+begin_src emacs-lisp
+  (add-hook 'sql-mode-hook 'lsp)
+  (setq lsp-sqls-workspace-config-path nil)
+  (setq lsp-sqls-connections
+      '(
+        ((driver . "sqlite3") (dataSourceName . "/home/audeering.local/cgeng/work/myfiles/bikerides/data/processed/db.sqlite3"))
+        ;; ((driver . "mysql") (dataSourceName . "yyoncho:local@tcp(localhost:3306)/foo"))
+        ;; ((driver . "mssql") (dataSourceName . "Server=localhost;Database=sammy;User Id=yyoncho;Password=hunter2;"))
+        ;; ((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5432 user=yyoncho password=local dbname=sammy sslmode=disable"))
+        )
+      )
+#+end_src
+
+#+RESULTS:
+| (driver . sqlite3)    | (dataSourceName . /home/audeering.local/cgeng/work/myfiles/bikerides/data/processed/db.sqlite3)      |
+| (driver . mysql)      | (dataSourceName . yyoncho:local@tcp(localhost:3306)/foo)                                             |
+| (driver . mssql)      | (dataSourceName . Server=localhost;Database=sammy;User Id=yyoncho;Password=hunter2;)                 |
+| (driver . postgresql) | (dataSourceName . host=127.0.0.1 port=5432 user=yyoncho password=local dbname=sammy sslmode=disable) |
+
+
 *** Other LSP Languages
+
 :PROPERTIES:
 :ID:       3fff27c7-73a4-4dfa-833a-86903c2d8d0b
 :END:
@@ -1584,6 +1635,9 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 #+end_src
 
 ** Single Other Mode Configurations
+*** SQL code formatting
+
+
 *** Json Files
 
 #+begin_src emacs-lisp :tangle ./el/setup-json-mode.el :mkdirp yes
