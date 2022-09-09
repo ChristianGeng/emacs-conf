@@ -1635,15 +1635,22 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 #+end_src
 
 ** Single Other Mode Configurations
+
 *** SQL code formatting
 
+
+see https://github.com/purcell/sqlformat
+
 #+begin_src emacs-lisp
-(setq sqlformat-command 'pgformatter)
-(setq sqlformat-args '("-s2" "-g"))
+
+  (setq sqlformat-command 'sqlformat)
+  (setq sqlformat-args nil)
+
+  ;; (setq sqlformat-command 'pgformatter)
+  ;; (setq sqlformat-args '("-s2" "-g"))
 #+end_src
 
 #+RESULTS:
-| -s2 | -g |
 
 *** Json Files
 
