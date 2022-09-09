@@ -463,6 +463,19 @@ Directory defaults to the value of `my-archive-dir'."
   (insert (file-name-nondirectory(buffer-file-name (window-buffer (minibuffer-selected-window))))))
 
 
+;; see https://emacs.stackexchange.com/questions/60661/how-to-duplicate-a-file-in-dired
+(defun cg/dired-duplicate-this-file ()
+  "Duplicate file on this line."
+  (interactive)
+  (let* ((this  (dired-get-filename t))
+         (ctr   1)
+         (new   (format "%s[%d]" this ctr)))
+    (while (file-exists-p new)
+      (setq ctr  (1+ ctr)
+            new  (format "%s[%d]" this ctr)))
+     (dired-copy-file this new nil))
+  (revert-buffer))
+
 (defun cg/remove-newlines-in-region ()
   "Remove all newlines in the region."
   (interactive)
