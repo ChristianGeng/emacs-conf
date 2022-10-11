@@ -185,8 +185,8 @@ However, if your init file changes the values of
   ;; Show keystrokes in progress
   (setq echo-keystrokes 0.1)
 
-  ;; Move files to trash when deleting
-  (setq delete-by-moving-to-trash t)
+  ;; Set to t in order to move files to trash when deleting
+  (setq delete-by-moving-to-trash nil)
 
   ;; Real emacs knights don't use shift to mark things
   (setq shift-select-mode nil)
