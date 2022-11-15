@@ -101,64 +101,51 @@
   )
 ;; (add-hook 'python-mode-hook #'flycheck-python-setup)
 
-(use-package python-mode
+(use-package lsp-mode
   :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (require 'highlight-indent-guides)
-                         (require 'sphinx-doc)
-                         (sphinx-doc-mode t)
-                         (highlight-indent-guides-mode -1)
-                         (auto-fill-mode)
-                         (flycheck-python-setup)
-                         (set-fill-column python-linewidth)
-                         ;;(highlight-indent-guides-mode)
-                         ;; (importmagic-mode)
-                         (lsp-deferred)
-                         ;; (yapf-mode)
-                         (lsp-treemacs)
-                         )
-                     )
-  :custom
-  ;; NOTE: Set these if Python 3 is called "python3" on your system!
-  ;; (python-shell-interpreter "python3")
-  ;; (dap-python-executable "python3")
-  ;; should be .dir-local:
-  ;; (lsp-pyright-venv-path "~/.venvs/py37")
-  (dap-python-debugger 'debugpy)
   :config
-  (require 'dap-python)
-  ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-  )
 
+  ;; make sure we have lsp-imenu everywhere we have LSP
+  (require 'lsp-imenu)
+  (add-hook 'lsp-after-open-hook 'lsp-enable-imenu)
+  ;; get lsp-python-enable defined
+  ;; NB: use either projectile-project-root or ffip-get-project-root-directory
+  ;;     or any other function that can be used to find the root directory of a project
+  (lsp-define-stdio-client lsp-python "python"
+                           #'projectile-project-root
+                           '("pyls"))
 
-(setq lsp-enable-file-watchers nil)
-(setq lsp-file-watch-threshold 2000)
+  ;; make sure this is activated when python-mode is activated
+  ;; lsp-python-enable is created by macro above
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (lsp-python-enable)))
 
-(setq lsp-pyright-auto-import-completions t)
-;;  Determines whether pyright automatically adds common search paths.
-;; i.e: Paths like "src" if there are no execution environments defined in the
-;; config file.
-(setq lsp-pyright-auto-search-paths t)
-(setq lsp-pyright-log-level "trace")
+  ;; lsp extras
+  (use-package lsp-ui
+    :ensure t
+    :config
+    (setq lsp-ui-sideline-ignore-duplicate t)
+    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
-(require 'dap-python)
+  (use-package company-lsp
+    :config
+    (push 'company-lsp company-backends))
 
-;; (lsp-client-settings)
+  ;; NB: only required if you prefer flake8 instead of the default
+  ;; send pyls config via lsp-after-initialize-hook -- harmless for
+  ;; other servers due to pyls key, but would prefer only sending this
+  ;; when pyls gets initialised (:initialize function in
+  ;; lsp-define-stdio-client is invoked too early (before server
+  ;; start)) -- cpbotha
+  (defun lsp-set-cfg ()
+    (let ((lsp-cfg `(:pyls (:configurationSources ("flake8")))))
+      ;; TODO: check lsp--cur-workspace here to decide per server / project
+      (lsp--set-configuration lsp-cfg)))
 
-(use-package company
-  :after lsp-mode
-  :hook (lsp-mode . company-mode)
-  ;; :bind (:map company-active-map
-  ;;        ("<tab>" . company-complete-selection))
-  ;;       (:map lsp-mode-map
-  ;;        ("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
+  (add-hook 'lsp-after-initialize-hook 'lsp-set-cfg))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+  ;; (require 'lsp-pylsp)
 
 (use-package pyvenv
   :config
