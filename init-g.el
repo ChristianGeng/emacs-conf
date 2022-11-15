@@ -106,8 +106,8 @@
 ;; Show keystrokes in progress
 (setq echo-keystrokes 0.1)
 
-;; Move files to trash when deleting
-(setq delete-by-moving-to-trash t)
+;; Set to t in order to move files to trash when deleting
+(setq delete-by-moving-to-trash nil)
 
 ;; Real emacs knights don't use shift to mark things
 (setq shift-select-mode nil)
@@ -383,6 +383,8 @@
 (electric-pair-mode 1)
 
 (setq sqlformat-command 'sqlformat)
+(setq sqlformat-args nil)
+
 ;; (setq sqlformat-command 'pgformatter)
 ;; (setq sqlformat-args '("-s2" "-g"))
 
@@ -659,6 +661,11 @@
 
 (use-package simple-httpd
   :ensure t)
+
+(add-hook 'write-file-hooks 'delete-trailing-whitespace nil t)
+  (defun nuke_trailing ()
+  (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+(add-hook 'prog-mode-hook #'nuke_trailing)
 
 ;;  value=155
 (setq value 155)

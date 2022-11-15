@@ -2759,6 +2759,23 @@ Shell Script to get get temperatures
     :ensure t)
 #+end_src
 
+** Supress always deleting trailing whitespace
+
+None of these work yet.
+
+
+#+begin_src emacs-lisp
+  (add-hook 'write-file-hooks 'delete-trailing-whitespace nil t)
+  (defun nuke_trailing ()
+  (add-hook 'before-save-hook #'delete-trailing-whitespace nil t))
+(add-hook 'prog-mode-hook #'nuke_trailing)
+#+end_src
+
+#+RESULTS:
+| nuke_trailing | nuke_traling | rainbow-delimiters-mode | editorconfig-major-mode-hook |
+
+https://stackoverflow.com/questions/19174302/emacs-only-delete-trailing-whitespace-while-saving-in-programming-mode
+
 * Misc
 ** Applications Config Example
 
