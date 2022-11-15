@@ -25,7 +25,7 @@
   :ensure t
   )
 
-(defun python-yapf-format-buffer ()
+(defun cg/python-yapf-format-buffer ()
   (interactive)
   (when (and (executable-find "yapf") buffer-file-name)
     (call-process "yapf" nil nil nil "-i" buffer-file-name)))
@@ -92,7 +92,7 @@
   (interactive)
   (when (derived-mode-p 'python-mode)
     (progn
-      (linum-mode)
+      ;; (linum-mode)
       (pycoverage-mode))))
 
 ;; (add-hook 'flycheck-mode-hook #'flycheck-virtualenv-setup)

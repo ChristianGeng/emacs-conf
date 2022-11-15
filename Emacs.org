@@ -33,7 +33,7 @@ However, if your init file changes the values of
 
 
 
-* Init File
+* The whole Init File
 :PROPERTIES:
 :ID:       214b3d62-1d24-46f8-a373-e3a9e665602d
 :END:
@@ -887,7 +887,7 @@ M-x jupyter-connect-server-repl
 
 
 
-*** LSP Python
+*** Python Info
 :PROPERTIES:
 :ID:       e06bb550-ccf7-4c8a-ba4d-c3d8343b4204
 :END:
@@ -1128,12 +1128,12 @@ Not sure whehter emacs interprets this at all
 *****
 
 
-**** Writing setup-python.el file the conf
+*** LSP Python: Writing setup-python.el file the conf
 :PROPERTIES:
 :ID:       e1a1988b-a70a-435c-98e3-d95c61522659
 :END:
 
-***** Header
+**** Header
 :PROPERTIES:
 :ID:       6644930c-c376-4981-ae63-fc57ab4f5122
 :END:
@@ -1147,7 +1147,7 @@ Not sure whehter emacs interprets this at all
 #+end_src
 
 
-***** Function to restart Workspace
+**** Function to restart Workspace unfinished
 :PROPERTIES:
 :ID:       41f1d2b5-4526-4261-aaaf-00525bd8034c
 :END:
@@ -1185,7 +1185,7 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 : lsp-workspace-restart-deep
 
 
-***** python-pytest
+**** python-pytest
 
 https://github.com/wbolster/emacs-python-pytest
 
@@ -1208,7 +1208,7 @@ python-pytest-repeat
 
 (setq python-pytest-confirm t)
 
-***** Configure Py3 Mode
+**** Configure Py3 Mode
 
 Py3 mode defined in ‘python-mode.el’:
 Major mode for Python shell process.
@@ -1216,18 +1216,18 @@ Major mode for Python shell process.
 Das muss der ~py-shell-mode~ sein
 
 
-***** Format buffer using yapf
+**** Format buffer using yapf
 :PROPERTIES:
 :ID:       674e2989-94c8-4dbe-976a-64ad936aa62c
 :END:
 
-Not really neceessary as yapf-mode, yapfify etc. exist
+really neceessary as yapf-mode, yapfify etc. exist
 
 see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
 
-  (defun python-yapf-format-buffer ()
+  (defun cg/python-yapf-format-buffer ()
     (interactive)
     (when (and (executable-find "yapf") buffer-file-name)
       (call-process "yapf" nil nil nil "-i" buffer-file-name)))
@@ -1241,7 +1241,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+end_src
 
 
-***** Function to remove unused imports using autoflake
+**** Function to remove unused imports using autoflake
 :PROPERTIES:
 :ID:       5a5a162d-6b68-405d-9c47-02775e75271e
 :END:
@@ -1270,7 +1270,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+RESULTS:
 : python-remove-unused-imports
 
-***** Function to remove unused variables using autoflake
+**** Function to remove unused variables using autoflake
 :PROPERTIES:
 :ID:       9259bd8f-9cce-4f06-b262-d9f487959596
 :END:
@@ -1296,7 +1296,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 : python-remove-unused-imports
 
 
-***** Configure black formatter for brunette
+**** Configure black formatter for brunette
 :PROPERTIES:
 :ID:       a7799b15-ad9f-4ab0-b55a-5ea7c6ef14e7
 :END:
@@ -1324,9 +1324,9 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
     )
 
 #+end_src
-****** Links
+***** Links
 
-******* Formatting providers in vscode
+****** Formatting providers in vscode
 
 https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0
 
@@ -1342,7 +1342,7 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 - 119 characters
 
 
-***** Aggregate Function to clean up
+**** Aggregate Function to clean up - not functioning
 
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
@@ -1357,7 +1357,7 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 #+end_src
 
 
-***** Rst autocomplete
+**** Rst autocomplete
 :PROPERTIES:
 :ID:       59d7132f-71a6-45b0-88b8-a2f15e3952f2
 :END:
@@ -1378,13 +1378,13 @@ https://github.com/tkf/auto-complete-rst
 
 
 
-***** defconst line width
+**** defconst line width - still needed?
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
   (defconst python-linewidth 89)
 #+end_src
 
-***** coverage
+**** coverage
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (require 'pycoverage)
@@ -1394,12 +1394,12 @@ https://github.com/tkf/auto-complete-rst
     (interactive)
     (when (derived-mode-p 'python-mode)
       (progn
-        (linum-mode)
+        ;; (linum-mode)
         (pycoverage-mode))))
 #+end_src
 
 
-***** Flyckeck Attempt to use Pylint
+**** Flyckeck Attempt to use Pylint
 
 https://www.flycheck.org/en/28/_downloads/flycheck.html#Configuring-checkers
 https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-python-3
@@ -1426,11 +1426,29 @@ https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-pyth
 : t
 
 
-***** Pyright-specific code
 
+**** python-lsp-server specific
+
+https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
+https://github.com/python-lsp/python-lsp-server
+https://github.com/emacs-lsp/lsp-mode/issues/2777
+
+
+pip install 'python-lsp-server[all]'
+
+pip install 'python-lsp-server[websockets]'
+
+#+begin_src emacs-lisp :tangle no :mkdirp yes
+(require 'lsp-pylsp)
+#+end_src
+
+**** Pyright specific code
+
+https://emacs-lsp.github.io/lsp-pyright/
 
 Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED in orde to get this working!
 
+Should become =:tangle no= when removed.
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
 
@@ -1496,7 +1514,9 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
 #+end_src
 
 
-***** Virtual Environments
+
+
+**** Virtual Environments
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
   (use-package pyvenv
     :config
@@ -1507,7 +1527,7 @@ Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED 
 
 #+end_src
 
-***** Footer
+**** Footer
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (provide 'setup-python)
@@ -1592,7 +1612,7 @@ https://github.com/lighttiger2505/sqls
 #+end_src
 
 
-** R using ess
+*** R using ess
 :PROPERTIES:
 :ID:       f6b47430-8927-472c-99f9-dd3a7ce2cc4a
 :END:
