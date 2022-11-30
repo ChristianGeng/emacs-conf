@@ -1432,7 +1432,7 @@ https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-pyth
 https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
 https://github.com/python-lsp/python-lsp-server
 https://github.com/emacs-lsp/lsp-mode/issues/2777
-
+https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/
 
 pip install 'python-lsp-server[all]'
 
@@ -1759,16 +1759,59 @@ see https://github.com/purcell/sqlformat
 
 #+end_src
 
-*** Org-Mode
+** Org-Mode
 
-**** Setting requiring main entry Point
+*** org-roam
+
+**** Getting Started with Org Roam - Build a Second Brain in Emacs*
+
+https://www.youtube.com/watch?v=AyhPmypHDEw
+https://systemcrafters.cc/build-a-second-brain-in-emacs/getting-started-with-org-roam/
+
+**** Capturing notes efficiently
+
+https://www.youtube.com/watch?v=YxgA5z2R08I&t=0s
+https://systemcrafters.net/build-a-second-brain-in-emacs/capturing-notes-efficiently/
+
+
+**** Org Roam: The Best Way to Keep a Journal in Emacs
+
+https://www.youtube.com/watch?v=3-sLBaJAtew&t=0s
+https://systemcrafters.net/build-a-second-brain-in-emacs/keep-a-journal/
+
+
+**** System Crafters Live! - Can You Apply Zettelkasten in Emacs?
+
+https://www.youtube.com/watch?v=-TpWahIzueg
+https://systemcrafters.net/live-streams/august-06-2021/
+
+Video von Sönke Ahrens: https://www.youtube.com/watch?v=JnS3g68zCXw
+
+
+*** Setting requiring main entry Point
+
+
+==(load "org-capture-templates-slim")=  wird in =setup-org= geladen.
+Dort wird die Browser Extension dann konfiguriert.
+
+Default Values:
+
+- selected template: p
+- unselected template: L
+
+
+My Values:
+
+- selected template: op
+- unselected template: oL
+
 
 #+begin_src emacs-lisp
   (require 'setup-org) ;; organizer todo notes etc
 #+end_src
 
-**** Setting up org-general
-***** Main Blob
+*** Setting up org-general
+**** Main Blob
 #+begin_src emacs-lisp  :tangle ./el/org-general.el :mkdirp yes
 ;; Enable org-mode
 (require 'org)
@@ -2178,7 +2221,7 @@ using git for this instead."
 
 
 
-***** Electric Pair Tweak
+**** Electric Pair Tweak
 
 see https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode-specific-pairs-for-electric-pair-mode
 
@@ -2201,6 +2244,39 @@ see https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode
 
 #+RESULTS:
 : t
+
+
+
+
+*** org-capture-extension
+
+https://github.com/sprig/org-capture-extension
+
+
+#+begin_src bash :results output pp
+ls -l "${HOME}/.local/share/applications/" | grep org
+#+end_src
+
+#+RESULTS:
+: -rw-r--r-- 1 cgeng domain users 145 Nov 22 16:15 org-protocol.desktop
+
+#+begin_src bash :results output pp
+  cat > "${HOME}/.local/share/applications/org-protocol.desktop" << EOF
+  [Desktop Entry]
+  Name=org-protocol
+  Exec=emacsclient %u
+  Type=Application
+  Terminal=false
+  Categories=System;
+  MimeType=x-scheme-handler/org-protocol;
+  EOF
+
+  update-desktop-database ~/.local/share/applications/
+#+end_src
+
+#+RESULTS:
+
+sudo update-desktop-database
 
 
 
