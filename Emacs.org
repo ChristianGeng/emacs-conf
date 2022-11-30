@@ -2278,7 +2278,18 @@ ls -l "${HOME}/.local/share/applications/" | grep org
 
 sudo update-desktop-database
 
+** google drive location menu
 
+
+#+begin_src emacs-lisp :tangle no
+
+  (require 'setup-user-menu)
+   (system-name)
+   (string-match-p (regexp-quote "compute3") (system-name))
+  (if (string-match-p (regexp-quote "compute3") (system-name))
+      (print ";"))
+(if (string-match-p (regexp-quote "compute3") (system-name)) (print ";"))
+#+end_src
 
 ** Collected Other Mode Configurations
 
@@ -2438,7 +2449,6 @@ sudo update-desktop-database
   (require 'calfw-org)
   (require 'calfw-gcal)
   (require 'calfw-ical)
-  (require 'setup-user-menu)
 
   (put 'erase-buffer 'disabled nil)
 

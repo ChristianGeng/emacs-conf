@@ -544,7 +544,6 @@
 (require 'calfw-org)
 (require 'calfw-gcal)
 (require 'calfw-ical)
-(require 'setup-user-menu)
 
 (put 'erase-buffer 'disabled nil)
 
