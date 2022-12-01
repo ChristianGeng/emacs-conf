@@ -866,10 +866,26 @@ M-x jupyter-connect-server-repl
 :ID:       b204e436-4dff-486d-8eac-8b32772d7574
 :END:
 
+**** Installation
+
+see [[https://emacs-lsp.github.io/lsp-mode/page/installation/][https://emacs-lsp.github.io/lsp-mode/page/installation/]]:
+
+M-x package-install RET lsp-mode RET
+
+AND:
+
+1. Delete your LSP-related packages
+2. Restart Emacs
+3. Install the new versions of the packages.
+
+**** Comments and Notes
+
+- Installation: M-x package-install RET lsp-mode RET
 -  often it is necessary to delete this file
 
   ~/.emacs.d/.lsp-session-v1
 
+**** Snippet
 
 #+begin_src emacs-lisp
   (require 'setup-lsp)
@@ -883,8 +899,6 @@ M-x jupyter-connect-server-repl
 
 #+RESULTS:
 : setup-dap-mode
-
-
 
 
 *** Python Info
@@ -1434,7 +1448,7 @@ https://github.com/python-lsp/python-lsp-server
 https://github.com/emacs-lsp/lsp-mode/issues/2777
 https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/
 
-pip install 'python-lsp-server[all]'
+pip install 'python-lsp-server[all']
 
 pip install 'python-lsp-server[websockets]'
 
