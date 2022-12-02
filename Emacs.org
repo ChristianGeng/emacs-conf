@@ -2956,6 +2956,39 @@ Repo is here: git clone git@github.com:yashi/org-asciidoc.git
 #+end_src
 
 
+*** Emacs as daemon
+
+
+Startin the daemon
+
+#+begin_example bash
+emacs --daemon
+nohup_dated emacs --daemon &
+#+end_example
+
+
+[[https://www.emacswiki.org/emacs/EmacsAsDaemon#h5o-10][Stopping the Emacs Daemon]]:
+
+#+begin_src emacs-lisp
+;; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+#+end_src
+
+The link above also contains more fancy code that asks for unsaved buffers first.
+
+
+Links:
+
+https://medium.com/@lukaszkorecki/emacs-as-tmux-replacement-2acd10d7dfc8
+https://emacs.stackexchange.com/questions/53036/switching-from-tmux-terminal-emacs-to-emacs-only
+https://emacs.stackexchange.com/questions/35587/emacs-client-cant-find-server-in-terminal
+
+
 *** dired
 
 
