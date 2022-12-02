@@ -1776,11 +1776,66 @@ see https://github.com/purcell/sqlformat
 ** Org-Mode
 
 *** org-roam
+:PROPERTIES:
+:ID:       08fd0c13-2ad4-441a-bf4c-c2b7fc6ddb99
+:END:
+
+(use-package org-roam :ensure t)
+
+Is compiler there? Should be non-nil:
+
+(executable-find "cc")
+
+cgeng@ap-cgeng:~/.emacs.d/elpa/emacsql-sqlite-20221127.2146/sqlite$ ls -tl
+total 8968
+-rw-r--r-- 1 cgeng domain users  613416 Dez  1 20:47 sqlite3.h
+-rw-r--r-- 1 cgeng domain users    5070 Dez  1 20:47 emacsql.c
+-rw-r--r-- 1 cgeng domain users     472 Dez  1 20:47 Makefile
+[[id:b09fc1fc-59c5-41d7-9f9d-d5be24f6659d][Meine erste idee]][[id:162bc05a-673f-454a-a368-7ffd25702081][meine zweite Idee]]-rw-r--r-- 1 cgeng domain users 8549001 Dez  1 20:47 sqlite3.c
+
+https://emacs.stackexchange.com/questions/56064/cannot-enable-org-roam-mode-no-emacsql-sqlite-binary-avaiable
+
+ (org-roam find executable sqlite3)
+
+make emacsql-sqlite
+
+#+begin_src emacs-lisp
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-v2-ack t)
+  :custom
+  (org-roam-directory "~/RoamNotes")
+  (org-roam-completion-everywhere t)
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point)
+         :map org-roam-dailies-map
+         ("Y" . org-roam-dailies-capture-yesterday)
+         ("T" . org-roam-dailies-capture-tomorrow))
+  :bind-keymap
+  ("C-c n d" . org-roam-dailies-map)
+  :config
+  (require 'org-roam-dailies) ;; Ensure the keymap is available
+  (org-roam-db-autosync-mode))
+#+end_src
+
+#+RESULTS:
+: t
 
 **** Getting Started with Org Roam - Build a Second Brain in Emacs*
+:PROPERTIES:
+:ID:       e13fdc2d-48a9-463b-8fdf-0e6cdb58b331
+:END:
 
 https://www.youtube.com/watch?v=AyhPmypHDEw
 https://systemcrafters.cc/build-a-second-brain-in-emacs/getting-started-with-org-roam/
+
+- org-roam-node-find create the node
+- org roam node insert Link to other node:
+- org-roam-buffer-toggle
 
 **** Capturing notes efficiently
 
@@ -1800,7 +1855,6 @@ https://www.youtube.com/watch?v=-TpWahIzueg
 https://systemcrafters.net/live-streams/august-06-2021/
 
 Video von Sönke Ahrens: https://www.youtube.com/watch?v=JnS3g68zCXw
-
 
 *** Setting requiring main entry Point
 
