@@ -1448,9 +1448,21 @@ https://github.com/python-lsp/python-lsp-server
 https://github.com/emacs-lsp/lsp-mode/issues/2777
 https://vxlabs.com/2018/06/08/python-language-server-with-emacs-and-lsp-mode/
 
-pip install 'python-lsp-server[all']
+pip install 'python-lsp-server[all]'
+pip install 'python-lsp-server[websockets]
 
-pip install 'python-lsp-server[websockets]'
+rope
+Pyflakes
+McCabe
+pycodestyle
+pydocstyle
+autopep8
+yapf
+flake8
+pylint
+
+
+
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
 
