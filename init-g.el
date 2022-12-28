@@ -256,6 +256,8 @@
 
 ;; Setup key bindings
 (require 'key-bindings)
+(message "before setting up helm")
+
 (require 'setup-helm)
 
 ;; Diminish modeline clutter
