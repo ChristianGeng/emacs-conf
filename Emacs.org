@@ -1054,93 +1054,6 @@ $ pip install importmagic epc
 ;;  coverlay                       20190414.940   available    melpa    Test coverage overlays
 #+end_example
 
-**** About Pyright
-
-***** Build Pyright
-
-Pylance = Pyright + IntelliCode AI models (not open-source)
-
-#+begin_src bash :tangle no
-  https://github.com/emacs-lsp/lsp-mode/issues/1863:
-  entweder über vs code installieren oder selbst bauen
-  git clone https://github.com/microsoft/pyright
-  cd pyright
-  npm i
-  npm run build:serverProd
-     ;; das sorgt dafür dass pyright bei mir im Pfad ist
-     ;; which pyright
-     ;; momentan befindet sich das hier: /home/audeering.local/cgeng/.nvm/versions/node/v12.22.1/bin/pyright
-#+end_src
-
-***** Use VS Code Version
-
-#+begin_src emacs-lisp :tangle no
-  ;; Nutzung der VSCode Version:
-  ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
-  ;; (setq lsp-pyright-server-cmd `("node" "~/pyright/client/server/server.bundle.js" "--stdio"))
-#+end_src
-
-Activating venvs:
-After changing the virtual env, the lsp workspace has to be restarted:
-see https://github.com/emacs-lsp/lsp-pyright/issues/7
-
-#+begin_src emacs-lisp :tangle no
-  (lsp-restart-workspace)
-#+end_src
-
-***** Configuration
-
-- Pyright LS uses a file called pyrightconfig.json to include settings
-This is documented at https://github.com/microsoft/pyright/blob/main/docs/configuration.md
-- This also statest that pyright settings can also be specified in a [tool.pyright] section of a "pyproject.toml" file.
-- some of these settings are also
-  https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/
--  https://github.com/emacs-lsp/lsp-pyright
-- hoe to devise local adaptions to PYTHONPATH under Emacs lsp pyright?
-- there is a custom variable:
-- python.analysis.extraPaths via lsp-pyright-extra-paths
-
--  PYTHONPATH  Setting py-pythonpath as a .dir-local seems not to work https://github.com/porterjamesj/virtualenvwrapper.el/issues/56
-- What works though is the customization of lsp-pyright-extra-paths
-- All variables that are accessible through Emacs as defcustom are here:
-  https://github.com/emacs-lsp/lsp-pyright
-
-code/data_collection/aisoundlab/audb_covid_19/1.0.0/
-
-
-***** pyrightconfig.json example
-
-Not sure whehter emacs interprets this at all
-
-#+begin_src json :tangle no
-  {
-      "exclude": ["**/node_modules", "**/__pycache__"],
-      "ignore": ["**/node_modules", "**/__pycache__"],
-      "include": ["flextensor", "tvm","1.0.0"],
-      "pythonPlatform": "Linux",
-      "pythonVersion": "3.7",
-      "reportMissingImports": true,
-      "reportMissingTypeStubs": false,
-      "stubPath": "typings",
-      "typeCheckingMode": "basic",
-      "venvPath": "/home/audeering.local/cgeng/.venvs",
-      "venv": "py37"
-  }
-
-#+end_src
-
-
-#+begin_src bash :tangle no
-
-#+end_src
-
-
-#+begin_src bash :tangle no
-
-#+end_src
-
-*****
-
 
 *** LSP Python: Writing setup-python.el file the conf
 :PROPERTIES:
@@ -1515,6 +1428,9 @@ pylint
 
 **** Pyright specific code
 
+
+***** The configuration
+
 https://emacs-lsp.github.io/lsp-pyright/
 
 Note: ~lsp-python-ms~ might be loaded with precedence and should be UNINSTALLED in orde to get this working!
@@ -1583,6 +1499,114 @@ Should become =:tangle no= when removed.
     :hook (company-mode . company-box-mode))
 
 #+end_src
+
+
+
+
+
+
+***** Additional Notes
+****** Pyright and npm
+
+Problem:
+
+#+begin_example
+npx pyright
+node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
+#+end_example
+
+nvm install 16.15.1
+nvm use 16.15.1
+
+=npx pyright= wird nur zum diagnostizieren genommen.
+was man will ist pyright von der console zu starten
+
+
+
+****** Build Pyright
+
+Pylance = Pyright + IntelliCode AI models (not open-source)
+
+#+begin_src bash :tangle no
+  https://github.com/emacs-lsp/lsp-mode/issues/1863:
+  entweder über vs code installieren oder selbst bauen
+  git clone https://github.com/microsoft/pyright
+  cd pyright
+  npm i
+  npm run build:serverProd
+     ;; das sorgt dafür dass pyright bei mir im Pfad ist
+     ;; which pyright
+     ;; momentan befindet sich das hier: /home/audeering.local/cgeng/.nvm/versions/node/v12.22.1/bin/pyright
+#+end_src
+
+****** Use VS Code Version
+
+#+begin_src emacs-lisp :tangle no
+  ;; Nutzung der VSCode Version:
+  ;; (setq lsp-pyright-server-cmd `("node" "~/.vscode/extensions/ms-python.vscode-pylance-2021.5.3/dist/pyright.bundle.js" "--stdio"))
+  ;; (setq lsp-pyright-server-cmd `("node" "~/pyright/client/server/server.bundle.js" "--stdio"))
+#+end_src
+
+Activating venvs:
+After changing the virtual env, the lsp workspace has to be restarted:
+see https://github.com/emacs-lsp/lsp-pyright/issues/7
+
+#+begin_src emacs-lisp :tangle no
+  (lsp-restart-workspace)
+#+end_src
+
+****** Configuration
+
+- Pyright LS uses a file called pyrightconfig.json to include settings
+This is documented at https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+- This also statest that pyright settings can also be specified in a [tool.pyright] section of a "pyproject.toml" file.
+- some of these settings are also
+  https://blog.pilosus.org/posts/2019/12/26/python-third-party-tools-configuration/
+-  https://github.com/emacs-lsp/lsp-pyright
+- hoe to devise local adaptions to PYTHONPATH under Emacs lsp pyright?
+- there is a custom variable:
+- python.analysis.extraPaths via lsp-pyright-extra-paths
+
+-  PYTHONPATH  Setting py-pythonpath as a .dir-local seems not to work https://github.com/porterjamesj/virtualenvwrapper.el/issues/56
+- What works though is the customization of lsp-pyright-extra-paths
+- All variables that are accessible through Emacs as defcustom are here:
+  https://github.com/emacs-lsp/lsp-pyright
+
+code/data_collection/aisoundlab/audb_covid_19/1.0.0/
+
+
+****** pyrightconfig.json example
+
+Not sure whehter emacs interprets this at all
+
+#+begin_src json :tangle no
+  {
+      "exclude": ["**/node_modules", "**/__pycache__"],
+      "ignore": ["**/node_modules", "**/__pycache__"],
+      "include": ["flextensor", "tvm","1.0.0"],
+      "pythonPlatform": "Linux",
+      "pythonVersion": "3.7",
+      "reportMissingImports": true,
+      "reportMissingTypeStubs": false,
+      "stubPath": "typings",
+      "typeCheckingMode": "basic",
+      "venvPath": "/home/audeering.local/cgeng/.venvs",
+      "venv": "py37"
+  }
+
+#+end_src
+
+
+#+begin_src bash :tangle no
+
+#+end_src
+
+
+#+begin_src bash :tangle no
+
+#+end_src
+
+*****
 
 
 
