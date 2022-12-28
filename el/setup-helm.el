@@ -3,8 +3,10 @@
 ;;; Helm Setup
 ;;; Code:
 
+;;; (package-initialize)
 (require 'helm)
-(require 'helm-config)
+;; helm config was deleted in 2022 Dec
+;; (require 'helm-config)
 
 
 
