@@ -256,8 +256,6 @@
 
 ;; Setup key bindings
 (require 'key-bindings)
-(message "before setting up helm")
-
 (require 'setup-helm)
 
 ;; Diminish modeline clutter
@@ -528,6 +526,7 @@
 
 (require 'openwith)
 (setq openwith-associations '(
+                              ("\\.pdf\\'"  "okular" (file))
                               ("\\.mp4\\'"  "vlc" (file))
                               ("\\.docx\\'" "lowriter" (file))
                               ("\\.odt\\'"  "lowriter" (file))

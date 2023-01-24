@@ -2514,6 +2514,7 @@ sudo update-desktop-database
 
   (require 'openwith)
   (setq openwith-associations '(
+                                ("\\.pdf\\'"  "okular" (file))
                                 ("\\.mp4\\'"  "vlc" (file))
                                 ("\\.docx\\'" "lowriter" (file))
                                 ("\\.odt\\'"  "lowriter" (file))
