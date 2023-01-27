@@ -1,3 +1,10 @@
+(setq cg/is-termux
+      (string-suffix-p "Android" (string-trim (shell-command-to-string "uname -a"))))
+
+;; Fix an issue accessing the ELPA archive in Termux
+(when cg/is-termux
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 ;; The default is 800 kilobytes.  Measured in bytes.
 ;; (setq gc-cons-threshold (* 50 1000 1000))
 ;; (setq gc-cons-threshold (* 350 1000 1000))

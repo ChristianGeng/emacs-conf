@@ -14,6 +14,20 @@ PROPERTIES:
 #+RESULTS:
 : t
 
+
+* Termux Issue
+
+#+begin_src emacs-lisp
+(setq cg/is-termux
+      (string-suffix-p "Android" (string-trim (shell-command-to-string "uname -a"))))
+
+;; Fix an issue accessing the ELPA archive in Termux
+(when cg/is-termux
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+#+end_src
+
+#+RESULTS:
+
 * Eearly Init - not needed?
 
 https://www.masteringemacs.org/article/whats-new-in-emacs-27-1
