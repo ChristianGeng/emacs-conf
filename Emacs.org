@@ -397,6 +397,16 @@ However, if your init file changes the values of
 
 #+end_src
 
+*** Expand region
+
+#+begin_src emacs-lisp
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+#+end_src
+
+#+RESULTS:
+: er/expand-region
+
 *** Undo system
 
 - C-r in evil/vim: undo/redo functionality
