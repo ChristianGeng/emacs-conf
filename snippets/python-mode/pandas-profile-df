@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: pandas-profile-df
+# key: pandas
+# --
+
+# Profile and pandas dataframe
+# pip instgall  ydata-profiling
+# pip instgall  pandas-profiling
+
+from ydata_profiling import ProfileReport
+profile = ProfileReport(df_train, title="Pandas Profiling Report")
+profile.to_notebook_iframe()
