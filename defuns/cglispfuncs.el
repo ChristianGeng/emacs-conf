@@ -31,6 +31,25 @@
 ;;; Code:
 
 
+;;; Found this here:
+;;; https://xenodium.com/emacs-quote-wrap-all-in-region/
+(defun cg/toggle-quote-comma-wrap-all-in-region (beg end)
+  "Toggle wrapping all items in region with double quotes + cimma. Use: Python LISTS"
+  (interactive (list (mark) (point)))
+  (unless (region-active-p)
+    (user-error "no region to wrap"))
+  (let ((deactivate-mark nil)
+        (replacement (string-join
+                      (mapcar (lambda (item)
+                                (if (string-match-p "^\".*\"$" item)
+                                    (string-trim item "\"" "\"")
+                                  (format "\"%s\"," item)))
+                              (split-string (buffer-substring beg end)))
+                      " ")))
+    (delete-region beg end)
+    (insert replacement)))
+
+
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 ;;; see https://www.emacswiki.org/emacs/UnfillParagraph
 (defun unfill-paragraph (&optional region)
