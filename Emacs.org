@@ -451,6 +451,8 @@ https://www.linode.com/docs/guides/emacs-evil-mode/
 
 [[https://github.com/emacs-evil/evil-magit][Evil-magit]] is not part of the  [[https://github.com/emacs-evil/evil-collection][Evil Collection]].
 
+=evil-emacs-state-modes=: which modes come up in emacs mode
+
 #+begin_src emacs-lisp
 
   ;; do ot apply yet
@@ -2845,8 +2847,6 @@ gpg --list-secret-keys christian.c.geng@gmail.com
 gpg --export-secret-keys YOUR_ID_HERE > private.key
 gpg --import private.key
 
-
-
 **** Lookup key
 
 
@@ -2886,6 +2886,49 @@ Note that you probably also have gpg2 on your system which is backwards-compatib
 COPY
 gpg2 --import private.key
 
+**** More gpg interaction
+
+***** GPG agent configuration
+
+#+begin_src bash :results output pp
+cat ~/.gnupg/gpg-agent.conf
+#+end_src
+
+#+RESULTS:
+: default-cache-ttl 0
+: max-cache-ttl 0
+: default-cache-ttl-ssh 0
+: max-cache-ttl-ssh 0
+
+***** Seems not to be effective (even after reload):
+
+Information is from [[https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session][here]].
+
+#+begin_src bash :results output pp
+  gpgconf --kill gpg-agent
+  gpgconf --reload gpg-agent
+  # gpg-connect-agent reloadagent
+  gpgconf --list-options gpg-agent | grep default
+  gpgconf --list-options gpg-agent | grep max-cache
+#+end_src
+
+#+RESULTS:
+: default-cache-ttl:24:0:expire cached PINs after N seconds:3:3:N:600::0
+: default-cache-ttl-ssh:24:1:expire SSH keys after N seconds:3:3:N:1800::0
+: max-cache-ttl:24:2:set maximum PIN cache lifetime to N seconds:3:3:N:7200::0
+: max-cache-ttl-ssh:24:2:set maximum SSH key lifetime to N seconds:3:3:N:7200::0
+
+***** OS / Ubuntu specific?
+
+Discussion about using gnone tools like =seahorse= or =dconf-editor= is found [[https://emacs.stackexchange.com/questions/37002/emacs-opens-gpg-file-without-asking-for-passphrase][here.]]
+
+I also had to use dconf-editor and used there recipe from [[https://askubuntu.com/questions/340809/how-can-i-adjust-the-default-passphrase-caching-duration-for-gpg-pgp-ssh-keys/358514?_gl=1*zo9a4w*_ga*MTM0MTA2NDI2MC4xNjU1MTk3NzU1*_ga_S812YQPLT2*MTY4MzE4Njk1MS4yMy4xLjE2ODMxODY5NTEuMC4wLjA.#358514][here]]. And it worked indeed:
+
+- Lauch dconf-editor.
+- Navigate to desktop - gnome - crypto - cache.
+- change gpg-cache-method to idle or timeout.
+- change gpg-cache-ttl to the number of seconds you want the passphrase to be cached.
+- Restart the gnome-keyring daemon $ gnome-keyring-daemon -r
 
 *** Mac Specific
 :PROPERTIES:
