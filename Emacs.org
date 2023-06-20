@@ -2643,8 +2643,6 @@ sudo update-desktop-database
 
   ;;(require 'pasc-mode)
 
-  (require 'setup-yasnippet)
-
   ;; (require 'setup-supercollider)
   (require 'setup-yaml-mode)
   (require 'setup-editorconfig)
@@ -2720,6 +2718,9 @@ https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group
 #+end_src
 
 
+
+
+
 **** fix missing alt-key in WSL
 :PROPERTIES:
 :ID:       52d2df23-c894-4ce0-b82b-1023c29e4483
@@ -2732,6 +2733,13 @@ WSL for Windows specific code
   (put 'set-goal-column 'disabled nil)
 #+end_src
 
+** yasnippet
+
+#+begin_src emacs-lisp
+  (require 'setup-yasnippet)
+  (define-key yas-minor-mode-map [(tab)] nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+#+end_src
 
 ** Misc
 :PROPERTIES:

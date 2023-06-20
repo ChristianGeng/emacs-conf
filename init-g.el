@@ -561,8 +561,6 @@
 
 ;;(require 'pasc-mode)
 
-(require 'setup-yasnippet)
-
 ;; (require 'setup-supercollider)
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
@@ -604,6 +602,10 @@
 
 (setq x-alt-keysym 'meta)
 (put 'set-goal-column 'disabled nil)
+
+(require 'setup-yasnippet)
+(define-key yas-minor-mode-map [(tab)] nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
 
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
