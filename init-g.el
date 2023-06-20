@@ -268,6 +268,9 @@
 ;; Diminish modeline clutter
 (require 'diminish)
 
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+
 ;; Represent undo-history as an actual tree (visualize with C-x u)
 ;; (setq undo-tree-mode-lighter "")
 ;;(setq undo-tree-mode-lighter "Undo-Tree") defaul
@@ -634,6 +637,8 @@
 
 (use-package ansible-vault
   :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
+
+(add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))

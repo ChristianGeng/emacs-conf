@@ -2,7 +2,6 @@ PROPERTIES:
 #+title: Emacs From Scratch Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init-g.el :mkdirp yes
 
-# M-x org-babel-tangle
 
 * Tangle and Reload init file
 
@@ -399,6 +398,9 @@ However, if your init file changes the values of
 
 *** Expand region
 
+;; expand regions semantically
+;; see https://github.com/magnars/expand-region.el
+
 #+begin_src emacs-lisp
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
@@ -556,7 +558,6 @@ Examples:
 CTRL-R * will insert in the contents of the clipboard
 CTRL-R " (the unnamed register) inserts the last delete or yank.
 To find this in vim's help type :h i_ctrl-r
-
 ****** Visual state
 
 evil-visual-state
@@ -569,6 +570,8 @@ v$ - select until end of line
 v^ - select until beginning of line
 
 vip - select paragraph
+
+
 
 
 ****** Replace State
@@ -597,7 +600,7 @@ No clue what this does
 ****** Navigating
 - ^: got to beginning of line
 - j: next line
-- k: previos line
+- k: previous line
 - b: back one word
 - w: forward one word
 - C-u up half a page -> not working for me: Why: bound to "universal arument" in emacs
@@ -762,7 +765,7 @@ gu3k : Change 3 lines above to lower case
 
 source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text=2%20Answers&text=Visual%20select%20the%20text%2C%20then,gu%20for%20lowercase.
 
-****** Closing Buffer
+****** Close whole editor
 
 ZQ - closes whole editor
 
@@ -781,12 +784,14 @@ ZQ - closes whole editor
 löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas
 
 
-****** Commands
+
+
+****** Windwos Buffers Splits
 
 ******* Working with buffers
 
 :bd - delete buffer
-
+C-6 - goto the previous buffer
 
 ******* Working with windows
 
@@ -799,12 +804,85 @@ Ctrl+WT (that's a capital T) to move any open window to its own tab.
 :tabnew - create a tab
 :tabnext
 
-******* Open files
+:tabfind filename opens file in new tab
+:tabclose close current tab
+
+
+******* Working with splits
+
+
+Switching  between visible buffers
+
+ctrl-w w or ctrl-w crtl-w
+
+Close the current window,  each window at a time:
+
+Control+w  q
+
+
+maximize” the current split:
+
+Ctrl-w _
+
+
+Make the current window the only one:
+
+:on
+:only
+CTRL-w CTRL-o
+And yes, also CTRL-W o has the same effect (as Nathan answered).
+
+
+
+
+Now to open a new split and open the bar file inside it:
+
+:sp bar
+
+split again and open the cat file:
+
+:sp cat
+
+Increase current split by 5 lines
+
+Ctrl-w 5+<
+
+
+And to return to equalized splits:
+
+Ctrl-w =
+
+ To split the current split again, only vertically (and at the same time open the file named “dog”) run:
+
+:vsp dog
+
+
+
+|-------------------+-------------------------------------------+---+---+---|
+| Command           | Action                                    |   |   |   |
+|-------------------+-------------------------------------------+---+---+---|
+| :sp filename      | Open filename in horizontal split         |   |   |   |
+| :vsp filename     | Open filename in vertical split           |   |   |   |
+| Ctrl-w h Ctrl-w ← | Shift focus to split on left of current   |   |   |   |
+| Ctrl-w l Ctrl-w → | Shift focus to split on right of current  |   |   |   |
+| Ctrl-w j Ctrl-w ↓ | Shift focus to split below the current    |   |   |   |
+| Ctrl-w k Ctrl-w ↑ | Shift focus to split above the current    |   |   |   |
+| Ctrl-w n+         | Increase size of current split by n lines |   |   |   |
+| Ctrl-w n-         | Decrease size of current split by n lines |   |   |   |
+|-------------------+-------------------------------------------+---+---+---|
+
+
+
+
+****** Open files
 
 :e ~/.bashrc - edit this file
 :r /path/to/file - inserts file into current buffer
 
 https://blog.confirm.ch/mastering-vim-opening-files/
+
+
+
 
 ***** Links
 
@@ -1004,7 +1082,7 @@ pip install  --upgrade flake8
 https://liuluheng.github.io/wiki/public_html/Python/flycheck-pylint-emacs-with-python.html
 
 ***** Pyright Code Checking Information
-****** Django Problem
+Django Problem
 ;; https://github.com/microsoft/pyright/issues/1359
 ;; Django Stubs: https://pypi.org/project/django-stubs/
 
@@ -2659,7 +2737,6 @@ WSL for Windows specific code
 :PROPERTIES:
 :ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
 :END:
-
 *** Local Defuns
 :PROPERTIES:
 :ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
@@ -2734,12 +2811,14 @@ WSL for Windows specific code
 - https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
 - https://www.youtube.com/watch?v=nZ_T7Q49B8Y
 
-
-(add-to-list 'auth-sources (joindirs org-directory "Notes.org.gpg")) ;; not parseable by authinfo
+#+begin_example emacs-lisp
+;; not parseable by authinfo
+(add-to-list 'auth-sources (joindirs org-directory "Notes.org.gpg"))
 (find-file (joindirs org-directory "Notes.org.gpg"))
+#+end_example
 
 
-
+#+begin_example emacs-lisp
 (defun delete-nth (index seq)
 "Delete the INDEX th element of SEQ.
 Return result sequence, SEQ __is__ modified."
@@ -2748,11 +2827,23 @@ Return result sequence, SEQ __is__ modified."
 (setcar seq (car (cdr seq)))
 (setcdr seq (cdr (cdr seq))))
 (setcdr (nthcdr (1- index) seq) (nthcdr (1+ index) seq))))
-
 (delete-nth 0 auth-sources)
+#+end_example
 
-(add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg")) ;; not parseable
+Add dropbos authinfo to auth source files
+
+#+begin_src emacs-lisp
+(add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
 (mapc 'message auth-sources)
+#+end_src
+
+#+RESULTS:
+| /home/audeering.local/cgeng/Dropbox/org/.authinfo.gpg | ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
+
+
 
 (find-file (joindirs org-directory ".authinfo.gpg"))
 (find-file (joindirs org-directory "Notes.org.gpg")) ;; no need to add to auth sources as not parseable
@@ -2764,21 +2855,25 @@ Return result sequence, SEQ __is__ modified."
   (mapc 'message auth-sources)
 #+end_src
 
-#+RESULTS:
-| ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
 
+#+RESULTS:
+| /home/audeering.local/cgeng/Dropbox/org/.authinfo.gpg | ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
+(auth-source-search :machine "chat.openai.com")
 (auth-source-search :site  "arts-outdoors")
 (auth-source-search :site  "arts-outdoors")
 
 https://www.arts-outdoors.de
 
+#+begin_src emacs-lisp :tangle no
 (auth-source-search :host "real.de")
-(auth-source-search :machine "mailprovider.com")
+#+end_src
 
+(auth-source-search :machine "mailprovider.com")
 (find-file (joindirs org-directory ".authinfo.gpg"))
 (auth-source-forget-all-cached)
 (find-file "~/.authinfo.gpg")
 (mapc 'message auth-sources)
+(auth-source-pass-get 'secret "openai-key")
 
 **** Generate Key
 
@@ -2929,6 +3024,8 @@ I also had to use dconf-editor and used there recipe from [[https://askubuntu.co
 - change gpg-cache-method to idle or timeout.
 - change gpg-cache-ttl to the number of seconds you want the passphrase to be cached.
 - Restart the gnome-keyring daemon $ gnome-keyring-daemon -r
+
+
 
 *** Mac Specific
 :PROPERTIES:
