@@ -250,10 +250,15 @@
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+      (set-fringe-mode 10)        ; Give some breathing room
+      ))
+
 (tool-bar-mode -1)          ; Disable the toolbar
 ;;  (tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)       ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
 

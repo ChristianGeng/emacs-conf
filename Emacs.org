@@ -367,14 +367,28 @@ However, if your init file changes the values of
 :ID:       53c1899a-035a-44f3-9460-d07523a3a1b3
 :END:
 
+Disable visible scrollbar when in graphical display
+see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-definition-is-void-error-when-running-em
+
 #+begin_src emacs-lisp
 
-  (scroll-bar-mode -1)        ; Disable visible scrollbar
-  (tool-bar-mode -1)          ; Disable the toolbar
-  ;;  (tooltip-mode -1)           ; Disable tooltips
-  (set-fringe-mode 10)       ; Give some breathing room
+  (if (display-graphic-p)
+      (progn
+        (tool-bar-mode -1)
+        (scroll-bar-mode -1)
+        (set-fringe-mode 10)        ; Give some breathing room
+        ))
 
-  (menu-bar-mode -1)            ; Disable the menu bar
+#+end_src
+
+#+RESULTS:
+
+
+#+begin_src emacs-lisp
+      (tool-bar-mode -1)          ; Disable the toolbar
+      ;;  (tooltip-mode -1)           ; Disable tooltips
+
+      (menu-bar-mode -1)            ; Disable the menu bar
 #+end_src
 
 ** Keyboard Interaction (and the Evil Chapter)
