@@ -373,7 +373,8 @@
 
 (require 'setup-typescript)
 (require 'setup-angular)
-(require 'setup-c-lsp-clangd)
+;; currently broken:
+;; (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 ;; (require 'setup-python-lsp-remember-you)
 
