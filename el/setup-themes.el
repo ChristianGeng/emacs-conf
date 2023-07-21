@@ -1,10 +1,49 @@
+;;; setup-themes.el --- summary -*- lexical-binding: t -*-
 
+;; Author: CGeng
+;; Maintainer: CGeng
+;; Version: version
+;; Package-Requires: (dependencies)
+;; Homepage: homepage
+;; Keywords: keywords
+
+
+;;; Commentary:
+
+;; commentary
+
+;;; Code:
+
+;;; name.el ends here
 ;; (load-theme 'fantom)
 ;; jetbrains-darcula
 ; doom-1337
 
 ;;(load-theme 'moe-light) - unfortunatel colors, got it from the supercollider guy
-(load-theme 'doom-1337)
+;; (load-theme 'doom-1337)
+
+;; Configure the Modus Themes' appearance
+(setq modus-themes-mode-line '(accented borderless)
+      modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+      modus-themes-fringes 'subtle
+      modus-themes-tabs-accented t
+      modus-themes-paren-match '(bold intense)
+      modus-themes-prompts '(bold intense)
+      modus-themes-completions 'opinionated
+      modus-themes-org-blocks 'tinted-background
+      modus-themes-scale-headings t
+      modus-themes-region '(bg-only)
+      modus-themes-headings
+      '((1 . (rainbow overline background 1.4))
+        (2 . (rainbow background 1.3))
+        (3 . (rainbow bold 1.2))
+        (t . (semilight 1.1))))
+
+;; Load the dark theme by default
+(load-theme 'modus-vivendi t)
+
+
 ;; (load-theme 'wombat)
 (defcustom cycle-themes '(material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic solarized moe-light)
   "List of themes through which one can switch easily by calling
