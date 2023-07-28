@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: jupyter-notebook-autoload
+# key:
+# --
+
+# use to reimport external dependendies
+%load_ext autoreload
+%autoreload 2
