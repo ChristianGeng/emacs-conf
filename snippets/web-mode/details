@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: details
+# key: details
+# --
+<details>
+    <summary>
+        <font size="3"><b> ${1:Detailstoshow} </b></font>
+    </summary>
+
+</details>

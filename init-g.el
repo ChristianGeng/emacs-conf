@@ -250,10 +250,15 @@
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (scroll-bar-mode -1)
+      (set-fringe-mode 10)        ; Give some breathing room
+      ))
+
 (tool-bar-mode -1)          ; Disable the toolbar
 ;;  (tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)       ; Give some breathing room
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
@@ -267,6 +272,9 @@
 
 ;; Diminish modeline clutter
 (require 'diminish)
+
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
 
 ;; Represent undo-history as an actual tree (visualize with C-x u)
 ;; (setq undo-tree-mode-lighter "")
@@ -365,7 +373,8 @@
 
 (require 'setup-typescript)
 (require 'setup-angular)
-(require 'setup-c-lsp-clangd)
+;; currently broken:
+;; (require 'setup-c-lsp-clangd)
 ;; (require 'setup-c++)
 ;; (require 'setup-python-lsp-remember-you)
 
@@ -558,8 +567,6 @@
 
 ;;(require 'pasc-mode)
 
-(require 'setup-yasnippet)
-
 ;; (require 'setup-supercollider)
 (require 'setup-yaml-mode)
 (require 'setup-editorconfig)
@@ -602,6 +609,10 @@
 (setq x-alt-keysym 'meta)
 (put 'set-goal-column 'disabled nil)
 
+(require 'setup-yasnippet)
+(define-key yas-minor-mode-map [(tab)] nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
   (interactive)
@@ -634,6 +645,8 @@
 
 (use-package ansible-vault
   :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
+
+(add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))

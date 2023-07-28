@@ -13,3 +13,7 @@
 [submodule "el/orgmode-mediawiki"]
 	path = el/orgmode-mediawiki
 	url = https://github.com/tomalexander/orgmode-mediawiki.git
+[submodule "el/c3po"]
+	path = el/c3po
+	url = https://github.com/d1egoaz/c3po.el.git
+	branch = main

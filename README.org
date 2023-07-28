@@ -27,6 +27,7 @@ Better take a look at other sources for configuration files:
 - https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
 - http://ergoemacs.org/emacs/emacs\_find\_replace.html
 - https://github.com/enzuru/.emacs.d
+- https://iqss.github.io/IQSS.emacs/ and https://iqss.github.io/IQSS.emacs/init.htm
 
 * Languages / Modes
 
