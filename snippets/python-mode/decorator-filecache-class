@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: decorator-filecache
+# key:
+# --
+
+from functools import wraps
+import os
+
+def filecache(func):
+    r"""filecache decorator.
+    Usage Example:
+        ifus = InfoFusion(video_id, use_cache=True)
+
+        @filecache
+        def _get_data(self, whisper_path, db):
+            ...
+            data = df_merged, row_merged, df_whisper, parsed_pdf, yaml_data, fpath_audio, df_segments
+            print(f"writing data to {self.cache_file}")
+            self._save_pkl(data)
+            ...
+
+    """
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        if os.path.exists(self.cache_file) and self.use_cache:
+            print(f"using cache file {self.cache_file}")
+            return self._load_pkl()
+        return func(self, *args, **kwargs)  # Also added return here
+
+    return wrapper
