@@ -140,6 +140,12 @@ Das ist praktisch um sich beispielsweise Code-Stellen zu merken.
    [[https://emacs.stackexchange.com/questions/40571/how-to-set-a-short-cut-for-begin-src-end-src][see
    here]]
 
+
+*** Resize images:
+
+Links:
+- https://lists.gnu.org/archive/html/emacs-orgmode/2012-08/msg01388.html
+
 ** Java
    :PROPERTIES:
    :CUSTOM_ID: java
