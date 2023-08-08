@@ -1,0 +1,45 @@
+# -*- mode: snippet -*-
+# name: decorator-filecache-for-function
+# key:
+# --
+
+
+def filecache(func):
+    """filecache decorator example for a function.
+
+    Usage Example(s):
+
+
+    Decorated Function:
+
+    @filecache
+    def df_overview(use_cache=False):
+        df = pd.DatFrame()
+        return df
+
+
+    Invocation:
+
+    df_overview = df_overview(use_cache=True)
+
+
+    """
+
+    @functools.wraps(func)
+    def wrapper(*args, use_cache=False, **kwargs):
+        # cache file naming is not really brilliant.
+        if func.__name__ == "df_overview":
+            cache_file = os.path.join(cache_dir, f"{func.__name__}.pkl")
+        elif func.__name__ == "df_filtered":
+            cache_file = os.path.join(
+                cache_dir, f"{func.__name__}_{args[1]}_{args[2]}.pkl"
+            )
+        else:
+            raise ValueError(f"{func.__name__} name handling not implemented.")
+
+        if os.path.exists(cache_file) and use_cache:
+            print(f"using cache file {cache_file}")
+            return pd.read_pickle(cache_file)
+        return func(*args, **kwargs)  # Also added return here
+
+    return wrapper
