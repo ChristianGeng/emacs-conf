@@ -4,6 +4,10 @@
 # --
 
 
+from functools import wraps
+import os
+
+
 def filecache(func):
     """filecache decorator example for a function.
 
