@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: babelpyvenv
+# key: babelpyvenv
+# --
+
+
+#+BEGIN_SRC emacs-lisp :session python
+(pyvenv-activate "/home/audeering.local/cgeng/Data/Data_HDD/work/.envs/crawler")
+#+END_SRC
+
+#+begin_src bash session python :results output pp
+which python
+#+end_src
+
+
+#+begin_src python session python  :results output pp
+import hashlib
+inport os
+#+end_src
