@@ -427,6 +427,10 @@
 
 (require 'setup-org) ;; organizer todo notes etc
 
+(use-package org-tree-slide
+  :custom
+  (org-image-actual-width nil))
+
 ;; (require 'setup-speedbar)
 
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
