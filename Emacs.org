@@ -984,7 +984,28 @@ M-x jupyter-connect-server-repl
 :ID:       b204e436-4dff-486d-8eac-8b32772d7574
 :END:
 
-**** Installation
+**** Install
+
+#+begin_src emacs-lisp
+  (require 'setup-lsp)
+#+end_src
+
+
+**** Usage
+
+***** More Interface Options
+
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-doc-enable t)
+(setq lsp-ui-peek-enable t)
+(setq lsp-ui-sideline-enable t)
+(setq lsp-ui-imenu-enable t)
+(setq lsp-ui-flycheck-enable t)
+
+**** Comments and Notes
+
+***** often it is necessary to delete =~/.emacs.d/.lsp-session-v1=
+***** Reinstallation:
 
 see [[https://emacs-lsp.github.io/lsp-mode/page/installation/][https://emacs-lsp.github.io/lsp-mode/page/installation/]]:
 
@@ -996,18 +1017,11 @@ AND:
 2. Restart Emacs
 3. Install the new versions of the packages.
 
-**** Comments and Notes
 
-- Installation: M-x package-install RET lsp-mode RET
--  often it is necessary to delete this file
-
-  ~/.emacs.d/.lsp-session-v1
-
-**** Snippet
+***** Deactivtate jdee for java files
 
 #+begin_src emacs-lisp
-  (require 'setup-lsp)
-  ;; 0(require 'setup-java)
+  ;; (require 'setup-java)
   ;; deactivate  jdee for  loading java files
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
@@ -1017,6 +1031,8 @@ AND:
 
 #+RESULTS:
 : setup-dap-mode
+
+
 
 
 *** Python Info
