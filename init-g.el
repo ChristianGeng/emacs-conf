@@ -348,7 +348,8 @@
   )
 
 (require 'setup-lsp)
-;; 0(require 'setup-java)
+
+;; (require 'setup-java)
 ;; deactivate  jdee for  loading java files
 (setq auto-mode-alist
       (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
