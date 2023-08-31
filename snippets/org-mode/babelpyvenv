@@ -15,5 +15,5 @@ which python
 
 #+begin_src python session python  :results output pp
 import hashlib
-inport os
+import os
 #+end_src
