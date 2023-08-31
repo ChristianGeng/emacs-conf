@@ -45,7 +45,7 @@
 
 
 ;; (load-theme 'wombat)
-(defcustom cycle-themes '(material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic solarized moe-light)
+(defcustom cycle-themes '(material material-light doom-solarized-dark doom-solarized-light atom-dark intellij idea-darkula subatomic moe-light)
   "List of themes through which one can switch easily by calling
 `cycle-themes' repeatedly. The first element is loaded at startup."
   :type '(repeat symbol))
