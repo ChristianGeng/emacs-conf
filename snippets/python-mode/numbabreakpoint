@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: numbabreakpoint
+# key: numbabreakpoint
+# --
+
+
+from numba import njit, gdb_init, gdb_breakpoint
+
+@njit(debug=True)
+def foo(a):
+    gdb_init() # instruct Numba to attach gdb at this location
+    gdb_breakpoint() # instruct gdb to break at this location
+    gdb_breakpoint() # and to break again at this location
