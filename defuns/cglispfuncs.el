@@ -314,9 +314,16 @@ Directory defaults to the value of `my-archive-dir'."
     (while (search-forward "\n" nil t) (replace-match "" nil t))))
 
 
-
-
-
+;; see https://emacs.stackexchange.com/questions/18161/how-to-replace-multiple-newlines-for-single-one-in-whole-file
+(defun cg/remove-extra-blank-lines ()
+    "replace multiple blank lines with a single one"
+    (interactive)
+    (setq orig (point))
+    (goto-char (point-min))
+    (while (re-search-forward "^\n+" nil t)
+      (replace-match "\n")
+      (forward-char 1))
+     (goto-char orig))
 
 
 ;;;;;;;;;;;;;;;;;;
