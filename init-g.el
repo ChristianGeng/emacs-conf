@@ -337,8 +337,6 @@
 ;; Setup extensions
 (require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-;; (eval-after-load 'dired '(require 'setup-python))
-
 ;; Setup lsp mode prior to setup-java
 ;; setup for lsp and dap
 (require 'setup-auto-complete)
@@ -369,7 +367,6 @@
 ;; (require 'setup-python-lsp-emacs-from-scratch)
 ;; (require 'setup-python-pyright)
 ;; (require 'setup-python-lsp-pyright)
-;; now: Alays write into setup-python and require so
 (require 'setup-python)
 
 (require 'setup-typescript)

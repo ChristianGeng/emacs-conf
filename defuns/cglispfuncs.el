@@ -52,7 +52,7 @@
 
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 ;;; see https://www.emacswiki.org/emacs/UnfillParagraph
-(defun unfill-paragraph (&optional region)
+(defun cg/unfill-paragraph (&optional region)
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive (progn (barf-if-buffer-read-only) '(t)))
   (let ((fill-column (point-max))
@@ -76,7 +76,7 @@
 
 
 
-(defun my-directory-files (d)
+(defun cg/my-directory-files (d)
   "Get List of files in directory"
   (let* ((path (file-name-as-directory (expand-file-name d)))
          (command (concat "ls -A1d " path "*")))
@@ -175,7 +175,7 @@ Directory defaults to the value of `my-archive-dir'."
 ;; https://stackoverflow.com/questions/384284/how-do-i-rename-an-open-file-in-emacs
 ;; https://sites.google.com/site/steveyegge2/my-dot-emacs-file
 ;; better; rename-current-buffer-file
-(defun rename-file-and-buffer (new-name)
+(defun cg/rename-file-and-buffer (new-name)
  "Renames both current buffer and file it's visiting to NEW-NAME." (interactive "sNew name: ")
  (let ((name (buffer-name))
 	(filename (buffer-file-name)))
@@ -188,7 +188,7 @@ Directory defaults to the value of `my-archive-dir'."
 ;; interesting: http://web-mode.org/
 
 ;; lines words characters
- (defun wc (&optional start end)
+ (defun cg/wc (&optional start end)
    "Prints number of lines, words and characters in region or whole buffer."
    (interactive)
    (let ((n 0)
@@ -305,8 +305,8 @@ Directory defaults to the value of `my-archive-dir'."
 
 ;;;;;;;;;;;;;;;;;;
 ;;; see https://stackoverflow.com/questions/5194294/how-to-remove-all-newlines-from-selected-region-in-emacs
-(defun remove-newlines-in-region ()
-  q"Removes all newlines in the region."
+(defun cg/remove-newlines-in-region ()
+  "Removes all newlines in the region."
   (interactive)
   (save-restriction
     (narrow-to-region (point) (mark))
@@ -314,8 +314,20 @@ Directory defaults to the value of `my-archive-dir'."
     (while (search-forward "\n" nil t) (replace-match "" nil t))))
 
 
+;; see https://emacs.stackexchange.com/questions/18161/how-to-replace-multiple-newlines-for-single-one-in-whole-file
+(defun cg/remove-extra-blank-lines ()
+    "replace multiple blank lines with a single one"
+    (interactive)
+    (setq orig (point))
+    (goto-char (point-min))
+    (while (re-search-forward "^\n+" nil t)
+      (replace-match "\n")
+      (forward-char 1))
+     (goto-char orig))
+
+
 ;;;;;;;;;;;;;;;;;;
-(defun replace-newlines-with-semicolon ()
+(defun cg/replace-newlines-with-semicolon ()
   "Removes all newlines in the region."
   (interactive)
   (save-restriction
@@ -328,7 +340,7 @@ Directory defaults to the value of `my-archive-dir'."
   ;;(global-set-key [f8] 'remove-newlines-in-region)
 
 ;;;;;;;;;;;;;;;;;;
-(defun kill-space-before-semicolon ()
+(defun cg/kill-space-before-semicolon ()
   "Removes all newlines in the region."
   (interactive)
   (save-restriction
@@ -336,7 +348,7 @@ Directory defaults to the value of `my-archive-dir'."
     (goto-char (point-min))
     (while (search-forward " ;" nil t) (replace-match "; " nil t))))
 
-(defun just-one-space-in-region (beg end)
+(defun cg/just-one-space-in-region (beg end)
   "replace all whitespace in the region with single spaces"
   (interactive "r")
   (save-excursion
@@ -346,7 +358,7 @@ Directory defaults to the value of `my-archive-dir'."
       (while (re-search-forward "\\s-+" nil t)
         (replace-match " ")))))
 
-(defun whitespace-to-underscore (beg end)
+(defun cg/whitespace-to-underscore (beg end)
   "BEG Replace all backward slashes in the region with forward slashes.  END.  "
   (interactive "r")
   (save-excursion
@@ -358,7 +370,7 @@ Directory defaults to the value of `my-archive-dir'."
   )
 
 
-(defun forwardize-slashes (beg end)
+(defun cg/forwardize-slashes (beg end)
   "BEG Replace all backward slashes in the region with forward slashes.  END.  "
   (interactive "r")
   (save-excursion
@@ -369,7 +381,7 @@ Directory defaults to the value of `my-archive-dir'."
         (replace-match "/"))))
   )
 
-(defun backwardize-slashes (beg end)
+(defun cg/backwardize-slashes (beg end)
   "Replace all forward slashes in the region with backward slashes."
   (interactive "r")
   (save-excursion
