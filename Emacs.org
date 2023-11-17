@@ -945,8 +945,6 @@ https://blog.confirm.ch/mastering-vim-opening-files/
   ;; Setup extensions
   (require 'setup-themes)
   ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
-  ;; (eval-after-load 'dired '(require 'setup-python))
-
   ;; Setup lsp mode prior to setup-java
   ;; setup for lsp and dap
   (require 'setup-auto-complete)
@@ -1223,7 +1221,7 @@ $ pip install importmagic epc
 #+end_src
 
 
-**** Function to restart Workspace unfinished
+**** Function to restart workspace - not functional
 :PROPERTIES:
 :ID:       41f1d2b5-4526-4261-aaaf-00525bd8034c
 :END:
@@ -1236,20 +1234,6 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
      (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
      (lsp-workspace-restart))
     )
-
-  ;;   ;;;###autoload
-  ;; (defun toggle-menubar ()
-  ;; "Toggle menubar visibility.
-  ;; If toolbar is invisible, turn it on.  Otherwise turn it off."
-  ;;   (interactive)
-  ;;   (if (eq menu-bar-mode t)
-  ;;       (menu-bar-mode -1)
-  ;;           (menu-bar-mode t)
-
-  ;; ))
-
-
-
 #+end_src
 
 #+RESULTS:
@@ -1260,37 +1244,22 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 #+RESULTS:
 : lsp-workspace-restart-deep
 
-
-**** python-pytest
+**** Running Tests with python-pytest
 
 https://github.com/wbolster/emacs-python-pytest
-
-
-python-pytest
-python-pytest-file
-python-pytest-file-dwim
-python-pytest-files
-python-pytest-function
-python-pytest-function-dwim
-python-pytest-last-failed
-python-pytest-repeat
-
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (use-package python-pytest
     :ensure t
     )
+  (setq python-pytest-confirm t)
 #+end_src
 
-(setq python-pytest-confirm t)
+Hydra Usage:
 
-**** Configure Py3 Mode
-
-Py3 mode defined in ‘python-mode.el’:
-Major mode for Python shell process.
-
-Das muss der ~py-shell-mode~ sein
-
+#+begin_example
+M-x python-pytest-dispatch
+#+end_example
 
 **** Format buffer using yapf
 :PROPERTIES:
@@ -1420,7 +1389,6 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 
 **** Aggregate Function to clean up - not functioning
 
-
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (defun python-cleanup-this-file ()
     "All cleaning actions run in chain..."
@@ -1441,9 +1409,9 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 https://github.com/tkf/auto-complete-rst
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+  ;; auto-complete-rst
   (require 'auto-complete-rst)
   (auto-complete-rst-init)
-
   ;; specify other sources to use in rst-mode
   (setq auto-complete-rst-other-sources
         '(ac-source-filename
@@ -1475,34 +1443,35 @@ https://github.com/tkf/auto-complete-rst
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (require 'pycoverage)
-
-
   (defun my-coverage ()
     (interactive)
     (when (derived-mode-p 'python-mode)
       (progn
-        ;; (linum-mode)
         (pycoverage-mode))))
 #+end_src
 
+
+**** pyvenv - virtual environments
+#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
+  (use-package pyvenv
+    :config
+    (pyvenv-mode 1)
+    (pyvenv-tracking-mode 1)
+    )
+#+end_src
 
 **** Flyckeck Attempt to use Pylint
 
 https://www.flycheck.org/en/28/_downloads/flycheck.html#Configuring-checkers
 https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-python-3
 
-
-
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
-
-
   ;; (add-hook 'flycheck-mode-hook #'flycheck-virtualenv-setup)
   (defun flycheck-python-setup ()
     (flycheck-mode)
     )
   ;; (add-hook 'python-mode-hook #'flycheck-python-setup)
 #+end_src
-
 
 #+begin_src emacs-lisp :tangle no :noweb yes
   (org-babel-tangle)
@@ -1511,8 +1480,6 @@ https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-pyth
 
 #+RESULTS:
 : t
-
-
 
 **** python-lsp-server specific
 
@@ -1533,8 +1500,6 @@ autopep8
 yapf
 flake8
 pylint
-
-
 
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
@@ -1587,8 +1552,6 @@ pylint
 #+end_src
 
 **** Pyright specific code
-
-
 ***** The configuration
 
 https://emacs-lsp.github.io/lsp-pyright/
@@ -1660,11 +1623,6 @@ Should become =:tangle no= when removed.
 
 #+end_src
 
-
-
-
-
-
 ***** Additional Notes
 ****** Pyright and npm
 
@@ -1680,8 +1638,6 @@ nvm use 16.15.1
 
 =npx pyright= wird nur zum diagnostizieren genommen.
 was man will ist pyright von der console zu starten
-
-
 
 ****** Build Pyright
 
@@ -1771,15 +1727,16 @@ Not sure whehter emacs interprets this at all
 
 
 
-**** Virtual Environments
-#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
-  (use-package pyvenv
-    :config
-    (pyvenv-mode 1)
-    ;; (setq pyvenv-workon "py37")  ; Default venv
-    (pyvenv-tracking-mode 1)
-    )  ; Automatically use pyvenv-workon via dir-locals
 
+
+
+**** shell interpreter
+
+Needs to come *BELOW* the ~(use-package python-mode ...)~ configuration:
+
+#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+(setq python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "-i --simple-prompt")
 #+end_src
 
 **** Footer
@@ -1798,7 +1755,6 @@ Not sure whehter emacs interprets this at all
   ;; (require 'setup-python-lsp-emacs-from-scratch)
   ;; (require 'setup-python-pyright)
   ;; (require 'setup-python-lsp-pyright)
-  ;; now: Alays write into setup-python and require so
   (require 'setup-python)
 #+end_src
 

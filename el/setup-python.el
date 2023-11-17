@@ -10,20 +10,10 @@
    (lsp-workspace-restart))
   )
 
-;;   ;;;###autoload
-;; (defun toggle-menubar ()
-;; "Toggle menubar visibility.
-;; If toolbar is invisible, turn it on.  Otherwise turn it off."
-;;   (interactive)
-;;   (if (eq menu-bar-mode t)
-;;       (menu-bar-mode -1)
-;;           (menu-bar-mode t)
-
-;; ))
-
 (use-package python-pytest
   :ensure t
   )
+(setq python-pytest-confirm t)
 
 (defun cg/python-yapf-format-buffer ()
   (interactive)
@@ -73,9 +63,9 @@
   (python-remove-unused-imports)
   )
 
+;; auto-complete-rst
 (require 'auto-complete-rst)
 (auto-complete-rst-init)
-
 ;; specify other sources to use in rst-mode
 (setq auto-complete-rst-other-sources
       '(ac-source-filename
@@ -83,17 +73,24 @@
         ac-source-dictionary
         ac-source-yasnippet))
 
+(use-package flymake-ruff
+  :ensure t
+  :hook (python-mode . flymake-ruff-load))
+
 (defconst python-linewidth 89)
 
 (require 'pycoverage)
-
-
 (defun my-coverage ()
   (interactive)
   (when (derived-mode-p 'python-mode)
     (progn
-      ;; (linum-mode)
       (pycoverage-mode))))
+
+(use-package pyvenv
+  :config
+  (pyvenv-mode 1)
+  (pyvenv-tracking-mode 1)
+  )
 
 ;; (add-hook 'flycheck-mode-hook #'flycheck-virtualenv-setup)
 (defun flycheck-python-setup ()
@@ -147,12 +144,8 @@
 
   ;; (require 'lsp-pylsp)
 
-(use-package pyvenv
-  :config
-  (pyvenv-mode 1)
-  ;; (setq pyvenv-workon "py37")  ; Default venv
-  (pyvenv-tracking-mode 1)
-  )  ; Automatically use pyvenv-workon via dir-locals
+(setq python-shell-interpreter "ipython3"
+        python-shell-interpreter-args "-i --simple-prompt")
 
 (provide 'setup-python)
 
