@@ -126,10 +126,20 @@
   (setq dap-auto-configure-features '(locals repl))
   :commands dap-debug
   :config
+  (require 'dap-ui)
+  (dap-mode t)
+  ;; Node support
   (require 'dap-node)
+  (dap-node-setup) ;; Automatically installs Node debug adapter if needed
+  ;; Python support
+  (require 'dap-python)
+  ;; dap-gdb-lldb
+  ;; (require 'dap-gdb-lldb)  -> makes it break!
+  ;; (dap-gdb-lldb-setup)
   (dap-ui-mode 1)
   (dap-tooltip-mode 1)
-  (dap-node-setup) ;; Automatically installs Node debug adapter if needed
+  ;; if it is not enabled `dap-mode' will use the minibuffer.
+  (tooltip-mode t)
   (require 'dap-hydra)
     ;; Redefine the height of the repl buffer
   (setq dap-ui-buffer-configurations
@@ -139,8 +149,6 @@
           (,dap-ui--breakpoints-buffer . ((side . left) (slot . 2) (window-width . ,treemacs-width)))
           (,dap-ui--debug-window-buffer . ((side . bottom) (slot . 3) (window-width . 0.20)))
           (,dap-ui--repl-buffer . ((side . bottom) (slot . 1) (window-height . 0.20)))))
-  ;; (require 'dap-gdb-lldb)  -> makes it break!
-  ;; (dap-gdb-lldb-setup)
   ;; Bind `C-c l d` to `dap-hydra` for easy access
   ;; (general-define-key
   ;;  :keymaps 'lsp-mode-map
@@ -149,7 +157,8 @@
   )
 
 
-
+;; (setq dap-auto-configure-features '(sessions locals controls tooltip))
+;; default: (sessions locals breakpoints expressions controls tooltip)
 
 ;; dap-node-setup setups the debug adapter
 

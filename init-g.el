@@ -351,6 +351,8 @@
 ;; deactivate  jdee for  loading java files
 (setq auto-mode-alist
       (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
+
+;; run dap mode setup
 (require 'setup-dap-mode)
 
 (use-package use-package-ensure-system-package :ensure t)

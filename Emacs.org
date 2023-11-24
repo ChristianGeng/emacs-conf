@@ -1038,15 +1038,18 @@ AND:
   ;; deactivate  jdee for  loading java files
   (setq auto-mode-alist
         (append '(("\\.java\\'" . java-mode)) auto-mode-alist))
-  (require 'setup-dap-mode)
 
 #+end_src
 
 #+RESULTS:
 : setup-dap-mode
 
+**** Debugging: Setup dap mode (including python)
 
-
+#+begin_src emacs-lisp
+  ;; run dap mode setup
+  (require 'setup-dap-mode)
+#+end_src
 
 *** Python Info
 :PROPERTIES:
@@ -1060,42 +1063,9 @@ https://github.com/pyenv/pyenv
 (pyenv-mode)
 then run pyenv-mode-set
 
-**** DAP Launching
+**** Launching DAP
 
-#+begin_src emacs-lisp :tangle no
-  ;; https://github.com/emacs-lsp/dap-mode/issues/202 DAP Breakpoints
-  ;;
-  ;; Launcher Example(s)
-  ;;
-  Endpoint to get a breakpoint into views when using manage.py
-  (dap-debug
-   (list :type "python"
-         :args "runserver --noreload"
-         :cwd "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/"
-         :module nil
-         :console "integratedTerminal"
-         :program "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/manage.py"
-         :request "launch"
-         :name "Python: Django manage"
-         :django t))
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-  ;;
-  ;; env vars do not work:
-  ;; https://github.com/emacs-lsp/dap-mode/issues/202
-  (dap-debug
-   (list :type "python"
-         :args "-s"
-         :cwd "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/app/study/tests/"
-         :environment-variables '(("FOO" . "BAR"))
-         :module nil
-         :console "integratedTerminal"
-         :program "/home/audeering.local/cgeng/code/data_collection/aisoundlab/backend/test.py"
-         :request "launch"
-         :name "Python: Django run unit test file"
-         :django t))
-#+end_src
+These are sitting in ~REPLS and Debugging~ in python.org
 
 **** Linting, Checkers, Static Code Analysis - Hooks
 
