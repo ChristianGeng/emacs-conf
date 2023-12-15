@@ -3,7 +3,7 @@
 # key: __init
 # --
 
-    def __init__(self):
-        """Constructor.
-        """
-        super().__init__()
+def __init__(self):
+    """Constructor.
+    """
+    super().__init__()
