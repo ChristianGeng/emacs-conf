@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: noquafile
+# key: noquafile
+# --
+
+
+# Use this at the top of the file:
+# flake8: noqa
