@@ -3040,6 +3040,41 @@ I also had to use dconf-editor and used there recipe from [[https://askubuntu.co
 
 #+end_src
 
+*** csv mode
+
+#+begin_src emacs-lisp
+
+(require 'cl)
+(require 'color)
+
+(defun csv-highlight (&optional separator)
+  (interactive (list (when current-prefix-arg (read-char "Separator: "))))
+  (font-lock-mode 1)
+  (let* ((separator (or separator ?\,))
+         (n (count-matches (string separator) (point-at-bol) (point-at-eol)))
+         (colors (loop for i from 0 to 1.0 by (/ 2.0 n)
+                       collect (apply #'color-rgb-to-hex
+                                      (color-hsl-to-rgb i 0.3 0.5)))))
+    (loop for i from 2 to n by 2
+          for c in colors
+          for r = (format "^\\([^%c\n]+%c\\)\\{%d\\}" separator separator i)
+          do (font-lock-add-keywords nil `((,r (1 '(face (:foreground ,c)))))))))
+
+#+end_src
+
+#+RESULTS:
+: csv-highlight
+
+#+begin_src emacs-lisp
+    (add-hook 'csv-mode-hook 'csv-highlight)
+    (add-hook 'csv-mode-hook 'csv-align-mode)
+    (add-hook 'csv-mode-hook '(lambda () (interactive) (toggle-truncate-lines nil)))
+#+end_src
+
+#+RESULTS:
+| t | csv-align-mode |
+
+
 *** calibredb
 :PROPERTIES:
 :ID:       632883c3-8739-4a79-bab9-87bc587dc8af
@@ -3201,9 +3236,7 @@ https://emacs.stackexchange.com/questions/35587/emacs-client-cant-find-server-in
 ** Get Temperature
 
 Shell Script to get get temperatures
-
 # temperatures=$(cat /sys/class/thermal/thermal_zone*/temp  | tr '\n' '/')
-
 
 ** Web Server
 
