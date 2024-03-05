@@ -9,6 +9,10 @@
 # and https://github.com/gooofy/drawilleplot
 
 # snippet for asciplot using drawilleplot matplotlib backend
+# fix:
+# *** AttributeError: module 'PIL.Image' has no attribute 'ANTIALIAS'
+# pip install Pillow==9.5.0
+
 import matplotlib
 matplotlib.use('module://drawilleplot')
 import matplotlib.pyplot as plt
