@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: timing
+# key: timing
+# --
+
+import time
+t0 = time.time()
+print("put your code here")
+t = time.time() - t0
+print(t)
