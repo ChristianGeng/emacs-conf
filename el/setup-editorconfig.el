@@ -33,7 +33,7 @@
 (use-package editorconfig
   :ensure t
   :config
-  (editorconfig-mode 1))
+  (editorconfig-mode nil))
 
 (provide 'setup-editorconfig)
 ;;; setup-editorconfig.el ends here
