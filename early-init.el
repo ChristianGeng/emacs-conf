@@ -5,5 +5,8 @@
 ;;                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
 
+(setcar native-comp-eln-load-path (concat (getenv "HOME") "/.cache/emacs/"))
+
+
 ;; (message "Early init")
 ;; (message "Early init")
