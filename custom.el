@@ -218,8 +218,7 @@
  '(ignored-local-variable-values
    '((eval progn (make-local-variable 'process-environment)
            (setq process-environment
-                 (copy-sequence process-environment))
-          )))
+                 (copy-sequence process-environment)))))
  '(markdown-command "pandoc")
  '(openwith-mode t)
  '(org-agenda-files (list org-directory))
@@ -290,25 +289,25 @@
                  nerd-icons nerd-icons-dired nerd-icons-ibuffer
                  ng2-mode nginx-mode ob-async ob-chatgpt-shell
                  ob-ipython ob-mermaid ob-mongo ob-sql-mode openwith
-                 org org-chef org-ml org-plus-contrib org-plus-contrib
-                 org-roam org-special-block-extras org-sql
-                 org-tree-slide ox-asciidoc ox-gfm ox-rst paredit
-                 pcache pcre2el pdf-tools pfuture pip-requirements
-                 pippel pkg-info plantuml-mode poly-ansible polymode
-                 pony-mode popup popup-imenu posframe powerline
-                 projectile projectile-extras projectile-speedbar
-                 protobuf-mode pungi py-autopep8 py-isort py-yapf
-                 pycoverage pyenv-mode-auto pyimport pylint pymacs
-                 python-django python-environment python-mode
-                 python-pytest python-x pyvenv queue
-                 rainbow-delimiters realgud realgud-jdb realgud-pry
-                 realgud-rdb2 reformatter req-package request rtags
-                 ruff-format rust-mode s scala-mode sclang-extensions
-                 sclang-snippets seq shrink-path shut-up simple-httpd
-                 smex smex smooth-scrolling spacemacs-theme sphinx-doc
-                 sphinx-mode spinner sqlformat sr-speedbar ssass-mode
-                 subatomic-theme swiper swoop system-packages tagedit
-                 terraform-mode tidal tj3-mode toml toml-mode treemacs
+                 org org-chef org-contrib org-ml org-roam
+                 org-special-block-extras org-sql org-tree-slide
+                 ox-asciidoc ox-gfm ox-rst paredit pcache pcre2el
+                 pdf-tools pfuture pip-requirements pippel pkg-info
+                 plantuml-mode poly-ansible polymode pony-mode popup
+                 popup-imenu posframe powerline projectile
+                 projectile-extras projectile-speedbar protobuf-mode
+                 pungi py-autopep8 py-isort py-yapf pycoverage
+                 pyenv-mode-auto pyimport pylint pymacs python-django
+                 python-environment python-mode python-pytest python-x
+                 pyvenv queue rainbow-delimiters realgud realgud-jdb
+                 realgud-pry realgud-rdb2 reformatter req-package
+                 request rtags ruff-format rust-mode s scala-mode
+                 sclang-extensions sclang-snippets seq shrink-path
+                 shut-up simple-httpd smex smex smooth-scrolling
+                 spacemacs-theme sphinx-doc sphinx-mode spinner
+                 sqlformat sr-speedbar ssass-mode subatomic-theme
+                 swiper swoop system-packages tagedit terraform-mode
+                 tidal tj3-mode toml toml-mode treemacs
                  treemacs-all-the-icons treemacs-evil
                  treemacs-icons-dired treemacs-magit
                  treemacs-projectile treepy typescript-mode undo-tree
