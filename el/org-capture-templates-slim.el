@@ -18,9 +18,9 @@
 ;; (require 'org-web-tools)
 ;; (setq org-web-tools-pandoc-sleep-time 5.0)
 ;; Enable org-contacts
-(require 'org-contacts)
+;; (require 'org-contacts)
 ;; (add-to-list 'org-contacts-files (concat org-directory "/peo.org"))
-(setq org-contacts-icon-use-gravatar nil)
+;; (setq org-contacts-icon-use-gravatar nil)
 ;; Enable org-eww
 ;; (require 'org-eww)
 ;; (require 'org-journal)

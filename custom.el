@@ -289,7 +289,7 @@
                  nerd-icons nerd-icons-dired nerd-icons-ibuffer
                  ng2-mode nginx-mode ob-async ob-chatgpt-shell
                  ob-ipython ob-mermaid ob-mongo ob-sql-mode openwith
-                 org org-chef org-contacts org-contrib org-ml org-roam
+                 org org-chef org-contrib org-ml org-roam
                  org-special-block-extras org-sql org-tree-slide
                  ox-asciidoc ox-gfm ox-rst paredit pcache pcre2el
                  pdf-tools pfuture pip-requirements pippel pkg-info
