@@ -1,3 +1,20 @@
+;;; doom-modeline.el --- Setup Doom Modeline  -*- lexical-binding: t; -*-
+;;; Commentary:
+;;
+;; Setup the doom modeline
+;; For having glyphs available you should also fonts
+;; (all-the-icons-install-fonts)
+;; (nerd-icons-install-fonts)
+;;
+;; You then probably will need to update the font-cache:
+;;
+;; fc-cache -f -v
+;;
+;; see: https://www.reddit.com/r/emacs/comments/v5adgc/help_with_fontsicons_in_doommodeline/
+;;
+;;; Code:
+
+
 (use-package doom-modeline
       :ensure t
       :hook (after-init . doom-modeline-mode))
@@ -54,7 +71,7 @@
 (setq doom-modeline-enable-word-count nil)
 
 ;; If non-nil, only display one number for checker information if applicable.
-(setq doom-modeline-checker-simple-format t)
+(setq doom-modeline-check-simple-format t)
 
 ;; The maximum displayed length of the branch name of version control.
 (setq doom-modeline-vcs-max-length 12)
@@ -119,3 +136,4 @@
 ;; https://github.com/seagle0128/doom-modeline/issues/254
 
 (provide 'setup-doom-modeline)
+;;; setup-doom-modeline.el ends here
