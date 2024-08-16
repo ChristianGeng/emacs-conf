@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: module-header
+# key: module
+# --
+;;; foo.el --- purpose of the model  -*- lexical-binding: t; -*-
+;;; Commentary:
+;;
+;; Commentary goes here
+;;
+;;; Code:
