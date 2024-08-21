@@ -285,29 +285,29 @@
                  marshal material-theme maven-test-mode memoize
                  mermaid-mode metalheart-theme mic-paren mkdown
                  mmm-mode moe-theme move-text multi-term
-                 multi-web-mode multiple-cursors mvn mvn-help
+                 multi-web-mode multiple-cursors mvn mvn-help neotree
                  nerd-icons nerd-icons-dired nerd-icons-ibuffer
                  ng2-mode nginx-mode ob-async ob-chatgpt-shell
                  ob-ipython ob-mermaid ob-mongo ob-sql-mode openwith
                  org org-chef org-contrib org-ml org-roam
                  org-special-block-extras org-sql org-tree-slide
                  ox-asciidoc ox-gfm ox-rst paredit pcache pcre2el
-                 pdf-tools pfuture pip-requirements pippel pkg-info
-                 plantuml-mode poly-ansible polymode pony-mode popup
-                 popup-imenu posframe powerline projectile
-                 projectile-extras projectile-speedbar protobuf-mode
-                 pungi py-autopep8 py-isort py-yapf pycoverage
-                 pyenv-mode-auto pyimport pylint pymacs python-django
-                 python-environment python-mode python-pytest python-x
-                 pyvenv queue rainbow-delimiters realgud realgud-jdb
-                 realgud-pry realgud-rdb2 reformatter req-package
-                 request rtags ruff-format rust-mode s scala-mode
-                 sclang-extensions sclang-snippets seq shrink-path
-                 shut-up simple-httpd smex smex smooth-scrolling
-                 spacemacs-theme sphinx-doc sphinx-mode spinner
-                 sqlformat sr-speedbar ssass-mode subatomic-theme
-                 swiper swoop system-packages tagedit terraform-mode
-                 tidal tj3-mode toml toml-mode treemacs
+                 pdf-tools persp-projectile pfuture pip-requirements
+                 pippel pkg-info plantuml-mode poly-ansible polymode
+                 pony-mode popup popup-imenu posframe powerline
+                 projectile projectile-extras projectile-speedbar
+                 protobuf-mode pungi py-autopep8 py-isort py-yapf
+                 pycoverage pyenv-mode-auto pyimport pylint pymacs
+                 python-django python-environment python-mode
+                 python-pytest python-x pyvenv queue
+                 rainbow-delimiters realgud realgud-jdb realgud-pry
+                 realgud-rdb2 reformatter req-package request rtags
+                 ruff-format rust-mode s scala-mode sclang-extensions
+                 sclang-snippets seq shrink-path shut-up simple-httpd
+                 smex smex smooth-scrolling spacemacs-theme sphinx-doc
+                 sphinx-mode spinner sqlformat sr-speedbar ssass-mode
+                 subatomic-theme swiper swoop system-packages tagedit
+                 terraform-mode tidal tj3-mode toml toml-mode treemacs
                  treemacs-all-the-icons treemacs-evil
                  treemacs-icons-dired treemacs-magit
                  treemacs-projectile treepy typescript-mode undo-tree
