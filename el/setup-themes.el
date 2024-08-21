@@ -86,5 +86,4 @@
 ;; (when (fboundp 'cycle-themes)
 ;;  (cycle-themes))
 
-
 (provide 'setup-themes)

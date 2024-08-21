@@ -658,6 +658,8 @@
 (when is-mac (exec-path-from-shell-initialize))
 ;; (when is-mac (require 'mac))
 
+(require 'setup-themes)
+
 (require 'cl)
 (require 'color)
 

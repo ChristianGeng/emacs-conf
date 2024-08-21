@@ -3147,14 +3147,12 @@ https://christiantietze.de/posts/2023/01/modus-themes-v4-changes/
 ;; (when (fboundp 'cycle-themes)
 ;;  (cycle-themes))
 
-
 (provide 'setup-themes)
-
 #+end_src
 
-
-
-
+#+begin_src emacs-lisp
+  (require 'setup-themes)
+#+end_src
 
 *** csv mode
 
