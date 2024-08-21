@@ -260,21 +260,21 @@
                  exec-path-from-shell expand-region eyebrowse f
                  fancy-battery fantom-theme fill-column-indicator flx
                  flx-ido flycheck flycheck-plantuml flycheck-yamllint
-                 flymake-eslint flymake-ruff flymake-yamllint flymd
-                 folding frame-local gh gh-md ghub ghub+ git-commit
-                 git-wip-timemachine gited gnu-elpa-keyring-update
-                 goto-chg gradle-mode grip-mode groovy-imports
-                 groovy-mode haskell-mode hcl-mode helm helm-ack
-                 helm-ag helm-core helm-dictionary helm-directory
-                 helm-lsp helm-make helm-projectile helm-swoop
-                 highlight-indent-guides highlight-indentation ht
-                 hydra ibuffer-projectile idea-darkula-theme
-                 image-dired+ imenu-list indium inf-groovy
-                 intellij-theme isend-mode isortify ivy java-snippets
-                 jdee jedi jedi-core jenkins jenkins-watch
-                 jetbrains-darcula-theme jinja2-mode jquery-doc
-                 js-auto-beautify js-comint js-import js2-mode
-                 js2-refactor json-mode json-process-client
+                 flymake-eslint flymake-ruff flymake-shellcheck
+                 flymake-yamllint flymd folding frame-local gh gh-md
+                 ghub ghub+ git-commit git-wip-timemachine gited
+                 gnu-elpa-keyring-update goto-chg gradle-mode
+                 grip-mode groovy-imports groovy-mode haskell-mode
+                 hcl-mode helm helm-ack helm-ag helm-core
+                 helm-dictionary helm-directory helm-lsp helm-make
+                 helm-projectile helm-swoop highlight-indent-guides
+                 highlight-indentation ht hydra ibuffer-projectile
+                 idea-darkula-theme image-dired+ imenu-list indium
+                 inf-groovy intellij-theme isend-mode isortify ivy
+                 java-snippets jdee jedi jedi-core jenkins
+                 jenkins-watch jetbrains-darcula-theme jinja2-mode
+                 jquery-doc js-auto-beautify js-comint js-import
+                 js2-mode js2-refactor json-mode json-process-client
                  json-snatcher jump-to-line jupyter k8s-mode kv
                  levenshtein log4e logito lsp-imenu lsp-ivy lsp-java
                  lsp-metals lsp-mode lsp-pyright lsp-treemacs lsp-ui

@@ -574,7 +574,6 @@
 (require 'setup-treemacs)
 
 (require 'setup-shell-scripting)
-
 (require 'calfw)
 (require 'calfw-gcal)
 (require 'calfw-org)
@@ -587,6 +586,11 @@
 (setq popup-use-optimized-column-computation nil)
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
+
+(use-package flymake-shellcheck
+:commands flymake-shellcheck-load
+:init
+(add-hook 'sh-mode-hook 'flymake-shellcheck-load))
 
 (setq shell-file-name "bash")
 (setq shell-command-switch "-c")

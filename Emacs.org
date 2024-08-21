@@ -2642,7 +2642,6 @@ sudo update-desktop-database
   (require 'setup-treemacs)
 
   (require 'setup-shell-scripting)
-
   (require 'calfw)
   (require 'calfw-gcal)
   (require 'calfw-org)
@@ -2655,6 +2654,18 @@ sudo update-desktop-database
   (setq popup-use-optimized-column-computation nil)
 
   (add-hook 'makefile-mode-hook 'makefile-executor-mode)
+
+#+end_src
+
+**** Enable shellcheck
+
+see https://github.com/federicotdn/flymake-shellcheck
+
+#+begin_src emacs-lisp
+  (use-package flymake-shellcheck
+  :commands flymake-shellcheck-load
+  :init
+  (add-hook 'sh-mode-hook 'flymake-shellcheck-load))
 
 #+end_src
 
@@ -3046,8 +3057,6 @@ I also had to use dconf-editor and used there recipe from [[https://askubuntu.co
 
 Modus Migration Guide to V4 should probably be reviewed:
 https://christiantietze.de/posts/2023/01/modus-themes-v4-changes/
-
-=(require 'setup-themes)= is not required
 
 #+begin_src emacs-lisp :tangle ./el/setup-themes.el :mkdirp yes
 ;;; setup-themes.el --- summary -*- lexical-binding: t -*-
