@@ -3044,6 +3044,9 @@ I also had to use dconf-editor and used there recipe from [[https://askubuntu.co
 
 *** Themes
 
+Modus Migration Guide to V4 should probably be reviewed:
+https://christiantietze.de/posts/2023/01/modus-themes-v4-changes/
+
 =(require 'setup-themes)= is not required
 
 #+begin_src emacs-lisp :tangle ./el/setup-themes.el :mkdirp yes
