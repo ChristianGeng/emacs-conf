@@ -331,11 +331,7 @@
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (require 'realgud)
-
 (require 'setup-projectile)
-
-;; Setup extensions
-(require 'setup-themes)
 ;; (eval-after-load 'ido '(require 'setup-ido)) ;; interactive break M-x
 ;; Setup lsp mode prior to setup-java
 ;; setup for lsp and dap

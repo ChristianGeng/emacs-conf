@@ -284,7 +284,7 @@
                  markdown-preview-mode markdown-toc markup-faces
                  marshal material-theme maven-test-mode memoize
                  mermaid-mode metalheart-theme mic-paren mkdown
-                 mmm-mode moe-theme move-text multi-term
+                 mmm-mode modus-themes moe-theme move-text multi-term
                  multi-web-mode multiple-cursors mvn mvn-help neotree
                  nerd-icons nerd-icons-dired nerd-icons-ibuffer
                  ng2-mode nginx-mode ob-async ob-chatgpt-shell
