@@ -1376,9 +1376,12 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 :ID:       59d7132f-71a6-45b0-88b8-a2f15e3952f2
 :END:
 
+This packages seems not to be really well maintained.
+I am revoming it as of 2024-08-21
+
 https://github.com/tkf/auto-complete-rst
 
-#+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
+#+begin_src emacs-lisp  :tangle no :mkdirp yes
   ;; auto-complete-rst
   (require 'auto-complete-rst)
   (auto-complete-rst-init)

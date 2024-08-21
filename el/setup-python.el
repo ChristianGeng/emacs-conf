@@ -63,16 +63,6 @@
   (python-remove-unused-imports)
   )
 
-;; auto-complete-rst
-(require 'auto-complete-rst)
-(auto-complete-rst-init)
-;; specify other sources to use in rst-mode
-(setq auto-complete-rst-other-sources
-      '(ac-source-filename
-        ac-source-abbrev
-        ac-source-dictionary
-        ac-source-yasnippet))
-
 (use-package flymake-ruff
   :ensure t
   :hook (python-mode . flymake-ruff-load))

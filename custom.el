@@ -232,25 +232,25 @@
                  ansible-vault anti-zenburn-theme apiwrap
                  apt-sources-list async atom-dark-theme
                  atom-one-dark-theme atomic-chrome auctex
-                 auto-complete auto-complete-rst avy bash-completion
-                 bind-key blacken blamer browse-kill-ring bui
-                 buster-snippets butler c-mode calfw calfw-gcal
-                 calfw-ical calfw-org calibredb cdlatex cfrs
-                 cider-eval-sexp-fu cmake-ide cmake-mode
-                 color-theme-github color-theme-sanityinc-tomorrow
-                 color-theme-solarized common-lisp-snippets company
-                 company-ansible company-box company-emacs-eclim
-                 company-lsp company-shell company-tern
-                 company-terraform company-web compat concurrent conda
-                 crontab-mode csv csv-mode ctable cyberpunk-theme
-                 dap-mode darcula-theme darkroom dash dash-docs
-                 dash-functional deferred diff-hl diminish dired-atool
-                 dired-collapse dired-details dired-du dired-explorer
-                 dired-fdclone dired-hacks-utils dired-imenu dired-k
-                 dired-narrow dired-quick-sort dired-rsync
-                 dired-sidebar dired-single dired-subtree
-                 django-manage django-snippets django-theme djangonaut
-                 docker docker-api docker-cli docker-compose-mode
+                 auto-complete avy bash-completion bind-key blacken
+                 blamer browse-kill-ring bui buster-snippets butler
+                 c-mode calfw calfw-gcal calfw-ical calfw-org
+                 calibredb cdlatex cfrs cider-eval-sexp-fu cmake-ide
+                 cmake-mode color-theme-github
+                 color-theme-sanityinc-tomorrow color-theme-solarized
+                 common-lisp-snippets company company-ansible
+                 company-box company-emacs-eclim company-lsp
+                 company-shell company-tern company-terraform
+                 company-web compat concurrent conda crontab-mode csv
+                 csv-mode ctable cyberpunk-theme dap-mode
+                 darcula-theme darkroom dash dash-docs dash-functional
+                 deferred diff-hl diminish dired-atool dired-collapse
+                 dired-details dired-du dired-explorer dired-fdclone
+                 dired-hacks-utils dired-imenu dired-k dired-narrow
+                 dired-quick-sort dired-rsync dired-sidebar
+                 dired-single dired-subtree django-manage
+                 django-snippets django-theme djangonaut docker
+                 docker-api docker-cli docker-compose-mode
                  dockerfile-mode doom doom-modeline doom-themes
                  dumb-jump ecb ecb-snapshot eclim edit-indirect
                  editorconfig egg ein ein-mumamo el-get elpy elpygen
