@@ -2661,6 +2661,9 @@ sudo update-desktop-database
 
 see https://github.com/federicotdn/flymake-shellcheck
 
+An extended tutorial can be found [[https://www.cyberciti.biz/programming/improve-your-bashsh-shell-script-with-shellcheck-lint-script-analysis-tool/][here]].
+
+
 #+begin_src emacs-lisp
   (use-package flymake-shellcheck
   :commands flymake-shellcheck-load
