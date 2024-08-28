@@ -3192,6 +3192,17 @@ https://christiantietze.de/posts/2023/01/modus-themes-v4-changes/
 | t | csv-align-mode |
 
 
+*** Language-Tool
+
+in the jars directory there is a download script
+https://github.com/mhayashi1120/Emacs-langtool?tab=readme-ov-file
+  ;; (joindirs user-emacs-directory "jars" "LanguageTool-6.4" "languagetool-commandline.jar")
+
+#+begin_src emacs-lisp
+  (setq langtool-language-tool-server-jar (joindirs user-emacs-directory "jars" "LanguageTool-6.4" "languagetool-server.jar"))
+  (require 'langtool)
+#+end_src
+
 *** calibredb
 :PROPERTIES:
 :ID:       632883c3-8739-4a79-bab9-87bc587dc8af

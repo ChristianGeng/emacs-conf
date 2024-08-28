@@ -680,6 +680,9 @@
 (add-hook 'csv-mode-hook 'csv-align-mode)
 (add-hook 'csv-mode-hook '(lambda () (interactive) (toggle-truncate-lines nil)))
 
+(setq langtool-language-tool-server-jar (joindirs user-emacs-directory "jars" "LanguageTool-6.4" "languagetool-server.jar"))
+(require 'langtool)
+
 (require 'calibredb)
 (setq calibredb-root-dir "/D/Calibre_Science/")
 (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))

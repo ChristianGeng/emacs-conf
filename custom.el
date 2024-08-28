@@ -276,9 +276,9 @@
                  jquery-doc js-auto-beautify js-comint js-import
                  js2-mode js2-refactor json-mode json-process-client
                  json-snatcher jump-to-line jupyter k8s-mode kv
-                 levenshtein log4e logito lsp-imenu lsp-ivy lsp-java
-                 lsp-metals lsp-mode lsp-pyright lsp-treemacs lsp-ui
-                 lv magit-find-file magit-gh-pulls magit-popup
+                 langtool levenshtein log4e logito lsp-imenu lsp-ivy
+                 lsp-java lsp-metals lsp-mode lsp-pyright lsp-treemacs
+                 lsp-ui lv magit-find-file magit-gh-pulls magit-popup
                  magit-svn magit-todos makefile-executor markdown-mode
                  markdown-mode+ markdown-preview-eww
                  markdown-preview-mode markdown-toc markup-faces
@@ -295,11 +295,11 @@
                  pdf-tools persp-projectile pfuture pip-requirements
                  pippel pkg-info plantuml-mode poly-ansible polymode
                  pony-mode popup popup-imenu posframe powerline
-                 projectile projectile-extras projectile-speedbar
-                 protobuf-mode pungi py-autopep8 py-isort py-yapf
-                 pycoverage pyenv-mode-auto pyimport pylint pymacs
-                 python-django python-environment python-mode
-                 python-pytest python-x pyvenv queue
+                 pretty-speedbar projectile projectile-extras
+                 projectile-speedbar protobuf-mode pungi py-autopep8
+                 py-isort py-yapf pycoverage pyenv-mode-auto pyimport
+                 pylint pymacs python-django python-environment
+                 python-mode python-pytest python-x pyvenv queue
                  rainbow-delimiters realgud realgud-jdb realgud-pry
                  realgud-rdb2 reformatter req-package request rtags
                  ruff-format rust-mode s scala-mode sclang-extensions
