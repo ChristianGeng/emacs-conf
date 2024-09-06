@@ -227,10 +227,10 @@
  '(package-selected-packages
    '(abyss-theme ac-octave ace-window adaptive-wrap adoc-mode
                  afternoon-theme ag aio airline-themes all-the-icons
-                 all-the-icons-dired alsamixer ample-theme anaphora
-                 angular-snippets annalist ansible ansible-doc
-                 ansible-vault anti-zenburn-theme apiwrap
-                 apt-sources-list async atom-dark-theme
+                 all-the-icons-dired alsamixer ample-theme
+                 anaconda-mode anaphora angular-snippets annalist
+                 ansible ansible-doc ansible-vault anti-zenburn-theme
+                 apiwrap apt-sources-list async atom-dark-theme
                  atom-one-dark-theme atomic-chrome auctex
                  auto-complete avy bash-completion bind-key blacken
                  blamer browse-kill-ring bui buster-snippets butler
