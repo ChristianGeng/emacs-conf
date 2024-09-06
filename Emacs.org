@@ -2491,6 +2491,15 @@ sudo update-desktop-database
 (if (string-match-p (regexp-quote "compute3") (system-name)) (print ";"))
 #+end_src
 
+** speedbar
+
+the setup is broken, not using it at the moment
+
+#+begin_src emacs-lisp
+  ;; (require 'setup-speedbar)
+#+end_src
+
+
 ** Collected Other Mode Configurations
 
 
