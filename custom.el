@@ -262,19 +262,19 @@
                  flx-ido flycheck flycheck-plantuml flycheck-yamllint
                  flymake-eslint flymake-ruff flymake-shellcheck
                  flymake-yamllint flymd folding frame-local gh gh-md
-                 ghub ghub+ git-commit git-wip-timemachine gited
-                 gnu-elpa-keyring-update goto-chg gradle-mode
-                 grip-mode groovy-imports groovy-mode haskell-mode
-                 hcl-mode helm helm-ack helm-ag helm-core
-                 helm-dictionary helm-directory helm-lsp helm-make
-                 helm-projectile helm-swoop highlight-indent-guides
-                 highlight-indentation ht hydra ibuffer-projectile
-                 idea-darkula-theme image-dired+ imenu-list indium
-                 inf-groovy intellij-theme isend-mode isortify ivy
-                 java-snippets jdee jedi jedi-core jenkins
-                 jenkins-watch jetbrains-darcula-theme jinja2-mode
-                 jquery-doc js-auto-beautify js-comint js-import
-                 js2-mode js2-refactor json-mode json-process-client
+                 git-wip-timemachine gited gnu-elpa-keyring-update
+                 goto-chg gradle-mode grip-mode groovy-imports
+                 groovy-mode haskell-mode hcl-mode helm helm-ack
+                 helm-ag helm-core helm-dictionary helm-directory
+                 helm-lsp helm-make helm-projectile helm-swoop
+                 highlight-indent-guides highlight-indentation ht
+                 hydra ibuffer-projectile idea-darkula-theme
+                 image-dired+ imenu-list indium inf-groovy
+                 intellij-theme isend-mode isortify ivy java-snippets
+                 jdee jedi jedi-core jenkins jenkins-watch
+                 jetbrains-darcula-theme jinja2-mode jquery-doc
+                 js-auto-beautify js-comint js-import js2-mode
+                 js2-refactor json-mode json-process-client
                  json-snatcher jump-to-line jupyter k8s-mode kv
                  langtool levenshtein log4e logito lsp-imenu lsp-ivy
                  lsp-java lsp-metals lsp-mode lsp-pyright lsp-treemacs
@@ -310,9 +310,10 @@
                  terraform-mode tidal tj3-mode toml toml-mode treemacs
                  treemacs-all-the-icons treemacs-evil
                  treemacs-icons-dired treemacs-magit
-                 treemacs-projectile treepy typescript-mode undo-tree
-                 use-package use-package-ensure-system-package
-                 virtualenv visual-fill-column visual-regexp vmd-mode
+                 treemacs-projectile treepy treesit-auto
+                 typescript-mode undo-tree use-package
+                 use-package-ensure-system-package virtualenv
+                 visual-fill-column visual-regexp vmd-mode
                  vue-html-mode vue-mode w3m web-beautify
                  web-completion-data web-mode web-mode-edit-element
                  web-server wfnames wgrep wgrep-ack wgrep-ag

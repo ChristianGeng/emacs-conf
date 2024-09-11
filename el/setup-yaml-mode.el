@@ -44,7 +44,7 @@
 (require 'ansible-doc)
 (require 'highlight-indentation)
 (require 'highlight-indent-guides)
-(require 'yasnippet)
+(use-package yasnippet :straight t)
 (require 'poly-ansible)
 
 (autoload 'yaml-mode "yaml-mode")

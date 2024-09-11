@@ -57,3 +57,9 @@ codeium/
 
 # do not track language tool in git
 /jars/LanguageTool*
+
+# ignore straight builds
+/straight/
+
+# ignore xml
+/xml/

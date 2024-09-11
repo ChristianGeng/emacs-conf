@@ -2,8 +2,15 @@ PROPERTIES:
 #+title: Emacs From Scratch Configuration
 #+PROPERTY: header-args:emacs-lisp :tangle ./init-g.el :mkdirp yes
 
+* Lexical binding to top of file
+
+#+begin_src emacs-lisp :tangle no
+-*- lexical-binding: t -*-
+#+end_src
+
 
 * Tangle and Reload init file
+
 
 #+begin_src emacs-lisp :tangle yes :noweb yes
   (org-babel-tangle)
@@ -13,6 +20,74 @@ PROPERTIES:
 #+RESULTS:
 : t
 
+* Collect Usage Stats
+
+#+begin_src emacs-lisp
+(setq use-package-compute-statistics t)
+#+end_src
+
+* Straight
+
+
+** Initial bootstrap
+
+First, place the following bootstrap code in your init-file:
+
+#+begin_src emacs-lisp
+    (defvar bootstrap-version)
+    (let ((bootstrap-file
+           (expand-file-name
+            "straight/repos/straight.el/bootstrap.el"
+            (or (bound-and-true-p straight-base-dir)
+                user-emacs-directory)))
+          (bootstrap-version 7))
+      (unless (file-exists-p bootstrap-file)
+        (with-current-buffer
+            (url-retrieve-synchronously
+             "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+             'silent 'inhibit-cookies)
+          (goto-char (point-max))
+          (eval-print-last-sexp)))
+      (load bootstrap-file nil 'nomessage))
+
+  (straight-use-package 'use-package)
+  (straight-use-package 'yasnippet)
+#+end_src
+
+#+RESULTS:
+: t
+
+- This should only run once, so it can be left in the init file
+- it wil create the directory straight in .emacs.d
+- To install a package: (straight-use-package 'evil)
+- M-x straight-use-package to see list of installables
+
+
+#+begin_src emacs-lisp
+    ;; org-20210929
+    ;; org-contrib-0.6
+    ;; org-ml-20230410.30
+    ;; org-sql-20240819.2145
+    ;; org-roam-20240715.1750
+    ;; org-chef-20231127.1601
+    ;; org-tree-slide-20230826.1234
+    ;; org-special-block-extras-20230721.43
+    ;; calfw-org-20170411.220
+  (use-package org :straight (:type built-in))
+  (use-package org-contrib :straight t)
+  (use-package org-ml :straight t)
+  (use-package org-sql :straight t)
+  (use-package org-roam :straight t)
+  (use-package org-tree-slide :straight t)
+  (use-package org-special-block-extras :straight t)
+  (use-package calfw-org :straight t)
+  (use-package yasnippet-classic-snippets :straight t)
+
+  ;; (use-package org :straight t)
+#+end_src
+
+#+RESULTS:
+: #s(hash-table data (:use-package (26337 54677 231137 228000) :init (26337 54677 231135 199000) :config (26337 54677 231125 580000) :config-secs (0 0 2 537000) :init-secs (0 0 17 784000) :use-package-secs (0 1 147606 993000)))
 
 
 * Treesitter auto mode
@@ -34,6 +109,7 @@ Links:
   (global-treesit-auto-mode))
 
 #+end_src
+
 
 * Termux Issue
 
@@ -71,6 +147,9 @@ However, if your init file changes the values of
 :PROPERTIES:
 :ID:       214b3d62-1d24-46f8-a373-e3a9e665602d
 :END:
+
+
+
 
 ** Configure Startup
 :PROPERTIES:
@@ -192,10 +271,9 @@ However, if your init file changes the values of
 
 #+end_src
 
-#+RESULTS:
 
 
-** Defaults
+*** Defaults
 :PROPERTIES:
 :ID:       8e48bca6-9fb1-4ce2-8234-784594027423
 :END:
@@ -333,7 +411,7 @@ However, if your init file changes the values of
 
 #+end_src
 
-** Show Line Numbers per Default, with some Exceptions
+*** Show Line Numbers per Default, with some Exceptions
 :PROPERTIES:
 :ID:       fa826301-f5ae-4c2a-9280-84422f397ff0
 :END:
@@ -361,7 +439,7 @@ However, if your init file changes the values of
 #+RESULTS:
 
 
-*** Set frame transparency, maximize windows.
+**** Set frame transparency, maximize windows.
 :PROPERTIES:
 :ID:       3e5a576d-bc05-4eb0-bc22-19964267f72f
 :END:
@@ -379,7 +457,7 @@ However, if your init file changes the values of
 
 
 
-** Interface more minimalsitic(menubar etc.))
+*** Interface more minimalsitic(menubar etc.))
 :PROPERTIES:
 :ID:       53c1899a-035a-44f3-9460-d07523a3a1b3
 :END:
@@ -408,7 +486,7 @@ see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-d
       (menu-bar-mode -1)            ; Disable the menu bar
 #+end_src
 
-** Keyboard Interaction (and the Evil Chapter)
+*** Keyboard Interaction (and the Evil Chapter)
 :PROPERTIES:
 :ID:       7659bb1b-d161-4195-9d35-657b64674762
 :END:
@@ -427,7 +505,7 @@ see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-d
 
 #+end_src
 
-*** Expand region
+**** Expand region
 
 ;; expand regions semantically
 ;; see https://github.com/magnars/expand-region.el
@@ -440,7 +518,7 @@ see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-d
 #+RESULTS:
 : er/expand-region
 
-*** Undo system
+**** Undo system
 
 - C-r in evil/vim: undo/redo functionality
 - it will suggest to customize the evil undo system, see customization below
@@ -461,7 +539,7 @@ see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-d
 
 
 
-**** Undo tree create "*.~undo-tree~" files
+***** Undo tree create "*.~undo-tree~" files
 
 Apparently the default has changed recently, so we need to
 set the history for the time being, see [[https://www.reddit.com/r/emacs/comments/tejte0/undotree_bug_undotree_files_scattering_everywhere/][this reddit post.]]
@@ -473,7 +551,7 @@ set the history for the time being, see [[https://www.reddit.com/r/emacs/comment
 
 The post also suggests that [[https://gitlab.com/ideasman42/emacs-undo-fu-session][emacs-undo-fu-session]] might be interesting.
 
-*** Evil
+**** Evil
 :PROPERTIES:
 :ID:       a33db7a9-3505-420b-80f8-fe89b83495b7
 :END:
@@ -534,7 +612,7 @@ https://www.linode.com/docs/guides/emacs-evil-mode/
 #+RESULTS:
 
 
-**** Evil Nerd Commenter
+***** Evil Nerd Commenter
 
 =M-;= does comment, but the behavior sometimes isn't exactly what you'd expect.
 
@@ -547,22 +625,22 @@ https://github.com/redguardtoo/evil-nerd-commenter
     :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 #+end_src
-**** Usage and Vim bindings
+***** Usage and Vim bindings
 
-***** States
+****** States
 
-****** Normal State
+******* Normal State
 
 evil-normal-state
 CTRL-z: go to emacs state when in normal state
 White dot
 
-****** Emacs state
+******* Emacs state
 CTRL-z: go back to normal state when in emacs state
 evil-emacs-state
 Blue dot
 
-****** Insert State
+******* Insert State
 
 evil-insert-state
 i insert here
@@ -579,7 +657,7 @@ asdasdasddddddddddddddddddddasd
 sdasdasdasdasdasdasdasdasda
 asdasdasdasdasdasdasdadsasdsadas
 
-******* Paste in insert state
+******** Paste in insert state
 
 see https://stackoverflow.com/questions/2861627/paste-in-insert-mode
 While in insert mode hit CTRL-R {register}
@@ -589,7 +667,7 @@ Examples:
 CTRL-R * will insert in the contents of the clipboard
 CTRL-R " (the unnamed register) inserts the last delete or yank.
 To find this in vim's help type :h i_ctrl-r
-****** Visual state
+******* Visual state
 
 evil-visual-state
 
@@ -605,30 +683,30 @@ vip - select paragraph
 
 
 
-****** Replace State
+******* Replace State
 
 Enter Replace state from normal state typing R
 Overwrites text under cursor
 
-****** Evil Motion State
+******* Evil Motion State
 
 M-x evil motion state
 golded dot
 
-****** Evil Operator-Pending
+******* Evil Operator-Pending
 
 M-x evil operator-state
 No clue what this does
 
 
 
-***** Normal mode and bindings
+****** Normal mode and bindings
 
-****** Visual Mode
+******* Visual Mode
 
 - S-v: Switch to visual mode
 
-****** Navigating
+******* Navigating
 - ^: got to beginning of line
 - j: next line
 - k: previous line
@@ -652,14 +730,14 @@ $ - to the end of the line, INCLUDING the last character.
 asssss asdas s asdasda dasd
 
 
-****** Indenting
+******* Indenting
 
 The == re-indents the line to suit its new position.
 For the visual-mode mappings, gv reselects the last visual block
 = re-indents that block.
 
 
-****** Moving Lines around
+******* Moving Lines around
 
 :m .-2 move line one up
 :m .+1 move line one down
@@ -671,7 +749,7 @@ nnoremap <A-k> :m .-2<CR>==
 
 https://github.com/emacs-evil/evil-collection
 
-****** Deleting
+******* Deleting
 
 d   motion
 
@@ -721,7 +799,7 @@ d^ - delete from cursor to beginning of line
 asssssssssssssssssssssssssssssssssssssssss
 
 D - delete (cut) to the end of the line
-****** Replace Modifier
+******* Replace Modifier
 
 c is the change modifier
 
@@ -734,7 +812,7 @@ Type  rx  to replace the character at the cursor with  x .
 
 asdasd (asd asdas asd)
 
-****** Cutting and pasting
+******* Cutting and pasting
 
 y - yank (copy) marked text
 d - delete marked text
@@ -745,7 +823,7 @@ yiw - yank (copy) word under the cursor
 
 yip - copy current paragraph
 
-****** Searching and Replacing
+******* Searching and Replacing
 
 https://vim.fandom.com/wiki/Search_and_replace#Basic_search_and_replace
 
@@ -773,7 +851,7 @@ To substitute all occurrences in the file type        :%s/old/new/g
 To ask for confirmation each time add 'c'             :%s/old/new/gc
 
 
-****** Upercasing and lower casing
+******* Upercasing and lower casing
 
 
 See the following methods:
@@ -796,11 +874,11 @@ gu3k : Change 3 lines above to lower case
 
 source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text=2%20Answers&text=Visual%20select%20the%20text%2C%20then,gu%20for%20lowercase.
 
-****** Close whole editor
+******* Close whole editor
 
 ZQ - closes whole editor
 
-****** More stuff in normal mode:
+******* More stuff in normal mode:
 
 - zz: put current line under cursor in the middle
 - zt: put current line under cursor at the top
@@ -817,19 +895,19 @@ löetasdasdjlajdklsadjklaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
 
-****** Windwos Buffers Splits
+******* Windwos Buffers Splits
 
-******* Working with buffers
+******** Working with buffers
 
 :bd - delete buffer
 C-6 - goto the previous buffer
 
-******* Working with windows
+******** Working with windows
 
 :split - split horizontally
 :vsplit - split left/right
 :sort - sort lines
-******* Working with Tabs
+******** Working with Tabs
 
 Ctrl+WT (that's a capital T) to move any open window to its own tab.
 :tabnew - create a tab
@@ -839,7 +917,7 @@ Ctrl+WT (that's a capital T) to move any open window to its own tab.
 :tabclose close current tab
 
 
-******* Working with splits
+******** Working with splits
 
 
 Switching  between visible buffers
@@ -905,7 +983,7 @@ Ctrl-w =
 
 
 
-****** Open files
+******* Open files
 
 :e ~/.bashrc - edit this file
 :r /path/to/file - inserts file into current buffer
@@ -915,7 +993,7 @@ https://blog.confirm.ch/mastering-vim-opening-files/
 
 
 
-***** Links
+****** Links
 
 - https://vim.rtorr.com/
 - https://devhints.io/vim
@@ -928,13 +1006,13 @@ https://blog.confirm.ch/mastering-vim-opening-files/
 
 
 
-** Programming
+*** Programming
 
 :PROPERTIES:
 :ID:       10eecafe-1a33-4d5d-a162-6fc25c6f4791
 :END:
 
-*** Programming General
+**** Programming General
 :PROPERTIES:
 :ID:       da20042e-decb-467e-bae5-1f20bef5db7e
 :END:
@@ -946,12 +1024,11 @@ https://blog.confirm.ch/mastering-vim-opening-files/
   ;; Setup lsp mode prior to setup-java
   ;; setup for lsp and dap
   (require 'setup-auto-complete)
-
 #+end_src
 
 
 
-*** Rainbow Delim
+**** Rainbow Delim
 :PROPERTIES:
 :ID:       5d59fc74-cea3-415b-ab72-a88eadd97d17
 :END:
@@ -968,7 +1045,7 @@ https://blog.confirm.ch/mastering-vim-opening-files/
 
 
 
-*** Notebooks
+**** Notebooks
 
 
 (require 'ein)
@@ -992,21 +1069,21 @@ M-x jupyter-connect-server-repl
 
 
 
-*** LSP General
+**** LSP General
 :PROPERTIES:
 :ID:       b204e436-4dff-486d-8eac-8b32772d7574
 :END:
 
-**** Install
+***** Install
 
 #+begin_src emacs-lisp
   (require 'setup-lsp)
 #+end_src
 
 
-**** Usage
+***** Usage
 
-***** More Interface Options
+****** More Interface Options
 
 (setq lsp-ui-doc-enable t)
 (setq lsp-ui-doc-enable t)
@@ -1015,10 +1092,10 @@ M-x jupyter-connect-server-repl
 (setq lsp-ui-imenu-enable t)
 (setq lsp-ui-flycheck-enable t)
 
-**** Comments and Notes
+***** Comments and Notes
 
-***** often it is necessary to delete =~/.emacs.d/.lsp-session-v1=
-***** Reinstallation:
+****** often it is necessary to delete =~/.emacs.d/.lsp-session-v1=
+****** Reinstallation:
 
 see [[https://emacs-lsp.github.io/lsp-mode/page/installation/][https://emacs-lsp.github.io/lsp-mode/page/installation/]]:
 
@@ -1031,7 +1108,7 @@ AND:
 3. Install the new versions of the packages.
 
 
-***** Deactivtate jdee for java files
+****** Deactivtate jdee for java files
 
 #+begin_src emacs-lisp
   ;; (require 'setup-java)
@@ -1044,18 +1121,18 @@ AND:
 #+RESULTS:
 : setup-dap-mode
 
-**** Debugging: Setup dap mode (including python)
+***** Debugging: Setup dap mode (including python)
 
 #+begin_src emacs-lisp
   ;; run dap mode setup
   (require 'setup-dap-mode)
 #+end_src
 
-*** Python Info
+**** Python Info
 :PROPERTIES:
 :ID:       e06bb550-ccf7-4c8a-ba4d-c3d8343b4204
 :END:
-**** pyenv
+***** pyenv
 
 https://github.com/pythonic-emacs/pyenv-mode
 https://github.com/pyenv/pyenv
@@ -1063,11 +1140,11 @@ https://github.com/pyenv/pyenv
 (pyenv-mode)
 then run pyenv-mode-set
 
-**** Launching DAP
+***** Launching DAP
 
 These are sitting in ~REPLS and Debugging~ in python.org
 
-**** Linting, Checkers, Static Code Analysis - Hooks
+***** Linting, Checkers, Static Code Analysis - Hooks
 
 Overview about formatting, organizing imports and style checkers:
 - https://zhauniarovich.com/post/2020/2020-04-starting-new-python-project/
@@ -1075,9 +1152,9 @@ Overview about formatting, organizing imports and style checkers:
 
 Usefuly Hooks Article: https://enzuru.medium.com/helpful-emacs-python-mode-hooks-especially-for-type-hinting-c4b70b9b2216
 
-***** Linting
+****** Linting
 
-****** Linters overview
+******* Linters overview
 ;; pylint: .pylintrc
 
 - pyright
@@ -1090,11 +1167,11 @@ Usefuly Hooks Article: https://enzuru.medium.com/helpful-emacs-python-mode-hooks
 pip install  --upgrade pylint
 pip install  --upgrade flake8
 
-****** pylint
+******* pylint
 
 https://liuluheng.github.io/wiki/public_html/Python/flycheck-pylint-emacs-with-python.html
 
-***** Pyright Code Checking Information
+****** Pyright Code Checking Information
 Django Problem
 ;; https://github.com/microsoft/pyright/issues/1359
 ;; Django Stubs: https://pypi.org/project/django-stubs/
@@ -1139,7 +1216,7 @@ Django Problem
 
 
 
-***** ImportMagic
+****** ImportMagic
 
 Importmagic does not work!
 
@@ -1156,10 +1233,10 @@ $ pip install importmagic epc
    ;; )
 #+end_example
 
-***** Type Hinting
+****** Type Hinting
 ;; https://stackoverflow.com/questions/44094494/can-pycharm-suggest-or-autocomplete-or-insert-type-hints/44102211#44102211
 
-***** Code Coverage in Emacs
+****** Code Coverage in Emacs
 
 - roll your own  ;; https://blog.laurentcharignon.com/post/universal-code-coverage/
 - On Elpa:  pycoverage https://github.com/mattharrison/pycoverage.el
@@ -1172,12 +1249,12 @@ $ pip install importmagic epc
 #+end_example
 
 
-*** LSP Python: Writing setup-python.el file the conf
+**** LSP Python: Writing setup-python.el file the conf
 :PROPERTIES:
 :ID:       e1a1988b-a70a-435c-98e3-d95c61522659
 :END:
 
-**** Header
+***** Header
 :PROPERTIES:
 :ID:       6644930c-c376-4981-ae63-fc57ab4f5122
 :END:
@@ -1189,7 +1266,7 @@ $ pip install importmagic epc
 #+end_src
 
 
-**** Function to restart workspace - not functional
+***** Function to restart workspace - not functional
 :PROPERTIES:
 :ID:       41f1d2b5-4526-4261-aaaf-00525bd8034c
 :END:
@@ -1212,7 +1289,7 @@ see http://ergoemacs.org/emacs/elisp_file_name_dir_name.html
 #+RESULTS:
 : lsp-workspace-restart-deep
 
-**** Running Tests with python-pytest
+***** Running Tests with python-pytest
 
 https://github.com/wbolster/emacs-python-pytest
 
@@ -1229,7 +1306,7 @@ Hydra Usage:
 M-x python-pytest-dispatch
 #+end_example
 
-**** Format buffer using yapf
+***** Format buffer using yapf
 :PROPERTIES:
 :ID:       674e2989-94c8-4dbe-976a-64ad936aa62c
 :END:
@@ -1254,7 +1331,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+end_src
 
 
-**** Function to remove unused imports using autoflake
+***** Function to remove unused imports using autoflake
 :PROPERTIES:
 :ID:       5a5a162d-6b68-405d-9c47-02775e75271e
 :END:
@@ -1283,7 +1360,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 #+RESULTS:
 : python-remove-unused-imports
 
-**** Function to remove unused variables using autoflake
+***** Function to remove unused variables using autoflake
 :PROPERTIES:
 :ID:       9259bd8f-9cce-4f06-b262-d9f487959596
 :END:
@@ -1309,7 +1386,7 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
 : python-remove-unused-imports
 
 
-**** Configure black formatter for brunette
+***** Configure black formatter for brunette
 :PROPERTIES:
 :ID:       a7799b15-ad9f-4ab0-b55a-5ea7c6ef14e7
 :END:
@@ -1337,9 +1414,9 @@ see https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-lsp.el
     )
 
 #+end_src
-***** Links
+****** Links
 
-****** Formatting providers in vscode
+******* Formatting providers in vscode
 
 https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-3lo0
 
@@ -1355,7 +1432,7 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 - 119 characters
 
 
-**** Aggregate Function to clean up - not functioning
+***** Aggregate Function to clean up - not functioning
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (defun python-cleanup-this-file ()
@@ -1369,7 +1446,7 @@ https://dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscode-
 #+end_src
 
 
-**** Rst autocomplete
+***** Rst autocomplete
 :PROPERTIES:
 :ID:       59d7132f-71a6-45b0-88b8-a2f15e3952f2
 :END:
@@ -1391,7 +1468,7 @@ https://github.com/tkf/auto-complete-rst
           ac-source-yasnippet))
 #+end_src
 
-**** flymake ruff
+***** flymake ruff
 
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
@@ -1404,13 +1481,13 @@ https://github.com/tkf/auto-complete-rst
 | flymake-ruff-load | evil-collection-python-set-evil-shift-width | yasnippet-snippets--fixed-indent | doom-modeline-env-setup-python | yas-minor-mode-on | lsp-deferred |
 
 
-**** defconst line width - still needed?
+***** defconst line width - still needed?
 
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
   (defconst python-linewidth 89)
 #+end_src
 
-**** coverage
+***** coverage
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (require 'pycoverage)
@@ -1422,7 +1499,7 @@ https://github.com/tkf/auto-complete-rst
 #+end_src
 
 
-**** pyvenv - virtual environments
+***** pyvenv - virtual environments
 #+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
   (use-package pyvenv
     :config
@@ -1431,7 +1508,7 @@ https://github.com/tkf/auto-complete-rst
     )
 #+end_src
 
-**** Flyckeck Attempt to use Pylint
+***** Flyckeck Attempt to use Pylint
 
 https://www.flycheck.org/en/28/_downloads/flycheck.html#Configuring-checkers
 https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-python-3
@@ -1452,7 +1529,7 @@ https://stackoverflow.com/questions/37720869/emacs-how-do-i-set-flycheck-to-pyth
 #+RESULTS:
 : t
 
-**** python-lsp-server specific
+***** python-lsp-server specific
 
 https://emacs-lsp.github.io/lsp-mode/page/lsp-pylsp/
 https://github.com/python-lsp/python-lsp-server
@@ -1522,8 +1599,8 @@ pylint
   ;; (require 'lsp-pylsp)
 #+end_src
 
-**** Pyright specific code
-***** The configuration
+***** Pyright specific code
+****** The configuration
 
 https://emacs-lsp.github.io/lsp-pyright/
 
@@ -1534,7 +1611,7 @@ Should become =:tangle no= when removed.
 #+begin_src emacs-lisp :tangle no :mkdirp yes
 
   (use-package python-mode
-    :ensure t
+    :straight t
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
                            (require 'highlight-indent-guides)
@@ -1594,8 +1671,8 @@ Should become =:tangle no= when removed.
 
 #+end_src
 
-***** Additional Notes
-****** Pyright and npm
+****** Additional Notes
+******* Pyright and npm
 
 Problem:
 
@@ -1610,7 +1687,7 @@ nvm use 16.15.1
 =npx pyright= wird nur zum diagnostizieren genommen.
 was man will ist pyright von der console zu starten
 
-****** Build Pyright
+******* Build Pyright
 
 Pylance = Pyright + IntelliCode AI models (not open-source)
 
@@ -1626,7 +1703,7 @@ Pylance = Pyright + IntelliCode AI models (not open-source)
      ;; momentan befindet sich das hier: /home/audeering.local/cgeng/.nvm/versions/node/v12.22.1/bin/pyright
 #+end_src
 
-****** Use VS Code Version
+******* Use VS Code Version
 
 #+begin_src emacs-lisp :tangle no
   ;; Nutzung der VSCode Version:
@@ -1642,7 +1719,7 @@ see https://github.com/emacs-lsp/lsp-pyright/issues/7
   (lsp-restart-workspace)
 #+end_src
 
-****** Configuration
+******* Configuration
 
 - Pyright LS uses a file called pyrightconfig.json to include settings
 This is documented at https://github.com/microsoft/pyright/blob/main/docs/configuration.md
@@ -1662,7 +1739,7 @@ This is documented at https://github.com/microsoft/pyright/blob/main/docs/config
 code/data_collection/aisoundlab/audb_covid_19/1.0.0/
 
 
-****** pyrightconfig.json example
+******* pyrightconfig.json example
 
 Not sure whehter emacs interprets this at all
 
@@ -1701,7 +1778,7 @@ Not sure whehter emacs interprets this at all
 
 
 
-**** shell interpreter
+***** shell interpreter
 
 Needs to come *BELOW* the ~(use-package python-mode ...)~ configuration:
 
@@ -1710,7 +1787,7 @@ Needs to come *BELOW* the ~(use-package python-mode ...)~ configuration:
         python-shell-interpreter-args "-i --simple-prompt")
 #+end_src
 
-**** Footer
+***** Footer
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
   (provide 'setup-python)
@@ -1729,17 +1806,7 @@ Needs to come *BELOW* the ~(use-package python-mode ...)~ configuration:
   (require 'setup-python)
 #+end_src
 
-*** LSP SQL
-
-
-#+begin_src emacs-lisp :tangle no :noweb yes
-  (org-babel-tangle)
-  (load-file "~/.emacs.d/init.el")
-#+end_src
-
-#+RESULTS:
-: t
-
+**** LSP SQL
 
 https://github.com/lighttiger2505/sqls
 
@@ -1763,7 +1830,7 @@ https://github.com/lighttiger2505/sqls
 | (driver . postgresql) | (dataSourceName . host=127.0.0.1 port=5432 user=yyoncho password=local dbname=sammy sslmode=disable) |
 
 
-*** Other LSP Languages
+**** Other LSP Languages
 
 :PROPERTIES:
 :ID:       3fff27c7-73a4-4dfa-833a-86903c2d8d0b
@@ -1795,7 +1862,7 @@ https://github.com/lighttiger2505/sqls
 #+end_src
 
 
-*** R using ess
+**** R using ess
 :PROPERTIES:
 :ID:       f6b47430-8927-472c-99f9-dd3a7ce2cc4a
 :END:
@@ -1828,16 +1895,16 @@ https://github.com/sejdemyr/.emacs.d/blob/master/init.el
 #+end_src
 
 
-** Electric Pair Mode
+*** Electric Pair Mode
 
 #+begin_src emacs-lisp
   ;; see http://ergoemacs.org/emacs/emacs_insert_brackets_by_pair.html
   (electric-pair-mode 1)
 #+end_src
 
-** Single Other Mode Configurations
+*** Single Other Mode Configurations
 
-*** SQL code formatting
+**** SQL code formatting
 
 
 see https://github.com/purcell/sqlformat
@@ -1853,7 +1920,7 @@ see https://github.com/purcell/sqlformat
 
 #+RESULTS:
 
-*** Json Files
+**** Json Files
 
 #+begin_src emacs-lisp :tangle ./el/setup-json-mode.el :mkdirp yes
       ;;; setup-json-mode.el --- summary -*- lexical-binding: t -*-
@@ -1895,9 +1962,9 @@ see https://github.com/purcell/sqlformat
 
 #+end_src
 
-** Org-Mode
+*** Org-Mode
 
-*** org-roam
+**** org-roam
 :PROPERTIES:
 :ID:       08fd0c13-2ad4-441a-bf4c-c2b7fc6ddb99
 :END:
@@ -1923,7 +1990,7 @@ make emacsql-sqlite
 
 #+begin_src emacs-lisp
 (use-package org-roam
-  :ensure t
+  :straight t
   :init
   (setq org-roam-v2-ack t)
   :custom
@@ -1947,7 +2014,7 @@ make emacsql-sqlite
 #+RESULTS:
 : t
 
-**** Getting Started with Org Roam - Build a Second Brain in Emacs*
+***** Getting Started with Org Roam - Build a Second Brain in Emacs*
 :PROPERTIES:
 :ID:       e13fdc2d-48a9-463b-8fdf-0e6cdb58b331
 :END:
@@ -1959,26 +2026,26 @@ https://systemcrafters.cc/build-a-second-brain-in-emacs/getting-started-with-org
 - org roam node insert Link to other node:
 - org-roam-buffer-toggle
 
-**** Capturing notes efficiently
+***** Capturing notes efficiently
 
 https://www.youtube.com/watch?v=YxgA5z2R08I&t=0s
 https://systemcrafters.net/build-a-second-brain-in-emacs/capturing-notes-efficiently/
 
 
-**** Org Roam: The Best Way to Keep a Journal in Emacs
+***** Org Roam: The Best Way to Keep a Journal in Emacs
 
 https://www.youtube.com/watch?v=3-sLBaJAtew&t=0s
 https://systemcrafters.net/build-a-second-brain-in-emacs/keep-a-journal/
 
 
-**** System Crafters Live! - Can You Apply Zettelkasten in Emacs?
+***** System Crafters Live! - Can You Apply Zettelkasten in Emacs?
 
 https://www.youtube.com/watch?v=-TpWahIzueg
 https://systemcrafters.net/live-streams/august-06-2021/
 
 Video von Sönke Ahrens: https://www.youtube.com/watch?v=JnS3g68zCXw
 
-*** Setting requiring main entry Point
+**** Setting requiring main entry Point
 
 
 ==(load "org-capture-templates-slim")=  wird in =setup-org= geladen.
@@ -2000,8 +2067,8 @@ My Values:
   (require 'setup-org) ;; organizer todo notes etc
 #+end_src
 
-*** Setting up org-general
-**** Main Blob
+**** Setting up org-general
+***** Main Blob
 #+begin_src emacs-lisp  :tangle ./el/org-general.el :mkdirp yes
 ;; Enable org-mode
 (require 'org)
@@ -2411,7 +2478,7 @@ using git for this instead."
 
 
 
-**** Electric Pair Tweak
+***** Electric Pair Tweak
 
 see https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode-specific-pairs-for-electric-pair-mode
 
@@ -2438,7 +2505,7 @@ see https://emacs.stackexchange.com/questions/2538/how-to-define-additional-mode
 
 
 
-*** org-capture-extension
+**** org-capture-extension
 
 https://github.com/sprig/org-capture-extension
 
@@ -2468,7 +2535,7 @@ ls -l "${HOME}/.local/share/applications/" | grep org
 
 sudo update-desktop-database
 
-*** org tree slide
+**** org tree slide
 
 #+begin_src emacs-lisp
 (use-package org-tree-slide
@@ -2489,7 +2556,7 @@ sudo update-desktop-database
   #+end_src
 
 
-** google drive location menu
+*** google drive location menu
 
 
 #+begin_src emacs-lisp :tangle no
@@ -2502,7 +2569,7 @@ sudo update-desktop-database
 (if (string-match-p (regexp-quote "compute3") (system-name)) (print ";"))
 #+end_src
 
-** speedbar
+*** speedbar
 
 the setup is broken, not using it at the moment
 
@@ -2510,119 +2577,9 @@ the setup is broken, not using it at the moment
   ;; (require 'setup-speedbar)
 #+end_src
 
-** codeium
 
 
-# git submodule add --depth 1  https://github.com/Exafunction/codeium.el el/codeium
-
-
-# (setq codeium-path "path_to_codeium_executable")
-
-# (add-to-list 'load-path "~/.emacs.d/elcodeium.el")
-# (require 'codeium)
-# (require 'codeium)
-
-
-#+begin_src emacs-lisp :tangle no
-  ;; (require 'setup-speedbar)
-  (add-to-list 'load-path "~/.emacs.d/el/codeium/")
-  (load-file "~/.emacs.d/el/codeium/codeium.el")
-  #+end_src
-
-  #+RESULTS:
-  : t
-
-#+begin_src emacs-lisp
-;; we recommend using use-package to organize your init.el
-(use-package codeium :tangle no
-    ;; if you use straight
-    ;; :straight '(:type git :host github :repo "Exafunction/codeium.el")
-    ;; otherwise, make sure that the codeium.el file is on load-path
-
-    :init
-    ;; use globally
-    (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
-    ;; or on a hook
-    ;; (add-hook 'python-mode-hook
-    ;;     (lambda ()
-    ;;         (setq-local completion-at-point-functions '(codeium-completion-at-point))))
-
-    ;; if you want multiple completion backends, use cape (https://github.com/minad/cape):
-    ;; (add-hook 'python-mode-hook
-    ;;     (lambda ()
-    ;;         (setq-local completion-at-point-functions
-    ;;             (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point)))))
-    ;; an async company-backend is coming soon!
-
-    ;; codeium-completion-at-point is autoloaded, but you can
-    ;; optionally set a timer, which might speed up things as the
-    ;; codeium local language server takes ~0.2s to start up
-    ;; (add-hook 'emacs-startup-hook
-    ;;  (lambda () (run-with-timer 0.1 nil #'codeium-init)))
-
-    ;; :defer t ;; lazy loading, if you want
-    :config
-    (setq use-dialog-box nil) ;; do not use popup boxes
-
-    ;; if you don't want to use customize to save the api-key
-    ;; (setq codeium/metadata/api_key "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
-
-    ;; get codeium status in the modeline
-    (setq codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-    (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
-    ;; alternatively for a more extensive mode-line
-    ;; (add-to-list 'mode-line-format '(-50 "" codeium-mode-line) t)
-
-    ;; use M-x codeium-diagnose to see apis/fields that would be sent to the local language server
-    (setq codeium-api-enabled
-        (lambda (api)
-            (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
-    ;; you can also set a config for a single buffer like this:
-    ;; (add-hook 'python-mode-hook
-    ;;     (lambda ()
-    ;;         (setq-local codeium/editor_options/tab_size 4)))
-
-    ;; You can overwrite all the codeium configs!
-    ;; for example, we recommend limiting the string sent to codeium for better performance
-    (defun my-codeium/document/text ()
-        (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
-    ;; if you change the text, you should also change the cursor_offset
-    ;; warning: this is measured by UTF-8 encoded bytes
-    (defun my-codeium/document/cursor_offset ()
-        (codeium-utf8-byte-length
-            (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
-    (setq codeium/document/text 'my-codeium/document/text)
-    (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
-#+end_src
-
-#+RESULTS:
-: t
-
-#+begin_src emacs-lisp
-(use-package company
-    :defer 0.1
-    :config
-    (global-company-mode t)
-    (setq-default
-        company-idle-delay 0.05
-        company-require-match nil
-        company-minimum-prefix-length 0
-
-        ;; get only preview
-        company-frontends '(company-preview-frontend)
-        ;; also get a drop down
-        ;; company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
-        ))
-#+end_src
-
-#+RESULTS:
-: t
-
-
-
-
-** Collected Other Mode Configurations
+*** Collected Other Mode Configurations
 
 
 #+begin_src emacs-lisp
@@ -2788,7 +2745,7 @@ the setup is broken, not using it at the moment
 
 #+end_src
 
-**** Enable shellcheck
+***** Enable shellcheck
 
 see https://github.com/federicotdn/flymake-shellcheck
 
@@ -2803,10 +2760,10 @@ An extended tutorial can be found [[https://www.cyberciti.biz/programming/improv
 
 #+end_src
 
-**** Shell prompt
+***** Shell prompt
 
 
-***** Recommendations
+****** Recommendations
 :PROPERTIES:
 :ID:       ad5cc4be-3a56-4208-90e3-173b17837c02
 :END:
@@ -2829,7 +2786,7 @@ https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group
 
 
 
-**** safe local variables
+***** safe local variables
 :PROPERTIES:
 :ID:       7a719b5d-aa8c-4110-9859-5aea715e044b
 :END:
@@ -2858,7 +2815,7 @@ https://emacs.stackexchange.com/questions/3447/cannot-set-terminal-process-group
 
 
 
-**** fix missing alt-key in WSL
+***** fix missing alt-key in WSL
 :PROPERTIES:
 :ID:       52d2df23-c894-4ce0-b82b-1023c29e4483
 :END:
@@ -2870,89 +2827,17 @@ WSL for Windows specific code
   (put 'set-goal-column 'disabled nil)
 #+end_src
 
-** yasnippet
+*** yasnippet
 
 #+begin_src emacs-lisp
   (require 'setup-yasnippet)
   (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (message "nach yasnippet loading")
 #+end_src
 
 
-** Misc
-:PROPERTIES:
-:ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
-:END:
-*** Local Defuns
-:PROPERTIES:
-:ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
-:END:
-
-#+begin_src emacs-lisp
-  (defun edit-current-file-as-root ()
-    "Edit the file that is associated with the current buffer as root"
-    (interactive)
-    (if (buffer-file-name)
-        (progn
-          (setq file (concat "/sudo:localhost:" (buffer-file-name)))
-          (find-file file))
-      (message "Current buffer does not have an associated file.")))
-#+end_src
-
-*** Imenu auto
-:PROPERTIES:
-:ID:       820994eb-2700-428a-a80b-d5e0ede6299d
-:END:
-#+begin_src emacs-lisp
-
-  ;; add Imenu whenever possible.
-  ;; see https://www.emacswiki.org/emacs/ImenuMode for documentation
-  (defun try-to-add-imenu ()
-    (condition-case nil (imenu-add-to-menubar "Index") (error nil)))
-  (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
-
-#+end_src
-
-
-*** Visible Bell off
-:PROPERTIES:
-:ID:       4b5650ad-478a-4c5e-8120-c56375abf02a
-:END:
-
-:PROPERTIES:
-:ID:       6d9c48b7-0c81-4a42-a7f0-dfe149934fb2
-:END:
-#+begin_src emacs-lisp
-  (setq visible-bell t)
-  ;; ring-bell function not doing what its supposed to?
-  ;; see https://www.emacswiki.org/emacs/AlarmBell
-  ;; (defun ring-bell-function()
-  ;;   "do not ring the bell when cursor has gone too far outside."
-  ;;   (message "Went outside but not ringing the bell.")
-  ;;     )
-#+end_src
-
-*** Ansible Vault Mode
-
-
-#+begin_src emacs-lisp
-
-  (setq ansible-vault-password-file "~/.ansible/vault_pass.txt")
-  (add-to-list 'auto-mode-alist '("/encrypted$" . yaml-mode))
-
-  (defun ansible-vault-mode-maybe ()
-    (when (ansible-vault--is-encrypted-vault-file)
-      (ansible-vault-mode 1)))
-
-  (use-package ansible-vault
-    :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
-
-#+end_src
-
-#+RESULTS:
-
-
-*** Auth Source
+*** Auth Source, GPG, Security
 
 - https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
 - https://www.youtube.com/watch?v=nZ_T7Q49B8Y
@@ -2976,7 +2861,7 @@ Return result sequence, SEQ __is__ modified."
 (delete-nth 0 auth-sources)
 #+end_example
 
-Add dropbos authinfo to auth source files
+Add dropbox authinfo to auth source files
 
 #+begin_src emacs-lisp
 (add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
@@ -3091,13 +2976,11 @@ gpg --import private.key
 
 **** Lookup key
 
-
 (defun efs/lookup-password (&rest keys)
 (let ((result (apply #'auth-source-search keys)))
 (if result
 (funcall (plist-get (car result) :secret))
 nil)))
-
 
 **** Migrate key to other machine
 
@@ -3130,7 +3013,7 @@ gpg2 --import private.key
 
 **** More gpg interaction
 
-***** GPG agent configuration
+**** GPG agent configuration
 
 #+begin_src bash :results output pp
 cat ~/.gnupg/gpg-agent.conf
@@ -3142,7 +3025,7 @@ cat ~/.gnupg/gpg-agent.conf
 : default-cache-ttl-ssh 0
 : max-cache-ttl-ssh 0
 
-***** Seems not to be effective (even after reload):
+**** Seems not to be effective (even after reload):
 
 Information is from [[https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session][here]].
 
@@ -3160,7 +3043,7 @@ Information is from [[https://superuser.com/questions/624343/keep-gnupg-credenti
 : max-cache-ttl:24:2:set maximum PIN cache lifetime to N seconds:3:3:N:7200::0
 : max-cache-ttl-ssh:24:2:set maximum SSH key lifetime to N seconds:3:3:N:7200::0
 
-***** OS / Ubuntu specific?
+****** OS / Ubuntu specific?
 
 Discussion about using gnone tools like =seahorse= or =dconf-editor= is found [[https://emacs.stackexchange.com/questions/37002/emacs-opens-gpg-file-without-asking-for-passphrase][here.]]
 
@@ -3174,7 +3057,11 @@ I also had to use dconf-editor and used there recipe from [[https://askubuntu.co
 
 
 
-*** Mac Specific
+#+RESULTS:
+
+
+
+****** Mac Specific
 :PROPERTIES:
 :ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
 :END:
@@ -3186,6 +3073,233 @@ I also had to use dconf-editor and used there recipe from [[https://askubuntu.co
   ;; (when is-mac (require 'mac))
 
 #+end_src
+
+
+*** codeium
+
+**** Key Configuration
+
+Found at this [[https://gist.github.com/togakangaroo/8b0ca3a4d71f6c31ce22d2f40aed7932][this post]].
+
+#+begin_src emacs-lisp
+    (defun get-codeium-api-key ()
+      "Retrieve the codeium API key from one of the authinfo files."
+      (let ((auth (nth 0 (auth-source-search
+                          :site "codeium.com"
+                          :user "privat-email-account"
+                          :max 1
+                          :require '(:secret)))))
+        (if auth
+            (funcall (plist-get auth :secret))
+          (error "No codeium API key found in authinfo file(s)"))))
+
+  (defvar codeium/metadata/api_key (get-codeium-api-key) "Your codeium key for accessing the ChatGPT API.")
+#+end_src
+
+#+RESULTS:
+: codeium/metadata/api_key
+
+(get-codeium-api-key)
+(codeium/metadata/api_key)
+(mapc 'message auth-sources)
+;; (setq codeium/metadata/api_key (get-codeium-api-key))
+
+**** Installation
+***** Manual installation - obsolete
+
+# git submodule add --depth 1  https://github.com/Exafunction/codeium.el el/codeium
+# (setq codeium-path "path_to_codeium_executable")
+# (add-to-list 'load-path "~/.emacs.d/elcodeium.el")
+# (require 'codeium)
+# (require 'codeium)
+
+
+#+begin_src emacs-lisp :tangle no
+  (add-to-list 'load-path "~/.emacs.d/el/codeium/")
+  (load-file "~/.emacs.d/el/codeium/codeium.el")
+  #+end_src
+
+**** Straight for codeium
+
+#+begin_src emacs-lisp
+  (straight-use-package '(codeium :type git :host github :repo "Exafunction/codeium.el"))
+#+end_src
+
+#+RESULTS:
+: t
+
+**** Codeium Configuration
+
+#+begin_src emacs-lisp
+;; we recommend using use-package to organize your init.el
+(use-package codeium
+    :straight t
+    ;; if you use straight
+    ;; :straight '(:type git :host github :repo "Exafunction/codeium.el")
+    ;; otherwise, make sure that the codeium.el file is on load-path
+
+    :init
+    ;; use globally
+    (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
+    ;; or on a hook
+    ;; (add-hook 'python-mode-hook
+    ;;     (lambda ()
+    ;;         (setq-local completion-at-point-functions '(codeium-completion-at-point))))
+
+    ;; if you want multiple completion backends, use cape (https://github.com/minad/cape):
+    ;; (add-hook 'python-mode-hook
+    ;;     (lambda ()
+    ;;         (setq-local completion-at-point-functions
+    ;;             (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point)))))
+    ;; an async company-backend is coming soon!
+
+    ;; codeium-completion-at-point is autoloaded, but you can
+    ;; optionally set a timer, which might speed up things as the
+    ;; codeium local language server takes ~0.2s to start up
+    ;; (add-hook 'emacs-startup-hook
+    ;;  (lambda () (run-with-timer 0.1 nil #'codeium-init)))
+
+    ;; :defer t ;; lazy loading, if you want
+    :config
+    (setq use-dialog-box nil) ;; do not use popup boxes
+
+    ;; if you don't want to use customize to save the api-key
+    ;; (setq codeium/metadata/api_key "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
+
+    ;; get codeium status in the modeline
+    (setq codeium-mode-line-enable
+        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
+    (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
+    ;; alternatively for a more extensive mode-line
+    ;; (add-to-list 'mode-line-format '(-50 "" codeium-mode-line) t)
+
+    ;; use M-x codeium-diagnose to see apis/fields that would be sent to the local language server
+    (setq codeium-api-enabled
+        (lambda (api)
+            (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
+    ;; you can also set a config for a single buffer like this:
+    ;; (add-hook 'python-mode-hook
+    ;;     (lambda ()
+    ;;         (setq-local codeium/editor_options/tab_size 4)))
+
+    ;; You can overwrite all the codeium configs!
+    ;; for example, we recommend limiting the string sent to codeium for better performance
+    (defun my-codeium/document/text ()
+        (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
+    ;; if you change the text, you should also change the cursor_offset
+    ;; warning: this is measured by UTF-8 encoded bytes
+    (defun my-codeium/document/cursor_offset ()
+        (codeium-utf8-byte-length
+            (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
+    (setq codeium/document/text 'my-codeium/document/text)
+    (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
+#+end_src
+
+#+RESULTS:
+: #s(hash-table data (:use-package (26337 64832 798951 444000) :use-package-secs (0 0 259964 965000) :init (26337 64832 798949 77000) :config (26337 64832 798936 537000) :config-secs (0 0 21 78000) :init-secs (0 0 9372 115000)))
+
+**** Codeium comany
+
+#+begin_src emacs-lisp
+(use-package company
+    :defer 0.1
+    :config
+    (global-company-mode t)
+    (setq-default
+        company-idle-delay 0.05
+        company-require-match nil
+        company-minimum-prefix-length 0
+
+        ;; get only preview
+        company-frontends '(company-preview-frontend)
+        ;; also get a drop down
+        ;; company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
+        ))
+#+end_src
+
+#+RESULTS:
+: #s(hash-table data (:use-package (26337 60415 137928 602000) :init (26337 60415 137926 222000) :config (26337 60415 137919 433000) :config-secs (0 0 1271 437000) :init-secs (0 0 1304 675000) :use-package-secs (0 0 1311 208000)))
+
+
+
+#+RESULTS:
+: codeium/metadata/api_key
+
+
+
+
+
+*** Misc
+:PROPERTIES:
+:ID:       d7d9d2b8-5c98-4fe9-bab5-d0c725bf3911
+:END:
+**** Edit as sudo
+:PROPERTIES:
+:ID:       8ee4a7b9-f9e7-422e-8c04-3c17a61da460
+:END:
+
+#+begin_src emacs-lisp
+  (defun edit-current-file-as-root ()
+    "Edit the file that is associated with the current buffer as root"
+    (interactive)
+    (if (buffer-file-name)
+        (progn
+          (setq file (concat "/sudo:localhost:" (buffer-file-name)))
+          (find-file file))
+      (message "Current buffer does not have an associated file.")))
+#+end_src
+
+**** Imenu auto
+:PROPERTIES:
+:ID:       820994eb-2700-428a-a80b-d5e0ede6299d
+:END:
+#+begin_src emacs-lisp
+
+  ;; add Imenu whenever possible.
+  ;; see https://www.emacswiki.org/emacs/ImenuMode for documentation
+  (defun try-to-add-imenu ()
+    (condition-case nil (imenu-add-to-menubar "Index") (error nil)))
+  (add-hook 'font-lock-mode-hook 'try-to-add-imenu)
+
+#+end_src
+
+
+**** Visible Bell off
+:PROPERTIES:
+:ID:       4b5650ad-478a-4c5e-8120-c56375abf02a
+:END:
+
+:PROPERTIES:
+:ID:       6d9c48b7-0c81-4a42-a7f0-dfe149934fb2
+:END:
+#+begin_src emacs-lisp
+  (setq visible-bell t)
+  ;; ring-bell function not doing what its supposed to?
+  ;; see https://www.emacswiki.org/emacs/AlarmBell
+  ;; (defun ring-bell-function()
+  ;;   "do not ring the bell when cursor has gone too far outside."
+  ;;   (message "Went outside but not ringing the bell.")
+  ;;     )
+#+end_src
+
+**** Ansible Vault Mode
+
+
+#+begin_src emacs-lisp
+  (setq ansible-vault-password-file "~/.ansible/vault_pass.txt")
+  (add-to-list 'auto-mode-alist '("/encrypted$" . yaml-mode))
+
+  (defun ansible-vault-mode-maybe ()
+    (when (ansible-vault--is-encrypted-vault-file)
+      (ansible-vault-mode 1)))
+
+  (use-package ansible-vault
+    :init (add-hook 'yaml-mode-hook 'ansible-vault-mode-maybe))
+
+#+end_src
+
+#+RESULTS:
+
 
 
 *** Themes
@@ -3416,7 +3530,7 @@ see in snippets
 #+RESULTS:
 : rcd-asciidoctor-preview
 
-*** Org ascidoc
+**** Org ascidoc
 :PROPERTIES:
 :ID:       59738c74-4023-4a75-8180-a424222ba95e
 :END:
@@ -3487,25 +3601,24 @@ https://emacs.stackexchange.com/questions/35587/emacs-client-cant-find-server-in
 
 *** dired
 
-
 #+begin_src emacs-lisp
   (require 'setup-dired)
 #+end_src
 
 
-** Get Temperature
+*** Get Temperature
 
 Shell Script to get get temperatures
 # temperatures=$(cat /sys/class/thermal/thermal_zone*/temp  | tr '\n' '/')
 
-** Web Server
+*** Web Server
 
 #+begin_src emacs-lisp
   (use-package simple-httpd
     :ensure t)
 #+end_src
 
-** Supress always deleting trailing whitespace
+*** Supress always deleting trailing whitespace
 
 None of these work yet.
 

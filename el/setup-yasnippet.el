@@ -1,6 +1,21 @@
-;; (require 'yasnippet)
+;;; setup-yasnippet.el --- summary -*- lexical-binding: t -*-
+
+;; Author: CGeng
+;; Maintainer: CGeng
+;; Version: version
+;; Package-Requires: (dependencies)
+;; Homepage: homepage
+;; Keywords: keywords
+
+;;; Commentary:
+
+;; commentary
+
+;;; Code:
+
 
 (use-package yasnippet
+  :straight t
   :if (not noninteractive)
   :diminish yas-minor-mode
   :hook ((text-mode
@@ -52,12 +67,12 @@
 ;; (add-to-list 'yas-snippet-dirs (expand-file-name "yasmate/snippets" user-emacs-directory) t)
 
 ;; (message (concat (number-to-string(length yas-snippet-dirs)) " n snippet drectories" ))
-(yas-snippet-dirs)
+;; (yas-snippet-dirs)
 ;; (printlist yas-snippet-dirs)
 
-(require 'seq)
-(seq-contains yas-snippet-dirs "/home/christian/.emacs.d/snippets")
-(seq-contains yas-snippet-dirs "~/.emacs.d/snippets")
+;; (require 'seq)
+;; (seq-contains yas-snippet-dirs "/home/cgeng/.emacs.d/snippets")
+;; (seq-contains yas-snippet-dirs "~/.emacs.d/snippets")
 ;; (seq-contains yas-snippet-dirs (expand-file-name "doom-snippets" user-emacs-directory))
 
 

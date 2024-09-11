@@ -97,12 +97,14 @@
 
 ;; Add packages defined elsewhere as builtin packages, so they will
 ;; not be pulled in a second time
-(eval-after-load 'finder-inf
-  '(setq package--builtins
-	 (nconc '(
-		  (yasnippet . [(0 8) nil "yasnippet"])
-               ;; (pkgname . [(maj-ver min-ver) nil "description"])
-		  ) package--builtins)))
+;; this causes to complain about yasnippet version 0.8xs
+
+;; (eval-after-load 'finder-inf
+;;   '(setq package--builtins
+;; 	 (nconc '(
+;; 		  (yasnippet . [(0 8) nil "yasnippet"])
+;;                ;; (pkgname . [(maj-ver min-ver) nil "description"])
+;; 		  ) package--builtins)))
 
 ;; (package-initialize)
 

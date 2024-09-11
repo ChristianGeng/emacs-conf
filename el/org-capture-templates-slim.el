@@ -119,7 +119,7 @@
 ;; --- RECIPES
 ;; https://github.com/Chobbes/org-chef
 (use-package org-chef
-  :ensure t)
+  :straight t)
 
 ;; (message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
 
