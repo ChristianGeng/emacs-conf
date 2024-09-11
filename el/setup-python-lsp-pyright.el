@@ -198,9 +198,6 @@
 
 ;;; Code:
 
-
-
-(require 'linum)
 (require 'pycoverage)
 
 
@@ -208,7 +205,6 @@
   (interactive)
   (when (derived-mode-p 'python-mode)
     (progn
-      (linum-mode)
       (pycoverage-mode))))
 
 

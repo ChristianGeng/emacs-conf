@@ -154,7 +154,6 @@
 ;; automatically sort imports
 ;; https://github.com/proofit404/isortify/blob/master/isortify.el
 ;; (add-hook 'python-mode-hook 'isortify-mode)
-;;(add-hook 'python-mode-hook 'linum-mode)
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 ;; (add-hook 'python-mode-hook 'jedi:ac-setup)
 
