@@ -196,14 +196,5 @@
   )
 
 
-
-
-
-(message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
-
-
-
-
-
 (provide 'setup-org-slim)
 ;;; setup-org.el ends here
