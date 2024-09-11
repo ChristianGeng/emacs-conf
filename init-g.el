@@ -524,7 +524,7 @@
 ;; (require 'mc)
 
 ;;(require 'setup-web-mode)
-(require 'setup-jabber)
+;; (require 'setup-jabber)
 (require 'setup-chat-tracking)
 ;; (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
 (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
