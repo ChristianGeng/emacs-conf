@@ -735,9 +735,9 @@
 (use-package org-chef
   :ensure t)
 
-(message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
+;; (message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
 
-(print org-capture-templates)
+;; (print org-capture-templates)
 
 (add-to-list 'org-capture-templates
      '("or" "RECIPE    (r) Cooking Recipe (Manual Entry)" entry

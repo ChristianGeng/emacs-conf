@@ -111,7 +111,7 @@
     "* %? [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")
 ))
 
-(message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
+;; (message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
 
 (print org-capture-templates)
 
