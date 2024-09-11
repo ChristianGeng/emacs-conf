@@ -51,9 +51,9 @@
 (yasmate-snippets-initialize)
 ;; (add-to-list 'yas-snippet-dirs (expand-file-name "yasmate/snippets" user-emacs-directory) t)
 
-(message (concat (number-to-string(length yas-snippet-dirs)) " nsnippet drectories" ))
+(message (concat (number-to-string(length yas-snippet-dirs)) " n snippet drectories" ))
 (yas-snippet-dirs)
-(printlist yas-snippet-dirs)
+;; (printlist yas-snippet-dirs)
 
 (require 'seq)
 (seq-contains yas-snippet-dirs "/home/christian/.emacs.d/snippets")
