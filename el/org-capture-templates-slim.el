@@ -113,7 +113,7 @@
 
 ;; (message (concat (number-to-string(length org-capture-templates)) " Org capture templates ohne Zusätze" ))
 
-(print org-capture-templates)
+;; (print org-capture-templates)
 
 
 ;; --- RECIPES
