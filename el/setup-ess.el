@@ -2,8 +2,6 @@
   ;;
     ;;; Code:
 
-  (message "Setting up ESS.")
-
 ;;; emacs speaks statistics
   (use-package ess
     :ensure t

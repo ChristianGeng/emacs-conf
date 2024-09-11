@@ -82,9 +82,6 @@
 
 ;;; Code:
 
-(message "Entering LSP Setup!")
-
-
 ;; npm install -g pyright
 ;; For Golang, let’s install gopls.
 ;; GO111MODULE=on go get golang.org/x/tools/gopls@latest

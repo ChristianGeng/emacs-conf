@@ -114,8 +114,6 @@
 
 ;;; Code:
 
-(message "Setting up Dap Mode!")
-
 (use-package dap-mode
   ;; :tags '("IDE" "PROGRAMMING" "LSP")
   :ensure t

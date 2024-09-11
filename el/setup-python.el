@@ -2,8 +2,6 @@
 ;;
 ;;; Code:
 
-(message "Lsp Python begins here")
-
 (defun lsp-workspace-restart-deep ()
   (interactive
    (delete-file (joindirs user-emacs-directory  ".lsp-session-v1"))
