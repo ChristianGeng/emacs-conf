@@ -30,7 +30,7 @@
 
 ;;; Code:
 
-(message "Entering Angular Configuration!")
+;; (message "Entering Angular Configuration!")
 
 
 ;;; name.el ends here
