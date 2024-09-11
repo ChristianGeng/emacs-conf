@@ -13,19 +13,6 @@ PROPERTIES:
 #+RESULTS:
 : t
 
-- org-tree-slide-mode
-- Navivation:
-    C-< org-tree-slide-move-previous-tree
-    C-> org-tree-slide-move-next-tree
-
-
-#+begin_src emacs-lisp :tangle no :noweb yes
-
-(with-eval-after-load "org-tree-slide"
-  (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
-  (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree)
-  )
-  #+end_src
 
 
 * Treesitter auto mode
@@ -2488,6 +2475,19 @@ sudo update-desktop-database
   :custom
   (org-image-actual-width nil))
 #+end_src
+
+
+- org-tree-slide-mode
+- Navivation:
+    C-< org-tree-slide-move-previous-tree
+    C-> org-tree-slide-move-next-tree
+#+begin_src emacs-lisp :tangle no :noweb yes
+(with-eval-after-load "org-tree-slide"
+  (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree)
+  )
+  #+end_src
+
 
 ** google drive location menu
 
