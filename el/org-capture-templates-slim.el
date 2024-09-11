@@ -121,7 +121,7 @@
 (use-package org-chef
   :ensure t)
 
-(message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
+;; (message (concat (number-to-string(length org-capture-templates)) " Org Templates inklusive aus einem URL" ))
 
 
 (add-to-list 'org-capture-templates
