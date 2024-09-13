@@ -1,45 +1,5 @@
 (setq use-package-compute-statistics t)
 
-(defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name
-          "straight/repos/straight.el/bootstrap.el"
-          (or (bound-and-true-p straight-base-dir)
-              user-emacs-directory)))
-        (bootstrap-version 7))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
-
-(straight-use-package 'use-package)
-(straight-use-package 'yasnippet)
-
-;; org-20210929
-  ;; org-contrib-0.6
-  ;; org-ml-20230410.30
-  ;; org-sql-20240819.2145
-  ;; org-roam-20240715.1750
-  ;; org-chef-20231127.1601
-  ;; org-tree-slide-20230826.1234
-  ;; org-special-block-extras-20230721.43
-  ;; calfw-org-20170411.220
-(use-package org :straight (:type built-in))
-(use-package org-contrib :straight t)
-(use-package org-ml :straight t)
-(use-package org-sql :straight t)
-(use-package org-roam :straight t)
-(use-package org-tree-slide :straight t)
-(use-package org-special-block-extras :straight t)
-(use-package calfw-org :straight t)
-(use-package yasnippet-classic-snippets :straight t)
-
-;; (use-package org :straight t)
-
 (use-package treesit-auto
   :custom
   (treesit-auto-install 'prompt)
@@ -86,6 +46,7 @@
 
 (use-package s :ensure t)
 
+;; This is already the default. why set it again
 (setq user-emacs-directory "~/.emacs.d/")
 ;; Functions (load all files in defuns-dir)
 ;;(add-to-list 'load-path user-emacs-directory)
@@ -143,6 +104,49 @@
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
+
+(setq straight-base-dir (joindirs (getenv "HOME") ".config" "emacs" emacs-version "straight"))
+(mkdir straight-base-dir t)
+
+(defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name
+          "straight/repos/straight.el/bootstrap.el"
+          (or (bound-and-true-p straight-base-dir)
+              user-emacs-directory)))
+        (bootstrap-version 7))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+(straight-use-package 'yasnippet)
+
+;; org-20210929
+  ;; org-contrib-0.6
+  ;; org-ml-20230410.30
+  ;; org-sql-20240819.2145
+  ;; org-roam-20240715.1750
+  ;; org-chef-20231127.1601
+  ;; org-tree-slide-20230826.1234
+  ;; org-special-block-extras-20230721.43
+  ;; calfw-org-20170411.220
+(use-package org :straight (:type built-in))
+(use-package org-contrib :straight t)
+(use-package org-ml :straight t)
+(use-package org-sql :straight t)
+(use-package org-roam :straight t)
+(use-package org-tree-slide :straight t)
+(use-package org-special-block-extras :straight t)
+(use-package calfw-org :straight t)
+(use-package yasnippet-classic-snippets :straight t)
+
+;; (use-package org :straight t)
 
 ;; Allow pasting selection outside of Emacs
 (setq x-select-enable-clipboard t)
@@ -474,6 +478,32 @@
 
 ;; (require 'setup-speedbar)
 
+(use-package flymake-shellcheck
+:commands flymake-shellcheck-load
+:init
+(add-hook 'sh-mode-hook 'flymake-shellcheck-load))
+
+(setq shell-file-name "bash")
+(setq shell-command-switch "-c")
+
+;; - '(safe-local-variable-values '((testvar\  . "hello")))
+;; + '(safe-local-variable-values
+;; +   '((pyvenv-activate . "~/.venvs/py37/")
+;; +     (testvar\  . "hello")))
+;;   '(sql-connection-alist
+;;     '(("dataupload local container mysql"
+
+;; (put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
+
+;; projectile-project-test-cmd :
+
+(put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
+(put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
+(put 'py-pythonpath  'safe-local-variable (lambda (_) t))
+
+(setq x-alt-keysym 'meta)
+(put 'set-goal-column 'disabled nil)
+
 ;; (require 'setup-speedbar)
 
 ;; (eval-after-load 'sgml-mode '(require 'setup-html-mode))
@@ -634,32 +664,6 @@
 
 (add-hook 'makefile-mode-hook 'makefile-executor-mode)
 
-(use-package flymake-shellcheck
-:commands flymake-shellcheck-load
-:init
-(add-hook 'sh-mode-hook 'flymake-shellcheck-load))
-
-(setq shell-file-name "bash")
-(setq shell-command-switch "-c")
-
-;; - '(safe-local-variable-values '((testvar\  . "hello")))
-;; + '(safe-local-variable-values
-;; +   '((pyvenv-activate . "~/.venvs/py37/")
-;; +     (testvar\  . "hello")))
-;;   '(sql-connection-alist
-;;     '(("dataupload local container mysql"
-
-;; (put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
-
-;; projectile-project-test-cmd :
-
-(put 'pyvenv-activate 'safe-local-variable (lambda (_) t))
-(put 'projectile-project-test-cmd 'safe-local-variable (lambda (_) t))
-(put 'py-pythonpath  'safe-local-variable (lambda (_) t))
-
-(setq x-alt-keysym 'meta)
-(put 'set-goal-column 'disabled nil)
-
 (require 'setup-yasnippet)
 (define-key yas-minor-mode-map [(tab)] nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
@@ -687,84 +691,6 @@
 (defvar codeium/metadata/api_key (get-codeium-api-key) "Your codeium key for accessing the ChatGPT API.")
 
 (straight-use-package '(codeium :type git :host github :repo "Exafunction/codeium.el"))
-
-;; we recommend using use-package to organize your init.el
-(use-package codeium
-    :straight t
-    ;; if you use straight
-    ;; :straight '(:type git :host github :repo "Exafunction/codeium.el")
-    ;; otherwise, make sure that the codeium.el file is on load-path
-
-    :init
-    ;; use globally
-    (add-to-list 'completion-at-point-functions #'codeium-completion-at-point)
-    ;; or on a hook
-    ;; (add-hook 'python-mode-hook
-    ;;     (lambda ()
-    ;;         (setq-local completion-at-point-functions '(codeium-completion-at-point))))
-
-    ;; if you want multiple completion backends, use cape (https://github.com/minad/cape):
-    ;; (add-hook 'python-mode-hook
-    ;;     (lambda ()
-    ;;         (setq-local completion-at-point-functions
-    ;;             (list (cape-super-capf #'codeium-completion-at-point #'lsp-completion-at-point)))))
-    ;; an async company-backend is coming soon!
-
-    ;; codeium-completion-at-point is autoloaded, but you can
-    ;; optionally set a timer, which might speed up things as the
-    ;; codeium local language server takes ~0.2s to start up
-    ;; (add-hook 'emacs-startup-hook
-    ;;  (lambda () (run-with-timer 0.1 nil #'codeium-init)))
-
-    ;; :defer t ;; lazy loading, if you want
-    :config
-    (setq use-dialog-box nil) ;; do not use popup boxes
-
-    ;; if you don't want to use customize to save the api-key
-    ;; (setq codeium/metadata/api_key "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
-
-    ;; get codeium status in the modeline
-    (setq codeium-mode-line-enable
-        (lambda (api) (not (memq api '(CancelRequest Heartbeat AcceptCompletion)))))
-    (add-to-list 'mode-line-format '(:eval (car-safe codeium-mode-line)) t)
-    ;; alternatively for a more extensive mode-line
-    ;; (add-to-list 'mode-line-format '(-50 "" codeium-mode-line) t)
-
-    ;; use M-x codeium-diagnose to see apis/fields that would be sent to the local language server
-    (setq codeium-api-enabled
-        (lambda (api)
-            (memq api '(GetCompletions Heartbeat CancelRequest GetAuthToken RegisterUser auth-redirect AcceptCompletion))))
-    ;; you can also set a config for a single buffer like this:
-    ;; (add-hook 'python-mode-hook
-    ;;     (lambda ()
-    ;;         (setq-local codeium/editor_options/tab_size 4)))
-
-    ;; You can overwrite all the codeium configs!
-    ;; for example, we recommend limiting the string sent to codeium for better performance
-    (defun my-codeium/document/text ()
-        (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (min (+ (point) 1000) (point-max))))
-    ;; if you change the text, you should also change the cursor_offset
-    ;; warning: this is measured by UTF-8 encoded bytes
-    (defun my-codeium/document/cursor_offset ()
-        (codeium-utf8-byte-length
-            (buffer-substring-no-properties (max (- (point) 3000) (point-min)) (point))))
-    (setq codeium/document/text 'my-codeium/document/text)
-    (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
-
-(use-package company
-    :defer 0.1
-    :config
-    (global-company-mode t)
-    (setq-default
-        company-idle-delay 0.05
-        company-require-match nil
-        company-minimum-prefix-length 0
-
-        ;; get only preview
-        company-frontends '(company-preview-frontend)
-        ;; also get a drop down
-        ;; company-frontends '(company-pseudo-tooltip-frontend company-preview-frontend)
-        ))
 
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
