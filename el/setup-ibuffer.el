@@ -43,6 +43,7 @@
                          ))
                ("python" (
                           or (mode . python-mode)
+                             (mode . python-ts-mode)
                              (mode . django-mode)
                              (mode . elpy-mode)
                              (mode . inferior-python-mode)
@@ -66,7 +67,8 @@
                             (mode . shell-script-mode)
                             (mode . dockerfile-mode)
                             (mode . jinja2-mode)
-                         ))
+                            ))
+               ("dired" (mode . dired-mode))
                ("jvm languages" (or
                              (mode . groovy-mode)
                              (mode . shell-mode)
@@ -81,11 +83,24 @@
                        (mode . ng2-ts-mode)
                        (name . "*ts-ls*")
                        ))
-               ("dired" (mode . dired-mode))
                ("emacs/lisp" (or
                          (name . "^\\*scratch\\*$")
                          (name . "^\\*Messages\\*$")
                          (mode . emacs-lisp-mode)))
+               ("git" (or
+                         (mode . magit-status-mode)
+                         (mode . magit-diff-mode)
+                         (mode . magit-process-mode)
+                         ))
+               ("helm" (or
+                        (mode . helm-major-mode)
+                        )
+                )
+               (
+                "search"(or
+                        (mode . ag-mode)
+                         )
+                )
                )
               ("default2"
                ("python" (
