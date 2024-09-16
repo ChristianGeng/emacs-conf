@@ -105,7 +105,7 @@
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
 
-(setq straight-base-dir (joindirs (getenv "HOME") ".config" "emacs" emacs-version "straight"))
+(setq straight-base-dir (joindirs (getenv "HOME") ".config" "emacs" emacs-version))
 (mkdir straight-base-dir t)
 
 (defvar bootstrap-version)

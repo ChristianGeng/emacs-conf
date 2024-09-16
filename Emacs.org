@@ -226,7 +226,7 @@ https://emacs.stackexchange.com/questions/60507/change-location-for-straight-el-
 
 
 #+begin_src emacs-lisp
-  (setq straight-base-dir (joindirs (getenv "HOME") ".config" "emacs" emacs-version "straight"))
+  (setq straight-base-dir (joindirs (getenv "HOME") ".config" "emacs" emacs-version))
   (mkdir straight-base-dir t)
 #+end_src
 
