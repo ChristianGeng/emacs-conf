@@ -229,7 +229,7 @@
 ;; (setq-default truncate-lines t)
 
 ;; Keep cursor away from edges when scrolling up/down
-(require 'smooth-scrolling)
+(require 'smooth-scroll)
 ;; (setq scroll-step 1)
 ;; (setq scroll-conservatively 10000)
 (setq auto-window-vscroll nil)
