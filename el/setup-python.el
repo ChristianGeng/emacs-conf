@@ -63,7 +63,10 @@
 
 (use-package flymake-ruff
   :ensure t
-  :hook (python-mode . flymake-ruff-load))
+  :hook
+  (python-mode . flymake-ruff-load)
+  (python-ts-mode . flymake-ruff-load)
+  )
 
 (defconst python-linewidth 89)
 

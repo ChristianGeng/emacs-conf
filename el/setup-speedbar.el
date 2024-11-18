@@ -23,7 +23,7 @@
 ;; and/or turn it on and off later with the function sr-speedbar-refresh-toggle.
 ;; The defaults it (and speedbar) comes with are a bit odd though - it also doesn't show files that it doesn't recognize, uses images for buttons, and is set on the right side - so you can set these if you'd like -
 (setq speedbar-show-unknown-files nil) ; show all files
-(setq speedbar-use-images nil) ; use text for buttons
+(setq speedbar-use-images t) ; use text for buttons
 (setq sr-speedbar-right-side t) ; put on right side
 ;; (set-face-font 'speedbar-face "Courier-10")
 (setq sr-speedbar-width-console 55)

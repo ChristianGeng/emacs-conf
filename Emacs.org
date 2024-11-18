@@ -490,7 +490,7 @@ see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-d
 
   (if (display-graphic-p)
       (progn
-        (tool-bar-mode -1)
+        (tool-bar-mode t)
         (scroll-bar-mode -1)
         (set-fringe-mode 10)        ; Give some breathing room
         ))
@@ -498,13 +498,27 @@ see https://superuser.com/questions/313398/how-to-prevent-the-symbols-function-d
 #+end_src
 
 #+RESULTS:
+: ((fullscreen . maximized) (alpha 99 . 99) (vertical-scroll-bars) (left-fringe . 10) (right-fringe . 10))
 
+This does not result in visible menubar
+#+begin_src emacs-lisp :tangle no
+(defun restore-menu-bar()
+  (interactive)
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode 1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode 1))
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode 1)))
+
+(restore-menu-bar)
+#+end_src
+
+#+RESULTS:
+: t
 
 #+begin_src emacs-lisp
-      (tool-bar-mode -1)          ; Disable the toolbar
+      (tool-bar-mode 1)          ; Disable the toolbar
       ;;  (tooltip-mode -1)           ; Disable tooltips
 
-      (menu-bar-mode -1)            ; Disable the menu bar
+      (menu-bar-mode t)            ; Disable the menu bar
 #+end_src
 
 ***** Keyboard Interaction (and the Evil Chapter)
@@ -597,6 +611,8 @@ https://www.linode.com/docs/guides/emacs-evil-mode/
                     ag-mode
                     dired-mode
                     flycheck-mode
+                    python-ts-mode
+                    python-mode
                     ))
       (add-to-list 'evil-emacs-state-modes mode)
       ))
@@ -1493,13 +1509,16 @@ https://github.com/tkf/auto-complete-rst
 
 
 #+begin_src emacs-lisp  :tangle ./el/setup-python.el :mkdirp yes
-(use-package flymake-ruff
-  :ensure t
-  :hook (python-mode . flymake-ruff-load))
+  (use-package flymake-ruff
+    :ensure t
+    :hook
+    (python-mode . flymake-ruff-load)
+    (python-ts-mode . flymake-ruff-load)
+    )
 #+end_src
 
 #+RESULTS:
-| flymake-ruff-load | evil-collection-python-set-evil-shift-width | yasnippet-snippets--fixed-indent | doom-modeline-env-setup-python | yas-minor-mode-on | lsp-deferred |
+: #s(hash-table data (:use-package (26354 41317 987108 240000) :init (26354 41317 987103 135000) :init-secs (0 0 58 882000) :use-package-secs (0 0 1501 267000) :config (26354 41317 987089 388000) :config-secs (0 0 1 784000)))
 
 
 ******* defconst line width - still needed?
@@ -2576,6 +2595,19 @@ sudo update-desktop-database
   #+end_src
 
 
+
+****** org toc mode
+#+begin_src emacs-lisp
+(if (require 'toc-org nil t)
+    (progn
+      (add-hook 'org-mode-hook 'toc-org-mode)
+
+      ;; enable in markdown, too
+      (add-hook 'markdown-mode-hook 'toc-org-mode)
+      (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
+  (warn "toc-org not found"))
+  #+end_src
+
 ***** google drive location menu
 
 
@@ -3134,10 +3166,17 @@ Found at this [[https://gist.github.com/togakangaroo/8b0ca3a4d71f6c31ce22d2f40ae
 # (require 'codeium)
 
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/el/codeium/")
-  (load-file "~/.emacs.d/el/codeium/codeium.el")
+  (load-file (joindirs straight-base-dir "straight" "build" "codeium" "codeium.el"))
+  ;;  ~/.config/emacs/31.0.50/straight/build/codeium/codeium.el
   #+end_src
+
+
+(find-file  straight-base-dir)
+
+
+
 
 ****** Straight for codeium
 
@@ -3150,7 +3189,7 @@ Found at this [[https://gist.github.com/togakangaroo/8b0ca3a4d71f6c31ce22d2f40ae
 
 ****** Codeium Configuration
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 ;; we recommend using use-package to organize your init.el
 (use-package codeium
     :straight t

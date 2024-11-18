@@ -40,6 +40,7 @@
                          (mode . shell-mode)
                          (mode . eshell-mode)
                          (mode . term-mode)
+                         (mode . python-pytest-mode)
                          ))
                ("python" (
                           or (mode . python-mode)
@@ -49,7 +50,6 @@
                              (mode . inferior-python-mode)
                              (name . "^\\*Elpy Output\\*$")
                              ))
-
                ("planner" (or
                            (name . "^\\*Calendar\\*$")
                            (name . "^diary$")
@@ -60,6 +60,7 @@
                            ))
                ("config"(
                          or (mode . yaml-mode)
+                            (mode . yaml-ts-mode)
                             (mode . nxml-mode)
                             (mode . json-mode)
                             (mode . conf-mode)
