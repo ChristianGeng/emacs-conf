@@ -1,5 +1,40 @@
 #+title: README
 
+* Building Emacs
+
+** Local Build
+
+#+begin_src bash
+./autogen.sh
+./configure --with-native-compilation --with-mailutils --with-tiff=ifavailable --with-gnutls=ifavailable
+make -j$(nproc)
+sudo make install
+#+end_src
+
+** Docker Build
+
+#+begin_src bash
+docker build -t emacs-build .
+docker run -it --rm emacs-build
+#+end_src
+
+** Important Configure Flags
+
+- --with-native-compilation: Enable native compilation
+- --with-mailutils: Include mail utilities
+- --with-tiff=ifavailable: Include TIFF support if available
+- --with-gnutls=ifavailable: Include GnuTLS support if available
+- --without-x: Build without X Window System support
+
+** Dependencies
+
+#+begin_src bash
+sudo apt-get install -y \
+  gcc-10 libgccjit0 libgccjit-10-dev \
+  libjansson4 libjansson-dev git \
+  software-properties-common
+#+end_src
+
 * Purpose / General  Links
 
 My adapation of https://github.com/chaoflow/.emacs.d
