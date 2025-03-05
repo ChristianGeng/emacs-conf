@@ -1,4 +1,4 @@
-(setq use-package-compute-statistics t)
+`(setq use-package-compute-statistics t)
 
 (use-package treesit-auto
   :custom
@@ -40,14 +40,14 @@
 
 (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
 (setq doom-snippets-enable-short-helpers nil)
-(add-to-list 'load-path "~/.emacs.d/el")
+(add-to-list 'load-path (expand-file-name "el" user-emacs-directory))
 ;; (add-to-list 'load-path "~/.emacs.d/elpa/s-20210616.619/")
 ;; (require 's)
 
 (use-package s :ensure t)
 
 ;; This is already the default. why set it again
-(setq user-emacs-directory "~/.emacs.d/")
+;; (setq user-emacs-directory "~/.emacs.d/")
 ;; Functions (load all files in defuns-dir)
 ;;(add-to-list 'load-path user-emacs-directory)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -62,7 +62,7 @@
 
 ;; Settings for currently logged in user
 ;; keep automatic customizations separately
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
 
 ;; create user customization directory for specific username/hostname combination
