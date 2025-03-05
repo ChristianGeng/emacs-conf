@@ -1,5 +1,12 @@
 #+title: README
 
+
+* Doom Flavor
+
+doom has got an environment file:
+
+doom help env
+
 * Building Emacs
 
 ** Directory Structure
@@ -10,12 +17,15 @@ Following a clean, organized directory structure:
 ~/local/                      # Base directory for local software
 ├── src/                      # Source code for software to be compiled
 │   ├── emacs/                # Emacs source code
+│   ├── texinfo/              # Texinfo source code
 │   └── ...
 ├── build/                    # Build directories (keeps source dir clean)
 │   ├── emacs/                # Emacs build directory
+│   ├── texinfo/              # Texinfo build directory
 │   └── ...
 ├── opt/                      # Installed software (similar to /opt)
 │   ├── emacs/                # Emacs installation
+│   ├── texinfo/              # Texinfo installation
 │   └── ...
 ├── bin/                      # Symlinks to installed binaries
 ├── lib/                      # Libraries for local software
@@ -59,6 +69,61 @@ make install
 # Add to PATH if not already there
 echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
+#+end_src
+
+** Building Texinfo
+
+Texinfo is required for building Emacs. If your system's texinfo is missing or outdated, you can build it from source:
+
+#+begin_src bash
+# Navigate to source directory
+cd ~/local/src
+
+# Download texinfo source
+wget https://ftp.gnu.org/gnu/texinfo/texinfo-6.8.tar.gz
+tar xzf texinfo-6.8.tar.gz
+
+# Create and use build directory
+mkdir -p ~/local/build/texinfo
+cd ~/local/build/texinfo
+
+# Configure with appropriate paths
+~/local/src/texinfo-6.8/configure --prefix=$HOME/local/opt/texinfo --bindir=$HOME/local/bin
+
+# Build and install
+make
+make install
+
+# Verify installation
+which makeinfo
+makeinfo --version
+#+end_src
+
+You can then use the locally installed texinfo when building Emacs by ensuring it's in your PATH:
+
+#+begin_src bash
+# When configuring Emacs, ensure the local bin directory is in your PATH
+export PATH="$HOME/local/bin:$PATH"
+
+# Or, if you prefer, explicitly set the MAKEINFO variable
+~/local/src/emacs/configure \
+  --prefix=$HOME/local/opt/emacs \
+  --bindir=$HOME/local/bin \
+  MAKEINFO=$HOME/local/bin/makeinfo \
+  --with-native-compilation \
+  --with-mailutils \
+  --with-tiff=ifavailable \
+  --with-gnutls=ifavailable
+#+end_src
+
+** Dependencies
+
+#+begin_src bash
+sudo apt-get install -y \
+  gcc-10 libgccjit0 libgccjit-10-dev \
+  libjansson4 libjansson-dev git \
+  software-properties-common \
+  automake texinfo
 #+end_src
 
 ** Docker Build
@@ -122,17 +187,7 @@ docker run -it --rm emacs-build
 - --with-gnutls=ifavailable: Include GnuTLS support if available
 - --without-x: Build without X Window System support (optional, for terminal-only use)
 
-** Dependencies
-
-#+begin_src bash
-sudo apt-get install -y \
-  gcc-10 libgccjit0 libgccjit-10-dev \
-  libjansson4 libjansson-dev git \
-  software-properties-common \
-  automake texinfo
-#+end_src
-
-* Purpose / General  Links
+** Purpose / General  Links
 
 My adapation of https://github.com/chaoflow/.emacs.d
 
@@ -159,7 +214,7 @@ Better take a look at other sources for configuration files:
 - https://caiorss.github.io/Emacs-Elisp-Programming/Keybindings.html
 - http://ergoemacs.org/emacs/emacs\_find\_replace.html
 - https://github.com/enzuru/.emacs.d
-- https://iqss.github.io/IQSS.emacs/ and https://iqss.github.io/IQSS.emacs/init.htm
+- https://github.com/iqss/IQSS.emacs/ and https://iqss.github.io/IQSS.emacs/init.htm
 
 * Languages / Modes
 
