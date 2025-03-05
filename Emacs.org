@@ -1520,6 +1520,46 @@ https://github.com/tkf/auto-complete-rst
 #+RESULTS:
 : #s(hash-table data (:use-package (26354 41317 987108 240000) :init (26354 41317 987103 135000) :init-secs (0 0 58 882000) :use-package-secs (0 0 1501 267000) :config (26354 41317 987089 388000) :config-secs (0 0 1 784000)))
 
+******* Jump to ruff check location
+
+This is given as in ~file:line:column~ format
+
+#+begin_example
+foo.py:232:89: E501 Line too long (96 > 88)
+#+end_example
+
+#+begin_src emacs-lisp :tangle ./el/setup-python.el :mkdirp yes
+  (defun cg/ruff-jump-to-file-line-column ()
+    "Jump to file:line:column pattern under cursor."
+    (interactive)
+    (let* ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+           (match (string-match "\\([^:]+\\):\\([0-9]+\\):\\([0-9]+\\)" line)))
+      (when match
+        (let ((file (match-string 1 line))
+              (line-num (string-to-number (match-string 2 line)))
+              (col-num (string-to-number (match-string 3 line))))
+          (find-file file)
+          (goto-char (point-min))
+          (forward-line (1- line-num))
+          (move-to-column (1- col-num))))))
+
+  ;; Bind it to a convenient key, for example:
+  ;; (global-set-key (kbd "C-c f") 'jump-to-file-line-column)
+
+  ;; Add the keybinding only to shell-mode and shell-mode derivatives
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c f") 'jump-to-file-line-column)))
+
+;; If you also want it in eshell
+(add-hook 'eshell-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c f") 'jump-to-file-line-column)))
+#+end_src
+
+#+RESULTS:
+| #[nil ((local-set-key (kbd C-c f) 'jump-to-file-line-column)) nil] | #[nil ((local-set-key (kbd C-c f) 'jump-to-file-line-column)) (t)] | #[nil ((display-line-numbers-mode 0)) nil] | ess-r-package-activate-directory-tracker |
+
 
 ******* defconst line width - still needed?
 
@@ -2916,7 +2956,8 @@ Return result sequence, SEQ __is__ modified."
 Add dropbox authinfo to auth source files
 
 #+begin_src emacs-lisp
-(add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
+  (add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
+    (add-to-list 'auth-sources (joindirs org-directory ".authinfo"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
@@ -2925,8 +2966,6 @@ Add dropbox authinfo to auth source files
 
 #+RESULTS:
 | /home/cgeng/Dropbox/org/.authinfo.gpg | ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
-
-
 
 (find-file (joindirs org-directory ".authinfo.gpg"))
 (find-file (joindirs org-directory "Notes.org.gpg")) ;; no need to add to auth sources as not parseable
