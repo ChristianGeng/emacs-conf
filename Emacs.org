@@ -14,16 +14,15 @@ PROPERTIES:
 
 #+begin_src emacs-lisp :tangle yes :noweb yes
   (org-babel-tangle)
-  (load-file "~/.emacs.d/init.el")
 #+end_src
 
 #+RESULTS:
-: t
+| /home/cgeng/emacs-conf/el/setup-themes.el | /home/cgeng/emacs-conf/el/org-general.el | /home/cgeng/emacs-conf/el/setup-json-mode.el | /home/cgeng/emacs-conf/el/setup-ess.el | /home/cgeng/emacs-conf/el/setup-python.el | /home/cgeng/emacs-conf/init-g.el | /home/cgeng/emacs-conf/Emacs.el |
 
 * Collect Usage Stats
 
 #+begin_src emacs-lisp
-(setq use-package-compute-statistics t)
+  `(setq use-package-compute-statistics t)
 #+end_src
 
 * Treesitter auto mode
@@ -141,14 +140,11 @@ However, if your init file changes the values of
 
   (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
   (setq doom-snippets-enable-short-helpers nil)
-  (add-to-list 'load-path "~/.emacs.d/el")
+  (add-to-list 'load-path (expand-file-name "el" user-emacs-directory))
   ;; (add-to-list 'load-path "~/.emacs.d/elpa/s-20210616.619/")
   ;; (require 's)
 
   (use-package s :ensure t)
-
-  ;; This is already the default. why set it again
-  (setq user-emacs-directory "~/.emacs.d/")
   ;; Functions (load all files in defuns-dir)
   ;;(add-to-list 'load-path user-emacs-directory)
   (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -163,7 +159,7 @@ However, if your init file changes the values of
 
   ;; Settings for currently logged in user
   ;; keep automatic customizations separately
-  (setq custom-file "~/.emacs.d/custom.el")
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (load custom-file 'noerror)
 
   ;; create user customization directory for specific username/hostname combination
@@ -3543,28 +3539,6 @@ https://github.com/mhayashi1120/Emacs-langtool?tab=readme-ov-file
   (setq langtool-language-tool-server-jar (joindirs user-emacs-directory "jars" "LanguageTool-6.4" "languagetool-server.jar"))
   (require 'langtool)
 #+end_src
-
-***** calibredb
-:PROPERTIES:
-:ID:       632883c3-8739-4a79-bab9-87bc587dc8af
-:END:
-
-
-#+begin_src emacs-lisp
-
-  (require 'calibredb)
-  (setq calibredb-root-dir "/D/Calibre_Science/")
-  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-
-  ;;(setq calibredb-root-dir "~/OneDrive/Doc/Calibre")
-  ;;(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-
-#+end_src
-
-#+RESULTS:
-: /D/Calibre_Science/metadata.db
-
-
 
 ***** Ascidoctor
 

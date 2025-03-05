@@ -45,9 +45,6 @@
 ;; (require 's)
 
 (use-package s :ensure t)
-
-;; This is already the default. why set it again
-;; (setq user-emacs-directory "~/.emacs.d/")
 ;; Functions (load all files in defuns-dir)
 ;;(add-to-list 'load-path user-emacs-directory)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -828,13 +825,6 @@
 
 (setq langtool-language-tool-server-jar (joindirs user-emacs-directory "jars" "LanguageTool-6.4" "languagetool-server.jar"))
 (require 'langtool)
-
-(require 'calibredb)
-(setq calibredb-root-dir "/D/Calibre_Science/")
-(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
-
-;;(setq calibredb-root-dir "~/OneDrive/Doc/Calibre")
-;;(setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
 
 (require 'adoc-mode)
 (add-to-list 'auto-mode-alist '("\.adoc$" . adoc-mode))
