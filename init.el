@@ -1,9 +1,10 @@
 ;;; XEmacs backwards compatibility file
 ;;; separate inits for gnu and x flavors: 
-  (if (string-match "XEmacs" emacs-version)
-      (setq user-init-file "~/.emacs.d/init-x.el")
-      (setq user-init-file   "~/.emacs.d/init-g.el")
-      )
+  (let ((emacs-config-dir (file-name-directory (or load-file-name buffer-file-name))))
+    (if (string-match "XEmacs" emacs-version)
+        (setq user-init-file (expand-file-name "init-x.el" emacs-config-dir))
+      (setq user-init-file (expand-file-name "init-g.el" emacs-config-dir))
+      ))
 
 ;  (if (string-match "XEmacs" emacs-version)
 ;        (setq thesub "~/.xemacs/init-x.el")
