@@ -681,6 +681,7 @@
 (message "nach yasnippet loading")
 
 (add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
+  (add-to-list 'auth-sources (joindirs org-directory ".authinfo"))
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
