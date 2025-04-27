@@ -45,6 +45,7 @@ Following a clean, organized directory structure:
 ** Local Build
 
 #+begin_src bash
+
 # Create necessary directories
 mkdir -p ~/local/{src,build,opt,bin,lib,include,share,var,etc}
 
@@ -81,6 +82,44 @@ make install
 # Add to PATH if not already there
 echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
+
+    # Create necessary directories
+    mkdir -p ~/local/{src,build,opt,bin,lib,include,share,var,etc}
+
+    # Get Emacs source code
+    cd ~/local/src
+    git clone https://git.savannah.gnu.org/git/emacs.git
+    cd emacs
+
+    # Build in the source directory (not in a separate build directory)
+    # Run the autogen script
+    ./autogen.sh
+
+    # Configure with appropriate paths
+    ./configure \
+      --prefix=$HOME/local/opt/emacs \
+      --bindir=$HOME/local/bin \
+      --datarootdir=$HOME/local/share \
+      --libdir=$HOME/local/lib \
+      --infodir=$HOME/local/share/info \
+      --mandir=$HOME/local/share/man \
+      --with-native-compilation \
+      --with-mailutils \
+      --with-tiff=ifavailable \
+      --with-gnutls=ifavailable \
+      --with-x-toolkit=no \
+      --without-native-compilation \
+      --with-xpm=ifavailable \
+      --with-gif=ifavailable
+
+    # Build and install
+    make -j$(nproc)
+    make install
+
+    # Add to PATH if not already there
+    echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
+
 #+end_src
 
 *Note:*
@@ -306,11 +345,37 @@ docker run -it --rm emacs-build
 
 - --prefix=$HOME/local/opt/emacs: Sets installation directory
 - --bindir=$HOME/local/bin: Where executable binaries will be installed
+- --datarootdir=$HOME/local/share: Directory for read-only architecture-independent data
+- --libdir=$HOME/local/lib: Directory for libraries
+- --infodir=$HOME/local/share/info: Directory for info documentation
+- --mandir=$HOME/local/share/man: Directory for man pages
 - --with-native-compilation: Enable native compilation support (faster Elisp)
 - --with-mailutils: Include mail utilities
 - --with-tiff=ifavailable: Include TIFF support if available
 - --with-gnutls=ifavailable: Include GnuTLS support if available
 - --without-x: Build without X Window System support (optional, for terminal-only use)
+
+** Troubleshooting
+
+*** Permission Errors
+
+If you encounter permission errors like:
+
+#+begin_src
+umask 022; /usr/bin/mkdir -p "/usr/local/share/info"
+/usr/bin/mkdir: cannot create directory '/usr/local/share/info': Permission denied
+make: *** [Makefile:793: install-info] Error 1
+#+end_src
+
+Make sure that all installation paths in the configure step are set to locations within your home directory. The key flags to check are:
+
+- --prefix
+- --datarootdir
+- --infodir
+- --mandir
+- --libdir
+
+Using directories under ~/local/ should resolve these permission issues.
 
 ** Purpose / General  Links
 
@@ -382,7 +447,7 @@ Better take a look at other sources for configuration files:
 1. [[https://github.com/hypernumbers/learn_elisp_the_hard_way/tree/master/contents][Learn Emacs Lips the Hard Way]]
 2. [[https://caiorss.github.io/Emacs-Elisp-Programming/Elisp_Programming.html#sec-4-2][Emacs Lisp caiorss]]
 3. [[https://www.cs.utexas.edu/~novak/schemevscl.html][Elisp versus Scheme Lisp keywords]]
-4. [[file:Learn%20Elisp%20the%20hard%20way][https://github.com/hypernumbers/learn\_elisp\_the\_hard\_way/tree/master/contents]]
+4. [[https://github.com/hypernumbers/learn_elisp_the_hard_way/tree/master/contents][Learn Elisp the hard way]]
 
 ** Python
    :PROPERTIES:
@@ -495,10 +560,6 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 -  https://blog.onionstudio.com.tw/emacs-%E5%AF%AB-vue-js/
 -  https://emacs-lsp.github.io/lsp-ui/
 
-
-
-
-
 ** LSP und DAP
    :PROPERTIES:
    :CUSTOM_ID: lsp-und-dap
@@ -574,7 +635,6 @@ Type faster: emmet-mode: But web-mode has sth similar d/ -> creates div,
 
 )
 #+END_EXAMPLE
-
 
 *** Links
 
