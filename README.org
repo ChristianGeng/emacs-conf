@@ -7,6 +7,13 @@ doom has got an environment file:
 
 doom help env
 
+To get started I am using this:
+
+git clone https://github.com/hlissner/doom-emacs-private ~/.config/doom
+
+
+
+
 * Building Emacs
 
 ** Directory Structure
@@ -52,15 +59,20 @@ cd ~/local/build/emacs
 
 # Generate configuration files
 ~/local/src/emacs/autogen.sh
-
 # Configure with appropriate paths
+CPPFLAGS="-I$HOME/local/include" \
+LDFLAGS="-L$HOME/local/lib" \
+LIBS="-lgif" \
 ~/local/src/emacs/configure \
   --prefix=$HOME/local/opt/emacs \
   --bindir=$HOME/local/bin \
   --with-native-compilation \
   --with-mailutils \
   --with-tiff=ifavailable \
-  --with-gnutls=ifavailable
+  --with-gnutls=ifavailable \
+  --with-gif \
+  CPPFLAGS="-I$HOME/local/include" \
+  LDFLAGS="-L$HOME/local/lib"
 
 # Build and install
 make -j$(nproc)
@@ -70,6 +82,54 @@ make install
 echo 'export PATH="$HOME/local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 #+end_src
+
+*Note:*
+
+#+begin_example bash
+CPPFLAGS="-I$HOME/local/include"
+LDFLAGS="-L$HOME/local/lib"
+#+end_example
+
+should result in the config lines having lines like this
+
+#+begin_example bash
+GIF_CFLAGS='-I/fsx/christian.geng/local/include'
+LIBGIF='-L/fsx/christian.geng/local/lib -lgif'
+#+end_example
+
+
+
+
+** Clean Build Instructions
+
+If you need to rebuild Emacs (or any software) from scratch, it's best to start with a clean build directory to avoid stale configuration or object files. This is especially important when changing dependencies like giflib, gnutls, etc.
+
+#+begin_src bash
+# Remove the existing build directory (be careful: this deletes all build artifacts)
+rm -rf ~/local/build/emacs
+
+# Recreate and enter the build directory
+mkdir -p ~/local/build/emacs
+cd ~/local/build/emacs
+
+# Run configure with the appropriate flags
+~/local/src/emacs/configure \
+  --prefix=$HOME/local/opt/emacs \
+  --bindir=$HOME/local/bin \
+  --with-native-compilation \
+  --with-mailutils \
+  --with-tiff=ifavailable \
+  --with-gnutls=ifavailable \
+  --with-gif \
+  CPPFLAGS="-I$HOME/local/include" \
+  LDFLAGS="-L$HOME/local/lib"
+
+# Build and install
+make -j$(nproc)
+make install
+#+end_src
+
+This ensures that your build picks up any changes to libraries or headers.
 
 ** Building Texinfo
 
@@ -94,10 +154,17 @@ cd ~/local/build/texinfo
 make
 make install
 
-# Verify installation
+# Verify installation   
 which makeinfo
 makeinfo --version
 #+end_src
+
+#+begin_quote
+*Tip: Do you need to run autoreconf?*
+
+- If you download a release tarball (e.g., texinfo-6.8.tar.gz, giflib-5.2.1.tar.gz), the configure script is already present and ready to use. You do NOT need to run autoreconf; just run ./configure in your build directory.
+- If you clone from git or use a development source tree, the configure script may be missing or outdated. In that case, run autoreconf -i (or autogen.sh, if present) before ./configure.
+#+end_quote
 
 You can then use the locally installed texinfo when building Emacs by ensuring it's in your PATH:
 
@@ -106,15 +173,73 @@ You can then use the locally installed texinfo when building Emacs by ensuring i
 export PATH="$HOME/local/bin:$PATH"
 
 # Or, if you prefer, explicitly set the MAKEINFO variable
-~/local/src/emacs/configure \
-  --prefix=$HOME/local/opt/emacs \
-  --bindir=$HOME/local/bin \
-  MAKEINFO=$HOME/local/bin/makeinfo \
-  --with-native-compilation \
-  --with-mailutils \
-  --with-tiff=ifavailable \
-  --with-gnutls=ifavailable
+
+
+
+** GnuTLS
+
+You can build gnutls from source:
+
+cd ~/local/src
+wget https://www.gnupg.org/ftp/gcrypt/gnutls/v3.8/gnutls-3.8.0.tar.xz
+tar -xf gnutls-3.8.0.tar.xz
+cd gnutls-3.8.0
+
+autoreconf -i
+automake
+
+./configure --prefix=$HOME/local/opt/gnutls --bindir=$HOME/local/bin
+make
+make install
+
+
+** GIFLIB
+
+You can build giflib from source:
+
+#+begin_src bash
+# Download giflib source
+cd ~/local/src
+wget https://downloads.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
+
+# Extract and enter source directory
+ tar xzf giflib-5.2.1.tar.gz
+cd giflib-5.2.1
+
+# Build and install (giflib uses in-tree build)
+make
+make install PREFIX=$HOME/local/opt/giflib
+
+# Ensure your local lib/include directories contain giflib files
+cp $HOME/local/opt/giflib/lib/libgif.* $HOME/local/lib/
+cp $HOME/local/opt/giflib/include/gif_lib.h $HOME/local/include/
+
+# (Optional) Check that the header and library are present
+ls -l $HOME/local/include/gif_lib.h
+ls -l $HOME/local/lib/libgif*
 #+end_src
+
+*Note:* giflib does not provide a pkg-config file, so you must use CPPFLAGS and LDFLAGS to help Emacs' configure script find giflib. For example:
+
+#+begin_src bash
+CPPFLAGS="-I$HOME/local/include" LDFLAGS="-L$HOME/local/lib" ./configure --prefix=$HOME/local/opt/emacs --bindir=$HOME/local/bin --with-gif --with-other-flags
+#+end_src
+
+Refer to the GIFLIB section below for details.
+
+** Nettle
+
+You can build nettle from source:
+
+
+cd ~/local/src
+wget ftp://ftp.gnu.org/gnu/nettle/nettle-3.8.1.tar.gz
+tar xzf nettle-3.8.1.tar.gz
+cd nettle-3.8.1
+
+./configure --prefix=$HOME/local/opt/nettle --bindir=$HOME/local/bin
+make
+make install
 
 ** Dependencies
 
