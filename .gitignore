@@ -63,3 +63,6 @@ codeium/
 
 # ignore xml
 /xml/
+
+# ignore tree-sitter
+tree-sitter/
