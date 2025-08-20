@@ -845,16 +845,69 @@ Type  rx  to replace the character at the cursor with  x .
 
 asdasd (asd asdas asd)
 
-********* Cutting and pasting
 
+********* Modifiers ~i~ and ~o~
+
+- ~i~ Insert before cursor (current position)
+- ~o~ Open new line below, start insert mode
+- ~O~ Open new line above, start insert mode
+
+
+********* Text Object Modifiers ~i~ and ~a~
+
+In Vim, the ~i~ in commands like ~viw~, ~ciw~, or ~yiw~ is a text object modifier that stands for "inner."
+
+| Modifier | Meaning      | Example Usage | Description                                      |
+|----------+--------------+---------------+--------------------------------------------------|
+| i        | inner        | viw, ci"      | Inside the object, excludes delimiters           |
+| a        | around/a     | daw, ca(      | Around the object, includes delimiters/whitespace|
+
+You can use similar patterns with other text objects:
+
+- ~vi"~: Select inside double quotes.
+- ~vi(~: Select inside parentheses.
+- ~vi[~: Select inside brackets.
+
+********* Cutting and pasting
 y - yank (copy) marked text
 d - delete marked text
-
 yy - yank (copy) a line
 2yy - yank (copy) 2 lines
 yiw - yank (copy) word under the cursor
-
 yip - copy current paragraph
+yi" - copy inside double quotes
+
+********* Macros
+
+Start recording a macro with qa (records into register a).
+
+| Command | Description                                         |
+|---------+-----------------------------------------------------|
+| qa      | Start recording a macro into register a             |
+| q       | Stop recording macro                                |
+| @a      | Play (execute) macro stored in register a           |
+| @@      | Repeat the last executed macro                      |
+| q{reg}  | Start recording a macro into register {reg}         |
+| @{reg}  | Play macro stored in register {reg}                 |
+
+********* Registers
+
+| Register | Type                | Description                                                      | Usage Example                                                         |
+|----------+---------------------+------------------------------------------------------------------+-----------------------------------------------------------------------|
+| ""       | Unnamed             | Default register holding last yanked or deleted text             | `p` to paste last yanked/deleted                                      |
+| 0        | Numbered            | Holds most recent yank (copy)                                    | `"0p` to paste last yank                                              |
+| 1-9      | Numbered            | Hold recent deletions; 1 is most recent delete, others are older | `"1p` to paste last deleted text                                      |
+| -        | Small delete        | Holds small deletes (like single characters)                     | `"-p` to paste small delete                                           |
+| a-z      | Named               | User-defined registers; lowercase overwrites, uppercase appends  | `"ayiw` yank word into register a; `"Ap` append paste from register A |
+| :        | Read-only           | Last executed command                                            | `":p` to paste last command                                           |
+| .        | Read-only           | Last inserted text                                               | `".p` to paste last inserted text                                     |
+| %        | Read-only           | Current file name                                                | `"%p` to paste current file name                                      |
+| #        | Read-only           | Alternate file name                                              | `"#p` to paste alternate file name                                    |
+| =        | Expression          | Evaluate expression and put result                               | `"=2+2<CR>p` to paste result of 2+2                                   |
+| * and +  | Selection/Clipboard | System clipboard registers (depends on platform)                 | `"*p` or `"+p` to paste from clipboard                                |
+| _        | Black hole          | Discards text (delete without saving)                            | `"_d` delete without saving                                           |
+| /        | Search pattern      | Last search pattern                                              | `"/p` to paste last search pattern                                    |
+
 
 ********* Searching and Replacing
 
