@@ -545,5 +545,45 @@ This command assumes point is not in a string or comment."
   (interactive "P")
   (insert-pair arg ?\{ ?\}))
 
+
+(defun play-remote-audio (remote-file &optional no-play audacity)
+  "Copy REMOTE-FILE from remote host and return local path.
+With NO-PLAY non-nil, don't play the file automatically.
+With AUDACITY non-nil, open the file in Audacity.
+
+Returns the local file path as a string.
+
+Example usage:
+  (play-remote-audio \"user@host:file.wav\")  ; Copy and play
+  (play-remote-audio \"user@host:file.wav\" t) ; Just copy
+  (play-remote-audio \"user@host:file.wav\" t 'audacity) ; Open in Audacity"
+  (interactive "sRemote file (user@host:/path/to/file.wav): \nP")
+  (let* ((temp-dir (make-temp-file "emacs-audio-" t))
+         (filename (file-name-nondirectory remote-file))
+         (local-file (expand-file-name filename temp-dir))
+         (play-command "mpv --no-terminal --no-resume-playback"))
+
+    (message "Copying %s to %s..." remote-file local-file)
+    (if (zerop (call-process "scp" nil "*scp-output*" t remote-file local-file))
+        (progn
+          (kill-new local-file)  ; Copy to kill ring
+          (message "File ready at: %s" local-file)
+
+          ;; Open in Audacity if requested
+          (when audacity
+            (if (executable-find "audacity")
+                (start-process "audacity" nil "audacity" local-file)
+              (message "Audacity not found in PATH")))
+
+          ;; Auto-play unless disabled
+          (when (and (not no-play) (not audacity))
+            (start-process "audio-player" nil "sh" "-c"
+                          (format "%s %s" play-command
+                                 (shell-quote-argument local-file))))
+
+          local-file)  ; Return the local file path
+      (error "Failed to copy file from remote host"))))
+
+
 (provide 'cglispfuncs)
 ;;; cglispfuncs.el ends here
