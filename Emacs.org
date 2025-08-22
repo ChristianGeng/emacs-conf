@@ -2964,238 +2964,163 @@ WSL for Windows specific code
 
 ***** Auth Source, GPG, Security
 
-- https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
-- https://www.youtube.com/watch?v=nZ_T7Q49B8Y
+This section explains how to store and retrieve credentials in Emacs using
+`auth-source`, and how to manage your GPG keys and agent. It replaces ad-hoc
+snippets with a minimal, reliable setup.
 
-#+begin_example emacs-lisp
-;; not parseable by authinfo
-(add-to-list 'auth-sources (joindirs org-directory "Notes.org.gpg"))
-(find-file (joindirs org-directory "Notes.org.gpg"))
-#+end_example
+- Reference: https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Tips-Pass.org
+- Video: https://www.youtube.com/watch?v=nZ_T7Q49B8Y
 
+****** Configure auth-sources (encrypted credentials)
 
-#+begin_example emacs-lisp
-(defun delete-nth (index seq)
-"Delete the INDEX th element of SEQ.
-Return result sequence, SEQ __is__ modified."
-(if (equal index 0)
-(progn
-(setcar seq (car (cdr seq)))
-(setcdr seq (cdr (cdr seq))))
-(setcdr (nthcdr (1- index) seq) (nthcdr (1+ index) seq))))
-(delete-nth 0 auth-sources)
-#+end_example
-
-Add dropbox authinfo to auth source files
+Keep credentials in `org-directory` using `.authinfo.gpg` (encrypted). Optionally
+fall back to `.authinfo` if needed.
 
 #+begin_src emacs-lisp
+  ;; Use encrypted authinfo in org directory (preferred)
   (add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
-    (add-to-list 'auth-sources (joindirs org-directory ".authinfo"))
+  ;; Optional: also consider a plaintext fallback if you really need it
+  (add-to-list 'auth-sources (joindirs org-directory ".authinfo"))
 #+end_src
+
+Notes:
+
+- Files like `Notes.org.gpg` are not in authinfo/netrc format; do not add them
+  to `auth-sources`.
+- You can always inspect the active sources during a session:
 
 #+begin_src emacs-lisp :tangle no
-(mapc 'message auth-sources)
+  (mapc #'message auth-sources)
 #+end_src
 
-#+RESULTS:
-| /home/cgeng/Dropbox/org/.authinfo.gpg | ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
+****** Querying credentials with auth-source
 
-(find-file (joindirs org-directory ".authinfo.gpg"))
-(find-file (joindirs org-directory "Notes.org.gpg")) ;; no need to add to auth sources as not parseable
-(auth-source-search :site "kaufland.de")
-(auth-source-search :site "real.de")
-
-
-Print the list of auth sources.
-#+begin_src emacs-lisp :tangle no :noweb yes
-  (mapc 'message auth-sources)
-#+end_src
-
-
-#+RESULTS:
-| /home/cgeng/Dropbox/org/.authinfo.gpg | ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
-(auth-source-search :machine "chat.openai.com")
-(auth-source-search :site  "arts-outdoors")
-(auth-source-search :site  "arts-outdoors")
-
-https://www.arts-outdoors.de
+Use `auth-source-search` to find entries. Prefer `:host` or `:machine` with `:user`.
 
 #+begin_src emacs-lisp :tangle no
-(auth-source-search :host "real.de")
+  ;; Example lookups (adjust :user to your login/user where applicable)
+  (auth-source-search :host "chat.openai.com" :user "my-user")
+  (auth-source-search :machine "real.de" :user "my-user")
+
+  ;; Get the secret string (helper)
+  (defun cg/auth-lookup (&rest keys)
+    "Return secret string for KEYS passed to `auth-source-search`, or nil."
+    (when-let* ((res   (apply #'auth-source-search keys))
+                (first (car res))
+                (sec   (plist-get first :secret)))
+      (if (functionp sec) (funcall sec) sec)))
+
+  ;; Examples (non-tangled):
+  ;; (cg/auth-lookup :host "codeium.com" :user "privat-email-account")
+  ;; (cg/auth-lookup :host "mailprovider.com" :user "me")
+
+  ;; Clear cached entries if you changed your files
+  (auth-source-forget-all-cached)
 #+end_src
 
-(auth-source-search :machine "mailprovider.com")
-(find-file (joindirs org-directory ".authinfo.gpg"))
-(auth-source-forget-all-cached)
-(find-file "~/.authinfo.gpg")
-(mapc 'message auth-sources)
-(auth-source-pass-get 'secret "openai-key")
+If you use `auth-source-pass`, you can also query pass entries, e.g.:
 
-****** Generate Key
+#+begin_src emacs-lisp :tangle no
+  (auth-source-pass-get 'secret "openai-key")
+#+end_src
 
-#+begin_example shell
+****** GPG: Generate a key (once)
+
+#+begin_src shell :tangle no
 gpg --full-generate-key
-#+end_example
-
-- use rsa
-- size: 4096
-- never expires
-- Real Name
-- Email
-- PassPhrase
-
-#+begin_src shell :tangle no :noweb yes :results output raw
-  gpg --list-keys
-  # these should be in
-  ls -t ~/.gnupg/
-  ls -t ~/.gnupg/private-keys-v1.d -la
 #+end_src
 
-#+RESULTS:
-/home/christian/.gnupg/pubring.kbx
-----------------------------------
-pub   rsa4096 2021-08-21 [SC]
-B6791609BBC1CD7C000F17E75921C10409567BCA
-uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
-sub   rsa4096 2021-08-21 [E]
+Recommended choices:
 
-random_seed
-trustdb.gpg
-openpgp-revocs.d
-pubring.kbx
-private-keys-v1.d
-pubring.kbx~
-total 8
--rw------- 1 christian christian 2056 Aug 21 13:00 3F10E5FB10073217E078BDB9F1043D5B7DD785EF.key
--rw------- 1 christian christian 2056 Aug 21 13:00 676E806C8E7D02199000B22A4B86BFDBEAF035A6.key
-/home/christian/.gnupg/pubring.kbx
-----------------------------------
-pub   rsa4096 2021-08-21 [SC]
-B6791609BBC1CD7C000F17E75921C10409567BCA
-uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
-sub   rsa4096 2021-08-21 [E]
+- Type: RSA and RSA
+- Size: 4096
+- Expiration: never (or set a sensible expiry and rotate)
+- Provide Real Name, Email, and a strong passphrase
 
-trustdb.gpg
-openpgp-revocs.d
-pubring.kbx
-private-keys-v1.d
-pubring.kbx~
+Inspect keys and key storage:
 
-#+begin_src shell :tangle no :noweb yes :results output raw
-  # Check if gpg-agent is already running
-  grep gpg-agent
-  # If it's not running, you can start it up with this command:
-  gpg-connect-agent /bye
+#+begin_src shell :tangle no
+gpg --list-keys
+ls -t ~/.gnupg/
+ls -la ~/.gnupg/private-keys-v1.d
 #+end_src
 
-#+RESULTS:
-22957
+****** GPG: Migrate key to another machine
 
-****** Migrate key to other maschine
+1) Identify your secret key ID
 
-gpg --list-secret-keys christian.c.geng@gmail.com
-
-gpg --export-secret-keys YOUR_ID_HERE > private.key
-gpg --import private.key
-
-****** Lookup key
-
-(defun efs/lookup-password (&rest keys)
-(let ((result (apply #'auth-source-search keys)))
-(if result
-(funcall (plist-get (car result) :secret))
-nil)))
-
-****** Migrate key to other machine
-
-Identify your private key:
-
+#+begin_src shell :tangle no
 gpg --list-secret-keys user@email.com
+#+end_src
 
-#+begin_example
-pub   rsa4096 2021-08-21 [SC]
-      <KEY ID DES SCHLÜSSELS>
-uid           [ultimate] Christian Geng (my default key for storing encrypted passwords) <christian.c.geng@gmail.com>
-sub   rsa4096 2021-08-21 [E]
-#+end_example
+2) Export and transfer securely
 
-Export key
+#+begin_src shell :tangle no
+gpg --export-secret-keys <KEYID> > private.key
+# ... transfer private.key securely (e.g., scp over a trusted channel) ...
+#+end_src
 
-gpg --export-secret-keys <KEY ID DES SCHLÜSSELS> > private.key
+3) Import on the target machine
 
-Copy Key to other machine (e.g. using scp)
-
-import
-
+#+begin_src shell :tangle no
 gpg --import private.key
-
-Enigmail / GnuPG v2
-Note that you probably also have gpg2 on your system which is backwards-compatible with gpg, but seems to manage a separate list of keys. When using Thunderbird with Enigmail, note that it uses version 2 and may be unable to see your private key after importing. To fix that, run
-
-COPY
+# Some tools use gpg2 (Thunderbird/Enigmail)
 gpg2 --import private.key
+#+end_src
 
-****** More gpg interaction
+Delete `private.key` after import.
 
-****** GPG agent configuration
+****** GPG agent configuration (caching)
 
-#+begin_src bash :results output pp
+View your current agent config:
+
+#+begin_src shell :tangle no
 cat ~/.gnupg/gpg-agent.conf
 #+end_src
 
-#+RESULTS:
-: default-cache-ttl 0
-: max-cache-ttl 0
-: default-cache-ttl-ssh 0
-: max-cache-ttl-ssh 0
+Reload agent and inspect defaults:
 
-****** Seems not to be effective (even after reload):
-
-Information is from [[https://superuser.com/questions/624343/keep-gnupg-credentials-cached-for-entire-user-session][here]].
-
-#+begin_src bash :results output pp
-  gpgconf --kill gpg-agent
-  gpgconf --reload gpg-agent
-  # gpg-connect-agent reloadagent
-  gpgconf --list-options gpg-agent | grep default
-  gpgconf --list-options gpg-agent | grep max-cache
+#+begin_src shell :tangle no
+gpgconf --kill gpg-agent
+gpgconf --reload gpg-agent
+gpgconf --list-options gpg-agent | grep -E 'default-cache|max-cache'
 #+end_src
 
-#+RESULTS:
-: default-cache-ttl:24:0:expire cached PINs after N seconds:3:3:N:600::0
-: default-cache-ttl-ssh:24:1:expire SSH keys after N seconds:3:3:N:1800::0
-: max-cache-ttl:24:2:set maximum PIN cache lifetime to N seconds:3:3:N:7200::0
-: max-cache-ttl-ssh:24:2:set maximum SSH key lifetime to N seconds:3:3:N:7200::0
+Example settings you may consider in `~/.gnupg/gpg-agent.conf`:
 
-******** OS / Ubuntu specific?
+#+begin_example
+default-cache-ttl 7200
+max-cache-ttl 31536000
+default-cache-ttl-ssh 1800
+max-cache-ttl-ssh 7200
+#+end_example
 
-Discussion about using gnone tools like =seahorse= or =dconf-editor= is found [[https://emacs.stackexchange.com/questions/37002/emacs-opens-gpg-file-without-asking-for-passphrase][here.]]
+Then reload the agent as above.
 
-I also had to use dconf-editor and used there recipe from [[https://askubuntu.com/questions/340809/how-can-i-adjust-the-default-passphrase-caching-duration-for-gpg-pgp-ssh-keys/358514?_gl=1*zo9a4w*_ga*MTM0MTA2NDI2MC4xNjU1MTk3NzU1*_ga_S812YQPLT2*MTY4MzE4Njk1MS4yMy4xLjE2ODMxODY5NTEuMC4wLjA.#358514][here]]. And it worked indeed:
+****** GNOME/Ubuntu notes (passphrase caching)
 
-- Lauch dconf-editor.
-- Navigate to desktop - gnome - crypto - cache.
-- change gpg-cache-method to idle or timeout.
-- change gpg-cache-ttl to the number of seconds you want the passphrase to be cached.
-- Restart the gnome-keyring daemon $ gnome-keyring-daemon -r
+If GNOME keyring controls caching, you can adjust via `dconf-editor`:
 
+- Launch dconf-editor
+- Navigate: desktop → gnome → crypto → cache
+- Set `gpg-cache-method` to `idle` or `timeout`
+- Set `gpg-cache-ttl` to desired seconds
+- Restart keyring: `gnome-keyring-daemon -r`
 
+References:
 
-#+RESULTS:
+- Emacs passphrase prompt discussion: https://emacs.stackexchange.com/questions/37002/emacs-opens-gpg-file-without-asking-for-passphrase
+- GNOME caching duration: https://askubuntu.com/q/340809
 
-
-
-******** Mac Specific
+****** macOS notes
 :PROPERTIES:
 :ID:       7ef44450-4c70-4117-8a72-44d99a0138e3
 :END:
-#+begin_src emacs-lisp
-  ;; Are we on a mac?
+#+begin_src emacs-lisp :tangle no
+  ;; Detect macOS and import shell env if needed
   (setq is-mac (equal system-type 'darwin))
-  ;; Setup environment variables from the user's shell.
   (when is-mac (exec-path-from-shell-initialize))
   ;; (when is-mac (require 'mac))
-
 #+end_src
 
 
