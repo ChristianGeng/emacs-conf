@@ -677,14 +677,10 @@
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   (message "nach yasnippet loading")
 
+  ;; Use encrypted authinfo in org directory (preferred)
   (add-to-list 'auth-sources (joindirs org-directory ".authinfo.gpg"))
-    (add-to-list 'auth-sources (joindirs org-directory ".authinfo"))
-
-  ;; Are we on a mac?
-  (setq is-mac (equal system-type 'darwin))
-  ;; Setup environment variables from the user's shell.
-  (when is-mac (exec-path-from-shell-initialize))
-  ;; (when is-mac (require 'mac))
+  ;; Optional: also consider a plaintext fallback if you really need it
+  (add-to-list 'auth-sources (joindirs org-directory ".authinfo"))
 
     (defun get-codeium-api-key ()
       "Retrieve the codeium API key from one of the authinfo files."

@@ -2993,6 +2993,9 @@ Notes:
   (mapc #'message auth-sources)
 #+end_src
 
+#+RESULTS:
+| ~/.authinfo | ~/.authinfo.gpg | ~/.netrc |
+
 ****** Querying credentials with auth-source
 
 Use `auth-source-search` to find entries. Prefer `:host` or `:machine` with `:user`.
