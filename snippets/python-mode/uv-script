@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: uv-script
+# key: uv-script
+# --
+
+# /// script
+# dependencies = [
+#   "click",
+#   "slm-bench[data]",
+# ]
+#
+# [tool.uv.sources]
+# slm-bench = { path = "../../", editable = true }
+# ///

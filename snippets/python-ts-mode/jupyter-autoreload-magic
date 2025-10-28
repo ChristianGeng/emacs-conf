@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: jupyter-autoreload-magic
+# key: #
+# --
+%load_ext autoreload
+%autoreload 2
