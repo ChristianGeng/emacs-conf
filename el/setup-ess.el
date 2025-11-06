@@ -1,4 +1,4 @@
-    ;;; setup-ess.el --- summary -*- lexical-binding: t -*-
+;;; setup-ess.el --- summary -*- lexical-binding: t -*-
   ;;
     ;;; Code:
 

@@ -138,11 +138,20 @@ However, if your init file changes the values of
       (package-initialize)
     )
 
+
   (add-to-list 'load-path (expand-file-name "doom-snippets" user-emacs-directory))
   (setq doom-snippets-enable-short-helpers nil)
   (add-to-list 'load-path (expand-file-name "el" user-emacs-directory))
   ;; (add-to-list 'load-path "~/.emacs.d/elpa/s-20210616.619/")
   ;; (require 's)
+
+  ;; define doom-dir manually
+  (setq doom-user-dir "~/.config/doom")
+  ;; Functions (load all files in defuns-dir)
+  (setq defuns-dir (expand-file-name "defuns" doom-user-dir))
+  (dolist (file (directory-files defuns-dir t "^[^.#].*el$"))
+    (when (file-regular-p file)
+      (load (file-name-sans-extension file))))
 
   (use-package s :ensure t)
   ;; Functions (load all files in defuns-dir)
@@ -782,56 +791,6 @@ nnoremap <A-k> :m .-2<CR>==
 
 https://github.com/emacs-evil/evil-collection
 
-********* Deleting
-
-d   motion
-
-d      - is the delete operator.
-motion - is what the operator will operate on (listed below).
-
-
-- dd delete line
-- dw delete
-
-
-w - until the start of the next word, EXCLUDING its first character.
-e - to the end of the current word, INCLUDING the last character.
-$ - to the end of the line, INCLUDING the last character.
-^ - to the beginning of the line
-b - back to the beginning of the word
-{ - delete to beginning of paragraph
-} - delete to end of paragraph
-
-
-d3w - delete three words in the future
-d5d - delete 5 lines
-2dd - delete 2 lines
-2dd - delete 2 lines
-
-y3w - copy the next three words
-
-das a hier is sowas wie ein modiefier des delete word commands:
-
-daw - delete a word and all whitespace around it. a stands for around
-diw - Delete just the word: das i ist für inside?
-dw - ???
-dap - delete around paragraph
-5dap - delete around 5 paragraphs
-di( - delete inside paremtheses
-di{ - delete inside curly bracces
-di" seems not to work!
-
-asdasd {a abn asdasd asd asdfgg } noch asdasd
-(asdasdasd )
-
-dd - delete (cut) a line
-dw - delete the word right of the cursor
-d$ - delete from cursor to the end of the line
-d^ - delete from cursor to beginning of line
-
-asssssssssssssssssssssssssssssssssssssssss
-
-D - delete (cut) to the end of the line
 ********* Replace Modifier
 
 c is the change modifier
@@ -937,28 +896,28 @@ To substitute all occurrences in the file type        :%s/old/new/g
 To ask for confirmation each time add 'c'             :%s/old/new/gc
 
 
-********* Upercasing and lower casing
+********* Handle upper and lower case
 
+#+begin_src org
+| Command | Description                                     |
+|---------+-------------------------------------------------|
+| ~       | Changes the case of the current character       |
+| guu     | Change current line from upper to lower         |
+| gUU     | Change current LINE from lower to upper         |
+| guw     | Change to end of current WORD from upper to lower |
+| guaw    | Change all of current WORD to lower             |
+| gUw     | Change to end of current WORD from lower to upper |
+| gUaw    | Change all of current WORD to upper             |
+| g~~     | Invert case of entire line                       |
+| g~w     | Invert case of current WORD                      |
+| guG     | Change to lowercase until the end of document   |
+| gU)     | Change text until end of sentence to upper case |
+| gu}     | Change text to end of paragraph to lower case   |
+| gU5j    | Change 5 lines below to upper case              |
+| gu3k    | Change 3 lines above to lower case              |
+#+end_src
 
-See the following methods:
-
-~    : Changes the case of current character
-guu  : Change current line from upper to lower.
-gUU  : Change current LINE from lower to upper.
-guw  : Change to end of current WORD from upper to lower.
-guaw : Change all of current WORD to lower.
-gUw  : Change to end of current WORD from lower to upper.
-gUaw : Change all of current WORD to upper.
-g~~  : Invert case to entire line
-g~w  : Invert case to current WORD
-guG  : Change to lowercase until the end of document.
-gU)  : Change until end of sentence to upper case
-gu}  : Change to end of paragraph to lower case
-gU5j : Change 5 lines below to upper case
-gu3k : Change 3 lines above to lower case
-
-
-source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text=2%20Answers&text=Visual%20select%20the%20text%2C%20then,gu%20for%20lowercase.
+You can copy this table directly into your Org file.source: https://stackoverflow.com/questions/2946051/changing-case-in-vim#:~:text=2%20Answers&text=Visual%20select%20the%20text%2C%20then,gu%20for%20lowercase.
 
 ********* Close whole editor
 
